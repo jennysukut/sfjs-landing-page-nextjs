@@ -6,6 +6,8 @@ export default function TemporaryPage() {
   return (
     <div className="TemporaryPage flex flex-col items-center py-20">
       <div className="ButtonContainer my-5 flex flex-col items-center gap-6">
+        <button className="test button h-16 w-16 bg-[url('/jacob.svg')] bg-cover"></button>
+
         <RandomColorButton
           aria="this is a test"
           variant="filled"

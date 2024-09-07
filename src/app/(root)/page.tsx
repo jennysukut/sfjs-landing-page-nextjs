@@ -3,6 +3,7 @@
 import SiteButton from "@/components/siteButton";
 import InfoBox from "@/components/infoBox";
 import FeaturesSection from "@/components/featuresSection";
+import MakersSection from "@/components/makersSection";
 
 import Image from "next/image";
 import { landingPageText } from "@/lib/landingPageText";
@@ -10,7 +11,7 @@ import { landingPageText } from "@/lib/landingPageText";
 export default function Home() {
   const promises = landingPageText.promises.map((promise: string) => {
     return (
-      <InfoBox aria={promise} variant="hollow">
+      <InfoBox aria={promise} variant="hollow" key={promise}>
         {promise}
       </InfoBox>
     );
@@ -55,7 +56,7 @@ export default function Home() {
             aria="sign up"
             size="large"
             variant="filled"
-            colorScheme="c3"
+            colorScheme="b4"
             addClasses="px-10"
           >
             sign me up!
@@ -64,7 +65,7 @@ export default function Home() {
             aria="support us"
             size="large"
             variant="filled"
-            colorScheme="b1"
+            colorScheme="c4"
             addClasses="px-14"
           >
             support us
@@ -83,6 +84,28 @@ export default function Home() {
         </div>
       </div>
       <FeaturesSection />
+      <div className="ButtonContainer mt-5 flex translate-x-[45vh] gap-8">
+        <SiteButton
+          aria="sign up"
+          size="large"
+          variant="filled"
+          colorScheme="c5"
+          addClasses="px-10"
+        >
+          get on the list
+        </SiteButton>
+        <SiteButton
+          aria="support us"
+          size="large"
+          variant="filled"
+          colorScheme="b2"
+          addClasses="px-14"
+        >
+          show your support
+        </SiteButton>
+      </div>
+
+      <MakersSection />
     </main>
   );
 }

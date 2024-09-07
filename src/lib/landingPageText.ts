@@ -153,7 +153,7 @@ export const landingPageText = {
       {
         addClasses: "",
         colorScheme: "f3",
-        title: "intentional approach",
+        title: "intentionally simple",
         details: [
           "We want to replace the frantic + dehumanizing + confusing mess that is the current job search into something reasonable + intentional.",
           "Because our application process is so simple {instant-apply with the option to add a note if you so choose}, we offer each job-seeker a maximum of 5 job application submissions per day. ",

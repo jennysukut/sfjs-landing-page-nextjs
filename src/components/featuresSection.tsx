@@ -4,10 +4,11 @@ import SiteButton from "./siteButton";
 import InfoBox from "./infoBox";
 import { useState } from "react";
 import { landingPageText } from "@/lib/landingPageText";
+import Image from "next/image";
 
 export default function FeaturesSection() {
   const [category, setCategory] = useState("individual");
-  const [clickedButton, setClickedButton] = useState("");
+  const [clickedButton, setClickedButton] = useState("none");
 
   function testClick(e: any) {
     if (clickedButton === e.target.name) {
@@ -18,7 +19,7 @@ export default function FeaturesSection() {
   const individualFeatureButtons =
     landingPageText.features.individualFeatures.map(
       ({
-        colorScheme: color,
+        colorScheme: colorScheme,
         title: title,
         addClasses: classes,
         details: details,
@@ -29,10 +30,11 @@ export default function FeaturesSection() {
               aria={title}
               variant="filled"
               size="large"
-              colorScheme="f1"
+              colorScheme="a1"
               addClasses={classes}
               onClick={testClick}
               name={title}
+              key={title}
             >
               {title}
             </SiteButton>
@@ -55,7 +57,8 @@ export default function FeaturesSection() {
               variant="filled"
               aria={title}
               colorScheme="b1"
-              addClasses="text-xs max-w-4xl"
+              addClasses="text-xs max-w-5xl"
+              key={title}
             >
               {details}
             </InfoBox>
@@ -81,6 +84,7 @@ export default function FeaturesSection() {
             addClasses={classes}
             onClick={testClick}
             name={title}
+            key={title}
           >
             {title}
           </SiteButton>
@@ -102,7 +106,8 @@ export default function FeaturesSection() {
             variant="filled"
             aria={title}
             colorScheme="b1"
-            addClasses="text-xs max-w-4xl"
+            addClasses="text-xs max-w-5xl"
+            key={title}
           >
             {details}
           </InfoBox>
@@ -110,6 +115,25 @@ export default function FeaturesSection() {
       }
     },
   );
+
+  function featurePrompt() {
+    if (clickedButton === "none") {
+      return (
+        <div className="FeaturesPrompt flex flex-col items-start">
+          <p className="FeaturesPrompt max-w-44 text-center text-xs text-jade">
+            {landingPageText.arrowprompts.feature}
+          </p>
+          <Image
+            className="-translate-y-[5vh] translate-x-[20vh]"
+            src="/GreenArrow.svg"
+            alt="arrow"
+            width={100}
+            height={75}
+          ></Image>
+        </div>
+      );
+    }
+  }
 
   function handleBusinessClick() {
     setCategory("business");
@@ -120,15 +144,15 @@ export default function FeaturesSection() {
   }
 
   return (
-    <div className="FeaturesSection mb-60 mt-40 flex flex-col">
-      <div className="FeaturesHeading flex">
+    <div className="FeaturesSection mt-40 flex flex-col">
+      <div className="FeaturesHeading flex items-center justify-center">
         <div className="FeaturesTitle mr-14 flex flex-col text-left">
           <h1 className="FeaturesTitle">our features:</h1>
           <p className="PromisesSubtitle mb-5 font-semibold italic">
             choose category:
           </p>
         </div>
-        <div className="ButtonContainer mb-8 mt-5 flex gap-8">
+        <div className="ButtonContainer mb-8 mt-5 flex gap-10">
           <SiteButton
             aria="features for businesses"
             size="large"
@@ -151,13 +175,15 @@ export default function FeaturesSection() {
           </SiteButton>
         </div>
       </div>
-      <div className="Features flex max-w-5xl flex-wrap justify-center gap-4 px-20">
+      <div className="Features flex max-w-5xl flex-wrap justify-center gap-6 px-20">
         {individualFeatureButtons}
         {individualFeatureDetails}
 
         {businessFeatureButtons}
         {businessFeatureDetails}
+        {/* have the little note pop up here only if the clicked button is "none" */}
       </div>
+      {featurePrompt()}
     </div>
   );
 }
