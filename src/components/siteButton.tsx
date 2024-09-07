@@ -42,7 +42,7 @@ const SiteButton: React.FC<ButtonProps> = ({
       "bg-cream border-jade text-jade border-[3px]": variant === "hollow",
       [`text-eggshell ${buttonColors[colorScheme].color1}`]:
         variant === "filled",
-      [`${addImage}`]: variant === "avatar",
+      [`${addImage} bg-cover`]: variant === "avatar",
       "group-hover:border-lime group-hover:bg-lime group-hover:text-eggshell":
         variant === "hollow",
 

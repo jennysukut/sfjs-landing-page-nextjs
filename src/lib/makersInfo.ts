@@ -10,14 +10,14 @@ export const makersInfo: Record<string, Maker> = {
   jenny: {
     firstName: "jenny",
     lastName: "sukut",
-    img: "/jenny.svg",
+    img: "bg-[url('/jenny.svg')]",
     shadow: "bg-magenta",
     details: [],
   },
   joshua: {
     firstName: "joshua",
     lastName: "duncan",
-    img: "/joshua.svg",
+    img: "bg-[url('/joshua.svg')]",
     shadow: "bg-lime",
     details: [
       "Raised in Rochester, NY",
@@ -33,14 +33,14 @@ export const makersInfo: Record<string, Maker> = {
   carl: {
     firstName: "carl",
     lastName: "thronson",
-    img: "/carl.svg",
+    img: "bg-[url('/carl.svg')]",
     shadow: "bg-lilac",
     details: [],
   },
   stephen: {
     firstName: "stephen",
     lastName: "walker",
-    img: "/stephen.svg",
+    img: "bg-[url('/stephen.svg')]",
     shadow: "bg-jade",
     details: [
       "Is from England",
@@ -55,29 +55,29 @@ export const makersInfo: Record<string, Maker> = {
   liam: {
     firstName: "liam",
     lastName: "prince",
-    img: "/liam.svg",
-    shadow: "bg-apricot",
+    img: "bg-[url('/liam.svg')]",
+    shadow: "bg-peach",
     details: [],
   },
   jacob: {
     firstName: "jacob",
     lastName: "sukut",
-    img: "/jacob.svg",
+    img: "bg-[url('/jacob.svg')]",
     shadow: "bg-sky",
     details: [],
   },
   lean: {
     firstName: "lean",
     lastName: "vilas",
-    img: "/lean.svg",
+    img: "bg-[url('/lean.svg')]",
     shadow: "bg-sky",
     details: [],
   },
   josh: {
     firstName: "joshua",
     lastName: "caldwell",
-    img: "/joshua.svg",
-    shadow: "bg-apricot",
+    img: "bg-[url('/josh.svg')]",
+    shadow: "bg-peach",
     details: [
       "From the Land Of Pilgrims",
       "Blockbuster Alum and Avid Jobs Applier",
@@ -89,7 +89,7 @@ export const makersInfo: Record<string, Maker> = {
   kaitlyn: {
     firstName: "kaitlyn",
     lastName: "cernanec",
-    img: "/kaitlyn.svg",
+    img: "bg-[url('/kaitlyn.svg')]",
     shadow: "bg-lilac",
     details: [
       "Token Canadian",
@@ -104,14 +104,14 @@ export const makersInfo: Record<string, Maker> = {
   vishal: {
     firstName: "vishal",
     lastName: "sonthalia",
-    img: "/vishal.svg",
+    img: "bg-[url('/vishal.svg')]",
     shadow: "bg-olive",
     details: [],
   },
   katelyn: {
     firstName: "katelyn",
     lastName: "lusher",
-    img: "/katelyn.svg",
+    img: "bg-[url('/katelyn.svg')]",
     shadow: "bg-jade",
     details: [
       "has a PhD in Rhetoric & Composition",

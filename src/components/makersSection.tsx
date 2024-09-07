@@ -25,24 +25,31 @@ export default function MakersSection() {
             size="largeCircle"
             colorScheme="b1"
             aria="test"
-            addClasses="mb-4"
-            addImage="bg-lime"
+            addClasses={`${maker.shadow} mb-4`}
+            addImage={`${maker.img}`}
             onClick={() => handleClick(maker.firstName)}
           ></SiteButton>
         </div>
-        <p>{maker.firstName}</p>
-        <p>{maker.lastName}</p>
+        <div className="MakerName flex flex-col items-center pl-2">
+          <p>{maker.firstName}</p>
+          <p>{maker.lastName}</p>
+        </div>
 
-        {clickedMaker === maker.firstName && (
+        {/* {clickedMaker === maker.firstName && (
           <ul>
             {maker.details.map((detail) => (
-              <li key={detail}>{detail}</li>
+              <SiteLabel variant="display" aria={detail} key={detail}>
+                {detail}
+              </SiteLabel>
             ))}
           </ul>
-        )}
+        )} */}
       </div>
     ));
   }
+
+  //make a way to display a random line from the maker's details when their picture is clicked.
+  //the random line should be displayed in a siteLabel
 
   return (
     <div className="MakersSection mt-32 flex flex-col">
@@ -53,18 +60,10 @@ export default function MakersSection() {
           and expertise to make this idea a reality
         </p>
       </div>
-
-      <div className="AllMakers flex max-w-2xl flex-wrap items-center justify-center gap-8">
+      <div className="AllMakers mb-20 mt-14 flex max-w-4xl flex-wrap items-center justify-center gap-10 gap-x-16">
         {displayMakersInfo()}
       </div>
-
-      {/* <SiteButton
-        variant="avatar"
-        size="largeCircle"
-        colorScheme="b1"
-        aria="test"
-        addImage="bg-[url('/jacob.svg')] bg-cover"
-      ></SiteButton> */}
+      {/*here's where you'll put the detail label on image/button click*/}
     </div>
   );
 }
