@@ -4,6 +4,7 @@ import SiteButton from "@/components/siteButton";
 import InfoBox from "@/components/infoBox";
 import FeaturesSection from "@/components/featuresSection";
 import MakersSection from "@/components/makersSection";
+import HopesSection from "@/components/hopesSection";
 
 import Image from "next/image";
 import { landingPageText } from "@/lib/landingPageText";
@@ -106,6 +107,37 @@ export default function Home() {
       </div>
 
       <MakersSection />
+
+      <div className="ButtonContainer mb-20 mt-5 flex max-w-2xl translate-x-[30vh] flex-wrap justify-end gap-8">
+        <SiteButton
+          aria="sign up"
+          size="large"
+          variant="filled"
+          colorScheme="c4"
+          addClasses="px-10"
+        >
+          help this bunch of hooligans{" "}
+        </SiteButton>
+        <SiteButton
+          aria="support us"
+          size="large"
+          variant="filled"
+          colorScheme="b4"
+          addClasses="px-14"
+        >
+          want to collaborate with this cohort?{" "}
+        </SiteButton>
+        <SiteButton
+          aria="support us"
+          size="large"
+          variant="filled"
+          colorScheme="e6"
+        >
+          sign up!{" "}
+        </SiteButton>
+      </div>
+
+      <HopesSection />
     </main>
   );
 }

@@ -53,7 +53,7 @@ export default function MakersSection() {
 
   return (
     <div className="MakersSection mt-32 flex flex-col">
-      <div className="MakersTitles -translate-x-36">
+      <div className="MakersTitles -translate-x-24">
         <h1 className="MakersTitle">our makers:</h1>
         <p className="MakersSubtitle mb-5 max-w-xl font-semibold italic">
           this is our group of amazing humans volunteering their time, energy,
