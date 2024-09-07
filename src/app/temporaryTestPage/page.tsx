@@ -2,6 +2,8 @@ import RandomColorButton from "@/components/randomColorButton";
 import SiteLabel from "@/components/siteLabel";
 import InfoBox from "@/components/infoBox";
 
+import { makersInfo } from "@/lib/makersInfo";
+
 export default function TemporaryPage() {
   return (
     <div className="TemporaryPage flex flex-col items-center py-20">
@@ -132,7 +134,6 @@ export default function TemporaryPage() {
             </SiteLabel>
           </div>
         </div>
-
         <InfoBox
           aria="test"
           variant="filled"
