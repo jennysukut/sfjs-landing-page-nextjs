@@ -29,7 +29,7 @@ export default function HopesSection() {
             aria="change perspectives"
             variant="filled"
             colorScheme="d4"
-            addClasses="text-xs"
+            addClasses="text-sm text-center"
           >
             to show how exciting & successful people-focused, conscious,
             transparent businesses can be{" "}
@@ -38,7 +38,7 @@ export default function HopesSection() {
             aria="change perspectives"
             variant="filled"
             colorScheme="f4"
-            addClasses="rounded-full text-sm"
+            addClasses="rounded-full text-sm px-14"
           >
             to do good{" "}
           </InfoBox>
@@ -56,7 +56,7 @@ export default function HopesSection() {
             aria="change perspectives"
             variant="filled"
             colorScheme="e6"
-            addClasses=" text-xs"
+            addClasses=" text-sm text-center"
           >
             to make human decency & good communication a standard practice
           </InfoBox>
