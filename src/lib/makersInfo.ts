@@ -1,20 +1,12 @@
-interface Maker {
-  firstName: string;
-  lastName: string;
-  img: string;
-  shadow: string;
-  details: string[];
-}
-
-export const makersInfo: Record<string, Maker> = {
-  jenny: {
+export const makersInfo = {
+  "jenny sukut": {
     firstName: "jenny",
     lastName: "sukut",
     img: "bg-[url('/jenny.svg')]",
     shadow: "bg-magenta",
     details: [],
   },
-  joshua: {
+  "joshua duncan": {
     firstName: "joshua",
     lastName: "duncan",
     img: "bg-[url('/joshua.svg')]",
@@ -30,14 +22,14 @@ export const makersInfo: Record<string, Maker> = {
       "Is Addicted to Soda Water",
     ],
   },
-  carl: {
+  "carl thronson": {
     firstName: "carl",
     lastName: "thronson",
     img: "bg-[url('/carl.svg')]",
     shadow: "bg-lilac",
     details: [],
   },
-  stephen: {
+  "stephen walker": {
     firstName: "stephen",
     lastName: "walker",
     img: "bg-[url('/stephen.svg')]",
@@ -52,28 +44,28 @@ export const makersInfo: Record<string, Maker> = {
       "Is a huge fan of video games, especially retro arcade games",
     ],
   },
-  liam: {
+  "liam prince": {
     firstName: "liam",
     lastName: "prince",
     img: "bg-[url('/liam.svg')]",
     shadow: "bg-peach",
     details: [],
   },
-  jacob: {
+  "jacob sukut": {
     firstName: "jacob",
     lastName: "sukut",
     img: "bg-[url('/jacob.svg')]",
     shadow: "bg-sky",
     details: [],
   },
-  lean: {
+  "lean vilas": {
     firstName: "lean",
     lastName: "vilas",
     img: "bg-[url('/lean.svg')]",
     shadow: "bg-sky",
     details: [],
   },
-  josh: {
+  "joshua caldwell": {
     firstName: "joshua",
     lastName: "caldwell",
     img: "bg-[url('/josh.svg')]",
@@ -86,7 +78,7 @@ export const makersInfo: Record<string, Maker> = {
       "Will scream if I see a snake",
     ],
   },
-  kaitlyn: {
+  "kaitlyn cernanec": {
     firstName: "kaitlyn",
     lastName: "cernanec",
     img: "bg-[url('/kaitlyn.svg')]",
@@ -101,14 +93,14 @@ export const makersInfo: Record<string, Maker> = {
       "Professionally ghosted after 4 interviews last month",
     ],
   },
-  vishal: {
+  "vishal sonthalia": {
     firstName: "vishal",
     lastName: "sonthalia",
     img: "bg-[url('/vishal.svg')]",
     shadow: "bg-olive",
     details: [],
   },
-  katelyn: {
+  "katelyn lusher": {
     firstName: "katelyn",
     lastName: "lusher",
     img: "bg-[url('/katelyn.svg')]",
@@ -122,6 +114,15 @@ export const makersInfo: Record<string, Maker> = {
       "coffee is part of her personality",
     ],
   },
+};
+
+export type MakersObjectType = typeof makersInfo;
+export type MakerInfoType = {
+  firstName: string;
+  lastName: string;
+  img: string;
+  shadow: string;
+  details: string[];
 };
 
 export function printMakersInfo() {

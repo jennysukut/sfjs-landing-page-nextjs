@@ -5,6 +5,7 @@ import InfoBox from "./infoBox";
 import { useState } from "react";
 import { landingPageText } from "@/lib/landingPageText";
 import Image from "next/image";
+import { ButtonColorOption } from "@/lib/buttonColors";
 
 export default function FeaturesSection() {
   const [category, setCategory] = useState("individual");
@@ -15,106 +16,6 @@ export default function FeaturesSection() {
       setClickedButton("");
     } else setClickedButton(e.target.name);
   }
-
-  const individualFeatureButtons =
-    landingPageText.features.individualFeatures.map(
-      ({
-        colorScheme: colorScheme,
-        title: title,
-        addClasses: classes,
-        details: details,
-      }) => {
-        if (category === "individual") {
-          return (
-            <SiteButton
-              aria={title}
-              variant="filled"
-              size="large"
-              colorScheme="a1"
-              addClasses={classes}
-              onClick={testClick}
-              name={title}
-              key={title}
-            >
-              {title}
-            </SiteButton>
-          );
-        }
-      },
-    );
-
-  const individualFeatureDetails =
-    landingPageText.features.individualFeatures.map(
-      ({
-        colorScheme: color,
-        title: title,
-        addClasses: classes,
-        details: details,
-      }) => {
-        if (clickedButton === title) {
-          return (
-            <InfoBox
-              variant="filled"
-              aria={title}
-              colorScheme="b1"
-              addClasses="text-xs max-w-5xl"
-              key={title}
-            >
-              {details}
-            </InfoBox>
-          );
-        }
-      },
-    );
-
-  const businessFeatureButtons = landingPageText.features.businessFeatures.map(
-    ({
-      colorScheme: color,
-      title: title,
-      addClasses: classes,
-      details: details,
-    }) => {
-      if (category === "business") {
-        return (
-          <SiteButton
-            aria={title}
-            variant="filled"
-            size="large"
-            colorScheme="f1"
-            addClasses={classes}
-            onClick={testClick}
-            name={title}
-            key={title}
-          >
-            {title}
-          </SiteButton>
-        );
-      }
-    },
-  );
-
-  const businessFeatureDetails = landingPageText.features.businessFeatures.map(
-    ({
-      colorScheme: color,
-      title: title,
-      addClasses: classes,
-      details: details,
-    }) => {
-      if (clickedButton === title) {
-        return (
-          <InfoBox
-            variant="filled"
-            aria={title}
-            colorScheme="b1"
-            addClasses="text-xs max-w-5xl"
-            key={title}
-          >
-            {details}
-          </InfoBox>
-        );
-      }
-    },
-  );
 
   function featurePrompt() {
     if (clickedButton === "none") {
@@ -175,13 +76,79 @@ export default function FeaturesSection() {
           </SiteButton>
         </div>
       </div>
-      <div className="Features flex max-w-5xl flex-wrap justify-center gap-6 px-20">
-        {individualFeatureButtons}
-        {individualFeatureDetails}
 
-        {businessFeatureButtons}
-        {businessFeatureDetails}
-        {/* have the little note pop up here only if the clicked button is "none" */}
+      {/* For Job Seekers */}
+      <div className="Features flex max-w-5xl flex-wrap justify-center gap-6 px-20">
+        {landingPageText.features.individualFeatures.map(
+          ({ colorScheme, title, addClasses, details }) => {
+            if (category === "individual") {
+              return (
+                <div key={`button-${title}`}>
+                  <SiteButton
+                    aria={title}
+                    variant="filled"
+                    size="large"
+                    colorScheme={colorScheme as ButtonColorOption}
+                    addClasses={addClasses}
+                    onClick={testClick}
+                    name={title}
+                    key={`button-${title}`}
+                  >
+                    {title}
+                  </SiteButton>
+                  {clickedButton === title && (
+                    <InfoBox
+                      variant="filled"
+                      aria={title}
+                      colorScheme={colorScheme as ButtonColorOption}
+                      addClasses="text-xs max-w-5xl"
+                      key={`info-${title}`}
+                    >
+                      {details}
+                    </InfoBox>
+                  )}
+                </div>
+              );
+            }
+            return null;
+          },
+        )}
+
+        {/* For Businesses */}
+        {landingPageText.features.businessFeatures.map(
+          ({ colorScheme, title, addClasses, details }) => {
+            if (category === "business") {
+              return (
+                <div key={`button-${title}`}>
+                  <SiteButton
+                    aria={title}
+                    variant="filled"
+                    size="large"
+                    colorScheme={colorScheme as ButtonColorOption}
+                    addClasses={addClasses}
+                    onClick={testClick}
+                    name={title}
+                    key={`button-${title}`}
+                  >
+                    {title}
+                  </SiteButton>
+                  {clickedButton === title && (
+                    <InfoBox
+                      variant="filled"
+                      aria={title}
+                      colorScheme={colorScheme as ButtonColorOption}
+                      addClasses="text-xs max-w-5xl"
+                      key={`info-${title}`}
+                    >
+                      {details}
+                    </InfoBox>
+                  )}
+                </div>
+              );
+            }
+            return null;
+          },
+        )}
       </div>
       {featurePrompt()}
     </div>

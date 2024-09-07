@@ -3,49 +3,17 @@
 import SiteButton from "./siteButton";
 import SiteLabel from "./siteLabel";
 import { useState } from "react";
-import Image from "next/image";
 import { makersInfo } from "@/lib/makersInfo";
+import getRandomMakerDetails from "@/utils/getRandomMaker";
+import { MakerInfoType } from "@/lib/makersInfo";
 
 export default function MakersSection() {
-  const [clickedMaker, setClickedMaker] = useState("");
+  const [clickedMaker, setClickedMaker] = useState({});
+  const [randomMakerDetail, setRandomMakerDetail] = useState("");
 
-  function handleClick(maker: string) {
+  function handleClick(maker: MakerInfoType) {
     setClickedMaker(maker);
-  }
-
-  function displayMakersInfo() {
-    return Object.entries(makersInfo).map(([key, maker]) => (
-      <div
-        key={key}
-        className="MakersButtonContainer flex flex-col items-center"
-      >
-        <div className="ButtonContainer flex">
-          <SiteButton
-            variant="avatar"
-            size="largeCircle"
-            colorScheme="b1"
-            aria="test"
-            addClasses={`${maker.shadow} mb-4`}
-            addImage={`${maker.img}`}
-            onClick={() => handleClick(maker.firstName)}
-          ></SiteButton>
-        </div>
-        <div className="MakerName flex flex-col items-center pl-2">
-          <p>{maker.firstName}</p>
-          <p>{maker.lastName}</p>
-        </div>
-
-        {/* {clickedMaker === maker.firstName && (
-          <ul>
-            {maker.details.map((detail) => (
-              <SiteLabel variant="display" aria={detail} key={detail}>
-                {detail}
-              </SiteLabel>
-            ))}
-          </ul>
-        )} */}
-      </div>
-    ));
+    setRandomMakerDetail(getRandomMakerDetails(maker, randomMakerDetail));
   }
 
   //make a way to display a random line from the maker's details when their picture is clicked.
@@ -61,9 +29,47 @@ export default function MakersSection() {
         </p>
       </div>
       <div className="AllMakers mb-20 mt-14 flex max-w-4xl flex-wrap items-center justify-center gap-10 gap-x-16">
-        {displayMakersInfo()}
+        {/* MakersButtonContainer */}
+        {Object.entries(makersInfo).map(([key, maker]) => (
+          <div
+            key={key}
+            className="MakersButtonContainer flex flex-col items-center"
+          >
+            <div className="ButtonContainer flex">
+              <SiteButton
+                variant="avatar"
+                size="largeCircle"
+                colorScheme="b1"
+                aria="test"
+                addClasses={`${maker.shadow} mb-4`}
+                addImage={`${maker.img}`}
+                onClick={() => handleClick(maker)}
+              ></SiteButton>
+            </div>
+            <div className="MakerName flex flex-col items-center pl-2">
+              <p>{maker.firstName}</p>
+              <p>{maker.lastName}</p>
+            </div>
+
+            {clickedMaker === maker.lastName && (
+              <ul>
+                <SiteLabel
+                  variant="display"
+                  aria={randomMakerDetail}
+                  key={randomMakerDetail}
+                >
+                  {randomMakerDetail}
+                </SiteLabel>
+              </ul>
+            )}
+          </div>
+        ))}
       </div>
-      {/*here's where you'll put the detail label on image/button click*/}
+      {randomMakerDetail && (
+        <SiteLabel variant="display" aria={randomMakerDetail}>
+          {randomMakerDetail}
+        </SiteLabel>
+      )}
     </div>
   );
 }

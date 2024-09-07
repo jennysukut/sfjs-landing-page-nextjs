@@ -84,7 +84,7 @@ const SiteButton: React.FC<ButtonProps> = ({
   const handleMouseLeave = () => setIsPressed(false);
 
   return (
-    <div className="ButtonContainer group relative">
+    <div className="ButtonContainer group relative w-fit">
       <button
         {...props}
         className={buttonClasses}

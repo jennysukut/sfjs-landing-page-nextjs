@@ -29,7 +29,7 @@ const SiteLabel: React.FC<LabelProps> = ({
   }
 
   const labelClasses = clsx(
-    `Label flex relative z-[1] rounded-full font-medium transition-all duration-200 ${smallShadowColors[colorScheme]} text-eggshell text-xs py-1 tracking-widest m-1`,
+    `Label w-fit flex relative z-[1] rounded-full font-medium transition-all duration-200 ${smallShadowColors[colorScheme]} text-eggshell text-xs py-1 tracking-widest m-1`,
     {
       // variant
       "px-4": variant === "display",
