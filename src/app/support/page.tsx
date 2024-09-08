@@ -11,7 +11,7 @@ type DonationCategory = "business" | "individuals" | "";
 
 export default function Support() {
   const [donationCategory, setDonationCategory] =
-    useState<DonationCategory>("");
+    useState<DonationCategory>("individuals");
 
   const [customAmount, setCustomAmount] = useState("");
 
@@ -19,15 +19,36 @@ export default function Support() {
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
 
-  const [selectedAmount, setSelectedAmount] = useState("");
+  const [selectedAmount, setSelectedAmount] = useState<string>("");
 
   const [businessName, setBusinessName] = useState("");
 
+  const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAddress(e.target.value);
+  };
+
   const handleCustomAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (value === "" || /^\d+$/.test(value)) {
-      setCustomAmount(value);
+    let value = e.target.value.replace(/[^\d.]/g, "");
+
+    // Remove leading zeros
+    value = value.replace(/^0+/, "");
+
+    // Ensure only one decimal point
+    const decimalIndex = value.indexOf(".");
+    if (decimalIndex !== -1) {
+      value =
+        value.slice(0, decimalIndex + 1) +
+        value.slice(decimalIndex + 1).replace(/\./g, "");
     }
+
+    // Limit to two decimal places
+    const parts = value.split(".");
+    if (parts[1] && parts[1].length > 2) {
+      parts[1] = parts[1].slice(0, 2);
+      value = parts.join(".");
+    }
+
+    setCustomAmount(value ? "$" + value : "");
   };
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,10 +57,6 @@ export default function Support() {
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
-  };
-
-  const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAddress(e.target.value);
   };
 
   const handleBusinessNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -136,9 +153,8 @@ export default function Support() {
                   ))}
                   <input
                     type="text"
-                    inputMode="numeric"
-                    pattern="\d*"
-                    placeholder="Custom"
+                    inputMode="decimal"
+                    placeholder="$0.00"
                     value={customAmount}
                     onChange={(e) => {
                       handleCustomAmountChange(e);
