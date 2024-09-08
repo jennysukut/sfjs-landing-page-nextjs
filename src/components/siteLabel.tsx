@@ -13,6 +13,7 @@ interface LabelProps extends React.HTMLAttributes<HTMLDivElement> {
   colorScheme?: SmallShadowColorOption;
   aria: string;
   type?: string;
+  addClasses?: string;
 }
 
 const SiteLabel: React.FC<LabelProps> = ({
@@ -21,6 +22,7 @@ const SiteLabel: React.FC<LabelProps> = ({
   variant,
   colorScheme = getRandomColorScheme("a1"),
   children,
+  addClasses,
   ...props
 }) => {
   function handleDelete() {
@@ -35,6 +37,7 @@ const SiteLabel: React.FC<LabelProps> = ({
       "px-4": variant === "display",
       "pr-3 pl-4": variant === "functional",
     },
+    addClasses,
   );
 
   return (

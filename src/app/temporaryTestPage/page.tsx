@@ -1,6 +1,7 @@
 import RandomColorButton from "@/components/randomColorButton";
 import SiteLabel from "@/components/siteLabel";
 import InfoBox from "@/components/infoBox";
+import ProgressBar from "@/components/progressBar";
 
 import { makersInfo } from "@/lib/makersInfo";
 
@@ -9,6 +10,8 @@ export default function TemporaryPage() {
     <div className="TemporaryPage flex flex-col items-center py-20">
       <div className="ButtonContainer my-5 flex flex-col items-center gap-6">
         <button className="test button h-16 w-16 bg-[url('/jacob.svg')] bg-cover"></button>
+
+        <ProgressBar current={15} total={190} />
 
         <RandomColorButton
           aria="this is a test"
