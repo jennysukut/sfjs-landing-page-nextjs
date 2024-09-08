@@ -27,13 +27,7 @@ export default function NavBar() {
           alt="Straightforward Job Site logo"
         />
       </Link>
-      <div className="TEMPORARYBUTTON">
-        <Link href={"/temporaryTestPage"}>
-          <SiteButton variant="hollow" colorScheme="a1" aria="test button">
-            temporary button to test page
-          </SiteButton>
-        </Link>
-      </div>
+
       <div className="NavButtonContainer flex gap-6">
         <SiteButton
           variant="filled"
@@ -43,9 +37,11 @@ export default function NavBar() {
         >
           sign up
         </SiteButton>
-        <SiteButton variant="filled" colorScheme="e5" aria="donate">
-          support us
-        </SiteButton>
+        <Link href={"/support"}>
+          <SiteButton variant="filled" colorScheme="e5" aria="donate">
+            support us
+          </SiteButton>
+        </Link>
         <SiteButton variant="filled" colorScheme="f3" aria="share on socials">
           share
         </SiteButton>

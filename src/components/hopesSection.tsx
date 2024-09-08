@@ -58,7 +58,8 @@ export default function HopesSection() {
             colorScheme="e6"
             addClasses=" text-sm text-center"
           >
-            to make human decency & good communication a standard practice
+            to make human decency & honest communication a standard business
+            practice
           </InfoBox>
         </div>
       </div>

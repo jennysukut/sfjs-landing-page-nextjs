@@ -2,7 +2,7 @@
 
 import SiteButton from "./siteButton";
 import InfoBox from "./infoBox";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { landingPageText } from "@/lib/landingPageText";
 import Image from "next/image";
 import { ButtonColorOption } from "@/lib/buttonColors";
@@ -10,6 +10,11 @@ import { ButtonColorOption } from "@/lib/buttonColors";
 export default function FeaturesSection() {
   const [category, setCategory] = useState("individual");
   const [clickedButton, setClickedButton] = useState("none");
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   function testClick(e: any) {
     if (clickedButton === e.target.name) {
@@ -36,16 +41,24 @@ export default function FeaturesSection() {
     }
   }
 
+  function getDetail() {}
+
   function handleBusinessClick() {
     setCategory("business");
+    setClickedButton("");
   }
 
   function handleIndividualClick() {
     setCategory("individual");
+    setClickedButton("");
+  }
+
+  if (!isClient) {
+    return null; // or a loading spinner
   }
 
   return (
-    <div className="FeaturesSection mt-40 flex flex-col">
+    <div className="FeaturesSection mt-40 flex flex-col justify-center">
       <div className="FeaturesHeading flex items-center justify-center">
         <div className="FeaturesTitle mr-14 flex flex-col text-left">
           <h1 className="FeaturesTitle">our features:</h1>
@@ -77,79 +90,149 @@ export default function FeaturesSection() {
         </div>
       </div>
 
-      {/* For Job Seekers */}
-      <div className="Features flex max-w-5xl flex-wrap justify-center gap-6 px-20">
-        {landingPageText.features.individualFeatures.map(
-          ({ colorScheme, title, addClasses, details }) => {
-            if (category === "individual") {
-              return (
-                <div key={`button-${title}`}>
-                  <SiteButton
-                    aria={title}
-                    variant="filled"
-                    size="large"
-                    colorScheme={colorScheme as ButtonColorOption}
-                    addClasses={addClasses}
-                    onClick={testClick}
-                    name={title}
-                    key={`button-${title}`}
-                  >
-                    {title}
-                  </SiteButton>
-                  {clickedButton === title && (
-                    <InfoBox
-                      variant="filled"
+      {clickedButton === "none" || clickedButton === "" ? (
+        <div className="Features mt-8 flex max-w-5xl flex-wrap justify-center gap-6 px-20">
+          {landingPageText.features.individualFeatures.map(
+            ({ colorScheme, title, addClasses }) => {
+              if (category === "individual") {
+                return (
+                  <div key={`button-${title}`}>
+                    <SiteButton
                       aria={title}
+                      variant="filled"
+                      size="large"
                       colorScheme={colorScheme as ButtonColorOption}
-                      addClasses="text-xs max-w-5xl"
-                      key={`info-${title}`}
+                      addClasses={addClasses}
+                      onClick={testClick}
+                      name={title}
+                      key={`button-${title}`}
                     >
-                      {details}
-                    </InfoBox>
-                  )}
-                </div>
-              );
-            }
-            return null;
-          },
-        )}
+                      {title}
+                    </SiteButton>
+                  </div>
+                );
+              }
+              return null;
+            },
+          )}
 
-        {/* For Businesses */}
-        {landingPageText.features.businessFeatures.map(
-          ({ colorScheme, title, addClasses, details }) => {
-            if (category === "business") {
-              return (
-                <div key={`button-${title}`}>
-                  <SiteButton
-                    aria={title}
-                    variant="filled"
-                    size="large"
-                    colorScheme={colorScheme as ButtonColorOption}
-                    addClasses={addClasses}
-                    onClick={testClick}
-                    name={title}
-                    key={`button-${title}`}
-                  >
-                    {title}
-                  </SiteButton>
-                  {clickedButton === title && (
-                    <InfoBox
-                      variant="filled"
+          {landingPageText.features.businessFeatures.map(
+            ({ colorScheme, title, addClasses }) => {
+              if (category === "business") {
+                return (
+                  <div key={`button-${title}`}>
+                    <SiteButton
                       aria={title}
+                      variant="filled"
+                      size="large"
                       colorScheme={colorScheme as ButtonColorOption}
-                      addClasses="text-xs max-w-5xl"
-                      key={`info-${title}`}
+                      addClasses={addClasses}
+                      onClick={testClick}
+                      name={title}
+                      key={`button-${title}`}
                     >
-                      {details}
-                    </InfoBox>
-                  )}
-                </div>
-              );
-            }
-            return null;
-          },
-        )}
-      </div>
+                      {title}
+                    </SiteButton>
+                  </div>
+                );
+              }
+              return null;
+            },
+          )}
+        </div>
+      ) : (
+        <div className="TallFeaturesGroup mt-8 flex flex-row justify-center">
+          <div className="TallFeaturesButtons flex max-w-5xl flex-col items-end justify-start gap-4">
+            {category === "individual"
+              ? landingPageText.features.individualFeatures.map(
+                  ({ colorScheme, title, addClasses }) => (
+                    <div key={`button-${title}`}>
+                      <SiteButton
+                        aria={title}
+                        variant="filled"
+                        size="large"
+                        colorScheme={colorScheme as ButtonColorOption}
+                        addClasses={addClasses}
+                        onClick={testClick}
+                        name={title}
+                      >
+                        {title}
+                      </SiteButton>
+                    </div>
+                  ),
+                )
+              : landingPageText.features.businessFeatures.map(
+                  ({ colorScheme, title, addClasses }) => (
+                    <div key={`button-${title}`}>
+                      <SiteButton
+                        aria={title}
+                        variant="filled"
+                        size="large"
+                        colorScheme={colorScheme as ButtonColorOption}
+                        addClasses={addClasses}
+                        onClick={testClick}
+                        name={title}
+                      >
+                        {title}
+                      </SiteButton>
+                    </div>
+                  ),
+                )}
+          </div>
+          <div className="TallFeaturesDetails ml-10 mr-20 flex max-w-lg">
+            {category === "individual"
+              ? landingPageText.features.individualFeatures.map(
+                  ({ title, colorScheme, details }) =>
+                    clickedButton === title && (
+                      <InfoBox
+                        key={`info-${title}`}
+                        variant="filled"
+                        aria={title}
+                        colorScheme={colorScheme as ButtonColorOption}
+                        addClasses="text-sm max-w-5xl py-14 px-20 flex flex-col justify-center m-0 leading-6"
+                      >
+                        {Array.isArray(details) ? (
+                          details.map((detail, index) => (
+                            <p key={index} className="mb-4 text-left">
+                              {detail.trim()}
+                            </p>
+                          ))
+                        ) : (
+                          <p className="text-left">
+                            {(details as string).trim()}
+                          </p>
+                        )}
+                      </InfoBox>
+                    ),
+                )
+              : landingPageText.features.businessFeatures.map(
+                  ({ title, colorScheme, details }) =>
+                    clickedButton === title && (
+                      <InfoBox
+                        key={`info-${title}`}
+                        variant="filled"
+                        aria={title}
+                        colorScheme={colorScheme as ButtonColorOption}
+                        addClasses="text-sm max-w-5xl py-14 px-20 flex flex-col justify-center m-0 leading-6"
+                      >
+                        {Array.isArray(details) ? (
+                          details.map((detail, index) => (
+                            <p key={index} className="mb-4 text-left">
+                              {detail.trim()}
+                            </p>
+                          ))
+                        ) : (
+                          <p className="text-left">
+                            {(details as string).trim()}
+                          </p>
+                        )}
+                      </InfoBox>
+                    ),
+                )}
+          </div>
+        </div>
+      )}
+
       {featurePrompt()}
     </div>
   );

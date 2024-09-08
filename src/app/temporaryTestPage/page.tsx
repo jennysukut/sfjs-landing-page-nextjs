@@ -16,7 +16,7 @@ export default function TemporaryPage() {
           colorScheme="f2"
         >
           {" "}
-          normal button
+          normal button under a normal guy hugging a tree
         </RandomColorButton>
         <RandomColorButton
           aria="this is a test"

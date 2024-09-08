@@ -1,4 +1,5 @@
 import SiteButton from "./siteButton";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -7,9 +8,11 @@ export default function Footer() {
         <SiteButton variant="filled" colorScheme="b2" aria="contact us">
           signup
         </SiteButton>
-        <SiteButton variant="filled" colorScheme="d4" aria="our makers">
-          support us
-        </SiteButton>
+        <Link href={"/support"}>
+          <SiteButton variant="filled" colorScheme="d4" aria="our makers">
+            support us
+          </SiteButton>
+        </Link>
         <SiteButton variant="filled" colorScheme="f3" aria="our sponsors">
           pricing
         </SiteButton>

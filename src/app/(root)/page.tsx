@@ -7,6 +7,7 @@ import MakersSection from "@/components/makersSection";
 import HopesSection from "@/components/hopesSection";
 
 import Image from "next/image";
+import Link from "next/link";
 import { landingPageText } from "@/lib/landingPageText";
 
 export default function Home() {
@@ -19,7 +20,7 @@ export default function Home() {
   });
 
   return (
-    <main className="Main flex flex-grow flex-col items-center bg-cream">
+    <main className="Main flex flex-grow flex-col items-center">
       <div className="MainSection flex w-full max-w-[1000px] flex-grow justify-center">
         <div className="MainContainer mt-28 flex -translate-x-[18vh] flex-col items-start gap-4">
           <h1 className="MainText max-w-[700px] text-2xl font-bold text-midnight">
@@ -35,14 +36,16 @@ export default function Home() {
             >
               sign me up!
             </SiteButton>
-            <SiteButton
-              aria="support us"
-              size="large"
-              variant="filled"
-              colorScheme="e5"
-            >
-              how can i help?
-            </SiteButton>
+            <Link href={"/support"}>
+              <SiteButton
+                aria="support us"
+                size="large"
+                variant="filled"
+                colorScheme="e5"
+              >
+                how can i help?
+              </SiteButton>
+            </Link>
           </div>
         </div>
       </div>
@@ -62,16 +65,18 @@ export default function Home() {
           >
             sign me up!
           </SiteButton>
-          <SiteButton
-            aria="support us"
-            size="large"
-            variant="filled"
-            colorScheme="c4"
-            addClasses="px-14"
-          >
-            support us
-          </SiteButton>
-          <div className="PromisePrompt flex items-end">
+          <Link href={"/support"}>
+            <SiteButton
+              aria="support us"
+              size="large"
+              variant="filled"
+              colorScheme="c4"
+              addClasses="px-14"
+            >
+              support us
+            </SiteButton>
+          </Link>
+          <div className="PromisePrompt flex -translate-x-[3vh] items-end">
             <Image
               src="/PurpleArrow.svg"
               alt="arrow"
@@ -85,7 +90,7 @@ export default function Home() {
         </div>
       </div>
       <FeaturesSection />
-      <div className="ButtonContainer mt-5 flex translate-x-[45vh] gap-8">
+      <div className="ButtonContainer mt-14 flex translate-x-[45vh] gap-8">
         <SiteButton
           aria="sign up"
           size="large"
@@ -95,31 +100,35 @@ export default function Home() {
         >
           get on the list
         </SiteButton>
-        <SiteButton
-          aria="support us"
-          size="large"
-          variant="filled"
-          colorScheme="b2"
-          addClasses="px-14"
-        >
-          show your support
-        </SiteButton>
+        <Link href={"/support"}>
+          <SiteButton
+            aria="support us"
+            size="large"
+            variant="filled"
+            colorScheme="b2"
+            addClasses="px-14"
+          >
+            show your support
+          </SiteButton>
+        </Link>
       </div>
 
       <MakersSection />
 
       <div className="ButtonContainer mb-20 mt-5 flex max-w-2xl translate-x-[30vh] flex-wrap justify-end gap-8">
+        <Link href={"/support"}>
+          <SiteButton
+            aria="help support us"
+            size="large"
+            variant="filled"
+            colorScheme="c4"
+            addClasses="px-10"
+          >
+            help this bunch of hooligans{" "}
+          </SiteButton>
+        </Link>
         <SiteButton
-          aria="sign up"
-          size="large"
-          variant="filled"
-          colorScheme="c4"
-          addClasses="px-10"
-        >
-          help this bunch of hooligans{" "}
-        </SiteButton>
-        <SiteButton
-          aria="support us"
+          aria="collaborate"
           size="large"
           variant="filled"
           colorScheme="b4"
@@ -128,7 +137,7 @@ export default function Home() {
           want to collaborate with this cohort?{" "}
         </SiteButton>
         <SiteButton
-          aria="support us"
+          aria="sign up"
           size="large"
           variant="filled"
           colorScheme="e6"
