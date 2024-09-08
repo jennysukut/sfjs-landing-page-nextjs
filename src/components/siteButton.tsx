@@ -39,7 +39,7 @@ const SiteButton: React.FC<ButtonProps> = ({
       "px-4 py-2 text-xs min-w-[65px]": size !== "large" && "largeCircle",
 
       // variant
-      "bg-cream border-jade text-jade border-[3px]": variant === "hollow",
+      "bg-cream border-jade text-jade border-[2px]": variant === "hollow",
       [`text-eggshell ${buttonColors[colorScheme].color1}`]:
         variant === "filled",
       [`${addImage} bg-cover`]: variant === "avatar",
@@ -71,7 +71,7 @@ const SiteButton: React.FC<ButtonProps> = ({
       "px-4 py-2 text-xs min-w-[65px]": size !== "large" && "largeCircle",
 
       // variant
-      "border-[3px] border-jade bg-jade group-hover:border-lilac group-hover:bg-lilac":
+      "border-[2px] border-jade bg-jade group-hover:border-lilac group-hover:bg-lilac":
         variant === "hollow",
       "bg-jade": variant === "avatar",
       [`${buttonColors[colorScheme].color2}`]: variant === "filled",
