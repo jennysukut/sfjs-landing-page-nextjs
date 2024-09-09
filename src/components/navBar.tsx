@@ -17,10 +17,10 @@ export default function NavBar() {
   }
 
   return (
-    <div className="NavBar mx-auto flex h-fit w-[98%] justify-between border-b border-midnight/20 px-16 py-6">
+    <div className="NavBar mx-auto flex h-fit w-[98%] justify-between px-16 py-6">
       <Link href={"/"}>
         <Image
-          className="Logo max-w-40 cursor-pointer transition-transform duration-300 hover:scale-105"
+          className="Logo mt-4 max-w-44 cursor-pointer transition-transform duration-300 hover:scale-105"
           src="/sfjs-logo.svg"
           width={229}
           height={75}

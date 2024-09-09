@@ -10,7 +10,7 @@ export default function SupportPage() {
   return (
     <div className="SupportPage flex max-w-[1600px] flex-col self-center p-14">
       <div className="DetailsAndDonation flex justify-between gap-10">
-        <div className="CurrentStatusAndTimeline flex flex-col gap-6">
+        <div className="CurrentStatusAndTimeline flex flex-col gap-6 px-8">
           <h1 className="CurrentStatusTitle pl-4">our current status:</h1>
           <InfoBox
             aria="our current status"
@@ -50,8 +50,8 @@ export default function SupportPage() {
         </div>
         <DonationBox />
       </div>
-      <div className="EstimatedTimelineContainer mx-auto flex w-full flex-col self-end border-b-2 border-midnight/20 pb-10">
-        <h1 className="EstimatedTimelineTitle mt-12 self-end">
+      <div className="EstimatedTimelineContainer mx-auto flex w-full flex-col self-end border-b-2 border-olive/20 pb-10 pt-12">
+        <h1 className="EstimatedTimelineTitle self-end pb-8">
           our est. timeline:
         </h1>
         <InfoBox

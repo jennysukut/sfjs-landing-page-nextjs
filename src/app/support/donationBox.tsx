@@ -9,6 +9,7 @@ import { supportPageInfo } from "@/lib/siteCopy/supportPageInfo";
 type DonationCategory = "business" | "individuals" | "";
 
 function DonationBox() {
+  const [selectedButton, setSelectedButton] = useState("");
   //obviously, we'll set this only we actually get the donation.
   //We'll have to write the logic when we get the info sent back from Helcim upon successful donation
   const [currentAmount, setCurrentAmount] = useState(0);
@@ -61,6 +62,7 @@ function DonationBox() {
 
   const handleAmountSelection = (amount: string) => {
     setSelectedAmount(amount);
+    setSelectedButton(amount);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -145,10 +147,9 @@ function DonationBox() {
                     key={amount}
                     aria={amount}
                     variant="hollow"
+                    selectable="true"
                     colorScheme="e5"
-                    addClasses={
-                      selectedAmount === amount ? "bg-jade text-cream" : ""
-                    }
+                    addClasses={selectedAmount === amount ? "" : ""}
                     onClick={() => handleAmountSelection(amount)}
                   >
                     {amount}

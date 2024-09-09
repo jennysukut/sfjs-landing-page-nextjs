@@ -4,7 +4,7 @@ import InfoBox from "@/components/infoBox";
 
 export default function HopesSection() {
   return (
-    <section className="HopesSection flex w-full flex-col items-center rounded-[50px] border border-midnight/20 bg-apricot/5 p-20 shadow-lg">
+    <section className="HopesSection flex w-full flex-col items-center rounded-[50px] border-2 border-jade bg-cream p-20 shadow-lg drop-shadow-jade">
       <div className="HopesContainer">
         <div className="HopesTitleContainer w-full">
           <h1 className="HopeTitle text-start">our hopes:</h1>
