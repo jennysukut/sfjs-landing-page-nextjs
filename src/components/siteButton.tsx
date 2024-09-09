@@ -1,7 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { buttonColors, ButtonColorOption } from "@/lib/buttonColors";
+import {
+  buttonColors,
+  ButtonColorOption,
+} from "@/lib/stylingData/buttonColors";
 import clsx from "clsx";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -84,7 +87,7 @@ const SiteButton: React.FC<ButtonProps> = ({
   const handleMouseLeave = () => setIsPressed(false);
 
   return (
-    <div className="ButtonContainer group relative w-fit">
+    <div className="Button group relative w-fit">
       <button
         {...props}
         className={buttonClasses}

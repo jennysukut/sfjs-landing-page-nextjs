@@ -4,7 +4,7 @@ import clsx from "clsx";
 import {
   LargeShadowColorOption,
   largeShadowColors,
-} from "@/lib/largeShadowColors";
+} from "@/lib/stylingData/largeShadowColors";
 
 interface InfoBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   variant: "hollow" | "filled";
@@ -28,7 +28,7 @@ const InfoBox: React.FC<InfoBoxProps> = ({
   ...props
 }) => {
   const boxClasses = clsx(
-    "InfoBox max-w-screen-sm relative z-[1] py-6 px-10  m-3 leading-5 font-semibold rounded-3xl transition-all duration-200 tracking-superwide",
+    "InfoBox max-w-screen-sm relative z-[1] py-6 px-10 leading-5 font-semibold rounded-3xl transition-all duration-200 tracking-superwide",
     {
       // variant
       "bg-cream border-jade drop-shadow-jade text-jade font-semibold border-[3px]":
