@@ -4,19 +4,11 @@ import Link from "next/link";
 function HeaderSection() {
   return (
     <section className="HeaderSection flex w-full flex-grow flex-col justify-center gap-4">
-      <SiteButton
-        variant="filled"
-        colorScheme="c4"
-        aria="test"
-        selectable="true"
-      >
-        test pressable button
-      </SiteButton>
       <h1 className="LandingPageText max-w-[700px] text-2xl font-bold text-midnight">
         our mission: to bring simplicity, honesty, and transparency to the job
         market.
       </h1>
-      <div className="ButtonContainer mt-5 flex gap-8">
+      <div className="ButtonContainer flex gap-8 pt-5">
         <SiteButton
           aria="sign up"
           size="large"

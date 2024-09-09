@@ -6,7 +6,7 @@ import InfoBox from "@/components/infoBox";
 
 function PromisesSection() {
   return (
-    <section className="PromisesSection flex w-full flex-col flex-wrap items-end justify-end self-end border-t-2 border-olive/20 pt-16 text-right">
+    <section className="PromisesSection flex w-full flex-col flex-wrap items-end justify-end self-end border-b-2 border-t-2 border-olive/20 pb-20 pt-16 text-right">
       <h1 className="PromisesTitle">our promises:</h1>
       <p className="PromisesSubtitle mb-5 font-semibold italic">
         to businesses and job-seekers
@@ -47,12 +47,12 @@ function PromisesSection() {
           sign me up!
         </SiteButton>
       </div>
-      <div className="PromisePrompt flex items-end pt-5">
+      <div className="PromisePrompt flex items-end pt-8">
         <Image
           src="/PurpleArrow.svg"
           alt="arrow"
-          width={100}
-          height={89}
+          width={75}
+          height={60}
         ></Image>
         <p className="PromisesPrompt max-w-44 text-center text-xs text-lilac">
           {landingPageText.arrowprompts.guarantee}

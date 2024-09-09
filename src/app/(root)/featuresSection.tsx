@@ -38,7 +38,7 @@ export default function FeaturesSection() {
   );
 
   return (
-    <section className="FeaturesSection flex w-full flex-col items-center justify-center border-y-2 border-olive/20 p-20 shadow-lg">
+    <section className="FeaturesSection flex w-full flex-col items-center justify-center p-20">
       {/* Features Heading */}
       <div className="FeaturesHeading flex w-[95%] items-center justify-center pb-8">
         <div className="FeaturesTitle mr-14 flex flex-col text-left">
@@ -72,7 +72,7 @@ export default function FeaturesSection() {
       </div>
 
       {/* Features */}
-      <div className="FeaturesContainer flex flex-row items-start justify-center gap-10 pt-4">
+      <div className="FeaturesContainer flex flex-row items-start gap-10 self-center pt-4 align-middle">
         {
           <>
             <div className={`FeatureButtons ${featuresButtonStyles}`}>
@@ -116,7 +116,7 @@ export default function FeaturesSection() {
       </div>
 
       {detail === "none" && (
-        <div className="FeaturesPrompt mt-12 flex -translate-x-[50%] items-start">
+        <div className="FeaturesPrompt mt-12 flex -translate-x-[50%] items-start pb-8">
           <p className="FeaturesPrompt max-w-44 text-center text-xs text-jade">
             {landingPageText.arrowprompts.feature}
           </p>

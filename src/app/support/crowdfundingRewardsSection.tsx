@@ -34,7 +34,7 @@ export default function CrowdfundingRewardsSection() {
 
   return (
     <section className="CrowdfundingRewardsSection mt-20 flex w-full flex-col items-center">
-      <div className="IntroContainer mb-12 self-start">
+      <div className="IntroContainer mb-12 self-start pl-12">
         <h1 className="RewardIncentivesTitle self-start pb-8 pl-12">
           our incentives & rewards:
         </h1>
@@ -59,7 +59,7 @@ export default function CrowdfundingRewardsSection() {
             aria="for individuals"
             variant="filled"
             colorScheme="c4"
-            addClasses="rounded-full self-center"
+            addClasses="rounded-full self-center "
           >
             for individuals:
           </InfoBox>
