@@ -1,5 +1,5 @@
 export const landingPageText = {
-  promises: [
+  guarantees: [
     "human-centric + no-nonsense systems",
     "a place to connect humans and conscious businesses",
     "simplicity + transparency + affordability",
@@ -8,16 +8,15 @@ export const landingPageText = {
   ],
 
   arrowprompts: {
-    promise:
+    guarantee:
       "psssttt, we’ve got fun rewards for individuals and businesses who help support us! check them out by pressing this button",
     feature:
       "click the buttons to learn how we implement these fantastic features!",
   },
 
   features: {
-    businessFeatures: [
+    business: [
       {
-        addClasses: "",
         colorScheme: "e6",
         title: "qualified applicants",
         details: [
@@ -26,7 +25,6 @@ export const landingPageText = {
         ],
       },
       {
-        addClasses: "",
         colorScheme: "f1",
         title: "integrated application management",
         details: [
@@ -37,7 +35,6 @@ export const landingPageText = {
         ],
       },
       {
-        addClasses: "",
         colorScheme: "b3",
         title: "manageable numbers",
         details: [
@@ -47,7 +44,6 @@ export const landingPageText = {
         ],
       },
       {
-        addClasses: "",
         colorScheme: "b4",
         title: "simple + conscious practices",
         details: [
@@ -58,7 +54,6 @@ export const landingPageText = {
         ],
       },
       {
-        addClasses: "",
         colorScheme: "f3",
         title: "flat-rate pricing",
         details: [
@@ -70,7 +65,6 @@ export const landingPageText = {
         ],
       },
       {
-        addClasses: "",
         colorScheme: "b1",
         title: "intentional approach",
         details: [
@@ -82,7 +76,6 @@ export const landingPageText = {
         ],
       },
       {
-        addClasses: "",
         colorScheme: "f4",
         title: "quicker hiring process",
         details: [
@@ -94,9 +87,8 @@ export const landingPageText = {
       },
     ],
 
-    individualFeatures: [
+    individual: [
       {
-        addClasses: "px-12",
         colorScheme: "b4",
         title: "a no-nonsense job board",
         details: [
@@ -106,9 +98,8 @@ export const landingPageText = {
         ],
       },
       {
-        addClasses: "px-12",
         colorScheme: "e6",
-        title: "two-way application managment system",
+        title: "two-way application managment",
         details: [
           "Our application management system is unlike any others on the market.",
           "What makes it different? It’s two-way functionality.",
@@ -117,7 +108,6 @@ export const landingPageText = {
         ],
       },
       {
-        addClasses: "px-12",
         colorScheme: "f1",
         title: "no more ghosting",
         details: [
@@ -128,7 +118,6 @@ export const landingPageText = {
         ],
       },
       {
-        addClasses: "",
         colorScheme: "b1",
         title: "higher chances of success",
         details: [
@@ -138,7 +127,6 @@ export const landingPageText = {
         ],
       },
       {
-        addClasses: "",
         colorScheme: "f4",
         title: "no resumes",
         details: [
@@ -151,7 +139,6 @@ export const landingPageText = {
         ],
       },
       {
-        addClasses: "",
         colorScheme: "f3",
         title: "intentionally simple",
         details: [
@@ -162,7 +149,6 @@ export const landingPageText = {
         ],
       },
       {
-        addClasses: "",
         colorScheme: "b3",
         title: "people - focused details",
         details: [

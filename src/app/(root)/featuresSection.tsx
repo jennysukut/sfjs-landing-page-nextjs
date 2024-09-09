@@ -1,0 +1,142 @@
+"useclient";
+
+import SiteButton from "@/components/siteButton";
+import InfoBox from "@/components/infoBox";
+import { useState, useEffect } from "react";
+import { landingPageText } from "@/lib/siteCopy/landingPageText";
+import Image from "next/image";
+import { ButtonColorOption } from "@/lib/stylingData/buttonColors";
+import clsx from "clsx";
+type Category = "individual" | "business";
+
+export default function FeaturesSection() {
+  const features = landingPageText.features;
+  const [category, setCategory] = useState("individual" as Category);
+  const [detail, setDetail] = useState("");
+  const [isClient, setIsClient] = useState(false);
+
+  const featuresButtonStyles = clsx(
+    "flex max-w-5xl",
+    detail === ""
+      ? "flex-wrap justify-center gap-6 px-20 pt-4"
+      : "flex-col items-end justify-start gap-4",
+  );
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []); //?
+
+  if (!isClient) {
+    return null; // or a loading spinner
+  } //?
+
+  function detailClick(e: any) {
+    setDetail(e.target.name);
+  }
+
+  function getDetail() {}
+
+  function handleClick(buttonType: Category) {
+    setCategory(buttonType);
+    setDetail("");
+  }
+
+  const selectedFeature = features[category].find(
+    (feature) => feature.title === detail,
+  );
+
+  return (
+    <section className="FeaturesSection flex w-full flex-col items-center justify-center border-y border-midnight/10 bg-apricot/5 p-20 shadow-lg">
+      {/* Features Heading */}
+      <div className="FeaturesHeading flex w-[95%] items-center justify-center border-b border-midnight/20 pb-12">
+        <div className="FeaturesTitle mr-14 flex flex-col text-left">
+          <h1 className="FeaturesTitle">our features:</h1>
+          <p className="PromisesSubtitle font-semibold italic">
+            choose category:
+          </p>
+        </div>
+        <div className="ButtonContainer flex gap-10">
+          <SiteButton
+            aria="features for businesses"
+            size="large"
+            variant="filled"
+            colorScheme="b3"
+            addClasses="px-14"
+            onClick={() => handleClick("business")}
+          >
+            for businesses
+          </SiteButton>
+          <SiteButton
+            aria="features for job seekers"
+            size="large"
+            variant="filled"
+            colorScheme="c4"
+            addClasses="px-14"
+            onClick={() => handleClick("individual")}
+          >
+            for job-seekers
+          </SiteButton>
+        </div>
+      </div>
+
+      {/* Features */}
+      <div className="FeaturesContainer mt-8 flex flex-row items-start justify-center gap-10">
+        {
+          <>
+            <div className={`FeatureButtons ${featuresButtonStyles}`}>
+              {features[category].map(({ colorScheme, title }) => {
+                return (
+                  <div key={`button-${title}`}>
+                    <SiteButton
+                      aria={title}
+                      variant="filled"
+                      size="large"
+                      colorScheme={colorScheme as ButtonColorOption}
+                      onClick={detailClick}
+                      name={title}
+                      key={`button-${title}`}
+                    >
+                      {title}
+                    </SiteButton>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="TallFeaturesDetails flex max-w-lg">
+              {selectedFeature && (
+                <InfoBox
+                  key={`info-${selectedFeature.title}`}
+                  variant="filled"
+                  aria={selectedFeature.title}
+                  colorScheme={selectedFeature.colorScheme as ButtonColorOption}
+                  addClasses="text-sm max-w-5xl py-14 px-20 flex flex-col justify-center leading-6"
+                >
+                  {selectedFeature.details.map((detail, index) => (
+                    <p key={index} className="mb-4 text-left">
+                      {detail.trim()}
+                    </p>
+                  ))}
+                </InfoBox>
+              )}
+            </div>
+          </>
+        }
+      </div>
+
+      {detail === "" && (
+        <div className="FeaturesPrompt mt-12 flex -translate-x-[50%] items-start">
+          <p className="FeaturesPrompt max-w-44 text-center text-xs text-jade">
+            {landingPageText.arrowprompts.feature}
+          </p>
+          <Image
+            className="translate-y-[-20px]"
+            src="/GreenArrow.svg"
+            alt="arrow"
+            width={100}
+            height={75}
+          ></Image>
+        </div>
+      )}
+    </section>
+  );
+}
