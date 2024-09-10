@@ -28,10 +28,15 @@ export default function PricingPage() {
   }
 
   function inactiveListingClick() {
-    setShowInactiveDetails(true);
-    setTimeout(() => {
-      setShowDumbQuestion(true);
-    }, 3000);
+    if (showInactiveDetails) {
+      setShowInactiveDetails(false);
+      setShowDumbQuestion(false);
+    } else {
+      setShowInactiveDetails(true);
+      setTimeout(() => {
+        setShowDumbQuestion(true);
+      }, 3000);
+    }
   }
 
   function handleDumbClick() {
@@ -72,7 +77,37 @@ export default function PricingPage() {
           for job-seekers
         </SiteButton>
       </div>
+
       <div className="PricingDetails flex gap-12 self-center pt-12">
+        {/* individual pricing details */}
+        {category === "individual" && (
+          <InfoBox
+            aria="individual pricing"
+            variant="filled"
+            colorScheme="c4"
+            textSize="medium"
+            className="BusinessPricing self-end"
+            addClasses="self-start text-center py-10 leading-6 mb-8"
+          >
+            <p className="PricingDetails py-2">
+              Our pricing model is pay-what-you-want!
+            </p>
+            <p className="PricingDetails py-2 font-medium italic">
+              We know our site and the common-sense tools it offers are
+              valuable, but we are all too familiar with the fact that often
+              those who most need the tools are unable to afford them.
+            </p>
+            <p className="PricingDetails py-2">
+              That's why we're making the amount up to you!
+            </p>
+            <p className="PricingDetails py-2">
+              Every single job-seeker who uses our site has access to all our
+              features, despite what their budget might look like.
+            </p>
+          </InfoBox>
+        )}
+
+        {/* business pricing details */}
         {category === "business" && (
           <div className="BusinessInfo">
             <InfoBox
@@ -137,7 +172,7 @@ export default function PricingPage() {
                   >
                     {dumb
                       ? "nevermind, I'll use common sense"
-                      : " but what if I want to have an inactive job post?"}
+                      : "...but what if I want to have an inactive job post?"}
                   </SiteButton>
                 </div>
               </div>
@@ -147,23 +182,11 @@ export default function PricingPage() {
                   height={100}
                   alt="dumb"
                   src="/Wait.gif"
-                  className="self-end rounded-3xl"
+                  className="self-end rounded-3xl drop-shadow-lilac"
                 ></Image>
               )}
             </div>
           </div>
-        )}
-
-        {category === "individual" && (
-          <InfoBox
-            aria="individual pricing"
-            variant="filled"
-            colorScheme="c4"
-            textSize="medium"
-            className="BusinessPricing self-end"
-          >
-            Individual Pricing
-          </InfoBox>
         )}
       </div>
     </div>
