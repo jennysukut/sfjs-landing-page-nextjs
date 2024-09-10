@@ -13,9 +13,11 @@ export default function Footer() {
             support us
           </SiteButton>
         </Link>
-        <SiteButton variant="filled" colorScheme="f3" aria="our sponsors">
-          pricing
-        </SiteButton>
+        <Link href={"/pricing"}>
+          <SiteButton variant="filled" colorScheme="f3" aria="our sponsors">
+            pricing
+          </SiteButton>
+        </Link>
         <SiteButton variant="filled" colorScheme="e6" aria="about">
           share
         </SiteButton>
