@@ -101,7 +101,7 @@ export default function FeaturesSection() {
                   variant="filled"
                   aria={selectedFeature.title}
                   colorScheme={selectedFeature.colorScheme as ButtonColorOption}
-                  addClasses="text-sm max-w-5xl py-16 px-20 flex flex-col justify-center leading-6"
+                  addClasses="text-sm max-w-5xl py-20 px-20 flex flex-col justify-center leading-6"
                 >
                   {selectedFeature.details.map((detail, index) => (
                     <p key={index} className="mb-4 text-left">

@@ -45,7 +45,7 @@ export default function HopesSection() {
               aria="change perspectives"
               variant="filled"
               colorScheme="c5"
-              addClasses="text-sm rounded-full"
+              addClasses="text-sm rounded-full px-14"
             >
               to empower individuals
             </InfoBox>

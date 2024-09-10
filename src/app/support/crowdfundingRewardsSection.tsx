@@ -59,7 +59,7 @@ export default function CrowdfundingRewardsSection() {
             aria="for individuals"
             variant="filled"
             colorScheme="c4"
-            addClasses="rounded-full self-center "
+            addClasses="rounded-full self-center px-14 "
           >
             for individuals:
           </InfoBox>
@@ -74,7 +74,7 @@ export default function CrowdfundingRewardsSection() {
             aria="for businesses"
             variant="filled"
             colorScheme="b3"
-            addClasses="rounded-full self-center"
+            addClasses="rounded-full self-center px-14"
           >
             for businesses:
           </InfoBox>
@@ -83,7 +83,7 @@ export default function CrowdfundingRewardsSection() {
           </div>
         </div>
       </div>
-      <div className="FinePrint mt-8 w-[95%] text-xs font-medium italic text-olive/80">
+      <div className="FinePrint mt-12 w-[100%] text-xs font-medium italic text-olive/80">
         {finePrintArray.map((line, index) => (
           <p className="Asterisk mb-4" key={index}>
             {line}

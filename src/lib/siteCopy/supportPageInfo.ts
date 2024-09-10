@@ -21,7 +21,7 @@ export const supportPageInfo = {
   ],
 
   timelineAst:
-    "*if there are delays in the development process, this timeline will be extended. We are confident we will at the very least be able to launch before the start of 2025.",
+    "*if there are delays in the development process, this timeline will be extended. We are confident we will at the very least be able to launch before the start of 2025!",
 
   incentivesAndRewards: [
     "The best reward is that this site will be available to use by the end of the year!",

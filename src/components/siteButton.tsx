@@ -15,7 +15,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   aria: string;
   padding?: "more" | "extra";
   addImage?: string;
-  selectable?: "true";
+  selectable?: boolean;
+  isSelected?: boolean;
 }
 
 const SiteButton: React.FC<ButtonProps> = ({
@@ -31,10 +32,10 @@ const SiteButton: React.FC<ButtonProps> = ({
   padding,
   addImage,
   selectable,
+  isSelected,
   ...props
 }) => {
   const [isPressed, setIsPressed] = useState(false);
-  const [isSelected, setIsSelected] = useState(false);
 
   const buttonClasses = clsx(
     "SiteButton relative z-[1] cursor-pointer rounded-full font-semibold transition-all duration-200 tracking-superwide hover:saturate-[120%]",
@@ -89,20 +90,12 @@ const SiteButton: React.FC<ButtonProps> = ({
       [`${buttonColors[colorScheme].color2}`]: variant === "filled",
 
       //selected state
-      "bg-lilac border-lilac": isSelected,
+      "bg-lilac border-lilac": isSelected && variant === "hollow",
     },
     addClasses,
   );
 
-  const handleMouseDown = () => {
-    setIsPressed(true);
-    if (selectable === "true" && isSelected === false) {
-      setIsSelected(true);
-    }
-    if (selectable === "true" && isSelected === true) {
-      setIsSelected(false);
-    }
-  };
+  const handleMouseDown = () => setIsPressed(true);
   const handleMouseUp = () => setIsPressed(false);
   const handleMouseLeave = () => setIsPressed(false);
 
