@@ -8,7 +8,7 @@ import CrowdfundingRewardsSection from "./crowdfundingRewardsSection";
 
 export default function SupportPage() {
   return (
-    <div className="SupportPage flex max-w-[1600px] flex-col self-center p-14 pb-4">
+    <div className="SupportPage flex max-w-[1600px] flex-col self-center p-14 pb-0">
       <div className="DetailsAndDonation flex justify-between gap-10">
         <div className="CurrentStatusAndTimeline flex flex-col gap-6 px-8">
           <h1 className="CurrentStatusTitle pl-4">our current status:</h1>

@@ -38,6 +38,7 @@ export default function NavBar() {
         >
           sign up
         </SiteButton>
+
         <Link href={"/support"}>
           <SiteButton
             variant="filled"
@@ -47,6 +48,17 @@ export default function NavBar() {
             onClick={handleNavButtonClick}
           >
             support us
+          </SiteButton>
+        </Link>
+        <Link href={"/pricing"}>
+          <SiteButton
+            variant="filled"
+            colorScheme="d4"
+            aria="pricing"
+            value="pricing"
+            onClick={handleNavButtonClick}
+          >
+            pricing
           </SiteButton>
         </Link>
         <SiteButton
