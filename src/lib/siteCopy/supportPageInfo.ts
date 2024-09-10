@@ -79,7 +79,7 @@ export const supportPageInfo = {
         "Get a Lifetime of Free Job Listings* [so much value]",
       ],
     },
-    individuals: {
+    individual: {
       $5: ["Get your name on our sponsor page"],
       $25: [
         "Get your name on our sponsor page",
@@ -117,7 +117,7 @@ export const businessRewardTiers: BusinessRewardTier[] = Object.keys(
 ) as BusinessRewardTier[];
 
 // Individual rewards
-type IndividualRewardTier = keyof typeof supportPageInfo.rewards.individuals;
+type IndividualRewardTier = keyof typeof supportPageInfo.rewards.individual;
 export const individualRewardTiers: IndividualRewardTier[] = Object.keys(
-  supportPageInfo.rewards.individuals,
+  supportPageInfo.rewards.individual,
 ) as IndividualRewardTier[];

@@ -3,7 +3,7 @@ import SiteButton from "@/components/siteButton";
 import InfoBox from "@/components/infoBox";
 
 const individualRewardsArray = Object.entries(
-  supportPageInfo.rewards.individuals,
+  supportPageInfo.rewards.individual,
 );
 const businessRewardsArray = Object.entries(supportPageInfo.rewards.business);
 const finePrintArray = supportPageInfo.businessFinePrint;
