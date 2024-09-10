@@ -15,15 +15,12 @@ export default function PricingPage() {
   const [dumb, setDumb] = useState(false);
 
   function handleClick(buttonType: Category) {
-    if (category === buttonType) {
-      setCategory("");
-    } else if (buttonType === "business") {
+    setCategory(buttonType);
+    if (buttonType === "business") {
       setCategory(buttonType);
       setTimeout(() => {
         setShowListingQuestion(true);
-      }, 3000);
-    } else {
-      setCategory(buttonType);
+      }, 1500);
     }
   }
 
@@ -31,20 +28,17 @@ export default function PricingPage() {
     if (showInactiveDetails) {
       setShowInactiveDetails(false);
       setShowDumbQuestion(false);
+      setDumb(false);
     } else {
       setShowInactiveDetails(true);
       setTimeout(() => {
         setShowDumbQuestion(true);
-      }, 3000);
+      }, 1500);
     }
   }
 
   function handleDumbClick() {
-    if (dumb) {
-      setDumb(false);
-    } else {
-      setDumb(true);
-    }
+    setDumb(!dumb);
   }
 
   return (
@@ -171,8 +165,8 @@ export default function PricingPage() {
                     addClasses="px-8"
                   >
                     {dumb
-                      ? "nevermind, I'll use common sense"
-                      : "...but what if I want to have an inactive job post?"}
+                      ? "nevermind, I was just being silly."
+                      : "...but what if I want to have a job post without actually hiring?"}
                   </SiteButton>
                 </div>
               </div>

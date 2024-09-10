@@ -13,6 +13,8 @@ type Category = "individual" | "business";
 export default function FeaturesSection() {
   const features = landingPageText.features;
   const [category, setCategory] = useState("individual" as Category);
+  // I have the detail set to none with a differentiation between "" and "none" because
+  //we've got the little note + arrow after the features section that I want to only exist before someone has clicked one of the detail buttons.
   const [detail, setDetail] = useState("none");
   const [isClient, setIsClient] = useState(false);
 
@@ -26,8 +28,6 @@ export default function FeaturesSection() {
   function detailClick(e: any) {
     setDetail(e.target.name);
   }
-
-  function getDetail() {}
 
   function handleClick(buttonType: Category) {
     setCategory(buttonType);

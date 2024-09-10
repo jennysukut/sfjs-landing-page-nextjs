@@ -4,16 +4,18 @@ import Image from "next/image";
 import SiteButton from "./siteButton";
 import Link from "next/link";
 import { useState } from "react";
+import {
+  LinkedinShareButton,
+  FacebookShareButton,
+  TwitterShareButton,
+} from "next-share";
+import { FaCentercode } from "react-icons/fa6";
 
 export default function NavBar() {
   const [clickedButton, setClickedButton] = useState("");
 
   function handleNavButtonClick(e: any) {
-    if (clickedButton === e.target.value) {
-      setClickedButton("");
-    } else {
-      setClickedButton(e.target.value);
-    }
+    setClickedButton(clickedButton === e.target.value ? "" : e.target.value);
   }
 
   return (
@@ -71,8 +73,48 @@ export default function NavBar() {
           share
         </SiteButton>
       </div>
+      {clickedButton === "share" ? (
+        <div className="ShareButtons absolute right-[5rem] top-24 flex flex-col items-end space-y-4">
+          <LinkedinShareButton url="straightforwardjobsite.com">
+            <SiteButton
+              variant="filled"
+              colorScheme="b3"
+              aria="linkedin"
+              value="linkedin"
+              onClick={handleNavButtonClick}
+            >
+              linkedin
+            </SiteButton>
+          </LinkedinShareButton>
+          <FacebookShareButton url="straightforwardjobsite.com">
+            <SiteButton
+              variant="filled"
+              colorScheme="f1"
+              aria="facebook"
+              value="facebook"
+              onClick={handleNavButtonClick}
+            >
+              facebook
+            </SiteButton>
+          </FacebookShareButton>
+          <TwitterShareButton url="straightforwardjobsite.com">
+            <SiteButton
+              variant="filled"
+              colorScheme="c1"
+              aria="threads"
+              value="threads"
+              onClick={handleNavButtonClick}
+            >
+              twitter
+            </SiteButton>
+          </TwitterShareButton>
+        </div>
+      ) : (
+        ""
+      )}
+
       {clickedButton === "signup" ? (
-        <div className="SignupButtons absolute right-64 top-24 flex flex-col items-start space-y-4">
+        <div className="SignupButtons absolute right-[23rem] top-24 flex flex-col items-start space-y-4">
           <SiteButton
             variant="filled"
             colorScheme="b3"
