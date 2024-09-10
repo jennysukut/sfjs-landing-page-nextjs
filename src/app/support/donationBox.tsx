@@ -5,6 +5,18 @@ import ProgressBar from "@/components/progressBar";
 import InfoBox from "@/components/infoBox";
 import SiteButton from "@/components/siteButton";
 import { supportPageInfo } from "@/lib/siteCopy/supportPageInfo";
+import { gql } from '@apollo/client';
+import client from '../../lib/apollo-client';
+
+const SAVE_ACCOUNT = gql`
+  mutation SaveAccount($requestBody: AccountInput!) {
+    saveAccount(requestBody: $requestBody) {
+      id
+      name
+      email
+    }
+  }
+`;
 
 type DonationCategory = "business" | "individuals" | "";
 
@@ -77,6 +89,23 @@ function DonationBox() {
       donationCategory,
       donationAmount,
     });
+
+    const requestBody = {
+      name,
+      email
+    };
+
+    client.mutate({
+      mutation: SAVE_ACCOUNT,
+      variables: { requestBody },
+    })
+    .then(({ data }) => {
+      console.log("success");
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+
   };
 
   const parseAmount = (amount: string): number => {
