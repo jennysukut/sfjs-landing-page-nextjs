@@ -6,13 +6,13 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function NavBar() {
-  const [signupClicked, setSignupClicked] = useState(false);
+  const [clickedButton, setClickedButton] = useState("");
 
-  function handleSignupClick() {
-    if (signupClicked === true) {
-      setSignupClicked(false);
+  function handleNavButtonClick(e: any) {
+    if (clickedButton === e.target.value) {
+      setClickedButton("");
     } else {
-      setSignupClicked(true);
+      setClickedButton(e.target.value);
     }
   }
 
@@ -33,28 +33,59 @@ export default function NavBar() {
           variant="filled"
           colorScheme="b4"
           aria="sign up"
-          onClick={handleSignupClick}
+          value="signup"
+          onClick={handleNavButtonClick}
         >
           sign up
         </SiteButton>
         <Link href={"/support"}>
-          <SiteButton variant="filled" colorScheme="e5" aria="donate">
+          <SiteButton
+            variant="filled"
+            colorScheme="e5"
+            aria="donate"
+            value="support"
+            onClick={handleNavButtonClick}
+          >
             support us
           </SiteButton>
         </Link>
-        <SiteButton variant="filled" colorScheme="f3" aria="share on socials">
+        <SiteButton
+          variant="filled"
+          colorScheme="f3"
+          aria="share on socials"
+          value="share"
+          onClick={handleNavButtonClick}
+        >
           share
         </SiteButton>
       </div>
-      {signupClicked === true ? (
+      {clickedButton === "signup" ? (
         <div className="SignupButtons absolute right-64 top-24 flex flex-col items-start space-y-4">
-          <SiteButton variant="filled" colorScheme="b3" aria="business">
+          <SiteButton
+            variant="filled"
+            colorScheme="b3"
+            aria="business"
+            value="business"
+            onClick={handleNavButtonClick}
+          >
             business
           </SiteButton>
-          <SiteButton variant="filled" colorScheme="f1" aria="collaborator">
+          <SiteButton
+            variant="filled"
+            colorScheme="f1"
+            aria="collaborator"
+            value="collaborator"
+            onClick={handleNavButtonClick}
+          >
             collaborator
           </SiteButton>
-          <SiteButton variant="filled" colorScheme="c1" aria="individual">
+          <SiteButton
+            variant="filled"
+            colorScheme="c1"
+            aria="individual"
+            value="individual"
+            onClick={handleNavButtonClick}
+          >
             human
           </SiteButton>
         </div>

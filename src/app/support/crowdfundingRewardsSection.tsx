@@ -33,15 +33,16 @@ export default function CrowdfundingRewardsSection() {
   }
 
   return (
-    <section className="CrowdfundingRewardsSection mt-20 flex w-full flex-col items-center">
-      <div className="IntroContainer mb-12 self-start pl-12">
-        <h1 className="RewardIncentivesTitle self-start pb-8 pl-12">
+    <section className="CrowdfundingRewardsSection mt-20 flex w-full flex-col items-center border-t-2 border-olive/20 pt-12">
+      <div className="IntroContainer mb-12 self-center">
+        <h1 className="RewardIncentivesTitle pb-8 pl-12">
           our incentives & rewards:
         </h1>
         <InfoBox
           variant="hollow"
           aria="our incentives & rewards"
-          addClasses="min-w-full"
+          addClasses="min-w-screen-lg"
+          width="extraWide"
         >
           {supportPageInfo.incentivesAndRewards.map((reward, index) => (
             <p key={index} className="mb-4 text-sm last:mb-0">
@@ -59,7 +60,8 @@ export default function CrowdfundingRewardsSection() {
             aria="for individuals"
             variant="filled"
             colorScheme="c4"
-            addClasses="rounded-full self-center px-14 "
+            size="small"
+            addClasses="rounded-full self-center"
           >
             for individuals:
           </InfoBox>
@@ -74,7 +76,8 @@ export default function CrowdfundingRewardsSection() {
             aria="for businesses"
             variant="filled"
             colorScheme="b3"
-            addClasses="rounded-full self-center px-14"
+            size="small"
+            addClasses="rounded-full self-center"
           >
             for businesses:
           </InfoBox>

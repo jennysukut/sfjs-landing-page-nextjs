@@ -74,7 +74,6 @@ function DonationBox() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
     const donationAmount = formData.selectedAmount || formData.customAmount;
     const parsedAmount = parseAmount(donationAmount);
     setCurrentAmount((prevAmount) => prevAmount + parsedAmount);
@@ -83,7 +82,7 @@ function DonationBox() {
     console.log("Form submitted:", formData);
   };
 
-  //Number Calculation + Adjustment for Display
+  // Number Calculation + Adjustment for Display
   const parseAmount = (amount: string): number => {
     return parseFloat(amount.replace(/[^0-9.]/g, "")) || 0;
   };
@@ -102,7 +101,6 @@ function DonationBox() {
     );
 
     if (!selectedReward) return null;
-
     const [amount, description] = selectedReward;
 
     return (
@@ -128,7 +126,7 @@ function DonationBox() {
     category === "business" || category === "individual";
 
   return (
-    <div className="DonationStation flex w-5/12 flex-col gap-6">
+    <div className="DonationStation flex w-5/12 flex-col gap-6 pt-20">
       <div className="ProgressBarContainer mb-4">
         <p className="ProgressBarStatus">
           current amount raised: ${currentAmount} / {calculatePercentage()}%

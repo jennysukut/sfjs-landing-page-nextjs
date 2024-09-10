@@ -7,6 +7,7 @@ import { landingPageText } from "@/lib/siteCopy/landingPageText";
 import Image from "next/image";
 import { ButtonColorOption } from "@/lib/stylingData/buttonColors";
 import clsx from "clsx";
+import Link from "next/link";
 type Category = "individual" | "business";
 
 export default function FeaturesSection() {
@@ -130,7 +131,26 @@ export default function FeaturesSection() {
         </div>
       )}
 
-      {/* add prompt buttons here */}
+      <div className="ButtonContainer flex gap-8 self-end pr-20 pt-12">
+        <SiteButton
+          aria="sign up"
+          size="large"
+          variant="filled"
+          colorScheme="c5"
+        >
+          get in early
+        </SiteButton>
+        <Link href={"/support"}>
+          <SiteButton
+            aria="support us"
+            size="large"
+            variant="filled"
+            colorScheme="b2"
+          >
+            show your support{" "}
+          </SiteButton>
+        </Link>
+      </div>
     </section>
   );
 }

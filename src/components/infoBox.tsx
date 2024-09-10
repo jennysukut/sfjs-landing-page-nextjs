@@ -14,10 +14,13 @@ interface InfoBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   title?: string;
   textSize?: "small" | "medium" | "large";
   addClasses?: string;
+  size?: "small";
+  width?: "extraWide";
 }
 
 const InfoBox: React.FC<InfoBoxProps> = ({
   type = "information",
+  size,
   aria,
   variant,
   colorScheme = "d6",
@@ -25,10 +28,11 @@ const InfoBox: React.FC<InfoBoxProps> = ({
   title,
   addClasses,
   textSize,
+  width,
   ...props
 }) => {
   const boxClasses = clsx(
-    "InfoBox max-w-screen-sm relative z-[1] py-6 px-10 leading-5 font-semibold rounded-3xl transition-all duration-200 tracking-superwide",
+    "InfoBox relative z-[1] font-semibold rounded-3xl leading-5 transition-all duration-200 tracking-superwide",
     {
       // variant
       "bg-cream border-jade drop-shadow-jade text-jade font-semibold border-[3px]":
@@ -39,6 +43,14 @@ const InfoBox: React.FC<InfoBoxProps> = ({
       "text-xs": textSize === "small",
       "text-sm": textSize === "medium",
       "text-m": textSize === "large",
+
+      // size
+      "py-6 px-10": size !== "small",
+      "py-4 px-14": size === "small",
+
+      //width
+      "max-w-screen-sm": width !== "extraWide",
+      "max-w-screen-lg": width === "extraWide",
     },
     addClasses,
   );
