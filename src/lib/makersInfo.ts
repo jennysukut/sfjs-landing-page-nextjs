@@ -4,7 +4,12 @@ export const makersInfo = {
     lastName: "sukut",
     img: "bg-[url('/jenny.svg')]",
     shadow: "bg-magenta",
-    details: [],
+    details: [
+      "comes up with silly prompts for websites",
+      "like one where you see the makers of a website",
+      "and get little details of them when you click on their faces",
+      "also, she laughs at her own jokes",
+    ],
   },
   "joshua duncan": {
     firstName: "joshua",
@@ -36,7 +41,7 @@ export const makersInfo = {
     shadow: "bg-jade",
     details: [
       "Is from England",
-      "Is participating in the Innovative Entrepreneurs cohort, a 9-month Government initiative aimed at nurturing entrepreneurial skills and helping participants turn their innovative ideas into successful global businesses",
+      "Is participating in the Innovative Entrepreneurs Cohort",
       "Has a passion for learning new technologies and tackling complex challenges",
       "Enjoys going to the gym and running to get his day started",
       "In his free time, Stephen likes going to the park with his wife and daughter",
@@ -56,7 +61,16 @@ export const makersInfo = {
     lastName: "sukut",
     img: "bg-[url('/jacob.svg')]",
     shadow: "bg-sky",
-    details: [],
+    details: [
+      "Is from Montana but has moved about 30 times",
+      "He was a literature and history teacher and Ultimate coach",
+      "Is a badass blacksmith",
+      "Eats peanut-butter and syrup on pancakes",
+      "Sometimes he eats potatoes raw",
+      "Thinks spiders are kinda cute",
+      "He thinks sauteeing onions in butter is one of the best smells in the world",
+      "Loves books and stories",
+    ],
   },
   "lean vilas": {
     firstName: "lean",
@@ -76,6 +90,7 @@ export const makersInfo = {
       "18 Years of Marketing and Brand Experience",
       "Media Junkie and Political Pontificator",
       "Will scream if I see a snake",
+      "I can't use Ultimate 'cause Jacob beat me to it and if too many of us congregate it turns into a pick up game.",
     ],
   },
   "kaitlyn cernanec": {
