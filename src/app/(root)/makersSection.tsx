@@ -23,7 +23,7 @@ export default function MakersSection() {
   //the random line should be displayed in a siteLabel
 
   return (
-    <section className="MakersSection flex w-full max-w-[1200px] flex-col self-center border-b-2 border-t-2 border-olive/20 pt-20">
+    <section className="MakersSection flex w-full flex-col self-center border-b-2 border-t-2 border-olive/20 pt-20">
       <div className="MakersContainer">
         <div className="MakersTitles ml-16">
           <h1 className="MakersTitle">our makers:</h1>
@@ -99,7 +99,7 @@ export default function MakersSection() {
             colorScheme="b4"
             addClasses="px-14"
           >
-            want to collaborate?{" "}
+            collaborate with us
           </SiteButton>
           <SiteButton
             aria="sign up"

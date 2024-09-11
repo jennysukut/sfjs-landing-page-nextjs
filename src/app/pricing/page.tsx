@@ -14,10 +14,19 @@ export default function PricingPage() {
   const [showDumbQuestion, setShowDumbQuestion] = useState(false);
   const [dumb, setDumb] = useState(false);
 
+  // function handleClick(buttonType: Category) {
+  //   setCategory(buttonType);
+  //   if (buttonType === "business") {
+  //     setCategory(buttonType);
+  //     setTimeout(() => {
+  //       setShowListingQuestion(true);
+  //     }, 1500);
+  //   }
+  // }
+
   function handleClick(buttonType: Category) {
     setCategory(buttonType);
     if (buttonType === "business") {
-      setCategory(buttonType);
       setTimeout(() => {
         setShowListingQuestion(true);
       }, 1500);
@@ -130,7 +139,7 @@ export default function PricingPage() {
                 aria="inactive job question"
                 variant="filled"
                 colorScheme="f3"
-                onClick={inactiveListingClick}
+                onClick={() => setDumb(!dumb)}
                 addClasses="px-8"
               >
                 what if a job listing is inactive?
@@ -175,8 +184,8 @@ export default function PricingPage() {
                   width={200}
                   height={100}
                   alt="dumb"
-                  src="/Wait.gif"
-                  className="self-end rounded-3xl drop-shadow-lilac"
+                  src="/wait-what.gif"
+                  className="mr-12 self-end rounded-3xl drop-shadow-lilac"
                 ></Image>
               )}
             </div>

@@ -39,9 +39,9 @@ export default function FeaturesSection() {
   );
 
   return (
-    <section className="FeaturesSection flex w-full flex-col items-center justify-center p-20">
+    <section className="FeaturesSection flex w-[90%] flex-col items-center justify-center p-20">
       {/* Features Heading */}
-      <div className="FeaturesHeading flex w-[95%] items-center justify-center pb-8">
+      <div className="FeaturesHeading flex items-center justify-center pb-8">
         <div className="FeaturesTitle mr-14 flex flex-col text-left">
           <h1 className="FeaturesTitle">our features:</h1>
           <p className="PromisesSubtitle font-semibold italic">

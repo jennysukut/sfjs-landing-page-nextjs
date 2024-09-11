@@ -61,7 +61,7 @@ export default function CrowdfundingRewardsSection() {
             variant="filled"
             colorScheme="c4"
             size="small"
-            addClasses="rounded-full self-center"
+            addClasses="rounded-2xl self-center"
           >
             for individuals:
           </InfoBox>
@@ -77,7 +77,7 @@ export default function CrowdfundingRewardsSection() {
             variant="filled"
             colorScheme="b3"
             size="small"
-            addClasses="rounded-full self-center"
+            addClasses="rounded-2xl self-center"
           >
             for businesses:
           </InfoBox>

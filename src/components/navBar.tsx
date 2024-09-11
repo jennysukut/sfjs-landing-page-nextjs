@@ -1,15 +1,12 @@
 "use client";
 
+import { useState } from "react";
+
 import Image from "next/image";
 import SiteButton from "./siteButton";
 import Link from "next/link";
-import { useState } from "react";
-import {
-  LinkedinShareButton,
-  FacebookShareButton,
-  TwitterShareButton,
-} from "next-share";
-import { FaCentercode } from "react-icons/fa6";
+import ShareOptions from "./shareOptions";
+import SignupOptions from "./signupOptions";
 
 export default function NavBar() {
   const [clickedButton, setClickedButton] = useState("");
@@ -37,6 +34,7 @@ export default function NavBar() {
           aria="sign up"
           value="signup"
           onClick={handleNavButtonClick}
+          isSelected={clickedButton === "signup"}
         >
           sign up
         </SiteButton>
@@ -69,83 +67,14 @@ export default function NavBar() {
           aria="share on socials"
           value="share"
           onClick={handleNavButtonClick}
+          isSelected={clickedButton === "share"}
         >
           share
         </SiteButton>
       </div>
-      {clickedButton === "share" ? (
-        <div className="ShareButtons absolute right-[5rem] top-24 flex flex-col items-end space-y-4">
-          <LinkedinShareButton url="straightforwardjobsite.com">
-            <SiteButton
-              variant="filled"
-              colorScheme="b3"
-              aria="linkedin"
-              value="linkedin"
-              onClick={handleNavButtonClick}
-            >
-              linkedin
-            </SiteButton>
-          </LinkedinShareButton>
-          <FacebookShareButton url="straightforwardjobsite.com">
-            <SiteButton
-              variant="filled"
-              colorScheme="f1"
-              aria="facebook"
-              value="facebook"
-              onClick={handleNavButtonClick}
-            >
-              facebook
-            </SiteButton>
-          </FacebookShareButton>
-          <TwitterShareButton url="straightforwardjobsite.com">
-            <SiteButton
-              variant="filled"
-              colorScheme="c1"
-              aria="threads"
-              value="threads"
-              onClick={handleNavButtonClick}
-            >
-              twitter
-            </SiteButton>
-          </TwitterShareButton>
-        </div>
-      ) : (
-        ""
-      )}
+      {clickedButton === "share" ? <ShareOptions /> : ""}
 
-      {clickedButton === "signup" ? (
-        <div className="SignupButtons absolute right-[23rem] top-24 flex flex-col items-start space-y-4">
-          <SiteButton
-            variant="filled"
-            colorScheme="b3"
-            aria="business"
-            value="business"
-            onClick={handleNavButtonClick}
-          >
-            business
-          </SiteButton>
-          <SiteButton
-            variant="filled"
-            colorScheme="f1"
-            aria="collaborator"
-            value="collaborator"
-            onClick={handleNavButtonClick}
-          >
-            collaborator
-          </SiteButton>
-          <SiteButton
-            variant="filled"
-            colorScheme="c1"
-            aria="individual"
-            value="individual"
-            onClick={handleNavButtonClick}
-          >
-            human
-          </SiteButton>
-        </div>
-      ) : (
-        ""
-      )}
+      {clickedButton === "signup" ? <SignupOptions /> : ""}
     </div>
   );
 }

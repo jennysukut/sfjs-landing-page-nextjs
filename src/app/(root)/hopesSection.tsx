@@ -66,7 +66,7 @@ export default function HopesSection() {
           </div>
         </div>
       </div>
-      <div className="ButtonContainer flex gap-6 self-start pt-24">
+      <div className="ButtonContainer mt-24 flex gap-6 self-start pl-20">
         <Link href={"/support"}>
           <SiteButton
             aria="support us"
