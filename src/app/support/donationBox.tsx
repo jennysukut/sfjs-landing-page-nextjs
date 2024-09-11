@@ -7,13 +7,12 @@ import SiteButton from "@/components/siteButton";
 import { supportPageInfo } from "@/lib/siteCopy/supportPageInfo";
 import { gql } from '@apollo/client';
 import client from '../../lib/apollo-client';
+import Script from "next/script";
 
-const SAVE_ACCOUNT = gql`
-  mutation SaveAccount($requestBody: AccountInput!) {
-    saveAccount(requestBody: $requestBody) {
-      id
-      name
-      email
+const INITIALIZE_PAYMENT = gql`
+  mutation InitializePayment($payment: PaymentInput!) {
+    initializePayment(payment: $payment) {
+      checkoutToken
     }
   }
 `;
@@ -90,21 +89,25 @@ function DonationBox() {
       donationAmount,
     });
 
-    const requestBody = {
-      name,
-      email
+    const payment = {
+      "paymentType": "purchase",
+      "amount": "0.01",
+      "currency": "CAD",
+      "account": { name, email }
     };
 
     client.mutate({
-      mutation: SAVE_ACCOUNT,
-      variables: { requestBody },
+      mutation: INITIALIZE_PAYMENT,
+      variables: { payment },
     })
-    .then(({ data }) => {
-      console.log("success");
-    })
-    .catch((error) => {
-      console.log(error.message);
-    });
+      .then(({ data }) => {
+        console.log("success");
+        // @ts-ignore
+        appendHelcimPayIframe(data.initializePayment.checkoutToken);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
 
   };
 
@@ -121,158 +124,161 @@ function DonationBox() {
   }
 
   return (
-    <div className="DonationStation flex w-5/12 flex-col gap-6">
-      <div className="ProgressBarContainer mb-4">
-        <p className="ProgressBarStatus">
-          current amount raised: ${currentAmount}
-        </p>
-        <ProgressBar current={currentAmount} total={15490} />
-      </div>
-      <InfoBox
-        className="DonateHere"
-        aria="support us"
-        variant="hollow"
-        addClasses="flex flex-col text-center items-center"
-      >
-        <h1 className="SupportUsTitle mt-2">show your support</h1>
-        <h3 className="SupportUsSubtitle mt-2 font-medium italic text-jade">
-          for Straightforward Job Site
-        </h3>
-        <p className="SupportUsComment mt-10 max-w-52 text-sm font-normal italic text-olive">
-          every amount is helpful & sincerely appreciated!{" "}
-        </p>
-
-        {/* donor options: business / individual */}
-        <div className="DonationOptions mt-8 flex gap-6">
-          <SiteButton
-            aria="human"
-            variant="filled"
-            colorScheme="e5"
-            addClasses="px-8 py-3"
-            onClick={individualOptions}
-          >
-            human
-          </SiteButton>
-          <SiteButton
-            aria="business"
-            variant="filled"
-            colorScheme="f3"
-            addClasses="px-8 py-3"
-            onClick={businessOptions}
-          >
-            business
-          </SiteButton>
+    <>
+      <Script type="text/javascript" src="https://secure.helcim.app/helcim-pay/services/start.js"></Script>
+      <div className="DonationStation flex w-5/12 flex-col gap-6">
+        <div className="ProgressBarContainer mb-4">
+          <p className="ProgressBarStatus">
+            current amount raised: ${currentAmount}
+          </p>
+          <ProgressBar current={currentAmount} total={15490} />
         </div>
+        <InfoBox
+          className="DonateHere"
+          aria="support us"
+          variant="hollow"
+          addClasses="flex flex-col text-center items-center"
+        >
+          <h1 className="SupportUsTitle mt-2">show your support</h1>
+          <h3 className="SupportUsSubtitle mt-2 font-medium italic text-jade">
+            for Straightforward Job Site
+          </h3>
+          <p className="SupportUsComment mt-10 max-w-52 text-sm font-normal italic text-olive">
+            every amount is helpful & sincerely appreciated!{" "}
+          </p>
 
-        {/* donation amount options */}
-        <div className="AmountOptions mt-8 flex max-w-sm flex-wrap items-center justify-center gap-4">
-          {donationCategory && (
-            <>
-              {Object.entries(supportPageInfo.rewards[donationCategory]).map(
-                ([amount]) => (
-                  <SiteButton
-                    key={amount}
-                    aria={amount}
-                    variant="hollow"
-                    colorScheme="e5"
-                    addClasses={
-                      selectedAmount === amount ? "bg-jade text-cream" : ""
-                    }
-                    onClick={() => handleAmountSelection(amount)}
-                  >
-                    {amount}
-                  </SiteButton>
-                ),
-              )}
+          {/* donor options: business / individual */}
+          <div className="DonationOptions mt-8 flex gap-6">
+            <SiteButton
+              aria="human"
+              variant="filled"
+              colorScheme="e5"
+              addClasses="px-8 py-3"
+              onClick={individualOptions}
+            >
+              human
+            </SiteButton>
+            <SiteButton
+              aria="business"
+              variant="filled"
+              colorScheme="f3"
+              addClasses="px-8 py-3"
+              onClick={businessOptions}
+            >
+              business
+            </SiteButton>
+          </div>
 
-              <input
-                type="text"
-                inputMode="decimal"
-                placeholder="$0.00"
-                value={customAmount}
-                onChange={(e) => {
-                  handleCustomAmountChange(e);
-                  setSelectedAmount("");
-                }}
-                className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-center text-xs placeholder-jade drop-shadow-jade"
-                aria-label="custom amount"
-              />
-            </>
-          )}
-        </div>
-
-        {/* donor information */}
-        <div className="DonorInfo mb-4 mt-10 flex w-full max-w-sm flex-col gap-4">
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            {donationCategory === "individuals" && (
-              <>
-                <input
-                  type="text"
-                  placeholder="Your Name*"
-                  value={name}
-                  onChange={handleNameChange}
-                  className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
-                  aria-label="name"
-                  required
-                />
-                <input
-                  type="email"
-                  placeholder="Your Email*"
-                  value={email}
-                  onChange={handleEmailChange}
-                  className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
-                  aria-label="email"
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder="Your Address*"
-                  value={address}
-                  onChange={handleAddressChange}
-                  className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
-                  aria-label="address"
-                  required
-                />
-              </>
-            )}
-            {donationCategory === "business" && (
-              <>
-                <input
-                  type="text"
-                  placeholder="Business Name*"
-                  value={businessName}
-                  onChange={handleBusinessNameChange}
-                  className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
-                  aria-label="business name"
-                  required
-                />
-                <input
-                  type="email"
-                  placeholder="Email Address*"
-                  value={email}
-                  onChange={handleEmailChange}
-                  className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
-                  aria-label="email"
-                  required
-                />
-              </>
-            )}
+          {/* donation amount options */}
+          <div className="AmountOptions mt-8 flex max-w-sm flex-wrap items-center justify-center gap-4">
             {donationCategory && (
-              <div className="mt-4 flex justify-end">
-                <SiteButton
-                  type="submit"
-                  aria="submit donation"
-                  variant="filled"
-                  colorScheme="e5"
-                >
-                  continue
-                </SiteButton>
-              </div>
+              <>
+                {Object.entries(supportPageInfo.rewards[donationCategory]).map(
+                  ([amount]) => (
+                    <SiteButton
+                      key={amount}
+                      aria={amount}
+                      variant="hollow"
+                      colorScheme="e5"
+                      addClasses={
+                        selectedAmount === amount ? "bg-jade text-cream" : ""
+                      }
+                      onClick={() => handleAmountSelection(amount)}
+                    >
+                      {amount}
+                    </SiteButton>
+                  ),
+                )}
+
+                <input
+                  type="text"
+                  inputMode="decimal"
+                  placeholder="$0.00"
+                  value={customAmount}
+                  onChange={(e) => {
+                    handleCustomAmountChange(e);
+                    setSelectedAmount("");
+                  }}
+                  className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-center text-xs placeholder-jade drop-shadow-jade"
+                  aria-label="custom amount"
+                />
+              </>
             )}
-          </form>
-        </div>
-      </InfoBox>
-    </div>
+          </div>
+
+          {/* donor information */}
+          <div className="DonorInfo mb-4 mt-10 flex w-full max-w-sm flex-col gap-4">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+              {donationCategory === "individuals" && (
+                <>
+                  <input
+                    type="text"
+                    placeholder="Your Name*"
+                    value={name}
+                    onChange={handleNameChange}
+                    className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
+                    aria-label="name"
+                    required
+                  />
+                  <input
+                    type="email"
+                    placeholder="Your Email*"
+                    value={email}
+                    onChange={handleEmailChange}
+                    className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
+                    aria-label="email"
+                    required
+                  />
+                  <input
+                    type="text"
+                    placeholder="Your Address*"
+                    value={address}
+                    onChange={handleAddressChange}
+                    className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
+                    aria-label="address"
+                    required
+                  />
+                </>
+              )}
+              {donationCategory === "business" && (
+                <>
+                  <input
+                    type="text"
+                    placeholder="Business Name*"
+                    value={businessName}
+                    onChange={handleBusinessNameChange}
+                    className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
+                    aria-label="business name"
+                    required
+                  />
+                  <input
+                    type="email"
+                    placeholder="Email Address*"
+                    value={email}
+                    onChange={handleEmailChange}
+                    className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
+                    aria-label="email"
+                    required
+                  />
+                </>
+              )}
+              {donationCategory && (
+                <div className="mt-4 flex justify-end">
+                  <SiteButton
+                    type="submit"
+                    aria="submit donation"
+                    variant="filled"
+                    colorScheme="e5"
+                  >
+                    continue
+                  </SiteButton>
+                </div>
+              )}
+            </form>
+          </div>
+        </InfoBox>
+      </div>
+    </>
   );
 }
 
