@@ -146,7 +146,7 @@ function DonationBox() {
           className="flex w-full flex-col items-center"
         >
           <h1 className="SupportUsTitle mt-2">show your support</h1>
-          <h3 className="SupportUsSubtitle mt-2 font-medium italic text-jade">
+          <h3 className="SupportUsSubtitle mt-2 text-lg font-medium italic text-jade">
             for Straightforward Job Site
           </h3>
           <p className="DonationComment max-w-60 pt-8 text-sm font-medium text-olive">
@@ -167,7 +167,6 @@ function DonationBox() {
                   target: { name: "donationCategory", value: "individual" },
                 })
               }
-              selectable={true}
               isSelected={formData.donationCategory === "individual"}
             >
               individual
@@ -184,7 +183,6 @@ function DonationBox() {
                   target: { name: "donationCategory", value: "business" },
                 })
               }
-              selectable={true}
               isSelected={formData.donationCategory === "business"}
             >
               business
@@ -202,7 +200,6 @@ function DonationBox() {
                         key={amount}
                         aria={amount}
                         variant="hollow"
-                        selectable={true}
                         isSelected={formData.selectedAmount === amount}
                         colorScheme="e5"
                         addClasses={

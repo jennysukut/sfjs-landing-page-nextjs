@@ -15,7 +15,6 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   aria: string;
   padding?: "more" | "extra";
   addImage?: string;
-  selectable?: boolean;
   isSelected?: boolean;
 }
 
@@ -31,7 +30,6 @@ const SiteButton: React.FC<ButtonProps> = ({
   children,
   padding,
   addImage,
-  selectable,
   isSelected,
   ...props
 }) => {

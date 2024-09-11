@@ -41,11 +41,11 @@ export default function CrowdfundingRewardsSection() {
         <InfoBox
           variant="hollow"
           aria="our incentives & rewards"
-          addClasses="min-w-screen-lg"
+          addClasses="min-w-screen-lg leading-relaxed py-12 px-14"
           width="extraWide"
         >
           {supportPageInfo.incentivesAndRewards.map((reward, index) => (
-            <p key={index} className="mb-4 text-sm last:mb-0">
+            <p key={index} className="mb-6 last:mb-0">
               {reward}
             </p>
           ))}
