@@ -138,7 +138,7 @@ export default function FeaturesSection() {
           variant="filled"
           colorScheme="c5"
         >
-          get in early
+          sign me up!
         </SiteButton>
         <Link href={"/support"}>
           <SiteButton

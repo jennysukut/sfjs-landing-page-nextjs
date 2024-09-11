@@ -75,7 +75,7 @@ export default function HopesSection() {
             colorScheme="c4"
             addClasses="px-14"
           >
-            join the movement
+            how can i help?
           </SiteButton>
         </Link>
         <SiteButton
@@ -85,7 +85,7 @@ export default function HopesSection() {
           colorScheme="f1"
           addClasses="px-10"
         >
-          sign up
+          sign me up!
         </SiteButton>
       </div>
     </section>
