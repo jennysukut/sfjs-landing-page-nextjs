@@ -1,10 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProgressBar from "@/components/progressBar";
 import InfoBox from "@/components/infoBox";
 import SiteButton from "@/components/siteButton";
 import { supportPageInfo } from "@/lib/siteCopy/supportPageInfo";
+import { gql } from '@apollo/client';
+import client from '../../lib/apollo-client';
+import Script from "next/script";
+
+const INITIALIZE_PAYMENT = gql`
+  mutation InitializePayment($payment: PaymentInput!) {
+    initializePayment(payment: $payment) {
+      checkoutToken
+    }
+  }
+`;
+
 import { z } from "zod";
 
 type DonationCategory = "business" | "individual";
@@ -100,14 +112,55 @@ function DonationBox() {
     setShowAddress(numericValue >= 100 && donationCategory === "individual");
   };
 
+  useEffect(() => {
+    // @ts-ignore
+    const handleMessage = (event) => {
+      console.log(JSON.stringify(event));
+      // if (event.origin === 'https://secure.helcim.com') {
+      if (event.origin.includes('helcim')) {
+        const { paymentStatus, transactionId } = event.data;
+        if (paymentStatus === 'success') {
+          // Handle successful payment
+          console.log("payment success");
+        } else if (paymentStatus === 'failed') {
+          // Handle failed payment
+          console.log("payment failed");
+        }
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const donationAmount = formData.selectedAmount || formData.customAmount;
     const parsedAmount = parseAmount(donationAmount);
     setCurrentAmount((prevAmount) => prevAmount + parsedAmount);
+    
+    // Add your form submission logic here
+   console.log("Form submitted:", formData);
 
-    // We'll add the form submission logic here that'll redirect to our Helcim payment integration
-    console.log("Form submitted:", formData);
+    const payment = {
+      "paymentType": "purchase",
+      "amount": "0.01",
+      "currency": "USD",
+      "account": { name, email }
+    };
+
+    client.mutate({
+      mutation: INITIALIZE_PAYMENT,
+      variables: { payment },
+    })
+      .then(({ data }) => {
+        console.log("success");
+        // @ts-ignore // this function is added by an external script
+        appendHelcimPayIframe(data.initializePayment.checkoutToken);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
 
   // Number Calculation + Adjustment for Display
@@ -154,6 +207,7 @@ function DonationBox() {
     category === "business" || category === "individual";
 
   return (
+     <Script type="text/javascript" src="https://secure.helcim.app/helcim-pay/services/start.js"></Script>
     <div className="DonationStation flex w-5/12 flex-col gap-6 pt-20">
       <div className="ProgressBarContainer mb-4">
         <p className="ProgressBarStatus">
@@ -304,6 +358,23 @@ function DonationBox() {
             )}
             {formData.donationCategory === "business" && (
               <>
+                {Object.entries(supportPageInfo.rewards[donationCategory]).map(
+                  ([amount]) => (
+                    <SiteButton
+                      key={amount}
+                      aria={amount}
+                      variant="hollow"
+                      colorScheme="e5"
+                      addClasses={
+                        selectedAmount === amount ? "bg-jade text-cream" : ""
+                      }
+                      onClick={() => handleAmountSelection(amount)}
+                    >
+                      {amount}
+                    </SiteButton>
+                  ),
+                )}
+
                 <input
                   type="text"
                   name="businessName"
@@ -337,7 +408,7 @@ function DonationBox() {
               </>
             )}
           </div>
-
+          
           {/* submission button */}
           <div className="mt-4 flex w-full max-w-sm justify-end">
             <SiteButton
