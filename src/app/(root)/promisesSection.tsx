@@ -6,12 +6,12 @@ import InfoBox from "@/components/infoBox";
 
 function PromisesSection() {
   return (
-    <section className="PromisesSection flex w-full flex-col flex-wrap items-end justify-end self-end border-t pt-16 text-right">
+    <section className="PromisesSection flex w-full flex-col flex-wrap items-end justify-end self-end border-b-2 border-t-2 border-olive/20 pb-20 pt-16 text-right">
       <h1 className="PromisesTitle">our promises:</h1>
       <p className="PromisesSubtitle mb-5 font-semibold italic">
         to businesses and job-seekers
       </p>
-      <div className="PromisesGuarantees flex flex-col items-end">
+      <div className="PromisesGuarantees mb-8 flex flex-col items-end">
         {landingPageText.guarantees.map((guarantee: string) => {
           return (
             <InfoBox
@@ -25,16 +25,7 @@ function PromisesSection() {
           );
         })}
       </div>
-      <div className="ButtonContainer mt-2 flex justify-end gap-4 border-t border-midnight/20 pt-5">
-        <SiteButton
-          aria="sign up"
-          size="large"
-          variant="filled"
-          colorScheme="b4"
-          addClasses="px-10"
-        >
-          sign me up!
-        </SiteButton>
+      <div className="ButtonContainer flex justify-end gap-4 border-t-2 border-olive/20 pt-5 pt-8">
         <Link href={"/support"}>
           <SiteButton
             aria="support us"
@@ -46,13 +37,22 @@ function PromisesSection() {
             support us
           </SiteButton>
         </Link>
+        <SiteButton
+          aria="sign up"
+          size="large"
+          variant="filled"
+          colorScheme="b4"
+          addClasses="px-10"
+        >
+          sign me up!
+        </SiteButton>
       </div>
-      <div className="PromisePrompt flex items-end pt-5">
+      <div className="PromisePrompt flex items-end pt-8">
         <Image
           src="/PurpleArrow.svg"
           alt="arrow"
-          width={100}
-          height={89}
+          width={75}
+          height={60}
         ></Image>
         <p className="PromisesPrompt max-w-44 text-center text-xs text-lilac">
           {landingPageText.arrowprompts.guarantee}

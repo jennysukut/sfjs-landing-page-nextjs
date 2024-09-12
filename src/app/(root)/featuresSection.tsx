@@ -7,34 +7,27 @@ import { landingPageText } from "@/lib/siteCopy/landingPageText";
 import Image from "next/image";
 import { ButtonColorOption } from "@/lib/stylingData/buttonColors";
 import clsx from "clsx";
+import Link from "next/link";
 type Category = "individual" | "business";
 
 export default function FeaturesSection() {
   const features = landingPageText.features;
   const [category, setCategory] = useState("individual" as Category);
-  const [detail, setDetail] = useState("");
+  // I have the detail set to none with a differentiation between "" and "none" because
+  //we've got the little note + arrow after the features section that I want to only exist before someone has clicked one of the detail buttons.
+  const [detail, setDetail] = useState("none");
   const [isClient, setIsClient] = useState(false);
 
   const featuresButtonStyles = clsx(
     "flex max-w-5xl",
-    detail === ""
+    detail === "" || detail === "none"
       ? "flex-wrap justify-center gap-6 px-20 pt-4"
       : "flex-col items-end justify-start gap-4",
   );
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []); //?
-
-  if (!isClient) {
-    return null; // or a loading spinner
-  } //?
-
   function detailClick(e: any) {
     setDetail(e.target.name);
   }
-
-  function getDetail() {}
 
   function handleClick(buttonType: Category) {
     setCategory(buttonType);
@@ -46,9 +39,9 @@ export default function FeaturesSection() {
   );
 
   return (
-    <section className="FeaturesSection flex w-full flex-col items-center justify-center border-y border-midnight/10 bg-apricot/5 p-20 shadow-lg">
+    <section className="FeaturesSection flex w-[90%] flex-col items-center justify-center p-20">
       {/* Features Heading */}
-      <div className="FeaturesHeading flex w-[95%] items-center justify-center border-b border-midnight/20 pb-12">
+      <div className="FeaturesHeading flex items-center justify-center pb-8">
         <div className="FeaturesTitle mr-14 flex flex-col text-left">
           <h1 className="FeaturesTitle">our features:</h1>
           <p className="PromisesSubtitle font-semibold italic">
@@ -80,7 +73,7 @@ export default function FeaturesSection() {
       </div>
 
       {/* Features */}
-      <div className="FeaturesContainer mt-8 flex flex-row items-start justify-center gap-10">
+      <div className="FeaturesContainer flex flex-row items-start gap-10 self-center pt-4 align-middle">
         {
           <>
             <div className={`FeatureButtons ${featuresButtonStyles}`}>
@@ -109,7 +102,7 @@ export default function FeaturesSection() {
                   variant="filled"
                   aria={selectedFeature.title}
                   colorScheme={selectedFeature.colorScheme as ButtonColorOption}
-                  addClasses="text-sm max-w-5xl py-14 px-20 flex flex-col justify-center leading-6"
+                  addClasses="text-sm max-w-5xl py-20 px-20 flex flex-col justify-center leading-6"
                 >
                   {selectedFeature.details.map((detail, index) => (
                     <p key={index} className="mb-4 text-left">
@@ -123,8 +116,8 @@ export default function FeaturesSection() {
         }
       </div>
 
-      {detail === "" && (
-        <div className="FeaturesPrompt mt-12 flex -translate-x-[50%] items-start">
+      {detail === "none" && (
+        <div className="FeaturesPrompt mt-12 flex -translate-x-[50%] items-start pb-8">
           <p className="FeaturesPrompt max-w-44 text-center text-xs text-jade">
             {landingPageText.arrowprompts.feature}
           </p>
@@ -137,6 +130,27 @@ export default function FeaturesSection() {
           ></Image>
         </div>
       )}
+
+      <div className="ButtonContainer flex gap-8 self-end pr-20 pt-12">
+        <SiteButton
+          aria="sign up"
+          size="large"
+          variant="filled"
+          colorScheme="c5"
+        >
+          sign me up!
+        </SiteButton>
+        <Link href={"/support"}>
+          <SiteButton
+            aria="support us"
+            size="large"
+            variant="filled"
+            colorScheme="b2"
+          >
+            show your support{" "}
+          </SiteButton>
+        </Link>
+      </div>
     </section>
   );
 }

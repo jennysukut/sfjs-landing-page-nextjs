@@ -23,7 +23,7 @@ export default function MakersSection() {
   //the random line should be displayed in a siteLabel
 
   return (
-    <section className="MakersSection flex w-full max-w-[1200px] flex-col self-center">
+    <section className="MakersSection flex w-full flex-col self-center border-b-2 border-t-2 border-olive/20 pt-20">
       <div className="MakersContainer">
         <div className="MakersTitles ml-16">
           <h1 className="MakersTitle">our makers:</h1>
@@ -79,7 +79,7 @@ export default function MakersSection() {
           </SiteLabel>
         )}
       </div>
-      <div className="ButtonContainer mb-20 mt-5 flex max-w-2xl flex-wrap justify-end gap-8 self-end">
+      <div className="ButtonContainer mb-20 mt-5 flex max-w-2xl flex-col items-end justify-end gap-8 self-end">
         <Link href={"/support"}>
           <SiteButton
             aria="help support us"
@@ -91,23 +91,25 @@ export default function MakersSection() {
             help this bunch of hooligans{" "}
           </SiteButton>
         </Link>
-        <SiteButton
-          aria="collaborate"
-          size="large"
-          variant="filled"
-          colorScheme="b4"
-          addClasses="px-14"
-        >
-          want to collaborate with this cohort?{" "}
-        </SiteButton>
-        <SiteButton
-          aria="sign up"
-          size="large"
-          variant="filled"
-          colorScheme="e6"
-        >
-          sign up!{" "}
-        </SiteButton>
+        <div className="OtherButtons flex justify-end gap-4">
+          <SiteButton
+            aria="collaborate"
+            size="large"
+            variant="filled"
+            colorScheme="b4"
+            addClasses="px-14"
+          >
+            collaborate with us
+          </SiteButton>
+          <SiteButton
+            aria="sign up"
+            size="large"
+            variant="filled"
+            colorScheme="e6"
+          >
+            sign up!{" "}
+          </SiteButton>
+        </div>
       </div>
     </section>
   );
