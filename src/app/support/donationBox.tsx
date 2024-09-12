@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProgressBar from "@/components/progressBar";
 import InfoBox from "@/components/infoBox";
 import SiteButton from "@/components/siteButton";
@@ -74,6 +74,27 @@ function DonationBox() {
     setSelectedAmount(amount);
   };
 
+  useEffect(() => {
+    // @ts-ignore
+    const handleMessage = (event) => {
+      console.log(JSON.stringify(event));
+      // if (event.origin === 'https://secure.helcim.com') {
+      if (event.origin.includes('helcim')) {
+        const { paymentStatus, transactionId } = event.data;
+        if (paymentStatus === 'success') {
+          // Handle successful payment
+          console.log("payment success");
+        } else if (paymentStatus === 'failed') {
+          // Handle failed payment
+          console.log("payment failed");
+        }
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const donationAmount = selectedAmount || customAmount;
@@ -92,7 +113,7 @@ function DonationBox() {
     const payment = {
       "paymentType": "purchase",
       "amount": "0.01",
-      "currency": "CAD",
+      "currency": "USD",
       "account": { name, email }
     };
 
@@ -102,7 +123,7 @@ function DonationBox() {
     })
       .then(({ data }) => {
         console.log("success");
-        // @ts-ignore
+        // @ts-ignore // this function is added by an external script
         appendHelcimPayIframe(data.initializePayment.checkoutToken);
       })
       .catch((error) => {
