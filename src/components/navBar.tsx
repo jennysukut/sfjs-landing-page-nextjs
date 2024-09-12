@@ -1,26 +1,25 @@
 "use client";
 
+import { useState } from "react";
+
 import Image from "next/image";
 import SiteButton from "./siteButton";
 import Link from "next/link";
-import { useState } from "react";
+import ShareOptions from "./shareOptions";
+import SignupOptions from "./signupOptions";
 
 export default function NavBar() {
-  const [signupClicked, setSignupClicked] = useState(false);
+  const [clickedButton, setClickedButton] = useState("");
 
-  function handleSignupClick() {
-    if (signupClicked === true) {
-      setSignupClicked(false);
-    } else {
-      setSignupClicked(true);
-    }
+  function handleNavButtonClick(e: any) {
+    setClickedButton(clickedButton === e.target.value ? "" : e.target.value);
   }
 
   return (
-    <div className="NavBar mx-auto flex h-fit w-[98%] justify-between border-b border-midnight/20 px-16 py-6">
+    <div className="NavBar mx-auto flex h-fit w-[98%] justify-between px-16 py-6">
       <Link href={"/"}>
         <Image
-          className="Logo max-w-40 cursor-pointer transition-transform duration-300 hover:scale-105"
+          className="Logo mt-4 max-w-44 cursor-pointer transition-transform duration-300 hover:scale-105"
           src="/sfjs-logo.svg"
           width={229}
           height={75}
@@ -33,34 +32,49 @@ export default function NavBar() {
           variant="filled"
           colorScheme="b4"
           aria="sign up"
-          onClick={handleSignupClick}
+          value="signup"
+          onClick={handleNavButtonClick}
+          isSelected={clickedButton === "signup"}
         >
           sign up
         </SiteButton>
+
         <Link href={"/support"}>
-          <SiteButton variant="filled" colorScheme="e5" aria="donate">
+          <SiteButton
+            variant="filled"
+            colorScheme="e5"
+            aria="donate"
+            value="support"
+            onClick={handleNavButtonClick}
+          >
             support us
           </SiteButton>
         </Link>
-        <SiteButton variant="filled" colorScheme="f3" aria="share on socials">
+        <Link href={"/pricing"}>
+          <SiteButton
+            variant="filled"
+            colorScheme="d4"
+            aria="pricing"
+            value="pricing"
+            onClick={handleNavButtonClick}
+          >
+            pricing
+          </SiteButton>
+        </Link>
+        <SiteButton
+          variant="filled"
+          colorScheme="f3"
+          aria="share on socials"
+          value="share"
+          onClick={handleNavButtonClick}
+          isSelected={clickedButton === "share"}
+        >
           share
         </SiteButton>
       </div>
-      {signupClicked === true ? (
-        <div className="SignupButtons absolute right-64 top-24 flex flex-col items-start space-y-4">
-          <SiteButton variant="filled" colorScheme="b3" aria="business">
-            business
-          </SiteButton>
-          <SiteButton variant="filled" colorScheme="f1" aria="collaborator">
-            collaborator
-          </SiteButton>
-          <SiteButton variant="filled" colorScheme="c1" aria="individual">
-            human
-          </SiteButton>
-        </div>
-      ) : (
-        ""
-      )}
+      {clickedButton === "share" ? <ShareOptions /> : ""}
+
+      {clickedButton === "signup" ? <SignupOptions /> : ""}
     </div>
   );
 }

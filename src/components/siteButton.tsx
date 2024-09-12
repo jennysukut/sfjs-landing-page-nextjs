@@ -15,6 +15,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   aria: string;
   padding?: "more" | "extra";
   addImage?: string;
+  isSelected?: boolean;
 }
 
 const SiteButton: React.FC<ButtonProps> = ({
@@ -29,6 +30,7 @@ const SiteButton: React.FC<ButtonProps> = ({
   children,
   padding,
   addImage,
+  isSelected,
   ...props
 }) => {
   const [isPressed, setIsPressed] = useState(false);
@@ -42,7 +44,8 @@ const SiteButton: React.FC<ButtonProps> = ({
       "px-4 py-2 text-xs min-w-[65px]": size !== "large" && "largeCircle",
 
       // variant
-      "bg-cream border-jade text-jade border-[2px]": variant === "hollow",
+      "bg-cream border-jade border-[2px]": variant === "hollow",
+      "text-jade": variant === "hollow" && !isSelected,
       [`text-eggshell ${buttonColors[colorScheme].color1}`]:
         variant === "filled",
       [`${addImage} bg-cover`]: variant === "avatar",
@@ -51,7 +54,12 @@ const SiteButton: React.FC<ButtonProps> = ({
 
       // pressed state
       "translate-x-1.5 translate-y-1.5": isPressed,
-      "hover:-translate-x-0.5 hover:-translate-y-0.5": !isPressed,
+      "hover:-translate-x-0.5 hover:-translate-y-0.5":
+        !isPressed && !isSelected,
+
+      //selected state
+      [`bg-lime border-lime translate-x-1 translate-y-1 text-eggshell`]:
+        isSelected,
 
       //padding
       "px-12": padding === "more",
@@ -78,6 +86,9 @@ const SiteButton: React.FC<ButtonProps> = ({
         variant === "hollow",
       "bg-jade": variant === "avatar",
       [`${buttonColors[colorScheme].color2}`]: variant === "filled",
+
+      //selected state
+      "bg-lilac border-lilac": isSelected && variant === "hollow",
     },
     addClasses,
   );

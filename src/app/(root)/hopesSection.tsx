@@ -1,14 +1,16 @@
 "useclient";
 
 import InfoBox from "@/components/infoBox";
+import SiteButton from "@/components/siteButton";
+import Link from "next/link";
 
 export default function HopesSection() {
   return (
-    <section className="HopesSection flex w-full flex-col items-center rounded-[50px] border border-midnight/20 bg-apricot/5 p-20 shadow-lg">
-      <div className="HopesContainer">
+    <section className="HopesSection flex w-full flex-col items-center p-20 pb-8">
+      <div className="HopesContainer flex flex-col">
         <div className="HopesTitleContainer w-full">
           <h1 className="HopeTitle text-start">our hopes:</h1>
-          <p className="HopeSubtitle mb-5 max-w-xl font-semibold italic">
+          <p className="HopeSubtitle mb-12 max-w-xl font-semibold italic">
             we have big ideals and even bigger dreams
           </p>
         </div>
@@ -16,7 +18,8 @@ export default function HopesSection() {
           aria="change perspectives"
           variant="filled"
           colorScheme="f3"
-          addClasses="rounded-full text-sm text-center"
+          addClasses="rounded-full text-sm text-center self-center"
+          size="small"
         >
           to change perspectives in the current work landscape
         </InfoBox>
@@ -35,7 +38,8 @@ export default function HopesSection() {
               aria="change perspectives"
               variant="filled"
               colorScheme="f4"
-              addClasses="rounded-full text-sm px-14"
+              size="small"
+              addClasses="rounded-full text-sm"
             >
               to do good{" "}
             </InfoBox>
@@ -45,6 +49,7 @@ export default function HopesSection() {
               aria="change perspectives"
               variant="filled"
               colorScheme="c5"
+              size="small"
               addClasses="text-sm rounded-full"
             >
               to empower individuals
@@ -60,6 +65,28 @@ export default function HopesSection() {
             </InfoBox>
           </div>
         </div>
+      </div>
+      <div className="ButtonContainer mt-24 flex gap-6 self-start pl-20">
+        <Link href={"/support"}>
+          <SiteButton
+            aria="support us"
+            size="large"
+            variant="filled"
+            colorScheme="c4"
+            addClasses="px-14"
+          >
+            how can i help?
+          </SiteButton>
+        </Link>
+        <SiteButton
+          aria="sign up"
+          size="large"
+          variant="filled"
+          colorScheme="f1"
+          addClasses="px-10"
+        >
+          sign me up!
+        </SiteButton>
       </div>
     </section>
   );

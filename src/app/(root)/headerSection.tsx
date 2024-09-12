@@ -8,7 +8,7 @@ function HeaderSection() {
         our mission: to bring simplicity, honesty, and transparency to the job
         market.
       </h1>
-      <div className="ButtonContainer mt-5 flex gap-8">
+      <div className="ButtonContainer flex gap-8 pt-5">
         <SiteButton
           aria="sign up"
           size="large"

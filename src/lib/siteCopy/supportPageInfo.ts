@@ -1,7 +1,7 @@
 export const supportPageInfo = {
   currentStatus: [
     "Right now, we have a group of makers who have all agreed to volunteer their time to help us get Straightforward Job Site off the ground!",
-    "{see & learn more about our makers on the main page}",
+    "{learn more about our makers on the main page}",
     "The reality is that most of our team is working on this project in their spare time and most are actively looking for employment while trying to support themselves & their families.",
   ],
 
@@ -21,7 +21,7 @@ export const supportPageInfo = {
   ],
 
   timelineAst:
-    "*if there are delays in the development process, this timeline will be extended. We are confident we will at the very least be able to launch before the start of 2025.",
+    "*if there are delays in the development process, this timeline will be extended. We are confident we will at the very least be able to launch before the start of 2025!",
 
   incentivesAndRewards: [
     "The best reward is that this site will be available to use by the end of the year!",
@@ -79,7 +79,7 @@ export const supportPageInfo = {
         "Get a Lifetime of Free Job Listings* [so much value]",
       ],
     },
-    individuals: {
+    individual: {
       $5: ["Get your name on our sponsor page"],
       $25: [
         "Get your name on our sponsor page",
@@ -117,7 +117,7 @@ export const businessRewardTiers: BusinessRewardTier[] = Object.keys(
 ) as BusinessRewardTier[];
 
 // Individual rewards
-type IndividualRewardTier = keyof typeof supportPageInfo.rewards.individuals;
+type IndividualRewardTier = keyof typeof supportPageInfo.rewards.individual;
 export const individualRewardTiers: IndividualRewardTier[] = Object.keys(
-  supportPageInfo.rewards.individuals,
+  supportPageInfo.rewards.individual,
 ) as IndividualRewardTier[];

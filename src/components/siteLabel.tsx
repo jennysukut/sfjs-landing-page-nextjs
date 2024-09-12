@@ -14,6 +14,7 @@ interface LabelProps extends React.HTMLAttributes<HTMLDivElement> {
   aria: string;
   type?: string;
   addClasses?: string;
+  textSize?: "medium" | "large";
 }
 
 const SiteLabel: React.FC<LabelProps> = ({
@@ -23,6 +24,7 @@ const SiteLabel: React.FC<LabelProps> = ({
   colorScheme = getRandomColorScheme("a1"),
   children,
   addClasses,
+  textSize,
   ...props
 }) => {
   function handleDelete() {
@@ -31,11 +33,16 @@ const SiteLabel: React.FC<LabelProps> = ({
   }
 
   const labelClasses = clsx(
-    `Label w-fit py-2 flex relative z-[1] rounded-full font-medium transition-all duration-200 ${smallShadowColors[colorScheme]} text-eggshell text-xs py-1 tracking-widest m-1`,
+    `Label w-fit py-2 flex relative z-[1] rounded-full font-medium transition-all duration-200 ${smallShadowColors[colorScheme]} text-eggshell py-1 tracking-widest m-1`,
     {
       // variant
       "px-4": variant === "display",
       "pr-3 pl-4": variant === "functional",
+
+      //textSize
+      "text-xs": !textSize,
+      "text-sm": textSize === "medium",
+      "text-md": textSize === "large",
     },
     addClasses,
   );
