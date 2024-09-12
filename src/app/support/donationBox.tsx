@@ -31,6 +31,8 @@ function DonationBox() {
     customAmount: "",
   });
 
+  const [showAddress, setShowAddress] = useState(false);
+
   const handleInputChange = (
     e:
       | React.ChangeEvent<HTMLInputElement>
@@ -41,6 +43,9 @@ function DonationBox() {
       ...prevData,
       [name]: value,
     }));
+    if (name === "donationCategory") {
+      handleDonorTypeChange(value);
+    }
   };
 
   const handleAmountSelection = (amount: string) => {
@@ -49,6 +54,12 @@ function DonationBox() {
       selectedAmount: prevData.selectedAmount === amount ? "" : amount,
       customAmount: "",
     }));
+
+    // Update showAddress based on the selected amount and donor type
+    const numericValue = parseFloat(amount.replace("$", ""));
+    setShowAddress(
+      numericValue >= 100 && formData.donationCategory === "individual",
+    );
   };
 
   const handleCustomAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,6 +81,23 @@ function DonationBox() {
       customAmount: value ? "$" + value : "",
       selectedAmount: "",
     }));
+
+    // Update showAddress based on the custom amount and donor type
+    const numericValue = parseFloat(value);
+    setShowAddress(
+      numericValue >= 100 && formData.donationCategory === "individual",
+    );
+  };
+
+  const handleDonorTypeChange = (donationCategory: string) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      donationCategory,
+    }));
+
+    // Update showAddress based on the donation amount and donor type
+    const numericValue = parseFloat(formData.customAmount.replace("$", ""));
+    setShowAddress(numericValue >= 100 && donationCategory === "individual");
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -260,16 +288,18 @@ function DonationBox() {
                   aria-label="email"
                   required
                 />
-                <input
-                  type="text"
-                  name="address"
-                  placeholder="Your Address*"
-                  value={formData.address}
-                  onChange={handleInputChange}
-                  className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
-                  aria-label="address"
-                  required
-                />
+                {showAddress && (
+                  <input
+                    type="text"
+                    name="address"
+                    placeholder="Your Address*"
+                    value={formData.address}
+                    onChange={handleInputChange}
+                    className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
+                    aria-label="address"
+                    required
+                  />
+                )}
               </>
             )}
             {formData.donationCategory === "business" && (
