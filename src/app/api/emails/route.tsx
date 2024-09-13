@@ -4,11 +4,11 @@ import TestEmail from "@/emails/testEmail";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function GET() {
+export async function POST() {
   await resend.emails.send({
-    from: "straightforwardjobsite@gmail.com",
+    from: "onboarding@resend.dev",
     to: "jennysukut@gmail.com",
-    subject: "testEmail",
+    subject: "Welcome!",
     react: TestEmail(),
   });
 

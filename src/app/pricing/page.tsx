@@ -57,10 +57,6 @@ export default function PricingPage() {
         <p className="PricingSubtitle italic">
           because that&apos;s how all pricing should be
         </p>
-
-        <SiteButton variant="filled" colorScheme="c4" aria="email test button">
-          test button for email?
-        </SiteButton>
       </div>
       <div className="PricingOptions flex gap-12 self-center pt-12">
         <SiteButton
