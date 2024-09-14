@@ -41,7 +41,7 @@ export default function CrowdfundingRewardsSection() {
         <InfoBox
           variant="hollow"
           aria="our incentives & rewards"
-          addClasses="min-w-screen-lg leading-relaxed py-12 px-14"
+          addClasses="min-w-screen-lg leading-relaxed py-14 px-14"
           width="extraWide"
         >
           {supportPageInfo.incentivesAndRewards.map((reward, index) => (

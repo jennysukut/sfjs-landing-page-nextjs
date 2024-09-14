@@ -6,8 +6,11 @@ import InfoBox from "@/components/infoBox";
 import SiteButton from "@/components/siteButton";
 import { supportPageInfo } from "@/lib/siteCopy/supportPageInfo";
 import { gql } from "@apollo/client";
+import { useSignals } from "@preact/signals-react/runtime";
 import client from "../../lib/apollo-client";
 import Script from "next/script";
+
+import { dropDown } from "@/components/navBar";
 
 const INITIALIZE_PAYMENT = gql`
   mutation InitializePayment($payment: PaymentInput!) {
@@ -22,8 +25,10 @@ import { z } from "zod";
 type DonationCategory = "business" | "individual";
 
 function DonationBox() {
+  useSignals();
   const rewards = supportPageInfo.rewards;
-  const targetAmount = 15490;
+  const targetAmount = 15000;
+
   const individualRewardsArray = Object.entries(
     supportPageInfo.rewards.individual,
   );
@@ -32,19 +37,22 @@ function DonationBox() {
   //obviously, we'll set this only we actually get the donation.
   //We'll have to write the logic when we get the info sent back from Helcim upon successful donation
   const [currentAmount, setCurrentAmount] = useState(0);
-
   const [formData, setFormData] = useState({
     donationCategory: "individual",
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     address: "",
     businessName: "",
+    contactName: "",
     selectedAmount: "",
     customAmount: "",
   });
-
   const [showAddress, setShowAddress] = useState(false);
+  const isDonationCategory = (category: string): category is DonationCategory =>
+    category === "business" || category === "individual";
 
+  //form input handlers
   const handleInputChange = (
     e:
       | React.ChangeEvent<HTMLInputElement>
@@ -112,27 +120,7 @@ function DonationBox() {
     setShowAddress(numericValue >= 100 && donationCategory === "individual");
   };
 
-  useEffect(() => {
-    // @ts-ignore
-    const handleMessage = (event) => {
-      console.log(JSON.stringify(event));
-      // if (event.origin === 'https://secure.helcim.com') {
-      if (event.origin.includes("helcim")) {
-        const { paymentStatus, transactionId } = event.data;
-        if (paymentStatus === "success") {
-          // Handle successful payment
-          console.log("payment success");
-        } else if (paymentStatus === "failed") {
-          // Handle failed payment
-          console.log("payment failed");
-        }
-      }
-    };
-
-    window.addEventListener("message", handleMessage);
-    return () => window.removeEventListener("message", handleMessage);
-  }, []);
-
+  //form submission handler
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const donationAmount = formData.selectedAmount || formData.customAmount;
@@ -146,7 +134,11 @@ function DonationBox() {
       paymentType: "purchase",
       amount: "0.01",
       currency: "USD",
-      account: { name: formData.name, email: formData.email },
+      account: {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+      },
     };
 
     client
@@ -204,8 +196,27 @@ function DonationBox() {
     );
   }
 
-  const isDonationCategory = (category: string): category is DonationCategory =>
-    category === "business" || category === "individual";
+  //payment integration message
+  useEffect(() => {
+    // @ts-ignore
+    const handleMessage = (event) => {
+      console.log(JSON.stringify(event));
+      // if (event.origin === 'https://secure.helcim.com') {
+      if (event.origin.includes("helcim")) {
+        const { paymentStatus, transactionId } = event.data;
+        if (paymentStatus === "success") {
+          // Handle successful payment
+          console.log("payment success");
+        } else if (paymentStatus === "failed") {
+          // Handle failed payment
+          console.log("payment failed");
+        }
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, []);
 
   return (
     <>
@@ -213,7 +224,9 @@ function DonationBox() {
         type="text/javascript"
         src="https://secure.helcim.app/helcim-pay/services/start.js"
       />
-      <div className="DonationStation flex w-5/12 flex-col gap-6 pt-20">
+      <div
+        className={`DonationStation flex w-5/12 flex-col gap-6 ${dropDown.value}`}
+      >
         <div className="ProgressBarContainer mb-4">
           <p className="ProgressBarStatus">
             current amount raised: ${currentAmount} / {calculatePercentage()}%
@@ -313,7 +326,7 @@ function DonationBox() {
                 )}
             </div>
 
-            {/* put the reward information box here */}
+            {/* reward information */}
             {formData.donationCategory === "individual" &&
               printRewardsArray(individualRewardsArray)}
 
@@ -330,12 +343,22 @@ function DonationBox() {
                 <>
                   <input
                     type="text"
-                    name="name"
-                    placeholder="Your Name*"
-                    value={formData.name}
+                    name="firstName"
+                    placeholder="Your First Name*"
+                    value={formData.firstName}
                     onChange={handleInputChange}
                     className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
-                    aria-label="name"
+                    aria-label="firstName"
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="lastName"
+                    placeholder="Your Last Name*"
+                    value={formData.lastName}
+                    onChange={handleInputChange}
+                    className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
+                    aria-label="lastName"
                     required
                   />
                   <input
@@ -396,9 +419,9 @@ function DonationBox() {
                     />
                     <input
                       type="text"
-                      name="name"
+                      name="contactName"
                       placeholder="Contact Name*"
-                      value={formData.name}
+                      value={formData.contactName}
                       onChange={handleInputChange}
                       className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
                       aria-label="contact name"

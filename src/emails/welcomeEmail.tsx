@@ -1,7 +1,11 @@
 import { Tailwind, Html, Img, Head, Preview } from "@react-email/components";
 import * as React from "react";
 
-export default function TestEmail() {
+type TestEmailProps = {
+  firstName: string;
+};
+
+export default function WelcomeEmail({ firstName }: TestEmailProps) {
   const baseUrl = "http://localhost:3000";
   return (
     <Html>
@@ -21,6 +25,8 @@ export default function TestEmail() {
                 cream: "#F8F2EC",
                 apricot: "#FDA26B",
                 midnight: "#308B7B",
+                watermelon: "#FFABDA",
+                magenta: "#E673A9",
               },
 
               letterSpacing: {
@@ -32,7 +38,7 @@ export default function TestEmail() {
         }}
       >
         <body className="Email font-helv h-[100%] gap-12 bg-cream pb-40 font-semibold tracking-widest text-midnight">
-          <Preview>Welcome to Straightforward Job Site!</Preview>
+          <Preview>Welcome to Straightforward Job Site {firstName}!</Preview>
           <Head>
             <Img
               src={`${baseUrl}/sfjs-logo.png`}
@@ -42,15 +48,22 @@ export default function TestEmail() {
               className="Email Header px-10 py-10"
             />
           </Head>
-          <section className="EmailBody mb-20 px-[15%] py-[5%] text-left text-[1rem] leading-relaxed">
-            <p className="EmailInfo">Hello there,</p>
+          <section className="EmailBody mb-8 px-[15%] py-[5%] text-left text-[1rem] leading-relaxed">
+            <p className="EmailInfo text-jade">Hello there {firstName}!</p>
             <p className="EmailInfo">
-              This is a test email where we&apos;ll see how it goes when we have
-              a simple background with olive text over it. Perhaps we&apos;ll
-              try a fun font like consolas and see how that renders?
+              You&apos;ve been signed up to get first access to Straightforward
+              Job Site and we couldn&apos;t be happier to have you join us!
             </p>
-            <p className="EmailInfo">
-              testing testing testing the function one last time!
+            <p className="EmailInfo mt-12 text-end text-olive">
+              We will send you an email as soon as we launch so you can make
+              your profile + start job-searching the simple way!
+            </p>
+            <p className="EmailInfo mt-12 text-jade">
+              We hope you&apos;ll enjoy the conscious + thoughtful +
+              human-focused enviornment we&apos;re working so hard to create ✨
+            </p>
+            <p className="EmailInfo mt-20 text-end font-medium italic text-olive">
+              - The Makers of Straightforward Job Site
             </p>
           </section>
         </body>
