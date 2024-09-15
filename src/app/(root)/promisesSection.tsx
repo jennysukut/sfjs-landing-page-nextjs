@@ -3,8 +3,11 @@ import { landingPageText } from "@/lib/siteCopy/landingPageText";
 import Image from "next/image";
 import Link from "next/link";
 import InfoBox from "@/components/infoBox";
+import { useModal } from "@/contexts/ModalContext";
+import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsModal";
 
 function PromisesSection() {
+  const { showModal } = useModal();
   return (
     <section className="PromisesSection flex w-full flex-col flex-wrap items-end justify-end self-end border-b-2 border-t-2 border-olive/20 pb-20 pt-16 text-right">
       <h1 className="PromisesTitle">our promises:</h1>
@@ -25,7 +28,7 @@ function PromisesSection() {
           );
         })}
       </div>
-      <div className="ButtonContainer flex justify-end gap-4 border-t-2 border-olive/20 pt-5 pt-8">
+      <div className="ButtonContainer flex justify-end gap-4 border-t-2 border-olive/20 pt-8">
         <Link href={"/support"}>
           <SiteButton
             aria="support us"
@@ -43,18 +46,20 @@ function PromisesSection() {
           variant="filled"
           colorScheme="b4"
           addClasses="px-10"
+          onClick={() => showModal(<SignupOptionsModal />)}
         >
           sign me up!
         </SiteButton>
       </div>
-      <div className="PromisePrompt flex items-end pt-8">
+      <div className="PromisePrompt flex items-start gap-2 pt-8">
         <Image
           src="/PurpleArrow.svg"
           alt="arrow"
-          width={75}
-          height={60}
+          width={112}
+          height={174}
+          className="w-[75px]"
         ></Image>
-        <p className="PromisesPrompt max-w-44 text-center text-xs text-lilac">
+        <p className="PromisesPrompt max-w-44 pt-12 text-center text-xs text-lilac">
           {landingPageText.arrowprompts.guarantee}
         </p>
       </div>

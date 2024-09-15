@@ -3,8 +3,11 @@
 import InfoBox from "@/components/infoBox";
 import SiteButton from "@/components/siteButton";
 import Link from "next/link";
+import { useModal } from "@/contexts/ModalContext";
+import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsModal";
 
 export default function HopesSection() {
+  const { showModal } = useModal();
   return (
     <section className="HopesSection flex w-full flex-col items-center p-20 pb-8">
       <div className="HopesContainer flex flex-col">
@@ -84,6 +87,7 @@ export default function HopesSection() {
           variant="filled"
           colorScheme="f1"
           addClasses="px-10"
+          onClick={() => showModal(<SignupOptionsModal />)}
         >
           sign me up!
         </SiteButton>

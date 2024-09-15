@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import NavBar from "@/components/navBar";
 import Footer from "@/components/footer";
+import { ModalProvider } from "@/contexts/ModalContext";
 
 export const metadata: Metadata = {
   title: "Straightforward Job Site",
@@ -16,9 +17,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-cream">
-        <NavBar />
-        <main className="Main flex flex-1 flex-col">{children}</main>
-        <Footer />
+        <ModalProvider>
+          <NavBar />
+          <main className="Main flex flex-1 flex-col">{children}</main>
+          <Footer />
+        </ModalProvider>
       </body>
     </html>
   );
