@@ -8,6 +8,7 @@ import { supportPageInfo } from "@/lib/siteCopy/supportPageInfo";
 import { gql } from "@apollo/client";
 import client from "../../lib/apollo-client";
 import Script from "next/script";
+import getRandomColorScheme from "@/utils/getRandomColorScheme";
 
 const INITIALIZE_PAYMENT = gql`
   mutation InitializePayment($payment: PaymentInput!) {
@@ -289,7 +290,7 @@ function DonationBox() {
                           aria={amount}
                           variant="hollow"
                           isSelected={formData.selectedAmount === amount}
-                          colorScheme="e5"
+                          colorScheme={getRandomColorScheme("a1")}
                           addClasses={
                             formData.selectedAmount === amount ? "" : ""
                           }

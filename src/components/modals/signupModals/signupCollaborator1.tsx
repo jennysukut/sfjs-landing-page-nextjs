@@ -31,7 +31,7 @@ export default function SignupModalCollaborator1() {
         />
         <div className="ButtonContainer -mb-3 mt-8 flex justify-end">
           <SiteButton
-            variant="filled"
+            variant="hollow"
             colorScheme="f4"
             aria="submit"
             onClick={() => showModal(<SignupModalCollaborator2 />)}
