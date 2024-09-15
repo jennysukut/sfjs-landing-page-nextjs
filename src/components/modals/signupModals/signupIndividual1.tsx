@@ -18,15 +18,16 @@ export default function SignupModalIndividual1() {
         <input
           type="name"
           placeholder="Delightful Human"
-          className="border-b border-jade bg-transparent pb-3 pt-2 text-xl text-jade placeholder:text-jade/50 focus:border-jade focus:outline-none"
+          className="text-md mb-4 border-b border-jade bg-transparent pb-3 pt-2 text-jade placeholder:text-jade/50 focus:border-jade focus:outline-none"
         />
         <label htmlFor="email">email</label>
         <input
           type="email"
           placeholder="fantasticemail@emailexample.com"
-          className="border-b border-jade bg-transparent pb-3 pt-2 text-xl text-jade placeholder:text-jade/50 focus:border-jade focus:outline-none"
+          className="text-md border-b border-jade bg-transparent pb-3 pt-2 text-jade placeholder:text-jade/50 focus:border-jade focus:outline-none"
         />
-        <div className="ButtonContainer mt-6 flex justify-end">
+        <div className="ButtonContainer -mb-4 mt-8 flex justify-end">
+          {/* make a checkbox here for "be a beta tester?" */}
           <SiteButton
             variant="hollow"
             colorScheme="c1"

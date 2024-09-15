@@ -34,7 +34,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({ children, modalKey }) => {
         >
           <AnimatePresence>
             <motion.div
-              className="ModalInnerContents absolute rounded-[50px] border-[3px] border-solid border-jade bg-cream px-20 pb-20 pt-24 text-jade drop-shadow-jade"
+              className="ModalInnerContents absolute rounded-[50px] border-[3px] border-solid border-jade bg-cream px-14 pb-12 pt-14 text-jade drop-shadow-jade"
               onClick={handleModalContentClick}
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
