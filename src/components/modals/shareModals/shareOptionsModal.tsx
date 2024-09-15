@@ -16,13 +16,13 @@ export default function ShareOptionsModal() {
       <p className="Subtitle w-full text-center">
         where would you like to share?
       </p>
-      <div className="ShareButtons mt-4 flex flex-col items-start gap-y-4">
+      <div className="ShareButtons mt-4 flex flex-col items-center gap-y-4">
         <LinkedinShareButton url="straightforwardjobsite.com">
           <SiteButton
             variant="filled"
             colorScheme="b3"
             aria="linkedin"
-            addClasses="w-[200px]"
+            addClasses="w-[150px] py-3"
           >
             linkedin
           </SiteButton>
@@ -32,7 +32,7 @@ export default function ShareOptionsModal() {
             variant="filled"
             colorScheme="f1"
             aria="facebook"
-            addClasses="w-[200px]"
+            addClasses="w-[150px] py-3"
           >
             facebook
           </SiteButton>
@@ -42,7 +42,7 @@ export default function ShareOptionsModal() {
             variant="filled"
             colorScheme="c1"
             aria="twitter"
-            addClasses="w-[200px]"
+            addClasses="w-[150px] py-3"
           >
             twitter
           </SiteButton>

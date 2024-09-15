@@ -53,7 +53,7 @@ export default function SignupModalBusiness1() {
             aria="submit"
             onClick={() => showModal(<SignupModalBusiness2 />)}
           >
-            sign up!
+            sign us up!
           </SiteButton>
         </div>
       </form>

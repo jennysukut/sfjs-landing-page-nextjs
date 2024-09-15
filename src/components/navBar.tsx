@@ -46,6 +46,7 @@ export default function NavBar() {
             aria="donate"
             value="support"
             onClick={handleNavButtonClick}
+            isSelected={clickedButton === "support"}
           >
             support us
           </SiteButton>
@@ -57,6 +58,7 @@ export default function NavBar() {
             aria="pricing"
             value="pricing"
             onClick={handleNavButtonClick}
+            isSelected={clickedButton === "pricing"}
           >
             pricing
           </SiteButton>
@@ -72,9 +74,17 @@ export default function NavBar() {
           share
         </SiteButton>
       </div>
-      {clickedButton === "share" ? <ShareOptions /> : ""}
+      {clickedButton === "share" ? (
+        <ShareOptions setClickedButton={setClickedButton} />
+      ) : (
+        ""
+      )}
 
-      {clickedButton === "signup" ? <SignupOptions /> : ""}
+      {clickedButton === "signup" ? (
+        <SignupOptions setClickedButton={setClickedButton} />
+      ) : (
+        ""
+      )}
     </div>
   );
 }

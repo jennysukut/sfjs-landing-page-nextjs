@@ -2,6 +2,7 @@ import SiteButton from "../../siteButton";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useModal } from "@/contexts/ModalContext";
 import ShareOptionsModal from "../shareModals/shareOptionsModal";
+import { useState } from "react";
 
 export default function SignupModalIndividual3() {
   const { showModal, hideModal } = useModal();
