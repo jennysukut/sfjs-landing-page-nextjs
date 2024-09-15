@@ -1,6 +1,7 @@
 import SiteButton from "../../siteButton";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useModal } from "@/contexts/ModalContext";
+import ShareOptionsModal from "../shareModals/shareOptionsModal";
 
 export default function SignupModalIndividual3() {
   const { showModal, hideModal } = useModal();
@@ -20,10 +21,17 @@ export default function SignupModalIndividual3() {
           colorScheme="e5"
           aria="submit"
           onClick={hideModal}
+          addClasses="px-6"
         >
-          fund our development
+          donate some dollarbucks
         </SiteButton>
-        <SiteButton variant="filled" colorScheme="f1" aria="submit">
+        <SiteButton
+          variant="filled"
+          colorScheme="f1"
+          aria="submit"
+          onClick={() => showModal(<ShareOptionsModal />)}
+          addClasses="px-6"
+        >
           tell your friends
         </SiteButton>
       </div>

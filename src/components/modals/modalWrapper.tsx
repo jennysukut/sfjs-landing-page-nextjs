@@ -49,8 +49,8 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({ children, modalKey }) => {
                 <Image
                   src="/back-arrow.svg"
                   alt="back"
-                  width={32}
-                  height={32}
+                  width={28}
+                  height={28}
                   className="absolute left-8 top-8 opacity-80 hover:cursor-pointer hover:opacity-100"
                   onClick={goBack}
                 />
