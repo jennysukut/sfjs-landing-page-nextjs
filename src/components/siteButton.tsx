@@ -9,7 +9,7 @@ import clsx from "clsx";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   addClasses?: string;
-  size?: "large" | "largeCircle";
+  size?: "large" | "largeCircle" | "smallCircle";
   variant: "hollow" | "filled" | "avatar";
   colorScheme: ButtonColorOption;
   aria: string;
@@ -41,7 +41,8 @@ const SiteButton: React.FC<ButtonProps> = ({
       // size
       "px-10 py-4 text-sm": size === "large",
       "h-16 w-16": size === "largeCircle",
-      "px-4 py-2 text-xs min-w-[65px]": size !== "large" && "largeCircle",
+      "h-6 w-6": size === "smallCircle",
+      "px-4 py-2 text-xs min-w-[65px]": size === "default",
 
       // variant
       "bg-cream border-jade border-[2px]": variant === "hollow",
@@ -49,7 +50,8 @@ const SiteButton: React.FC<ButtonProps> = ({
       [`text-eggshell ${buttonColors[colorScheme].color1}`]:
         variant === "filled",
       [`${addImage} bg-cover`]: variant === "avatar",
-      "group-hover:border-lime group-hover:bg-lime group-hover:text-eggshell":
+      // hover colors for hollow buttons
+      [`${buttonColors[colorScheme].color5} ${buttonColors[colorScheme].color6} group-hover:text-eggshell`]:
         variant === "hollow",
 
       // pressed state
@@ -58,8 +60,10 @@ const SiteButton: React.FC<ButtonProps> = ({
         !isPressed && !isSelected,
 
       //selected state
-      [`bg-lime border-lime translate-x-1 translate-y-1 text-eggshell`]:
+      [`${buttonColors[colorScheme].color1} ${buttonColors[colorScheme].color3} translate-x-1 translate-y-1 text-eggshell`]:
         isSelected,
+      [`${buttonColors[colorScheme].color5} ${buttonColors[colorScheme].color6} translate-x-0.5 translate-y-0.5 text-eggshell`]:
+        isSelected && size === "smallCircle",
 
       //padding
       "px-12": padding === "more",
@@ -74,21 +78,23 @@ const SiteButton: React.FC<ButtonProps> = ({
   );
 
   const shadowClasses = clsx(
-    "ButtonShadow absolute -right-1.5 top-1.5 rounded-full text-transparent font-semibold tracking-superwide",
+    "ButtonShadow absolute rounded-full text-transparent font-semibold tracking-superwide",
     {
       // size
-      "px-10 py-4 text-sm": size === "large",
-      "h-16 w-16": size === "largeCircle",
-      "px-4 py-2 text-xs min-w-[65px]": size !== "large" && "largeCircle",
+      "px-10 py-4 text-sm -right-1.5 top-1.5": size === "large",
+      "h-16 w-16 -right-1.5 top-1.5": size === "largeCircle",
+      "h-6 w-6 -right-1 top-1": size === "smallCircle",
+      "px-4 py-2 text-xs min-w-[65px] -right-1.5 top-1.5": size === "default",
 
       // variant
-      "border-[2px] border-jade bg-jade group-hover:border-lilac group-hover:bg-lilac":
+      [`border-[2px] border-jade bg-jade ${buttonColors[colorScheme].color7} ${buttonColors[colorScheme].color8}`]:
         variant === "hollow",
       "bg-jade": variant === "avatar",
       [`${buttonColors[colorScheme].color2}`]: variant === "filled",
 
       //selected state
-      "bg-lilac border-lilac": isSelected && variant === "hollow",
+      [` ${buttonColors[colorScheme].color2} ${buttonColors[colorScheme].color4} ${buttonColors[colorScheme].color7} ${buttonColors[colorScheme].color8}`]:
+        isSelected && variant === "hollow",
     },
     addClasses,
   );

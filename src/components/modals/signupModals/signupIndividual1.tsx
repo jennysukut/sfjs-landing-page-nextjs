@@ -2,9 +2,12 @@ import SiteButton from "../../siteButton";
 import * as Dialog from "@radix-ui/react-dialog";
 import SignupModalIndividual2 from "./signupIndividual2";
 import { useModal } from "@/contexts/ModalContext";
+import { useState } from "react";
 
 export default function SignupModalIndividual1() {
   const { showModal } = useModal();
+  const [betaTester, setBetaTester] = useState(false);
+
   return (
     <div className="SignupModal flex max-w-[450px] flex-col gap-4 text-jade">
       <Dialog.Title className="Title w-full text-center text-xl font-bold">
@@ -26,7 +29,7 @@ export default function SignupModalIndividual1() {
           placeholder="fantasticemail@emailexample.com"
           className="text-md border-b-2 border-jade/50 bg-transparent pb-3 pt-2 text-jade placeholder:text-jade/50 focus:border-jade focus:outline-none"
         />
-        <div className="-mb-4 mt-6 flex items-center gap-2">
+        <div className="BetaTesterButton -mb-4 mt-6 flex items-center gap-2">
           <input
             type="checkbox"
             id="betaTester"
@@ -36,10 +39,23 @@ export default function SignupModalIndividual1() {
             sign up to be a beta tester
           </label>
         </div>
+        <div className="BetaTesterButton -mb-4 mt-6 flex items-center gap-2">
+          <SiteButton
+            variant="hollow"
+            colorScheme="f1"
+            aria="betaTester"
+            size="smallCircle"
+            isSelected={betaTester}
+            onClick={() => setBetaTester(!betaTester)}
+          />
+          <label htmlFor="betaTester" className="cursor-pointer pl-2 text-sm">
+            sign up to be a beta tester
+          </label>
+        </div>
         <div className="ButtonContainer mt-8 flex justify-end">
           <SiteButton
             variant="hollow"
-            colorScheme="c1"
+            colorScheme="f1"
             aria="submit"
             onClick={() => showModal(<SignupModalIndividual2 />)}
           >
