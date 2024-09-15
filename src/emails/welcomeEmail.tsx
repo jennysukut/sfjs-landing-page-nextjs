@@ -51,16 +51,16 @@ export default function WelcomeEmail({ firstName }: TestEmailProps) {
           <section className="EmailBody mb-8 px-[15%] py-[5%] text-left text-[1rem] leading-relaxed">
             <p className="EmailInfo text-jade">Hello there {firstName}!</p>
             <p className="EmailInfo">
-              You&apos;ve been signed up to get first access to Straightforward
-              Job Site and we couldn&apos;t be happier to have you join us!
+              {`You've been signed up to get first access to Straightforward
+              Job Site and we couldn't be happier to have you join us!`}
             </p>
             <p className="EmailInfo mt-12 text-end text-olive">
-              We will send you an email as soon as we launch so you can make
-              your profile + start job-searching the simple way!
+              {`We will send you an email as soon as we launch so you can make
+              your profile + start job-searching the simple way!`}
             </p>
             <p className="EmailInfo mt-12 text-jade">
-              We hope you&apos;ll enjoy the conscious + thoughtful +
-              human-focused enviornment we&apos;re working so hard to create ✨
+              {`We hope you'll enjoy the conscious + thoughtful +
+              human-focused enviornment we're working so hard to create ✨`}
             </p>
             <p className="EmailInfo mt-20 text-end font-medium italic text-olive">
               - The Makers of Straightforward Job Site

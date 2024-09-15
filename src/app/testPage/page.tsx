@@ -18,7 +18,7 @@ export default function TestPage() {
   //I wonder if we need another folder in the routes section to divide the different API endpoints for the different types of emails?
 
   //Email Sending Handler
-  const handleClick = async () => {
+  const sendTestEmail = async () => {
     setTestEmailSent(true);
 
     //sending the request to the API endpoint and attaching the Body information: email and firstname
@@ -48,7 +48,7 @@ export default function TestPage() {
         variant="filled"
         colorScheme="b6"
         aria="email test button"
-        onClick={handleClick}
+        onClick={sendTestEmail}
         disabled={testEmailSent}
       >
         test button for email

@@ -9,7 +9,7 @@ import Link from "next/link";
 import ShareOptions from "./shareOptions";
 import SignupOptions from "./signupOptions";
 
-export const dropDown = signal("mt-8");
+export const dropDown = signal(false);
 
 export default function NavBar() {
   const [clickedButton, setClickedButton] = useState("");
@@ -20,13 +20,11 @@ export default function NavBar() {
 
   useEffect(() => {
     if (clickedButton === "share" || clickedButton === "signup") {
-      dropDown.value = "mt-20";
+      dropDown.value = true;
     } else {
-      dropDown.value = "mt-8";
+      dropDown.value = false;
     }
   }, [clickedButton]);
-
-  console.log(dropDown.value);
 
   return (
     <div className="NavBar mx-auto flex h-fit w-[98%] justify-between px-16 py-6">
