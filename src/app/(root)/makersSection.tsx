@@ -7,12 +7,15 @@ import { makersInfo } from "@/lib/makersInfo";
 import getRandomMakerDetails from "@/utils/getRandomMaker";
 import { MakerInfoType } from "@/lib/makersInfo";
 import Link from "next/link";
+import { useModal } from "@/contexts/ModalContext";
+import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsModal";
 
 const makersArray = Object.entries(makersInfo);
 
 export default function MakersSection() {
   const [clickedMaker, setClickedMaker] = useState({});
   const [randomMakerDetail, setRandomMakerDetail] = useState("");
+  const { showModal } = useModal();
 
   function handleClick(maker: MakerInfoType) {
     setClickedMaker(maker);
@@ -106,6 +109,7 @@ export default function MakersSection() {
             size="large"
             variant="filled"
             colorScheme="e6"
+            onClick={() => showModal(<SignupOptionsModal />)}
           >
             sign up!{" "}
           </SiteButton>

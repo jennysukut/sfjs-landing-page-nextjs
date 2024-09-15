@@ -55,7 +55,7 @@ export default function PricingPage() {
       <div className="PricingTitleContainer flex flex-col self-start text-left">
         <h1 className="PricingTitle">our straightforward pricing:</h1>
         <p className="PricingSubtitle italic">
-          because that's how all pricing should be
+          {`because that's how all pricing should be`}
         </p>
       </div>
       <div className="PricingOptions flex gap-12 self-center pt-12">
@@ -101,7 +101,7 @@ export default function PricingPage() {
               those who most need the tools are unable to afford them.
             </p>
             <p className="PricingDetails py-2">
-              That's why we're making the amount up to you!
+              {`That's why we're making the amount up to you!`}
             </p>
             <p className="PricingDetails py-2">
               Every single job-seeker who uses our site has access to all our

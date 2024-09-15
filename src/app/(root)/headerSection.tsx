@@ -1,7 +1,10 @@
 import SiteButton from "@/components/siteButton";
 import Link from "next/link";
+import { useModal } from "@/contexts/ModalContext";
+import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsModal";
 
 function HeaderSection() {
+  const { showModal } = useModal();
   return (
     <section className="HeaderSection flex w-full flex-grow flex-col justify-center gap-4">
       <h1 className="LandingPageText max-w-[700px] text-2xl font-bold text-midnight">
@@ -14,6 +17,7 @@ function HeaderSection() {
           size="large"
           variant="filled"
           colorScheme="b1"
+          onClick={() => showModal(<SignupOptionsModal />)}
         >
           sign me up!
         </SiteButton>

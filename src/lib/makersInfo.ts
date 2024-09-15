@@ -2,7 +2,7 @@ export const makersInfo = {
   "jenny sukut": {
     firstName: "jenny",
     lastName: "sukut",
-    img: "bg-[url('/jenny.svg')]",
+    img: "bg-[url('/makers/jenny.svg')]",
     shadow: "bg-magenta",
     details: [
       "comes up with silly prompts for websites",
@@ -14,7 +14,7 @@ export const makersInfo = {
   "joshua duncan": {
     firstName: "joshua",
     lastName: "duncan",
-    img: "bg-[url('/joshua.svg')]",
+    img: "bg-[url('/makers/joshua.svg')]",
     shadow: "bg-lime",
     details: [
       "Raised in Rochester, NY",
@@ -30,14 +30,14 @@ export const makersInfo = {
   "carl thronson": {
     firstName: "carl",
     lastName: "thronson",
-    img: "bg-[url('/carl.svg')]",
+    img: "bg-[url('/makers/carl.svg')]",
     shadow: "bg-lilac",
     details: [],
   },
   "stephen walker": {
     firstName: "stephen",
     lastName: "walker",
-    img: "bg-[url('/stephen.svg')]",
+    img: "bg-[url('/makers/stephen.svg')]",
     shadow: "bg-jade",
     details: [
       "Is from England",
@@ -52,14 +52,14 @@ export const makersInfo = {
   "liam prince": {
     firstName: "liam",
     lastName: "prince",
-    img: "bg-[url('/liam.svg')]",
+    img: "bg-[url('/makers/liam.svg')]",
     shadow: "bg-peach",
     details: [],
   },
   "jacob sukut": {
     firstName: "jacob",
     lastName: "sukut",
-    img: "bg-[url('/jacob.svg')]",
+    img: "bg-[url('/makers/jacob.svg')]",
     shadow: "bg-sky",
     details: [
       "Is from Montana but has moved about 30 times",
@@ -75,14 +75,14 @@ export const makersInfo = {
   "lean vilas": {
     firstName: "lean",
     lastName: "vilas",
-    img: "bg-[url('/lean.svg')]",
+    img: "bg-[url('/makers/lean.svg')]",
     shadow: "bg-sky",
     details: [],
   },
   "joshua caldwell": {
     firstName: "joshua",
     lastName: "caldwell",
-    img: "bg-[url('/josh.svg')]",
+    img: "bg-[url('/makers/josh.svg')]",
     shadow: "bg-peach",
     details: [
       "From the Land Of Pilgrims",
@@ -96,7 +96,7 @@ export const makersInfo = {
   "kaitlyn cernanec": {
     firstName: "kaitlyn",
     lastName: "cernanec",
-    img: "bg-[url('/kaitlyn.svg')]",
+    img: "bg-[url('/makers/kaitlyn.svg')]",
     shadow: "bg-lilac",
     details: [
       "Token Canadian",
@@ -111,14 +111,14 @@ export const makersInfo = {
   "vishal sonthalia": {
     firstName: "vishal",
     lastName: "sonthalia",
-    img: "bg-[url('/vishal.svg')]",
+    img: "bg-[url('/makers/vishal.svg')]",
     shadow: "bg-olive",
     details: [],
   },
   "katelyn lusher": {
     firstName: "katelyn",
     lastName: "lusher",
-    img: "bg-[url('/katelyn.svg')]",
+    img: "bg-[url('/makers/katelyn.svg')]",
     shadow: "bg-jade",
     details: [
       "has a PhD in Rhetoric & Composition",

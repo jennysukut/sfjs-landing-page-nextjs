@@ -2,12 +2,15 @@
 
 import SiteButton from "@/components/siteButton";
 import InfoBox from "@/components/infoBox";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { landingPageText } from "@/lib/siteCopy/landingPageText";
 import Image from "next/image";
 import { ButtonColorOption } from "@/lib/stylingData/buttonColors";
 import clsx from "clsx";
 import Link from "next/link";
+import { useModal } from "@/contexts/ModalContext";
+import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsModal";
+
 type Category = "individual" | "business";
 
 export default function FeaturesSection() {
@@ -16,7 +19,7 @@ export default function FeaturesSection() {
   // I have the detail set to none with a differentiation between "" and "none" because
   //we've got the little note + arrow after the features section that I want to only exist before someone has clicked one of the detail buttons.
   const [detail, setDetail] = useState("none");
-  const [isClient, setIsClient] = useState(false);
+  const { showModal } = useModal();
 
   const featuresButtonStyles = clsx(
     "flex max-w-5xl",
@@ -122,11 +125,11 @@ export default function FeaturesSection() {
             {landingPageText.arrowprompts.feature}
           </p>
           <Image
-            className="translate-y-[-20px]"
+            className="w-[90px] translate-y-[-20px]"
             src="/GreenArrow.svg"
             alt="arrow"
-            width={100}
-            height={75}
+            width={146}
+            height={86}
           ></Image>
         </div>
       )}
@@ -137,6 +140,7 @@ export default function FeaturesSection() {
           size="large"
           variant="filled"
           colorScheme="c5"
+          onClick={() => showModal(<SignupOptionsModal />)}
         >
           sign me up!
         </SiteButton>
