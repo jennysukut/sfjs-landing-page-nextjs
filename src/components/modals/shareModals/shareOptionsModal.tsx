@@ -9,14 +9,14 @@ import {
 
 export default function ShareOptionsModal() {
   return (
-    <div className="SignupOptionsModal flex flex-col items-center gap-4 px-12">
+    <div className="ShareOptionsModal flex flex-col items-center gap-4 px-4">
       <Dialog.Title className="Title w-full text-center text-xl font-bold">
         spread the word
       </Dialog.Title>
       <p className="Subtitle w-full text-center">
         where would you like to share?
       </p>
-      <div className="SignupButtons mt-4 flex flex-col items-start gap-y-4">
+      <div className="ShareButtons mt-4 flex flex-col items-start gap-y-4">
         <LinkedinShareButton url="straightforwardjobsite.com">
           <SiteButton
             variant="filled"
