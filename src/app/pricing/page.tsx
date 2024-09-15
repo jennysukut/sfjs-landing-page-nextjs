@@ -96,16 +96,16 @@ export default function PricingPage() {
               Our pricing model is pay-what-you-want!
             </p>
             <p className="PricingDetails py-2 font-medium italic">
-              We know our site and the common-sense tools it offers are
+              {`We know our site and the common-sense tools it offers are
               valuable, but we are all too familiar with the fact that often
-              those who most need the tools are unable to afford them.
+              those who most need the tools are unable to afford them.`}
             </p>
             <p className="PricingDetails py-2">
               {`That's why we're making the amount up to you!`}
             </p>
             <p className="PricingDetails py-2">
-              Every single job-seeker who uses our site has access to all our
-              features, despite what their budget might look like.
+              {`Every single job-seeker who uses our site has access to all our
+              features, despite what their budget might look like.`}
             </p>
           </InfoBox>
         )}

@@ -12,13 +12,15 @@ export default function SignupOptions() {
       <SiteButton variant="filled" colorScheme="f1" aria="collaborator">
         collaborator
       </SiteButton>
+
       <SiteButton
         variant="filled"
         colorScheme="c1"
         aria="individual"
         onClick={() => showModal(<SignupModal />)}
       >
-        human
+        job-seeker
+
       </SiteButton>
     </div>
   );
