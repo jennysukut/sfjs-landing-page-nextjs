@@ -10,7 +10,7 @@ export default function SignupOptions() {
         collaborator
       </SiteButton>
       <SiteButton variant="filled" colorScheme="c1" aria="individual">
-        human
+        job-seeker
       </SiteButton>
     </div>
   );

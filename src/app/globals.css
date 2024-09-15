@@ -72,14 +72,3 @@ body {
     --scrollbar-thumb-radius: 9999px;
   }
 }
-
-@layer components {
-  .borderContainer {
-    @apply m-5 flex max-w-96 flex-col rounded-3xl bg-cream px-10 py-8 text-jade outline outline-jade drop-shadow-jade;
-  }
-
-  /* for the solid container, you have to add the color and drop shadow to the page directly */
-  .solidContainer {
-    @apply m-5 flex max-w-96 flex-col rounded-3xl px-10 py-8 text-cream;
-  }
-}

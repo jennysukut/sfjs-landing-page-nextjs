@@ -9,7 +9,7 @@ export default function StatusTimelineGoalsSection() {
       <InfoBox
         aria="our current status"
         variant="hollow"
-        addClasses="max-w-md leading-relaxed py-12 px-14"
+        addClasses="max-w-md leading-relaxed py-14 px-14"
       >
         {supportPageInfo.currentStatus.map((status, index) => (
           <p key={index} className="mb-6 last:mb-0">
@@ -22,7 +22,7 @@ export default function StatusTimelineGoalsSection() {
         aria="our crowdfunding needs"
         variant="filled"
         colorScheme="c4"
-        addClasses="max-w-md leading-relaxed py-12 px-14"
+        addClasses="max-w-md leading-relaxed py-14 px-14"
       >
         {supportPageInfo.crowdfundingNeed.map((status, index) => (
           <p key={index} className="mb-6 mt-4 last:mb-0">
@@ -33,7 +33,7 @@ export default function StatusTimelineGoalsSection() {
       <InfoBox
         aria="our current status"
         variant="hollow"
-        addClasses="max-w-md text-center flex flex-col items-center leading-relaxed py-12 px-14"
+        addClasses="max-w-md text-center flex flex-col items-center leading-relaxed py-14 px-14"
       >
         our goal is to raise between:
         <SiteLabel
@@ -42,7 +42,7 @@ export default function StatusTimelineGoalsSection() {
           addClasses="px-8 m-5"
           textSize="medium"
         >
-          $15.490 - $216.738
+          $15,000 - $216,000
         </SiteLabel>
         {supportPageInfo.goalDetail}
       </InfoBox>
