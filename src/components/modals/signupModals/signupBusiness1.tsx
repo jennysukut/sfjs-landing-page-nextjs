@@ -2,9 +2,13 @@ import SiteButton from "../../siteButton";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useModal } from "@/contexts/ModalContext";
 import SignupModalBusiness2 from "./signupBusiness2";
+import { useState } from "react";
 
 export default function SignupModalBusiness1() {
   const { showModal } = useModal();
+  const [earlySignup, setEarlySignup] = useState(false);
+  const [betaTester, setBetaTester] = useState(false);
+
   return (
     <div className="SignupModal flex max-w-[450px] flex-col gap-4 text-jade">
       <Dialog.Title className="Title w-full text-center text-xl font-bold">
@@ -26,21 +30,27 @@ export default function SignupModalBusiness1() {
           placeholder="fantasticemail@mybusiness.org"
           className="text-md border-b-2 border-jade/50 bg-transparent pb-3 pt-2 text-jade placeholder:text-jade/50 focus:border-jade focus:outline-none"
         />
-        <div className="GetInEarlyOption -mb-4 mt-6 flex items-center gap-2">
-          <input
-            type="checkbox"
-            id="inEarly"
-            className="h-6 w-6 cursor-pointer appearance-none rounded-full border-2 border-jade bg-cream drop-shadow-smJade checked:border-none checked:bg-peach checked:drop-shadow-smLime"
+        <div className="BetaTesterButton -mb-4 mt-6 flex items-center gap-2">
+          <SiteButton
+            variant="hollow"
+            colorScheme="f1"
+            aria="betaTester"
+            size="smallCircle"
+            isSelected={earlySignup}
+            onClick={() => setEarlySignup(!earlySignup)}
           />
           <label htmlFor="betaTester" className="cursor-pointer pl-2 text-sm">
-            get in early{" "}
+            get in early
           </label>
         </div>
-        <div className="BetaTesterOption -mb-8 mt-6 flex items-center gap-2">
-          <input
-            type="checkbox"
-            id="betaTester"
-            className="h-6 w-6 cursor-pointer appearance-none rounded-full border-2 border-jade bg-cream drop-shadow-smJade checked:border-none checked:bg-jade checked:drop-shadow-smWatermelon"
+        <div className="BetaTesterButton -mb-4 mt-6 flex items-center gap-2">
+          <SiteButton
+            variant="hollow"
+            colorScheme="c1"
+            aria="betaTester"
+            size="smallCircle"
+            isSelected={betaTester}
+            onClick={() => setBetaTester(!betaTester)}
           />
           <label htmlFor="betaTester" className="cursor-pointer pl-2 text-sm">
             sign up to be a beta tester

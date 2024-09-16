@@ -9,15 +9,6 @@ import { gql } from "@apollo/client";
 import client from "../../lib/apollo-client";
 import Script from "next/script";
 import getRandomColorScheme from "@/utils/getRandomColorScheme";
-
-const INITIALIZE_PAYMENT = gql`
-  mutation InitializePayment($payment: PaymentInput!) {
-    initializePayment(payment: $payment) {
-      checkoutToken
-    }
-  }
-`;
-
 import { z } from "zod";
 
 type DonationCategory = "business" | "individual";
@@ -29,9 +20,8 @@ function DonationBox() {
     supportPageInfo.rewards.individual,
   );
   const businessRewardsArray = Object.entries(supportPageInfo.rewards.business);
-
-  //obviously, we'll set this only we actually get the donation.
-  //We'll have to write the logic when we get the info sent back from Helcim upon successful donation
+  const [showAddress, setShowAddress] = useState(false);
+  //this currentAmount will be set after we get a response back from Helcim confirming the donation amount
   const [currentAmount, setCurrentAmount] = useState(0);
 
   const [formData, setFormData] = useState({
@@ -44,7 +34,13 @@ function DonationBox() {
     customAmount: "",
   });
 
-  const [showAddress, setShowAddress] = useState(false);
+  const INITIALIZE_PAYMENT = gql`
+    mutation InitializePayment($payment: PaymentInput!) {
+      initializePayment(payment: $payment) {
+        checkoutToken
+      }
+    }
+  `;
 
   const handleInputChange = (
     e:
@@ -56,6 +52,7 @@ function DonationBox() {
       ...prevData,
       [name]: value,
     }));
+    console.log(formData);
     if (name === "donationCategory") {
       handleDonorTypeChange(value);
     }
@@ -133,6 +130,8 @@ function DonationBox() {
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
   }, []);
+
+  //form submission handler
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

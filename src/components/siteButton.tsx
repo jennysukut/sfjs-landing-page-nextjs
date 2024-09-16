@@ -62,7 +62,7 @@ const SiteButton: React.FC<ButtonProps> = ({
       //selected state
       [`${buttonColors[colorScheme].color1} ${buttonColors[colorScheme].color3} translate-x-1 translate-y-1 text-eggshell`]:
         isSelected,
-      [`${buttonColors[colorScheme].color5} ${buttonColors[colorScheme].color6} translate-x-0.5 translate-y-0.5 text-eggshell`]:
+      [`${buttonColors[colorScheme].color5} ${buttonColors[colorScheme].color6} translate-x-[2px] translate-y-[2px] text-eggshell`]:
         isSelected && size === "smallCircle",
 
       //padding

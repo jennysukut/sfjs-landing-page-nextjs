@@ -24,16 +24,24 @@ export default function SignupModalCollaborator2() {
           rows={5}
           className="mb-0 resize-none rounded-lg border-2 border-jade/50 bg-transparent p-3 text-sm text-midnight placeholder:text-jade/50 focus:border-jade focus:outline-none"
         />
-        <div className="-mb-4 mt-6 flex items-center gap-2">
-          <input
-            type="checkbox"
-            id="betaTester"
-            className="h-6 w-6 cursor-pointer appearance-none rounded-full border-2 border-jade bg-cream drop-shadow-smJade checked:border-none checked:bg-peach checked:drop-shadow-smLime"
+        {/* This is the Beta Tester Button - uncomment when you're ready to implement the form + validation */}
+        {/* <div className="BetaTesterButton mt-6 flex items-center gap-2">
+          <SiteButton
+            variant="hollow"
+            colorScheme="f1"
+            aria="betaTester"
+            size="smallCircle"
+            isSelected={watch("betaTester")}
+            onClick={() => {
+              const newValue = !watch("betaTester");
+              setValue("betaTester", newValue);
+              setBetaTester(newValue);
+            }}
           />
           <label htmlFor="betaTester" className="cursor-pointer pl-2 text-sm">
             sign up to be a beta tester
           </label>
-        </div>
+        </div> */}
         <div className="ButtonContainer mt-8 flex justify-end">
           <SiteButton
             variant="hollow"
