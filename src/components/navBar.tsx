@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { signal, useSignal } from "@preact/signals-react";
 
 import Image from "next/image";
 import SiteButton from "./siteButton";
@@ -8,12 +9,22 @@ import Link from "next/link";
 import ShareOptions from "./shareOptions";
 import SignupOptions from "./signupOptions";
 
+export const dropDown = signal(false);
+
 export default function NavBar() {
   const [clickedButton, setClickedButton] = useState("");
 
   function handleNavButtonClick(e: any) {
     setClickedButton(clickedButton === e.target.value ? "" : e.target.value);
   }
+
+  useEffect(() => {
+    if (clickedButton === "share" || clickedButton === "signup") {
+      dropDown.value = true;
+    } else {
+      dropDown.value = false;
+    }
+  }, [clickedButton]);
 
   return (
     <div className="NavBar mx-auto flex h-fit w-[98%] justify-between px-16 py-6">

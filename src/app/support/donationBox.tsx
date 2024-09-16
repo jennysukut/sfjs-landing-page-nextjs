@@ -6,16 +6,30 @@ import InfoBox from "@/components/infoBox";
 import SiteButton from "@/components/siteButton";
 import { supportPageInfo } from "@/lib/siteCopy/supportPageInfo";
 import { gql } from "@apollo/client";
+import { useSignals } from "@preact/signals-react/runtime";
 import client from "../../lib/apollo-client";
 import Script from "next/script";
 import getRandomColorScheme from "@/utils/getRandomColorScheme";
+
+import { dropDown } from "@/components/navBar";
+
+const INITIALIZE_PAYMENT = gql`
+  mutation InitializePayment($payment: PaymentInput!) {
+    initializePayment(payment: $payment) {
+      checkoutToken
+    }
+  }
+`;
+
 import { z } from "zod";
 
 type DonationCategory = "business" | "individual";
 
 function DonationBox() {
+  useSignals();
   const rewards = supportPageInfo.rewards;
-  const targetAmount = 15490;
+  const targetAmount = 15000;
+
   const individualRewardsArray = Object.entries(
     supportPageInfo.rewards.individual,
   );
@@ -23,13 +37,14 @@ function DonationBox() {
   const [showAddress, setShowAddress] = useState(false);
   //this currentAmount will be set after we get a response back from Helcim confirming the donation amount
   const [currentAmount, setCurrentAmount] = useState(0);
-
   const [formData, setFormData] = useState({
     donationCategory: "individual",
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     address: "",
     businessName: "",
+    contactName: "",
     selectedAmount: "",
     customAmount: "",
   });
@@ -42,6 +57,7 @@ function DonationBox() {
     }
   `;
 
+  //form input handlers
   const handleInputChange = (
     e:
       | React.ChangeEvent<HTMLInputElement>
@@ -131,8 +147,6 @@ function DonationBox() {
     return () => window.removeEventListener("message", handleMessage);
   }, []);
 
-  //form submission handler
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const donationAmount = formData.selectedAmount || formData.customAmount;
@@ -146,7 +160,11 @@ function DonationBox() {
       paymentType: "purchase",
       amount: "0.01",
       currency: "USD",
-      account: { name: formData.name, email: formData.email },
+      account: {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+      },
     };
 
     client
@@ -204,8 +222,27 @@ function DonationBox() {
     );
   }
 
-  const isDonationCategory = (category: string): category is DonationCategory =>
-    category === "business" || category === "individual";
+  //payment integration message
+  useEffect(() => {
+    // @ts-ignore
+    const handleMessage = (event) => {
+      console.log(JSON.stringify(event));
+      // if (event.origin === 'https://secure.helcim.com') {
+      if (event.origin.includes("helcim")) {
+        const { paymentStatus, transactionId } = event.data;
+        if (paymentStatus === "success") {
+          // Handle successful payment
+          console.log("payment success");
+        } else if (paymentStatus === "failed") {
+          // Handle failed payment
+          console.log("payment failed");
+        }
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, []);
 
   return (
     <>
@@ -213,7 +250,9 @@ function DonationBox() {
         type="text/javascript"
         src="https://secure.helcim.app/helcim-pay/services/start.js"
       />
-      <div className="DonationStation flex w-5/12 flex-col gap-6 pt-20">
+      <div
+        className={`DonationStation flex w-5/12 flex-col gap-6 ${dropDown.value === true ? "mt-20" : "mt-8"}`}
+      >
         <div className="ProgressBarContainer mb-4">
           <p className="ProgressBarStatus">
             current amount raised: ${currentAmount} / {calculatePercentage()}%
@@ -279,41 +318,38 @@ function DonationBox() {
 
             {/* donation amount options */}
             <div className="AmountOptions mt-8 flex max-w-sm flex-wrap items-center justify-center gap-4">
-              {formData.donationCategory &&
-                isDonationCategory(formData.donationCategory) && (
-                  <>
-                    {Object.entries(rewards[formData.donationCategory]).map(
-                      ([amount]) => (
-                        <SiteButton
-                          key={amount}
-                          aria={amount}
-                          variant="hollow"
-                          isSelected={formData.selectedAmount === amount}
-                          colorScheme={getRandomColorScheme("a1")}
-                          addClasses={
-                            formData.selectedAmount === amount ? "" : ""
-                          }
-                          onClick={() => handleAmountSelection(amount)}
-                        >
-                          {amount}
-                        </SiteButton>
-                      ),
-                    )}
-                    <input
-                      type="text"
-                      name="customAmount"
-                      inputMode="decimal"
-                      placeholder="custom amount"
-                      value={formData.customAmount}
-                      onChange={handleCustomAmountChange}
-                      className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-center text-xs placeholder-jade drop-shadow-jade"
-                      aria-label="custom amount"
-                    />
-                  </>
-                )}
+              {formData.donationCategory && (
+                <>
+                  {Object.entries(
+                    rewards[formData.donationCategory as DonationCategory],
+                  ).map(([amount]) => (
+                    <SiteButton
+                      key={amount}
+                      aria={amount}
+                      variant="hollow"
+                      isSelected={formData.selectedAmount === amount}
+                      colorScheme="e5"
+                      addClasses={formData.selectedAmount === amount ? "" : ""}
+                      onClick={() => handleAmountSelection(amount)}
+                    >
+                      {amount}
+                    </SiteButton>
+                  ))}
+                  <input
+                    type="text"
+                    name="customAmount"
+                    inputMode="decimal"
+                    placeholder="custom amount"
+                    value={formData.customAmount}
+                    onChange={handleCustomAmountChange}
+                    className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-center text-xs placeholder-jade drop-shadow-jade"
+                    aria-label="custom amount"
+                  />
+                </>
+              )}
             </div>
 
-            {/* put the reward information box here */}
+            {/* reward information */}
             {formData.donationCategory === "individual" &&
               printRewardsArray(individualRewardsArray)}
 
@@ -330,12 +366,22 @@ function DonationBox() {
                 <>
                   <input
                     type="text"
-                    name="name"
-                    placeholder="Your Name*"
-                    value={formData.name}
+                    name="firstName"
+                    placeholder="Your First Name*"
+                    value={formData.firstName}
                     onChange={handleInputChange}
                     className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
-                    aria-label="name"
+                    aria-label="firstName"
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="lastName"
+                    placeholder="Your Last Name*"
+                    value={formData.lastName}
+                    onChange={handleInputChange}
+                    className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
+                    aria-label="lastName"
                     required
                   />
                   <input
@@ -362,60 +408,59 @@ function DonationBox() {
                   )}
                 </>
               )}
-              {formData.donationCategory === "business" &&
-                isDonationCategory(formData.donationCategory) && (
-                  <>
-                    {Object.entries(
-                      supportPageInfo.rewards[formData.donationCategory],
-                    ).map(([amount]) => (
-                      <SiteButton
-                        key={amount}
-                        aria={amount}
-                        variant="hollow"
-                        colorScheme="e5"
-                        addClasses={
-                          formData.selectedAmount === amount
-                            ? "bg-jade text-cream"
-                            : ""
-                        }
-                        onClick={() => handleAmountSelection(amount)}
-                      >
-                        {amount}
-                      </SiteButton>
-                    ))}
+              {formData.donationCategory === "business" && (
+                <>
+                  {Object.entries(
+                    supportPageInfo.rewards[formData.donationCategory],
+                  ).map(([amount]) => (
+                    <SiteButton
+                      key={amount}
+                      aria={amount}
+                      variant="hollow"
+                      colorScheme="e5"
+                      addClasses={
+                        formData.selectedAmount === amount
+                          ? "bg-jade text-cream"
+                          : ""
+                      }
+                      onClick={() => handleAmountSelection(amount)}
+                    >
+                      {amount}
+                    </SiteButton>
+                  ))}
 
-                    <input
-                      type="text"
-                      name="businessName"
-                      placeholder="Business Name*"
-                      value={formData.businessName}
-                      onChange={handleInputChange}
-                      className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
-                      aria-label="business name"
-                      required
-                    />
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder="Contact Name*"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
-                      aria-label="contact name"
-                      required
-                    />
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Email Address*"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
-                      aria-label="email"
-                      required
-                    />
-                  </>
-                )}
+                  <input
+                    type="text"
+                    name="businessName"
+                    placeholder="Business Name*"
+                    value={formData.businessName}
+                    onChange={handleInputChange}
+                    className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
+                    aria-label="business name"
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="contactName"
+                    placeholder="Contact Name*"
+                    value={formData.contactName}
+                    onChange={handleInputChange}
+                    className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
+                    aria-label="contact name"
+                    required
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email Address*"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
+                    aria-label="email"
+                    required
+                  />
+                </>
+              )}
             </div>
 
             {/* submission button */}
