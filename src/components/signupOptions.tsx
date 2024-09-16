@@ -32,6 +32,7 @@ export default function SignupOptions({ setClickedButton }: any) {
       >
         collaborator
       </SiteButton>
+
       <SiteButton
         variant="filled"
         colorScheme="c1"

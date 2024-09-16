@@ -67,6 +67,6 @@ const config: Config = {
       smMagenta: "3px 3px 0px #E673A9",
     },
   },
-  plugins: [],
+  plugins: [require("@mertasan/tailwindcss-variables")],
 };
 export default config;
