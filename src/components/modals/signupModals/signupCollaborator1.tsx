@@ -2,9 +2,35 @@ import SiteButton from "../../siteButton";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useModal } from "@/contexts/ModalContext";
 import SignupModalCollaborator2 from "./signupCollaborator2";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+
+// this is the first part of a two-part form, this schema covers this modal, I've got another one on the signupCollaborator2 modal
+const collaboratorSchema = z.object({
+  name: z.string().min(2, { message: "Required" }),
+  email: z.string().email(),
+});
+
+type FormData = z.infer<typeof collaboratorSchema>;
 
 export default function SignupModalCollaborator1() {
   const { showModal } = useModal();
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(collaboratorSchema),
+  });
+
+  // I'd like to send this data to the next modal that pops up so we can send all the data to the server at once.
+  // Would I send it through the <SignupModalCollaborator2 /> when I click the form's button?
+  const onSubmit: SubmitHandler<FormData> = (data) => console.log(data);
+
   return (
     <div className="SignupCollaboratorModal flex max-w-[450px] flex-col gap-4 text-jade">
       <Dialog.Title className="Title w-full text-center text-xl font-bold">
@@ -16,25 +42,47 @@ export default function SignupModalCollaborator1() {
       <Dialog.Description className="Text w-full text-center font-medium italic text-olive">
         {`tell us a little bit about you and we’ll see if there’s a way we can work together.`}
       </Dialog.Description>
-      <form className="flex flex-col gap-2">
-        <label htmlFor="name">name</label>
+      <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
+        {/* name input */}
+        <label htmlFor="name">your name*</label>
         <input
           type="name"
-          placeholder="Delightful Human"
-          className="text-md mb-4 border-b-2 border-jade/50 bg-transparent pb-3 pt-2 text-jade placeholder:text-jade/50 focus:border-jade focus:outline-none"
+          placeholder="Fantastic Human"
+          className="text-md mb-0 border-b-2 border-jade/50 bg-transparent pb-2 pt-2 text-jade placeholder:text-jade/50 focus:border-jade focus:outline-none"
+          {...register("name")}
         />
-        <label htmlFor="email">email</label>
+        {errors.name?.message && (
+          <p className="text-xs font-medium text-orange">
+            {errors.name.message.toString()}
+          </p>
+        )}
+
+        {/* email input */}
+        <label htmlFor="email" className="mt-6">
+          your email*
+        </label>
         <input
           type="email"
           placeholder="fantasticemail@emailexample.com"
           className="text-md border-b-2 border-jade/50 bg-transparent pb-3 pt-2 text-jade placeholder:text-jade/50 focus:border-jade focus:outline-none"
+          {...register("email", { required: "Email Address is required" })}
         />
+        {errors.email?.message && (
+          <p className="text-xs font-medium text-orange">
+            {errors.email.message.toString()}
+          </p>
+        )}
+
+        {/* continue button */}
         <div className="ButtonContainer -mb-3 mt-8 flex justify-end">
           <SiteButton
             variant="hollow"
             colorScheme="f4"
             aria="submit"
-            onClick={() => showModal(<SignupModalCollaborator2 />)}
+            onClick={handleSubmit((data) => {
+              console.log(data);
+              showModal(<SignupModalCollaborator2 />);
+            })}
           >
             tell us about you
           </SiteButton>
