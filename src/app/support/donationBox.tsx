@@ -9,10 +9,7 @@ import { gql } from "@apollo/client";
 import { useSignals } from "@preact/signals-react/runtime";
 import client from "../../lib/apollo-client";
 import Script from "next/script";
-import getRandomColorScheme from "@/utils/getRandomColorScheme";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+
 import { dropDown } from "@/components/navBar";
 
 const INITIALIZE_PAYMENT = gql`
@@ -23,38 +20,21 @@ const INITIALIZE_PAYMENT = gql`
   }
 `;
 
-const individualDonationSchema = z.object({
-  firstName: z.string().min(2),
-  lastName: z.string().min(2),
-  email: z.string().email(),
-  amount: z.number(),
-  address: z.string().optional(),
-});
-
-const businessDonationSchema = z.object({
-  businessName: z.string().min(2),
-  contactName: z.string().min(2),
-  email: z.string().email(),
-  amount: z.number(),
-});
-
 type DonationCategory = "business" | "individual";
-type FellowFormData = z.infer<typeof individualDonationSchema>;
-type BusinessFormData = z.infer<typeof businessDonationSchema>;
 
 function DonationBox() {
   useSignals();
   const rewards = supportPageInfo.rewards;
   const targetAmount = 15000;
-  //this currentAmount will be set after we get a response back from Helcim confirming the donation amount
-  const [currentAmount, setCurrentAmount] = useState(0);
 
   const individualRewardsArray = Object.entries(
     supportPageInfo.rewards.individual,
   );
   const businessRewardsArray = Object.entries(supportPageInfo.rewards.business);
 
-  const [showAddress, setShowAddress] = useState(false);
+  //obviously, we'll set this only we actually get the donation.
+  //We'll have to write the logic when we get the info sent back from Helcim upon successful donation
+  const [currentAmount, setCurrentAmount] = useState(0);
   const [formData, setFormData] = useState({
     donationCategory: "individual",
     firstName: "",
@@ -66,14 +46,7 @@ function DonationBox() {
     selectedAmount: "",
     customAmount: "",
   });
-
-  const INITIALIZE_PAYMENT = gql`
-    mutation InitializePayment($payment: PaymentInput!) {
-      initializePayment(payment: $payment) {
-        checkoutToken
-      }
-    }
-  `;
+  const [showAddress, setShowAddress] = useState(false);
 
   //form input handlers
   const handleInputChange = (
@@ -86,7 +59,6 @@ function DonationBox() {
       ...prevData,
       [name]: value,
     }));
-    console.log(formData);
     if (name === "donationCategory") {
       handleDonorTypeChange(value);
     }
@@ -144,61 +116,41 @@ function DonationBox() {
     setShowAddress(numericValue >= 100 && donationCategory === "individual");
   };
 
-  useEffect(() => {
-    // @ts-ignore
-    const handleMessage = (event) => {
-      console.log(JSON.stringify(event));
-      // if (event.origin === 'https://secure.helcim.com') {
-      if (event.origin.includes("helcim")) {
-        const { paymentStatus, transactionId } = event.data;
-        if (paymentStatus === "success") {
-          // Handle successful payment
-          console.log("payment success");
-        } else if (paymentStatus === "failed") {
-          // Handle failed payment
-          console.log("payment failed");
-        }
-      }
+  //form submission handler
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const donationAmount = formData.selectedAmount || formData.customAmount;
+    const parsedAmount = parseAmount(donationAmount);
+    setCurrentAmount((prevAmount) => prevAmount + parsedAmount);
+
+    // Add your form submission logic here
+    console.log("Form submitted:", formData);
+
+    const payment = {
+      paymentType: "purchase",
+      amount: "0.01",
+      currency: "USD",
+      account: {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+      },
     };
 
-    window.addEventListener("message", handleMessage);
-    return () => window.removeEventListener("message", handleMessage);
-  }, []);
-
-  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   const donationAmount = formData.selectedAmount || formData.customAmount;
-  //   const parsedAmount = parseAmount(donationAmount);
-  //   setCurrentAmount((prevAmount) => prevAmount + parsedAmount);
-
-  //   // Add your form submission logic here
-  //   console.log("Form submitted:", formData);
-
-  //   const payment = {
-  //     paymentType: "purchase",
-  //     amount: "0.01",
-  //     currency: "USD",
-  //     account: {
-  //       firstName: formData.firstName,
-  //       lastName: formData.lastName,
-  //       email: formData.email,
-  //     },
-  //   };
-
-  //   client
-  //     .mutate({
-  //       mutation: INITIALIZE_PAYMENT,
-  //       variables: { payment },
-  //     })
-  //     .then(({ data }) => {
-  //       console.log("success");
-  //       // @ts-ignore // this function is added by an external script
-  //       appendHelcimPayIframe(data.initializePayment.checkoutToken);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.message);
-  //     });
-  // };
+    client
+      .mutate({
+        mutation: INITIALIZE_PAYMENT,
+        variables: { payment },
+      })
+      .then(({ data }) => {
+        console.log("success");
+        // @ts-ignore // this function is added by an external script
+        appendHelcimPayIframe(data.initializePayment.checkoutToken);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
 
   // Number Calculation + Adjustment for Display
   const parseAmount = (amount: string): number => {
@@ -285,7 +237,10 @@ function DonationBox() {
           variant="hollow"
           addClasses="flex flex-col text-center items-center"
         >
-          <form className="flex w-full flex-col items-center">
+          <form
+            onSubmit={handleSubmit}
+            className="flex w-full flex-col items-center"
+          >
             <h1 className="SupportUsTitle mt-2">show your support</h1>
             <h3 className="SupportUsSubtitle mt-2 text-lg font-medium italic text-jade">
               for Straightforward Job Site
@@ -343,7 +298,7 @@ function DonationBox() {
                       aria={amount}
                       variant="hollow"
                       isSelected={formData.selectedAmount === amount}
-                      colorScheme={getRandomColorScheme("a1")}
+                      colorScheme="e5"
                       addClasses={formData.selectedAmount === amount ? "" : ""}
                       onClick={() => handleAmountSelection(amount)}
                     >
@@ -425,25 +380,6 @@ function DonationBox() {
               )}
               {formData.donationCategory === "business" && (
                 <>
-                  {Object.entries(
-                    supportPageInfo.rewards[formData.donationCategory],
-                  ).map(([amount]) => (
-                    <SiteButton
-                      key={amount}
-                      aria={amount}
-                      variant="hollow"
-                      colorScheme="e5"
-                      addClasses={
-                        formData.selectedAmount === amount
-                          ? "bg-jade text-cream"
-                          : ""
-                      }
-                      onClick={() => handleAmountSelection(amount)}
-                    >
-                      {amount}
-                    </SiteButton>
-                  ))}
-
                   <input
                     type="text"
                     name="businessName"
