@@ -3,6 +3,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { useModal } from "@/contexts/ModalContext";
 import ShareOptionsModal from "../shareModals/shareOptionsModal";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function SignupModalIndividual3() {
   const { showModal, hideModal } = useModal();
@@ -19,15 +20,17 @@ export default function SignupModalIndividual3() {
       </Dialog.Description>
       <video src="" className="aspect-video w-full rounded-3xl bg-peach" />
       <div className="ButtonContainer mt-4 flex justify-end gap-4">
-        <SiteButton
-          variant="filled"
-          colorScheme="e5"
-          aria="submit"
-          onClick={hideModal}
-          addClasses="px-6"
-        >
-          donate some dollarbucks
-        </SiteButton>
+        <Link href={"/support"}>
+          <SiteButton
+            variant="filled"
+            colorScheme="e5"
+            aria="submit"
+            onClick={hideModal}
+            addClasses="px-6"
+          >
+            donate some dollarbucks
+          </SiteButton>
+        </Link>
         <SiteButton
           variant="filled"
           colorScheme="f1"

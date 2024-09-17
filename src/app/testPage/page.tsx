@@ -4,6 +4,7 @@ import SiteButton from "@/components/siteButton";
 import { useState } from "react";
 import { signupFellow } from "@/utils/actions/signup";
 import { useForm, SubmitHandler } from "react-hook-form";
+import TestDonationBox from "./testDonationBox";
 
 type Inputs = {
   firstName: string;
@@ -32,16 +33,6 @@ export default function TestPage() {
     });
   };
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-
-  console.log(watch("lastName")); // watch input value by passing the name of it
-
   return (
     <div className="TestPage flex flex-col items-center align-middle">
       <SiteButton
@@ -53,24 +44,8 @@ export default function TestPage() {
       >
         test button for email
       </SiteButton>
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-20">
-        {/* register your input into the hook by invoking the "register" function */}
-        <input defaultValue="firstName" {...register("firstName")} />
-        {/* include validation with required or other standard HTML validation rules */}
-        <input
-          defaultValue="lastName"
-          {...register("lastName", { required: true, min: 5 })}
-        />
-        {/* errors will return when field validation fails  */}
-        {errors.lastName && (
-          <span className="text-black">This field is required</span>
-        )}
-        <input
-          defaultValue="email"
-          {...register("email", { required: true })}
-        />
-        <input type="submit" />
-      </form>
+
+      <TestDonationBox />
     </div>
   );
 }

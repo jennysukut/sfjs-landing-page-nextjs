@@ -9,16 +9,7 @@ import { gql } from "@apollo/client";
 import { useSignals } from "@preact/signals-react/runtime";
 import client from "../../lib/apollo-client";
 import Script from "next/script";
-
 import { dropDown } from "@/components/navBar";
-
-const INITIALIZE_PAYMENT = gql`
-  mutation InitializePayment($payment: PaymentInput!) {
-    initializePayment(payment: $payment) {
-      checkoutToken
-    }
-  }
-`;
 
 type DonationCategory = "business" | "individual";
 
@@ -26,7 +17,6 @@ function DonationBox() {
   useSignals();
   const rewards = supportPageInfo.rewards;
   const targetAmount = 15000;
-
   const individualRewardsArray = Object.entries(
     supportPageInfo.rewards.individual,
   );
@@ -116,42 +106,6 @@ function DonationBox() {
     setShowAddress(numericValue >= 100 && donationCategory === "individual");
   };
 
-  //form submission handler
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const donationAmount = formData.selectedAmount || formData.customAmount;
-    const parsedAmount = parseAmount(donationAmount);
-    setCurrentAmount((prevAmount) => prevAmount + parsedAmount);
-
-    // Add your form submission logic here
-    console.log("Form submitted:", formData);
-
-    const payment = {
-      paymentType: "purchase",
-      amount: "0.01",
-      currency: "USD",
-      account: {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-      },
-    };
-
-    client
-      .mutate({
-        mutation: INITIALIZE_PAYMENT,
-        variables: { payment },
-      })
-      .then(({ data }) => {
-        console.log("success");
-        // @ts-ignore // this function is added by an external script
-        appendHelcimPayIframe(data.initializePayment.checkoutToken);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  };
-
   // Number Calculation + Adjustment for Display
   const parseAmount = (amount: string): number => {
     return parseFloat(amount.replace(/[^0-9.]/g, "")) || 0;
@@ -191,6 +145,57 @@ function DonationBox() {
       </div>
     );
   }
+
+  // Helcim Payment Initializer
+  const INITIALIZE_PAYMENT = gql`
+    mutation InitializePayment($payment: PaymentInput!) {
+      initializePayment(payment: $payment) {
+        checkoutToken
+      }
+    }
+  `;
+
+  //form submission handler
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const donationAmount = formData.selectedAmount || formData.customAmount;
+    const parsedAmount = parseAmount(donationAmount);
+    setCurrentAmount((prevAmount) => prevAmount + parsedAmount);
+
+    // Add your form submission logic here
+    console.log("Form submitted:", formData);
+
+    const payment = {
+      paymentType: "purchase",
+      amount: "0.01",
+      currency: "USD",
+      // account: {
+      //   firstName: formData.firstName,
+      //   lastName: formData.lastName,
+      //   email: formData.email,
+      // },
+
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+    };
+
+    console.log(payment);
+
+    client
+      .mutate({
+        mutation: INITIALIZE_PAYMENT,
+        variables: { payment },
+      })
+      .then(({ data }) => {
+        console.log("success");
+        // @ts-ignore // this function is added by an external script
+        appendHelcimPayIframe(data.initializePayment.checkoutToken);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
 
   //payment integration message
   useEffect(() => {
