@@ -7,6 +7,8 @@ import { useState } from "react";
 export default function SignupModalIndividual3() {
   const { showModal, hideModal } = useModal();
 
+  const handleShareOptionsModal = () => showModal(<ShareOptionsModal />);
+
   return (
     <div className="SignupModalIndividual2 flex max-w-[450px] flex-col gap-4 text-jade">
       <Dialog.Title className="Title w-full text-center text-xl font-bold">
@@ -30,7 +32,7 @@ export default function SignupModalIndividual3() {
           variant="filled"
           colorScheme="f1"
           aria="submit"
-          onClick={() => showModal(<ShareOptionsModal />)}
+          onClick={handleShareOptionsModal}
           addClasses="px-6"
         >
           tell your friends

@@ -31,6 +31,12 @@ export default function SignupModalIndividual1() {
     },
   });
 
+  const handleBetaTesterChange = () => {
+    const newValue = !watch("betaTester");
+    setValue("betaTester", newValue);
+    setBetaTester(newValue);
+  };
+
   // Submission Handler - send this data to the server.
   // Do we need to check if the email address is already in the server?
   const onSubmit: SubmitHandler<FormData> = (data) => console.log(data);
@@ -85,11 +91,7 @@ export default function SignupModalIndividual1() {
             aria="betaTester"
             size="smallCircle"
             isSelected={watch("betaTester")}
-            onClick={() => {
-              const newValue = !watch("betaTester");
-              setValue("betaTester", newValue);
-              setBetaTester(newValue);
-            }}
+            onClick={handleBetaTesterChange}
           />
           <label htmlFor="betaTester" className="cursor-pointer pl-2 text-sm">
             sign up to be a beta tester
