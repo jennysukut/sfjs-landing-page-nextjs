@@ -38,29 +38,15 @@ function TestDonationBox() {
   const [donationCategory, setDonationCategory] = useState("individual");
   const [showAddress, setShowAddress] = useState(false);
   const [selectedAmount, setSelectedAmount] = useState("");
+  const [customAmount, setCustomAmount] = useState("");
 
+  //rewards
   const individualRewardsArray = Object.entries(
     supportPageInfo.rewards.individual,
   );
   const businessRewardsArray = Object.entries(supportPageInfo.rewards.business);
 
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   setValue,
-  //   watch,
-  //   formState: { errors },
-  // } = useForm<FellowFormData>({
-  //   resolver: zodResolver(fellowDonationSchema),
-  // }) ||
-  // useForm<BusinessFormData>({ resolver: zodResolver(businessDonationSchema) });
-
-  // const onIndividualDonation: SubmitHandler<FellowFormData> = (data) =>
-  //   console.log(data);
-
-  // const onBusinessDonation: SubmitHandler<BusinessFormData> = (data) =>
-  //   console.log(data);
-
+  // setting up individual form
   const {
     register: registerIndividual,
     handleSubmit: handleSubmitIndividual,
@@ -70,6 +56,7 @@ function TestDonationBox() {
     resolver: zodResolver(fellowDonationSchema),
   });
 
+  // setting up business form
   const {
     register: registerBusiness,
     handleSubmit: handleSubmitBusiness,
@@ -79,127 +66,131 @@ function TestDonationBox() {
     resolver: zodResolver(businessDonationSchema),
   });
 
+  // form handling for invidividual and business options
   const onIndividualDonation: SubmitHandler<FellowFormData> = (data) => {
     console.log("Individual donation:", data);
   };
-
   const onBusinessDonation: SubmitHandler<BusinessFormData> = (data) => {
     console.log("Business donation:", data);
   };
 
+  //setting chosen amount for donation via buttons
   const handleAmountChange = (amount: any) => {
-    if (donationCategory === "individual") {
-      const newValue = amount;
-      setIndividualValue("amount", newValue);
-      setSelectedAmount(String(newValue));
+    setCustomAmount("");
+    //remove amounts if a button is already selected then gets clicked again
+    if (String(amount) === selectedAmount) {
+      console.log("amounts are the same");
+      if (donationCategory === "individual") {
+        setIndividualValue("amount", 0);
+      } else {
+        setBusinessValue("amount", 0);
+      }
+      setSelectedAmount("");
+      handleAddressOption(0);
+      return;
     }
-    if (donationCategory === "business") {
-      const newValue = amount;
-      setBusinessValue("amount", newValue);
-      setSelectedAmount(String(newValue));
+
+    // if an individual amount gets selected, update the IndividualDonation information, if not, set it as business
+    if (donationCategory === "individual") {
+      setIndividualValue("amount", amount);
+    } else {
+      setBusinessValue("amount", amount);
+    }
+    setSelectedAmount(String(amount));
+    handleAddressOption(amount);
+  };
+
+  // handler for custom amounts
+  const handleCustomAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/[^\d.]/g, "");
+    value = value.replace(/^0+/, "");
+    const decimalIndex = value.indexOf(".");
+    if (decimalIndex !== -1) {
+      value =
+        value.slice(0, decimalIndex + 1) +
+        value.slice(decimalIndex + 1).replace(/\./g, "");
+    }
+    const parts = value.split(".");
+    if (parts[1] && parts[1].length > 2) {
+      parts[1] = parts[1].slice(0, 2);
+      value = parts.join(".");
+    }
+
+    setCustomAmount("$" + value);
+    setSelectedAmount(value);
+    if (donationCategory === "individual") {
+      setIndividualValue("amount", parseFloat(value));
+    } else {
+      setBusinessValue("amount", parseFloat(value));
     }
   };
 
-  // const [formData, setFormData] = useState({
-  //   donationCategory: "individual",
-  //   firstName: "",
-  //   lastName: "",
-  //   email: "",
-  //   address: "",
-  //   businessName: "",
-  //   contactName: "",
-  //   selectedAmount: "",
-  //   customAmount: "",
-  // });
+  console.log(selectedAmount);
 
-  // //form input handlers
-  // const handleInputChange = (
-  //   e:
-  //     | React.ChangeEvent<HTMLInputElement>
-  //     | { target: { name: string; value: string } },
-  // ) => {
-  //   const { name, value } = e.target;
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value,
-  //   }));
-  //   if (name === "donationCategory") {
-  //     handleDonorTypeChange(value);
-  //   }
-  // };
+  // handler responsible to assessing if the Address option should be displayed
+  const handleAddressOption = (amount: any) => {
+    const numericValue = parseAmount(amount);
+    setShowAddress(numericValue >= 100.0 && donationCategory === "individual");
+  };
 
-  // const handleAmountSelection = (amount: string) => {
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     selectedAmount: prevData.selectedAmount === amount ? "" : amount,
-  //     customAmount: "",
-  //   }));
-
-  // Update showAddress based on the selected amount and donor type
-  //   const numericValue = parseFloat(selectedAmount.replace("$", ""));
-  //   setShowAddress(
-  //     numericValue >= 100 && donationCategory === "individual",
-  //   );
-  // };
-
-  // const handleCustomAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   let value = e.target.value.replace(/[^\d.]/g, "");
-  //   value = value.replace(/^0+/, "");
-  //   const decimalIndex = value.indexOf(".");
-  //   if (decimalIndex !== -1) {
-  //     value =
-  //       value.slice(0, decimalIndex + 1) +
-  //       value.slice(decimalIndex + 1).replace(/\./g, "");
-  //   }
-  //   const parts = value.split(".");
-  //   if (parts[1] && parts[1].length > 2) {
-  //     parts[1] = parts[1].slice(0, 2);
-  //     value = parts.join(".");
-  //   }
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     customAmount: value ? "$" + value : "",
-  //     selectedAmount: "",
-  //   }));
-
-  //   // Update showAddress based on the custom amount and donor type
-  //   const numericValue = parseFloat(value);
-  //   setShowAddress(
-  //     numericValue >= 100 && formData.donationCategory === "individual",
-  //   );
-  // };
-
-  // const handleDonorTypeChange = (donationCategory: string) => {
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     donationCategory,
-  //   }));
-
-  // // Update showAddress based on the donation amount and donor type
-  // const numericValue = parseFloat(selectedAmount.replace("$", ""));
-  // setShowAddress(numericValue >= 100 && donationCategory === "individual");
-
-  // Number Calculation + Adjustment for Display
-  const parseAmount = (amount: string): number => {
+  // number parsing for handling
+  const parseAmount = (amount: string | number): number => {
+    if (typeof amount === "number") return amount;
     return parseFloat(amount.replace(/[^0-9.]/g, "")) || 0;
   };
 
+  // calculating the percentage of funds raised
   const calculatePercentage = () => {
     const percentage = (currentAmount / targetAmount) * 100;
     return percentage.toFixed(1);
   };
 
-  // Display Rewards Relevant with Amount
+  // display rewards relevant to selectedAmount
   function printRewardsArray(
     rewardsArray: [string, string[]][],
   ): React.ReactNode {
-    const selectedReward = rewardsArray.find(
-      ([amount]) => amount === selectedAmount,
+    if (selectedAmount === "0" || selectedAmount === "") return null;
+
+    // Convert selectedAmount to a number
+    const selectedAmountNum = parseFloat(
+      selectedAmount.replace(/[^0-9.]/g, ""),
     );
 
-    if (!selectedReward) return null;
-    const [amount, description] = selectedReward;
+    // Check for individual donations over $1,000
+    if (donationCategory === "individual" && selectedAmountNum >= 1001) {
+      const thousandPlusReward = rewardsArray.find(
+        ([amount]) => amount === "$1000+",
+      );
+      if (thousandPlusReward) {
+        const [amount, description] = thousandPlusReward;
+        return renderRewardBox(amount, description);
+      }
+    }
 
+    // Find the closest reward amount that's less than or equal to the selected amount
+    const closestReward = rewardsArray.reduce((closest, current) => {
+      const currentAmount = parseFloat(current[0].replace(/[^0-9.]/g, ""));
+      if (
+        currentAmount <= selectedAmountNum &&
+        currentAmount > parseFloat(closest[0].replace(/[^0-9.]/g, "")) &&
+        current[0] !== "$1000+" // Exclude the $1000+ option from normal comparison
+      ) {
+        return current;
+      }
+      return closest;
+    });
+
+    if (!closestReward) return null;
+    const [amount, description] = closestReward;
+
+    return renderRewardBox(amount, description);
+  }
+
+  // render the rewards information
+  function renderRewardBox(
+    amount: string,
+    description: string[],
+  ): React.ReactNode {
     return (
       <div key={amount} className="RewardBox">
         <InfoBox
@@ -218,79 +209,6 @@ function TestDonationBox() {
       </div>
     );
   }
-
-  // Helcim Payment Initializer
-  // const INITIALIZE_PAYMENT = gql`
-  //   mutation InitializePayment($payment: PaymentInput!) {
-  //     initializePayment(payment: $payment) {
-  //       checkoutToken
-  //     }
-  //   }
-  // `;
-
-  //form submission handler
-  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   const donationAmount = formData.selectedAmount || formData.customAmount;
-  //   const parsedAmount = parseAmount(donationAmount);
-  //   setCurrentAmount((prevAmount) => prevAmount + parsedAmount);
-
-  //   // Add your form submission logic here
-  //   console.log("Form submitted:", formData);
-
-  //   const payment = {
-  //     paymentType: "purchase",
-  //     amount: "0.01",
-  //     currency: "USD",
-  //     // account: {
-  //     //   firstName: formData.firstName,
-  //     //   lastName: formData.lastName,
-  //     //   email: formData.email,
-  //     // },
-
-  //     firstName: formData.firstName,
-  //     lastName: formData.lastName,
-  //     email: formData.email,
-  //   };
-
-  //   console.log(payment);
-
-  //   client
-  //     .mutate({
-  //       mutation: INITIALIZE_PAYMENT,
-  //       variables: { payment },
-  //     })
-  //     .then(({ data }) => {
-  //       console.log("success");
-  //       // @ts-ignore // this function is added by an external script
-  //       appendHelcimPayIframe(data.initializePayment.checkoutToken);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.message);
-  //     });
-  // };
-
-  //payment integration message
-  // useEffect(() => {
-  //   // @ts-ignore
-  //   const handleMessage = (event) => {
-  //     console.log(JSON.stringify(event));
-  //     // if (event.origin === 'https://secure.helcim.com') {
-  //     if (event.origin.includes("helcim")) {
-  //       const { paymentStatus, transactionId } = event.data;
-  //       if (paymentStatus === "success") {
-  //         // Handle successful payment
-  //         console.log("payment success");
-  //       } else if (paymentStatus === "failed") {
-  //         // Handle failed payment
-  //         console.log("payment failed");
-  //       }
-  //     }
-  //   };
-
-  //   window.addEventListener("message", handleMessage);
-  //   return () => window.removeEventListener("message", handleMessage);
-  // }, []);
 
   return (
     <>
@@ -313,6 +231,7 @@ function TestDonationBox() {
           variant="hollow"
           addClasses="flex flex-col text-center items-center"
         >
+          {/* form submission: individual and business options */}
           <form
             onSubmit={
               donationCategory === "individual"
@@ -360,36 +279,34 @@ function TestDonationBox() {
 
             {/* donation amount options */}
             <div className="AmountOptions mt-8 flex max-w-sm flex-wrap items-center justify-center gap-4">
-              {Object.entries(
-                rewards[donationCategory as DonationCategory],
-              ).map(([amount]) => (
-                <SiteButton
-                  key={amount}
-                  aria={amount}
-                  variant="hollow"
-                  colorScheme={getRandomColorScheme("a1")}
-                  isSelected={selectedAmount === amount}
-                  onClick={() => handleAmountChange(amount)}
-                >
-                  {amount}
-                </SiteButton>
-              ))}
+              {Object.entries(rewards[donationCategory as DonationCategory])
+                .filter(([amount]) => amount !== "$1000+") // filter the 1000+ option from the buttonlist
+                .map(([amount]) => (
+                  <SiteButton
+                    key={amount}
+                    aria={amount}
+                    variant="hollow"
+                    colorScheme={getRandomColorScheme("a1")}
+                    isSelected={selectedAmount === amount}
+                    onClick={() => handleAmountChange(amount)}
+                  >
+                    {amount}
+                  </SiteButton>
+                ))}
               <input
                 type="text"
-                name="customAmount"
                 inputMode="decimal"
                 placeholder="custom amount"
-                // value={customAmount}
-                // onChange={handleCustomAmountChange}
                 className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-center text-xs placeholder-jade drop-shadow-smJade"
                 aria-label="custom amount"
+                value={customAmount}
+                onChange={handleCustomAmountChange}
               />
             </div>
 
             {/* reward information */}
             {donationCategory === "individual" &&
               printRewardsArray(individualRewardsArray)}
-
             {donationCategory === "business" &&
               printRewardsArray(businessRewardsArray)}
 
