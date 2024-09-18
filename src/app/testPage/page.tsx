@@ -4,7 +4,6 @@ import SiteButton from "@/components/siteButton";
 import { useState } from "react";
 import { signupFellow } from "@/utils/actions/signup";
 import { useForm, SubmitHandler } from "react-hook-form";
-import TestDonationBox from "./testDonationBox";
 
 type Inputs = {
   firstName: string;
@@ -44,8 +43,6 @@ export default function TestPage() {
       >
         test button for email
       </SiteButton>
-
-      <TestDonationBox />
     </div>
   );
 }
