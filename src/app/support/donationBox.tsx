@@ -87,6 +87,7 @@ function DonationBox() {
 
   // options for form submission
   const onIndividualDonation: SubmitHandler<FellowFormData> = (data) => {
+    setCurrentAmount(1000);
     console.log("Individual donation:", data);
   };
 

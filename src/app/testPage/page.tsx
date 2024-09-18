@@ -4,7 +4,6 @@ import SiteButton from "@/components/siteButton";
 import { useState } from "react";
 import { signupFellow } from "@/utils/actions/signup";
 import { useForm, SubmitHandler } from "react-hook-form";
-
 type Inputs = {
   firstName: string;
   lastName: string;
