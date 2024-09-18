@@ -79,7 +79,6 @@ function TestDonationBox() {
     setCustomAmount("");
     //remove amounts if a button is already selected then gets clicked again
     if (String(amount) === selectedAmount) {
-      console.log("amounts are the same");
       if (donationCategory === "individual") {
         setIndividualValue("amount", 0);
       } else {
@@ -124,8 +123,6 @@ function TestDonationBox() {
       setBusinessValue("amount", parseFloat(value));
     }
   };
-
-  console.log(selectedAmount);
 
   // handler responsible to assessing if the Address option should be displayed
   const handleAddressOption = (amount: any) => {
