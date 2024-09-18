@@ -1,18 +1,21 @@
 "use client";
 
+import * as z from "zod";
 import { useState, useEffect } from "react";
+import { useSignals } from "@preact/signals-react/runtime";
+import { gql } from "@apollo/client";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import client from "../../lib/apollo-client";
+import Script from "next/script";
+
 import ProgressBar from "@/components/progressBar";
 import InfoBox from "@/components/infoBox";
 import SiteButton from "@/components/siteButton";
+
 import { supportPageInfo } from "@/lib/siteCopy/supportPageInfo";
-import { gql } from "@apollo/client";
-import client from "../../lib/apollo-client";
-import Script from "next/script";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import { dropDown } from "@/components/navBar";
-import { useSignals } from "@preact/signals-react/runtime";
 
 import getRandomColorScheme from "@/utils/getRandomColorScheme";
 
@@ -311,7 +314,7 @@ function DonationBox() {
                     key={amount}
                     aria={amount}
                     variant="hollow"
-                    colorScheme="a1"
+                    colorScheme={getRandomColorScheme("a1")}
                     isSelected={selectedAmount === amount}
                     onClick={() => handleAmountChange(amount)}
                   >
