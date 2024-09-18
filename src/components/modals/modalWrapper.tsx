@@ -34,7 +34,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({ children, modalKey }) => {
         >
           <AnimatePresence>
             <motion.div
-              className="ModalInnerContents absolute rounded-[50px] border-[3px] border-solid border-jade bg-cream px-20 pb-20 pt-24 text-jade drop-shadow-jade"
+              className="ModalInnerContents absolute rounded-[50px] border-[3px] border-solid border-jade bg-cream px-14 pb-12 pt-14 text-jade drop-shadow-jade"
               onClick={handleModalContentClick}
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -49,8 +49,8 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({ children, modalKey }) => {
                 <Image
                   src="/back-arrow.svg"
                   alt="back"
-                  width={32}
-                  height={32}
+                  width={28}
+                  height={28}
                   className="absolute left-8 top-8 opacity-80 hover:cursor-pointer hover:opacity-100"
                   onClick={goBack}
                 />

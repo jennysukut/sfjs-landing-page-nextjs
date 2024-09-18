@@ -1,7 +1,9 @@
 import SiteButton from "../../siteButton";
 import { useModal } from "@/contexts/ModalContext";
-import SignupModalIndividual1 from "./signupIndividual1";
 import * as Dialog from "@radix-ui/react-dialog";
+import SignupModalIndividual1 from "./signupIndividual1";
+import SignupModalBusiness1 from "./signupBusiness1";
+import SignupModalCollaborator1 from "./signupCollaborator1";
 
 export default function SignupOptionsModal() {
   const { showModal } = useModal();
@@ -27,6 +29,7 @@ export default function SignupOptionsModal() {
           colorScheme="b3"
           aria="business"
           addClasses="w-[200px]"
+          onClick={() => showModal(<SignupModalBusiness1 />)}
         >
           business
         </SiteButton>
@@ -35,6 +38,7 @@ export default function SignupOptionsModal() {
           colorScheme="f1"
           aria="collaborator"
           addClasses="w-[200px]"
+          onClick={() => showModal(<SignupModalCollaborator1 />)}
         >
           collaborator
         </SiteButton>

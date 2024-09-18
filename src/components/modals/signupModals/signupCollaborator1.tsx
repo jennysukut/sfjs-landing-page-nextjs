@@ -1,23 +1,22 @@
 import SiteButton from "../../siteButton";
 import * as Dialog from "@radix-ui/react-dialog";
-import SignupModalIndividual2 from "./signupIndividual2";
 import { useModal } from "@/contexts/ModalContext";
-import { useState } from "react";
+import SignupModalCollaborator2 from "./signupCollaborator2";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
-const fellowSchema = z.object({
+// this is the first part of a two-part form, this schema covers this modal, I've got another one on the signupCollaborator2 modal
+const collaboratorSchema = z.object({
   name: z.string().min(2, { message: "Required" }),
   email: z.string().email(),
-  betaTester: z.boolean().optional(),
 });
 
-type FormData = z.infer<typeof fellowSchema>;
+type FormData = z.infer<typeof collaboratorSchema>;
 
-export default function SignupModalIndividual1() {
+export default function SignupModalCollaborator1() {
   const { showModal } = useModal();
-  const [betaTester, setBetaTester] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -25,34 +24,25 @@ export default function SignupModalIndividual1() {
     watch,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: zodResolver(fellowSchema),
-    defaultValues: {
-      betaTester: false,
-    },
+    resolver: zodResolver(collaboratorSchema),
   });
 
-  const handleBetaTesterChange = () => {
-    const newValue = !watch("betaTester");
-    setValue("betaTester", newValue);
-    setBetaTester(newValue);
-  };
-
-  // Submission Handler - send this data to the server.
-  // Do we need to check if the email address is already in the server?
+  // I'd like to send this data to the next modal that pops up so we can send all the data to the server at once.
+  // Would I send it through the <SignupModalCollaborator2 /> when I click the form's button?
   const onSubmit: SubmitHandler<FormData> = (data) => console.log(data);
 
   return (
-    <div className="SignupModal flex max-w-[450px] flex-col gap-4 text-jade">
+    <div className="SignupCollaboratorModal flex max-w-[450px] flex-col gap-4 text-jade">
       <Dialog.Title className="Title w-full text-center text-xl font-bold">
         hello there!
       </Dialog.Title>
       <Dialog.Description className="Subtitle w-full text-center">
-        sign up to be notified when we launch this Straightforward Job Site
+        {`you’d like to collaborate with us here at straightforward job site - how exciting!`}
       </Dialog.Description>
-      <form
-        className="IndividualSignupForm flex flex-col gap-2"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <Dialog.Description className="Text w-full text-center font-medium italic text-olive">
+        {`tell us a little bit about you and we’ll see if there’s a way we can work together.`}
+      </Dialog.Description>
+      <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
         {/* name input */}
         <label htmlFor="name">your name*</label>
         <input
@@ -83,33 +73,18 @@ export default function SignupModalIndividual1() {
           </p>
         )}
 
-        {/* beta tester option */}
-        <div className="BetaTesterButton mt-6 flex items-center gap-2">
+        {/* continue button */}
+        <div className="ButtonContainer -mb-3 mt-8 flex justify-end">
           <SiteButton
             variant="hollow"
-            colorScheme="f1"
-            aria="betaTester"
-            size="smallCircle"
-            isSelected={watch("betaTester")}
-            onClick={handleBetaTesterChange}
-          />
-          <label htmlFor="betaTester" className="cursor-pointer pl-2 text-sm">
-            sign up to be a beta tester
-          </label>
-        </div>
-
-        {/* form submission button */}
-        <div className="ButtonContainer mt-8 flex justify-end">
-          <SiteButton
-            variant="hollow"
-            colorScheme="f1"
+            colorScheme="f4"
             aria="submit"
             onClick={handleSubmit((data) => {
               console.log(data);
-              showModal(<SignupModalIndividual2 />);
+              showModal(<SignupModalCollaborator2 />);
             })}
           >
-            sign me up!
+            tell us about you
           </SiteButton>
         </div>
       </form>

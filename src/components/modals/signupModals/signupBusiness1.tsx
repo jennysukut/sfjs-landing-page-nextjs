@@ -1,22 +1,24 @@
 import SiteButton from "../../siteButton";
 import * as Dialog from "@radix-ui/react-dialog";
-import SignupModalIndividual2 from "./signupIndividual2";
 import { useModal } from "@/contexts/ModalContext";
+import SignupModalBusiness2 from "./signupBusiness2";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
-const fellowSchema = z.object({
-  name: z.string().min(2, { message: "Required" }),
+const businessSchema = z.object({
+  business: z.string().min(2, { message: "Required" }),
   email: z.string().email(),
   betaTester: z.boolean().optional(),
+  earlySignup: z.boolean().optional(),
 });
 
-type FormData = z.infer<typeof fellowSchema>;
+type FormData = z.infer<typeof businessSchema>;
 
-export default function SignupModalIndividual1() {
+export default function SignupModalBusiness1() {
   const { showModal } = useModal();
+  const [earlySignup, setEarlySignup] = useState(false);
   const [betaTester, setBetaTester] = useState(false);
   const {
     register,
@@ -25,55 +27,47 @@ export default function SignupModalIndividual1() {
     watch,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: zodResolver(fellowSchema),
+    resolver: zodResolver(businessSchema),
     defaultValues: {
       betaTester: false,
     },
   });
 
-  const handleBetaTesterChange = () => {
-    const newValue = !watch("betaTester");
-    setValue("betaTester", newValue);
-    setBetaTester(newValue);
-  };
-
   // Submission Handler - send this data to the server.
-  // Do we need to check if the email address is already in the server?
   const onSubmit: SubmitHandler<FormData> = (data) => console.log(data);
 
   return (
     <div className="SignupModal flex max-w-[450px] flex-col gap-4 text-jade">
       <Dialog.Title className="Title w-full text-center text-xl font-bold">
-        hello there!
+        sign up
       </Dialog.Title>
       <Dialog.Description className="Subtitle w-full text-center">
-        sign up to be notified when we launch this Straightforward Job Site
+        to be notified when we launch this Straightforward Job Site
       </Dialog.Description>
       <form
-        className="IndividualSignupForm flex flex-col gap-2"
+        className="BusinessSignupForm flex flex-col gap-2"
         onSubmit={handleSubmit(onSubmit)}
       >
-        {/* name input */}
-        <label htmlFor="name">your name*</label>
+        {/* businessname input */}
+
+        <label htmlFor="business">business name*</label>
         <input
-          type="name"
-          placeholder="Fantastic Human"
-          className="text-md mb-0 border-b-2 border-jade/50 bg-transparent pb-2 pt-2 text-jade placeholder:text-jade/50 focus:border-jade focus:outline-none"
-          {...register("name")}
+          type="business"
+          placeholder="Your Business"
+          className="text-md mb-4 border-b-2 border-jade/50 bg-transparent pb-3 pt-2 text-jade placeholder:text-jade/50 focus:border-jade focus:outline-none"
+          {...register("business")}
         />
-        {errors.name?.message && (
+        {errors.business?.message && (
           <p className="text-xs font-medium text-orange">
-            {errors.name.message.toString()}
+            {errors.business.message.toString()}
           </p>
         )}
 
-        {/* email input */}
-        <label htmlFor="email" className="mt-6">
-          your email*
-        </label>
+        {/* business email input  */}
+        <label htmlFor="email">business email*</label>
         <input
           type="email"
-          placeholder="fantasticemail@emailexample.com"
+          placeholder="fantasticemail@mybusiness.org"
           className="text-md border-b-2 border-jade/50 bg-transparent pb-3 pt-2 text-jade placeholder:text-jade/50 focus:border-jade focus:outline-none"
           {...register("email", { required: "Email Address is required" })}
         />
@@ -83,15 +77,37 @@ export default function SignupModalIndividual1() {
           </p>
         )}
 
-        {/* beta tester option */}
-        <div className="BetaTesterButton mt-6 flex items-center gap-2">
+        {/* button options */}
+        <div className="EarlySignupButton -mb-4 mt-6 flex items-center gap-2">
           <SiteButton
             variant="hollow"
             colorScheme="f1"
+            aria="earlySignup"
+            size="smallCircle"
+            isSelected={watch("earlySignup")}
+            onClick={() => {
+              const newValue = !watch("earlySignup");
+              setValue("earlySignup", newValue);
+              setBetaTester(newValue);
+            }}
+          />
+          <label htmlFor="betaTester" className="cursor-pointer pl-2 text-sm">
+            get in early
+          </label>
+        </div>
+
+        <div className="BetaTesterButton -mb-4 mt-6 flex items-center gap-2">
+          <SiteButton
+            variant="hollow"
+            colorScheme="c1"
             aria="betaTester"
             size="smallCircle"
             isSelected={watch("betaTester")}
-            onClick={handleBetaTesterChange}
+            onClick={() => {
+              const newValue = !watch("betaTester");
+              setValue("betaTester", newValue);
+              setBetaTester(newValue);
+            }}
           />
           <label htmlFor="betaTester" className="cursor-pointer pl-2 text-sm">
             sign up to be a beta tester
@@ -102,14 +118,14 @@ export default function SignupModalIndividual1() {
         <div className="ButtonContainer mt-8 flex justify-end">
           <SiteButton
             variant="hollow"
-            colorScheme="f1"
+            colorScheme="c1"
             aria="submit"
             onClick={handleSubmit((data) => {
               console.log(data);
-              showModal(<SignupModalIndividual2 />);
+              showModal(<SignupModalBusiness2 />);
             })}
           >
-            sign me up!
+            sign us up!
           </SiteButton>
         </div>
       </form>

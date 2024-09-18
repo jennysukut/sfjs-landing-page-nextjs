@@ -5,7 +5,9 @@ type TestEmailProps = {
   firstName: string;
 };
 
-export default function WelcomeEmail({ firstName }: TestEmailProps) {
+export default function WelcomeEmail({
+  firstName = "testName",
+}: TestEmailProps) {
   const baseUrl = "http://localhost:3000";
   return (
     <Html>
@@ -37,7 +39,7 @@ export default function WelcomeEmail({ firstName }: TestEmailProps) {
           plugins: [require("@mertasan/tailwindcss-variables")],
         }}
       >
-        <body className="Email font-helv h-[100%] gap-12 bg-cream pb-40 font-semibold tracking-widest text-midnight">
+        <body className="Email h-[100%] gap-12 bg-cream pb-40 font-sans font-semibold tracking-widest text-midnight">
           <Preview>Welcome to Straightforward Job Site {firstName}!</Preview>
           <Head>
             <Img
@@ -55,15 +57,15 @@ export default function WelcomeEmail({ firstName }: TestEmailProps) {
               Job Site and we couldn't be happier to have you join us!`}
             </p>
             <p className="EmailInfo mt-12 text-end text-olive">
-              {`We will send you an email as soon as we launch so you can make
+              {`We will respect your inbox and send you a notice when we launch so you can make
               your profile + start job-searching the simple way!`}
             </p>
             <p className="EmailInfo mt-12 text-jade">
               {`We hope you'll enjoy the conscious + thoughtful +
               human-focused enviornment we're working so hard to create ✨`}
             </p>
-            <p className="EmailInfo mt-20 text-end font-medium italic text-olive">
-              - The Makers of Straightforward Job Site
+            <p className="EmailInfo mt-20 text-end text-sm italic tracking-superwide text-olive">
+              - the makers of straightforward job site
             </p>
           </section>
         </body>
