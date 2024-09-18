@@ -32,3 +32,5 @@ function getRandomColorScheme(
 }
 
 export default getRandomColorScheme;
+
+//let's write another colorscheme generator that just comes up with a random one despite the one that's entered? That way we can use it and set it once?

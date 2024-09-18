@@ -14,20 +14,26 @@ import * as z from "zod";
 import getRandomColorScheme from "@/utils/getRandomColorScheme";
 
 type DonationCategory = "business" | "individual";
+
+// zod schemas
 const fellowDonationSchema = z.object({
-  firstName: z.string().min(2, { message: "your first name is required" }),
-  lastName: z.string().min(2, { message: "your first name is required" }),
-  email: z.string().email(),
-  address: z.string().min(10).optional(),
-  amount: z.number(),
-});
-const businessDonationSchema = z.object({
-  businessName: z.string().min(2),
-  contactName: z.string().min(2),
-  email: z.string().email(),
-  amount: z.number(),
+  firstName: z.string().min(2, { message: "Your first name is required" }),
+  lastName: z.string().min(2, { message: "Your last name is required" }),
+  email: z.string().email({ message: "Invalid email address" }),
+  amount: z.string().min(1, { message: "Amount is required" }),
+  address: z.string().optional(),
 });
 
+const businessDonationSchema = z.object({
+  businessName: z
+    .string()
+    .min(2, { message: "Your Business Name is required" }),
+  contactName: z.string().min(2, { message: "Please provide a contact name" }),
+  email: z.string().email({ message: "Invalid email address" }),
+  amount: z.string().min(1, { message: "Amount is required" }),
+});
+
+// form types
 type FellowFormData = z.infer<typeof fellowDonationSchema>;
 type BusinessFormData = z.infer<typeof businessDonationSchema>;
 
@@ -54,6 +60,9 @@ function TestDonationBox() {
     setValue: setIndividualValue,
   } = useForm<FellowFormData>({
     resolver: zodResolver(fellowDonationSchema),
+    defaultValues: {
+      amount: "",
+    },
   });
 
   // setting up business form
@@ -64,14 +73,26 @@ function TestDonationBox() {
     setValue: setBusinessValue,
   } = useForm<BusinessFormData>({
     resolver: zodResolver(businessDonationSchema),
+    defaultValues: {
+      amount: "",
+    },
   });
 
-  // form handling for invidividual and business options
+  // options for form submission
   const onIndividualDonation: SubmitHandler<FellowFormData> = (data) => {
     console.log("Individual donation:", data);
   };
+
   const onBusinessDonation: SubmitHandler<BusinessFormData> = (data) => {
     console.log("Business donation:", data);
+  };
+
+  // log errors
+  const logErrors = (errors: typeof errorsIndividual) => {
+    console.log("Form Errors:", errors);
+  };
+  const logBusinessErrors = (errors: typeof errorsBusiness) => {
+    console.log("Form Errors:", errors);
   };
 
   //setting chosen amount for donation via buttons
@@ -80,9 +101,9 @@ function TestDonationBox() {
     //remove amounts if a button is already selected then gets clicked again
     if (String(amount) === selectedAmount) {
       if (donationCategory === "individual") {
-        setIndividualValue("amount", 0);
+        setIndividualValue("amount", "0");
       } else {
-        setBusinessValue("amount", 0);
+        setBusinessValue("amount", "0");
       }
       setSelectedAmount("");
       handleAddressOption(0);
@@ -118,9 +139,9 @@ function TestDonationBox() {
     setCustomAmount("$" + value);
     setSelectedAmount(value);
     if (donationCategory === "individual") {
-      setIndividualValue("amount", parseFloat(value));
+      setIndividualValue("amount", value);
     } else {
-      setBusinessValue("amount", parseFloat(value));
+      setBusinessValue("amount", value);
     }
   };
 
@@ -230,10 +251,11 @@ function TestDonationBox() {
         >
           {/* form submission: individual and business options */}
           <form
+            key={donationCategory === "individual" ? 1 : 2}
             onSubmit={
               donationCategory === "individual"
-                ? handleSubmitIndividual(onIndividualDonation)
-                : handleSubmitBusiness(onBusinessDonation)
+                ? handleSubmitIndividual(onIndividualDonation, logErrors)
+                : handleSubmitBusiness(onBusinessDonation, logBusinessErrors)
             }
             className="flex w-full flex-col items-center"
           >
@@ -283,7 +305,7 @@ function TestDonationBox() {
                     key={amount}
                     aria={amount}
                     variant="hollow"
-                    colorScheme={getRandomColorScheme("a1")}
+                    colorScheme="a1"
                     isSelected={selectedAmount === amount}
                     onClick={() => handleAmountChange(amount)}
                   >
@@ -417,11 +439,6 @@ function TestDonationBox() {
                 variant="filled"
                 colorScheme="e5"
                 addClasses="px-8"
-                onClick={
-                  donationCategory === "individual"
-                    ? handleSubmitIndividual(onIndividualDonation)
-                    : handleSubmitBusiness(onBusinessDonation)
-                }
               >
                 continue
               </SiteButton>
