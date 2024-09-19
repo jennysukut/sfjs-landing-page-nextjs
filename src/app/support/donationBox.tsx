@@ -37,6 +37,7 @@ const businessDonationSchema = z.object({
   contactName: z.string().min(2, { message: "Please provide a contact name" }),
   email: z.string().email({ message: "Invalid email address" }),
   amount: z.string().min(1, { message: "Amount is required" }),
+  referral: z.string().optional(),
 });
 
 // form types
@@ -52,6 +53,7 @@ function DonationBox() {
   const [showAddress, setShowAddress] = useState(false);
   const [selectedAmount, setSelectedAmount] = useState("");
   const [customAmount, setCustomAmount] = useState("");
+  const [referral, setReferral] = useState(false);
 
   // rewards arrays
   const individualRewardsArray = Object.entries(
@@ -235,6 +237,10 @@ function DonationBox() {
       </div>
     );
   }
+
+  // const handleReferralClick = () => {
+  //   setReferral(!referral);
+  // };
 
   return (
     <>
@@ -437,6 +443,38 @@ function DonationBox() {
                       {errorsBusiness.email.message.toString()}
                     </p>
                   )}
+                  {/* referral option */}
+                  <div className="ReferralOption mt-6 flex items-center gap-2">
+                    <SiteButton
+                      variant="hollow"
+                      colorScheme="f1"
+                      aria="referral"
+                      size="smallCircle"
+                      isSelected={referral}
+                      onClick={() => setReferral(!referral)}
+                    />
+                    {!referral ? (
+                      <label
+                        htmlFor="referral"
+                        className="cursor-pointer pl-2 text-sm"
+                      >
+                        have a referral code?{" "}
+                      </label>
+                    ) : (
+                      <input
+                        type="text"
+                        placeholder="Referral Code"
+                        className="ml-2 rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
+                        aria-label="referral"
+                        {...registerBusiness("referral")}
+                      />
+                    )}
+                    {errorsBusiness.referral?.message && (
+                      <p className="text-left text-xs font-medium text-orange">
+                        {errorsBusiness.referral.message.toString()}
+                      </p>
+                    )}
+                  </div>
                 </>
               )}
             </div>
