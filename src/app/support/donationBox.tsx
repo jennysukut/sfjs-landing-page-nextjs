@@ -54,6 +54,7 @@ function DonationBox() {
   const [selectedAmount, setSelectedAmount] = useState("");
   const [customAmount, setCustomAmount] = useState("");
   const [referral, setReferral] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // rewards arrays
   const individualRewardsArray = Object.entries(
@@ -89,11 +90,27 @@ function DonationBox() {
 
   // options for form submission
   const onIndividualDonation: SubmitHandler<FellowFormData> = (data) => {
-    setCurrentAmount(1000);
+    //set isSubmitting to reflect a "submitting"
+    setIsSubmitting(true);
+
+    // open Helcim payment processor. If the processing is successful and the amount matches the data.amount
+    // and the data.amount === selectedAmount,
+    // show the new percentage and reroute the fellow to a successful modal and send a fellow receipt email
+
+    const parsedAmount = parseAmount(selectedAmount);
+    setCurrentAmount((prevAmount) => prevAmount + parsedAmount);
     console.log("Individual donation:", data);
   };
 
   const onBusinessDonation: SubmitHandler<BusinessFormData> = (data) => {
+    setIsSubmitting(true);
+
+    // open Helcim payment processor. If the processing is successful and the amount matches the data.amount
+    // and the data.amount === selectedAmount,
+    // show the new percentage and reroute the business to a successful modal and send a business receipt email
+
+    const parsedAmount = parseAmount(selectedAmount);
+    setCurrentAmount((prevAmount) => prevAmount + parsedAmount);
     console.log("Business donation:", data);
   };
 
@@ -238,9 +255,14 @@ function DonationBox() {
     );
   }
 
-  // const handleReferralClick = () => {
-  //   setReferral(!referral);
-  // };
+  // payment initializer
+  const INITIALIZE_PAYMENT = gql`
+    mutation InitializePayment($payment: PaymentInput!) {
+      initializePayment(payment: $payment) {
+        checkoutToken
+      }
+    }
+  `;
 
   return (
     <>
@@ -469,11 +491,6 @@ function DonationBox() {
                         {...registerBusiness("referral")}
                       />
                     )}
-                    {errorsBusiness.referral?.message && (
-                      <p className="text-left text-xs font-medium text-orange">
-                        {errorsBusiness.referral.message.toString()}
-                      </p>
-                    )}
                   </div>
                 </>
               )}
@@ -487,8 +504,9 @@ function DonationBox() {
                 variant="filled"
                 colorScheme="e5"
                 addClasses="px-8"
+                disabled={isSubmitting}
               >
-                continue
+                {isSubmitting ? "redirecting..." : "continue"}
               </SiteButton>
             </div>
           </form>
