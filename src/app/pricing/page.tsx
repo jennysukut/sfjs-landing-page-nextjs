@@ -107,13 +107,13 @@ export default function PricingPage() {
 
         {/* business pricing details */}
         {category === "business" && (
-          <div className="BusinessInfo">
+          <div className="BusinessInfo flex flex-col">
             <InfoBox
               aria="business pricing"
               variant="filled"
               colorScheme="b3"
               textSize="medium"
-              addClasses="self-start text-center py-12 leading-6 mb-8"
+              addClasses="self-center text-center py-12 leading-6 mb-8"
               className="BusinessPricing"
             >
               <p className="PricingDetail">
