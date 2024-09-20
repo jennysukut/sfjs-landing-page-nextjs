@@ -76,7 +76,7 @@ export default function FeaturesSection() {
       </div>
 
       {/* Features */}
-      <div className="FeaturesContainer flex flex-row items-start gap-10 self-center pt-4 align-middle">
+      <div className="FeaturesContainer flex flex-row items-start self-center pt-4 align-middle">
         {
           <>
             <div className={`FeatureButtons ${featuresButtonStyles}`}>
@@ -105,7 +105,7 @@ export default function FeaturesSection() {
                   variant="filled"
                   aria={selectedFeature.title}
                   colorScheme={selectedFeature.colorScheme as ButtonColorOption}
-                  addClasses="text-sm max-w-5xl py-20 px-20 flex flex-col justify-center leading-6"
+                  addClasses="text-sm max-w-5xl py-16 px-20 ml-8 flex flex-col justify-center leading-6"
                 >
                   {selectedFeature.details.map((detail, index) => (
                     <p key={index} className="mb-4 text-left">
@@ -149,7 +149,7 @@ export default function FeaturesSection() {
             aria="support us"
             size="large"
             variant="filled"
-            colorScheme="b2"
+            colorScheme="b4"
           >
             show your support{" "}
           </SiteButton>

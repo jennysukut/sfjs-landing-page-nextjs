@@ -65,7 +65,7 @@ export const landingPageText = {
         ],
       },
       {
-        colorScheme: "b1",
+        colorScheme: "c6",
         title: "intentional approach",
         details: [
           "Our intentionality is part of each feature of our job site. ",

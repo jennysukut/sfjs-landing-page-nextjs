@@ -14,22 +14,17 @@ export default function PricingPage() {
   const [showDumbQuestion, setShowDumbQuestion] = useState(false);
   const [dumb, setDumb] = useState(false);
 
-  // function handleClick(buttonType: Category) {
-  //   setCategory(buttonType);
-  //   if (buttonType === "business") {
-  //     setCategory(buttonType);
-  //     setTimeout(() => {
-  //       setShowListingQuestion(true);
-  //     }, 1500);
-  //   }
-  // }
-
   function handleClick(buttonType: Category) {
-    setCategory(buttonType);
-    if (buttonType === "business") {
-      setTimeout(() => {
-        setShowListingQuestion(true);
-      }, 1500);
+    if (buttonType === category) {
+      console.log("same category");
+      setCategory("");
+    } else {
+      setCategory(buttonType);
+      if (buttonType === "business") {
+        setTimeout(() => {
+          setShowListingQuestion(true);
+        }, 1500);
+      }
     }
   }
 
@@ -90,10 +85,10 @@ export default function PricingPage() {
             colorScheme="c4"
             textSize="medium"
             className="BusinessPricing self-end"
-            addClasses="self-start text-center py-10 leading-6 mb-8"
+            addClasses="self-start text-center py-12 leading-6 mb-8"
           >
             <p className="PricingDetails py-2">
-              Our pricing model is pay-what-you-want!
+              {`Our pricing model is pay-what-you-want!`}
             </p>
             <p className="PricingDetails py-2 font-medium italic">
               {`We know our site and the common-sense tools it offers are
@@ -118,7 +113,7 @@ export default function PricingPage() {
               variant="filled"
               colorScheme="b3"
               textSize="medium"
-              addClasses="self-start text-center py-10 leading-6 mb-8"
+              addClasses="self-start text-center py-12 leading-6 mb-8"
               className="BusinessPricing"
             >
               <p className="PricingDetail">
@@ -139,7 +134,7 @@ export default function PricingPage() {
                 aria="inactive job question"
                 variant="filled"
                 colorScheme="f3"
-                onClick={() => setDumb(!dumb)}
+                onClick={() => inactiveListingClick()}
                 addClasses="px-8"
               >
                 what if a job listing is inactive?
@@ -154,7 +149,7 @@ export default function PricingPage() {
                     variant="filled"
                     colorScheme="f3"
                     textSize="small"
-                    addClasses="mt-8 text-center max-w-96 self-end py-10 px-14"
+                    addClasses="mt-8 text-center max-w-[26rem] self-end py-12 px-14"
                   >
                     {pricingDetails.inactiveJobDetails.map((detail, index) => (
                       <p key={index} className="mb-2">
@@ -164,7 +159,7 @@ export default function PricingPage() {
                   </InfoBox>
                 )}
                 <div
-                  className={`self-end pt-8 transition-opacity duration-500 ease-in-out ${showDumbQuestion ? "opacity-100" : "opacity-0"}`}
+                  className={`self-end pt-8 transition-opacity duration-500 ease-in-out ${showInactiveDetails && showDumbQuestion ? "opacity-100" : "opacity-0"}`}
                 >
                   <SiteButton
                     aria="inactive job question"
@@ -179,7 +174,7 @@ export default function PricingPage() {
                   </SiteButton>
                 </div>
               </div>
-              {dumb && (
+              {showInactiveDetails && dumb && (
                 <Image
                   width={200}
                   height={100}
