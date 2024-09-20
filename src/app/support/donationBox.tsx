@@ -1,13 +1,12 @@
 "use client";
 
 import * as z from "zod";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSignals } from "@preact/signals-react/runtime";
 import { gql } from "@apollo/client";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import client from "../../lib/apollo-client";
 import Script from "next/script";
 
 import ProgressBar from "@/components/progressBar";

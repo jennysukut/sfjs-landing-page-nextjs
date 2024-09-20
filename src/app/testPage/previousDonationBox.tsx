@@ -146,6 +146,20 @@ function PreviousDonationBox() {
     );
   }
 
+  //FRONT END NEEDED INFO FOR PAYMENT: Carl's Helpful Notes
+  // 1) add a script: <script type="text/javascript" src="https://secure.helcim.app/helcim-pay/services/start.js"></script>
+  // 2) call the backend api initializeCheckout to obtain the "checkoutToken"
+  // 3) call the function "appendHelcimPayIframe" like this:
+  // // Link HTML example
+  // <a href="javascript: appendHelcimPayIframe(checkoutToken)">
+  //   Pay Now
+  // </a>
+
+  // // Onclick HTML example
+  // // Requires JavaScript onclick event handler
+
+  // <a href="#" id="pay-now">Pay Now</a>
+
   // Helcim Payment Initializer
   const INITIALIZE_PAYMENT = gql`
     mutation InitializePayment($payment: PaymentInput!) {
@@ -161,6 +175,7 @@ function PreviousDonationBox() {
       amount: "0.01",
       currency: "USD",
       email: "test@gmail.com",
+      accountName: "test name",
     };
 
     console.log(payment);

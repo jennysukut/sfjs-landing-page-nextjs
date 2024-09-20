@@ -3,7 +3,6 @@ import { useModal } from "@/contexts/ModalContext";
 import SignupModalBusiness1 from "./modals/signupModals/signupBusiness1";
 import SignupModalIndividual1 from "./modals/signupModals/signupIndividual1";
 import SignupModalCollaborator1 from "./modals/signupModals/signupCollaborator1";
-import { useEffect } from "react";
 
 export default function SignupOptions({ setClickedButton }: any) {
   const { showModal } = useModal();

@@ -6,7 +6,8 @@ import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useMutation, gql } from "@apollo/client";
+import { SIGNUP_MUTATION } from "@/graphql/mutations";
+import { useMutation } from "@apollo/client";
 
 const fellowSchema = z.object({
   name: z.string().min(2, { message: "Required" }),
@@ -15,15 +16,6 @@ const fellowSchema = z.object({
 });
 
 type FormData = z.infer<typeof fellowSchema>;
-
-const SIGNUP_MUTATION = gql`
-  mutation SignUp($name: String!, $email: String!, $betaTester: Boolean!) {
-    signUp(name: $name, email: $email, betaTester: $betaTester) {
-      success
-      message
-    }
-  }
-`;
 
 export default function SignupModalIndividual1() {
   const { showModal } = useModal();

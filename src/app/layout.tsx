@@ -3,6 +3,11 @@ import "./globals.css";
 import NavBar from "@/components/navBar";
 import Footer from "@/components/footer";
 import { ModalProvider } from "@/contexts/ModalContext";
+import dynamic from "next/dynamic";
+
+const ApolloWrapper = dynamic(() => import("@/app/apolloClient"), {
+  ssr: false,
+});
 
 export const metadata: Metadata = {
   title: "Straightforward Job Site",
@@ -17,11 +22,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-cream">
-        <ModalProvider>
-          <NavBar />
-          <main className="Main flex flex-1 flex-col">{children}</main>
-          <Footer />
-        </ModalProvider>
+        <ApolloWrapper>
+          <ModalProvider>
+            <NavBar />
+            <main className="Main flex flex-1 flex-col">{children}</main>
+            <Footer />
+          </ModalProvider>
+        </ApolloWrapper>
       </body>
     </html>
   );
