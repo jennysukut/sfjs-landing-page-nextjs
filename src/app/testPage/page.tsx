@@ -4,6 +4,7 @@ import SiteButton from "@/components/siteButton";
 import { useState } from "react";
 import { signupFellow } from "@/utils/actions/signup";
 import { useForm, SubmitHandler } from "react-hook-form";
+import PreviousDonationBox from "./previousDonationBox";
 type Inputs = {
   firstName: string;
   lastName: string;
@@ -83,6 +84,7 @@ export default function TestPage() {
       >
         test button for donation email
       </SiteButton>
+      <PreviousDonationBox />
     </div>
   );
 }

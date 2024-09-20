@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { useMutation, gql } from "@apollo/client";
 
 const fellowSchema = z.object({
   name: z.string().min(2, { message: "Required" }),
@@ -14,6 +15,15 @@ const fellowSchema = z.object({
 });
 
 type FormData = z.infer<typeof fellowSchema>;
+
+const SIGNUP_MUTATION = gql`
+  mutation SignUp($name: String!, $email: String!, $betaTester: Boolean!) {
+    signUp(name: $name, email: $email, betaTester: $betaTester) {
+      success
+      message
+    }
+  }
+`;
 
 export default function SignupModalIndividual1() {
   const { showModal } = useModal();
@@ -37,9 +47,18 @@ export default function SignupModalIndividual1() {
     setBetaTester(newValue);
   };
 
-  // Submission Handler - send this data to the server.
-  // Do we need to check if the email address is already in the server?
-  const onSubmit: SubmitHandler<FormData> = (data) => console.log(data);
+  const [signUp, { loading, error }] = useMutation(SIGNUP_MUTATION);
+
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    try {
+      const result = await signUp({ variables: data });
+      console.log("Signup successful:", result.data.signUp);
+      showModal(<SignupModalIndividual2 />);
+    } catch (err) {
+      console.error("Signup error:", err);
+      // Handle error (e.g., show error message to user)
+    }
+  };
 
   return (
     <div className="SignupModal flex max-w-[450px] flex-col gap-4 text-jade">
@@ -104,12 +123,10 @@ export default function SignupModalIndividual1() {
             variant="hollow"
             colorScheme="f1"
             aria="submit"
-            onClick={handleSubmit((data) => {
-              console.log(data);
-              showModal(<SignupModalIndividual2 />);
-            })}
+            onClick={handleSubmit(onSubmit)}
+            disabled={loading}
           >
-            sign me up!
+            {loading ? "Signing up..." : "sign me up!"}
           </SiteButton>
         </div>
       </form>

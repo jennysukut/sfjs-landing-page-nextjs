@@ -13,7 +13,7 @@ import { dropDown } from "@/components/navBar";
 
 type DonationCategory = "business" | "individual";
 
-function DonationBox() {
+function PreviousDonationBox() {
   useSignals();
   const rewards = supportPageInfo.rewards;
   const targetAmount = 15000;
@@ -155,29 +155,12 @@ function DonationBox() {
     }
   `;
 
-  //form submission handler
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const donationAmount = formData.selectedAmount || formData.customAmount;
-    const parsedAmount = parseAmount(donationAmount);
-    setCurrentAmount((prevAmount) => prevAmount + parsedAmount);
-
-    // Add your form submission logic here
-    console.log("Form submitted:", formData);
-
+  const testPayment = () => {
     const payment = {
       paymentType: "purchase",
       amount: "0.01",
       currency: "USD",
-      // account: {
-      //   firstName: formData.firstName,
-      //   lastName: formData.lastName,
-      //   email: formData.email,
-      // },
-
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      email: formData.email,
+      email: "test@gmail.com",
     };
 
     console.log(payment);
@@ -196,6 +179,48 @@ function DonationBox() {
         console.log(error.message);
       });
   };
+
+  //form submission handler
+  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   const donationAmount = formData.selectedAmount || formData.customAmount;
+  //   const parsedAmount = parseAmount(donationAmount);
+  //   setCurrentAmount((prevAmount) => prevAmount + parsedAmount);
+
+  //   // Add your form submission logic here
+  //   console.log("Form submitted:", formData);
+
+  //   const payment = {
+  //     paymentType: "purchase",
+  //     amount: "0.01",
+  //     currency: "USD",
+  //     // account: {
+  //     //   firstName: formData.firstName,
+  //     //   lastName: formData.lastName,
+  //     //   email: formData.email,
+  //     // },
+
+  //     firstName: "Test",
+  //     lastName: "Name",
+  //     email: "test@gmail.com",
+  //   };
+
+  //   console.log(payment);
+
+  //   client
+  //     .mutate({
+  //       mutation: INITIALIZE_PAYMENT,
+  //       variables: { payment },
+  //     })
+  //     .then(({ data }) => {
+  //       console.log("success");
+  //       // @ts-ignore // this function is added by an external script
+  //       appendHelcimPayIframe(data.initializePayment.checkoutToken);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.message);
+  //     });
+  // };
 
   //payment integration message
   useEffect(() => {
@@ -228,6 +253,14 @@ function DonationBox() {
       <div
         className={`DonationStation flex w-5/12 flex-col gap-6 ${dropDown.value === true ? "mt-20" : "mt-8"}`}
       >
+        <SiteButton
+          aria="test-payment"
+          variant="filled"
+          colorScheme="b1"
+          onClick={testPayment}
+        >
+          test payment button
+        </SiteButton>
         <div className="ProgressBarContainer mb-4">
           <p className="ProgressBarStatus">
             current amount raised: ${currentAmount} / {calculatePercentage()}%
@@ -243,7 +276,7 @@ function DonationBox() {
           addClasses="flex flex-col text-center items-center"
         >
           <form
-            onSubmit={handleSubmit}
+            // onSubmit={handleSubmit}
             className="flex w-full flex-col items-center"
           >
             <h1 className="SupportUsTitle mt-2">show your support</h1>
@@ -438,4 +471,4 @@ function DonationBox() {
   );
 }
 
-export default DonationBox;
+export default PreviousDonationBox;

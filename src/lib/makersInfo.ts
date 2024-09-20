@@ -49,18 +49,12 @@ export const makersInfo = {
       "Is a huge fan of video games, especially retro arcade games",
     ],
   },
-  "liam prince": {
-    firstName: "liam",
-    lastName: "prince",
-    img: "bg-[url('/makers/liam.svg')]",
-    shadow: "bg-peach",
-    details: [],
-  },
+
   "jacob sukut": {
     firstName: "jacob",
     lastName: "sukut",
     img: "bg-[url('/makers/jacob.svg')]",
-    shadow: "bg-sky",
+    shadow: "bg-olive",
     details: [
       "Is from Montana but has moved about 30 times",
       "He was a literature and history teacher and Ultimate coach",

@@ -1,4 +1,3 @@
-// lib/apollo-client.js
 import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
 
 const client = new ApolloClient({
