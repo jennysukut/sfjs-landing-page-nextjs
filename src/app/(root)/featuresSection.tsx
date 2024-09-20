@@ -10,6 +10,8 @@ import clsx from "clsx";
 import Link from "next/link";
 import { useModal } from "@/contexts/ModalContext";
 import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsModal";
+import { motion } from "framer-motion";
+import ButtonContainer from "@/components/buttonContainer";
 
 type Category = "individual" | "business";
 
@@ -20,6 +22,33 @@ export default function FeaturesSection() {
   //we've got the little note + arrow after the features section that I want to only exist before someone has clicked one of the detail buttons.
   const [detail, setDetail] = useState("none");
   const { showModal } = useModal();
+
+  const motionContainer = {
+    show: {
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.4,
+      },
+    },
+  };
+
+  const motionItem = {
+    hidden: { opacity: 0, x: -50 },
+    show: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        x: {
+          type: "spring",
+          duration: 0.8,
+        },
+        opacity: {
+          duration: 0.5,
+          ease: "easeInOut",
+        },
+      },
+    },
+  };
 
   const featuresButtonStyles = clsx(
     "flex max-w-5xl",
@@ -79,10 +108,16 @@ export default function FeaturesSection() {
       <div className="FeaturesContainer flex flex-row items-start self-center pt-4 align-middle">
         {
           <>
-            <div className={`FeatureButtons ${featuresButtonStyles}`}>
+            <motion.ul
+              className={`FeatureButtons ${featuresButtonStyles}`}
+              variants={motionContainer}
+              whileInView={"show"}
+              viewport={{ once: true }}
+              initial="hidden"
+            >
               {features[category].map(({ colorScheme, title }) => {
                 return (
-                  <div key={`button-${title}`}>
+                  <motion.li key={`button-${title}`} variants={motionItem}>
                     <SiteButton
                       aria={title}
                       variant="filled"
@@ -94,10 +129,10 @@ export default function FeaturesSection() {
                     >
                       {title}
                     </SiteButton>
-                  </div>
+                  </motion.li>
                 );
               })}
-            </div>
+            </motion.ul>
             <div className="TallFeaturesDetails flex max-w-lg">
               {selectedFeature && (
                 <InfoBox
@@ -134,7 +169,7 @@ export default function FeaturesSection() {
         </div>
       )}
 
-      <div className="ButtonContainer flex gap-8 self-end pr-20 pt-12">
+      <ButtonContainer addClasses="self-end">
         <SiteButton
           aria="sign up"
           size="large"
@@ -154,7 +189,7 @@ export default function FeaturesSection() {
             show your support{" "}
           </SiteButton>
         </Link>
-      </div>
+      </ButtonContainer>
     </section>
   );
 }

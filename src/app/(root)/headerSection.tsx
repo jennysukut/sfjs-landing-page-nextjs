@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useModal } from "@/contexts/ModalContext";
 import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsModal";
 import { motion, AnimatePresence } from "framer-motion";
+import ButtonContainer from "@/components/buttonContainer";
 
 function HeaderSection() {
   const { showModal } = useModal();
@@ -36,7 +37,7 @@ function HeaderSection() {
             duration: 1,
           }}
         >
-          <div className="ButtonContainer flex gap-8 pt-5">
+          <ButtonContainer>
             <SiteButton
               aria="sign up"
               size="large"
@@ -56,7 +57,7 @@ function HeaderSection() {
                 how can i help?
               </SiteButton>
             </Link>
-          </div>
+          </ButtonContainer>
         </motion.div>
       </AnimatePresence>
     </section>
