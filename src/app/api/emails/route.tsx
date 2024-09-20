@@ -1,18 +1,7 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
-import WelcomeEmail from "@/emails/welcomeEmail";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-export async function POST(request: Request) {
-  const { email, firstName } = await request.json();
-
-  await resend.emails.send({
-    from: "onboarding@resend.dev",
-    to: email,
-    subject: "Welcome!",
-    react: WelcomeEmail({ firstName }),
-  });
-
-  return NextResponse.json({ status: "ok" });
+export async function GET() {
+  return NextResponse.json({ message: "Hello from the API" });
 }
+
+// Add other HTTP method handlers as needed (POST, PUT, DELETE, etc.)
