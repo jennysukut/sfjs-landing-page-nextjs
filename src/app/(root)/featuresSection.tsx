@@ -103,7 +103,6 @@ export default function FeaturesSection() {
           </SiteButton>
         </div>
       </div>
-
       {/* Features */}
       <div className="FeaturesContainer flex flex-row items-start self-center pt-4 align-middle">
         {
@@ -153,7 +152,7 @@ export default function FeaturesSection() {
           </>
         }
       </div>
-
+      {/* //animate this to fade in after a bit of time */}
       {detail === "none" && (
         <div className="FeaturesPrompt mt-12 flex -translate-x-[50%] items-start pb-8">
           <p className="FeaturesPrompt max-w-44 text-center text-xs text-jade">
@@ -168,7 +167,6 @@ export default function FeaturesSection() {
           ></Image>
         </div>
       )}
-
       <ButtonContainer addClasses="self-end">
         <SiteButton
           aria="sign up"

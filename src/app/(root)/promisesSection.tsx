@@ -108,6 +108,8 @@ function PromisesSection() {
             sign me up!
           </SiteButton>
         </ButtonContainer>
+
+        {/* //animate this to fade in after a bit of time */}
         <div className="PromisePrompt flex justify-end gap-2 pr-8 pt-8">
           <Image
             src="/PurpleArrow.svg"

@@ -1,6 +1,7 @@
 import { supportPageInfo } from "@/lib/siteCopy/supportPageInfo";
 import SiteButton from "@/components/siteButton";
 import InfoBox from "@/components/infoBox";
+import MotionContainer from "@/components/motionContainer";
 
 const individualRewardsArray = Object.entries(
   supportPageInfo.rewards.individual,
@@ -15,18 +16,20 @@ export default function CrowdfundingRewardsSection() {
     return (
       <>
         {rewardsArray.map(([amount, description]) => (
-          <div key={amount} className="RewardBox">
-            <h1 className="Amount mb-3">{amount}</h1>
-            <InfoBox variant="hollow" aria={amount} addClasses="mb-8">
-              <ul className="w-full">
-                {description.map((item, index) => (
-                  <li key={index} className="relative mb-2 list-disc pl-6">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </InfoBox>
-          </div>
+          <MotionContainer key={amount}>
+            <div key={amount} className="RewardBox">
+              <h1 className="Amount mb-3">{amount}</h1>
+              <InfoBox variant="hollow" aria={amount} addClasses="mb-8">
+                <ul className="w-full">
+                  {description.map((item, index) => (
+                    <li key={index} className="relative mb-2 list-disc pl-6">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </InfoBox>
+            </div>
+          </MotionContainer>
         ))}
       </>
     );
@@ -34,7 +37,11 @@ export default function CrowdfundingRewardsSection() {
 
   return (
     <section className="CrowdfundingRewardsSection mt-20 flex w-full flex-col items-center border-t-2 border-olive/20 pt-12">
-      <div className="IntroContainer mb-12 self-center">
+      <MotionContainer
+        direction="x"
+        addClasses="IntroContainer mb-12 self-center flex flex-col"
+      >
+        {/* <div className="IntroContainer mb-12 self-center"> */}
         <h1 className="RewardIncentivesTitle pb-8 pl-12">
           our incentives & rewards:
         </h1>
@@ -50,7 +57,8 @@ export default function CrowdfundingRewardsSection() {
             </p>
           ))}
         </InfoBox>
-      </div>
+        {/* </div> */}
+      </MotionContainer>
       <h1 className="RewardsSectionTitle pb-12 pt-12">
         our rewards breakdown:
       </h1>
