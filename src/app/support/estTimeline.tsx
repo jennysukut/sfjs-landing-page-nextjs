@@ -10,7 +10,7 @@ export default function EstTimelineSection() {
       <InfoBox
         aria="our est. timeline"
         variant="hollow"
-        addClasses="leading-relaxed py-12 px-12 self-end"
+        addClasses="leading-relaxed py-14 px-12 self-end"
       >
         {supportPageInfo.estTimeline.map((status, index) => (
           <p key={index} className="mb-6 last:mb-0">

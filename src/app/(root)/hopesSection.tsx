@@ -53,7 +53,10 @@ export default function HopesSection() {
           whileInView={"show"}
           viewport={{ once: true }}
         >
-          <motion.div className="ChangeContainer" variants={motionItem}>
+          <motion.div
+            className="ChangeContainer flex flex-col"
+            variants={motionItem}
+          >
             <InfoBox
               aria="change perspectives"
               variant="filled"
