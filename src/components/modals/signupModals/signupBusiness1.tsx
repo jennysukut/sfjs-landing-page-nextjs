@@ -121,6 +121,12 @@ export default function SignupModalBusiness1() {
             colorScheme="c1"
             aria="submit"
             onClick={handleSubmit((data) => {
+              // It looks like the only data we need to signup a business
+              // Is business (business name)
+              // email
+              // earlySignup
+              // betaTester
+              // Is this correct?
               console.log(data);
               showModal(<SignupModalBusiness2 />);
             })}
