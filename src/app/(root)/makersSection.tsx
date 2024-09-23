@@ -56,9 +56,9 @@ export default function MakersSection() {
   //the random line should be displayed in a siteLabel
 
   return (
-    <section className="MakersSection flex w-full flex-col self-center border-b-2 border-t-2 border-olive/20 pt-20">
+    <section className="MakersSection flex w-full flex-col self-center border-b-2 border-t-2 border-olive/20 pt-8 sm:pt-20">
       <div className="MakersContainer">
-        <div className="MakersTitles ml-16">
+        <div className="MakersTitles ml-4 sm:ml-16">
           <h1 className="MakersTitle">our makers:</h1>
           <p className="MakersSubtitle mb-5 max-w-xl font-semibold italic">
             this is our group of amazing humans volunteering their time, energy,

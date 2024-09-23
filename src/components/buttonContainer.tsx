@@ -37,7 +37,7 @@ export default function ButtonContainer({
 
   return (
     <motion.div
-      className={`ButtonContainer flex justify-center gap-6 pt-8 ${addClasses}`}
+      className={`ButtonContainer flex gap-6 pt-8 ${addClasses}`}
       initial="hidden"
       variants={motionContainer}
       viewport={{ once: true }}

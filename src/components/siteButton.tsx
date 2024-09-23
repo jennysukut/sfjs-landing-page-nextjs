@@ -43,7 +43,8 @@ const SiteButton: React.FC<ButtonProps> = ({
       "h-16 w-16": size === "largeCircle",
       "h-6 w-6": size === "smallCircle",
       "px-4 py-2 text-xs min-w-[65px]": size === "default",
-      "px-14 py-4 text-[0.85rem] md:px-16 md:text-sm": size === "extraLarge",
+      "px-16 py-6 text-[0.85rem] md:px-16 sm:py-4 md:text-sm":
+        size === "extraLarge",
 
       // variant
       "bg-cream border-jade border-[2px]": variant === "hollow",
@@ -56,7 +57,8 @@ const SiteButton: React.FC<ButtonProps> = ({
         variant === "hollow",
 
       // pressed state
-      "translate-x-1.5 translate-y-1.5": isPressed,
+      "translate-x-2 translate-y-2 sm:translate-x-1.5 sm:translate-y-1.5":
+        isPressed,
       "hover:-translate-x-0.5 hover:-translate-y-0.5":
         !isPressed && !isSelected,
 
@@ -82,12 +84,12 @@ const SiteButton: React.FC<ButtonProps> = ({
     "ButtonShadow absolute rounded-full text-transparent font-semibold tracking-superwide",
     {
       // size
-      "px-6 py-4  text-[0.85rem] md:px-10 md:text-sm -right-1.5 top-1.5":
+      "px-6 py-4  text-[0.85rem] md:px-10 md:text-sm -right-2 top-2":
         size === "large",
       "h-16 w-16 -right-1.5 top-1.5": size === "largeCircle",
       "h-6 w-6 -right-1 top-1": size === "smallCircle",
       "px-4 py-2 text-xs min-w-[65px] -right-1.5 top-1.5": size === "default",
-      "px-14 py-4 text-[0.85rem] md:px-16 md:text-sm -right-1.5 top-1.5":
+      "px-16 py-6 text-[0.85rem] sm:py-4 sm:px-16 sm:text-sm -right-2 top-2":
         size === "extraLarge",
 
       // variant

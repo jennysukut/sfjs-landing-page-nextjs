@@ -12,6 +12,7 @@ import { useModal } from "@/contexts/ModalContext";
 import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsModal";
 import { motion } from "framer-motion";
 import ButtonContainer from "@/components/buttonContainer";
+import InfoModal from "@/components/modals/infoModal";
 
 type Category = "individual" | "business";
 
@@ -53,12 +54,23 @@ export default function FeaturesSection() {
   const featuresButtonStyles = clsx(
     "flex max-w-5xl",
     detail === "" || detail === "none"
-      ? "flex-wrap justify-center gap-6 sm:px-20 pt-4"
+      ? "flex-wrap justify-center gap-6 sm:px-14 pt-4"
       : "flex-col  items-center sm:items-end justify-start gap-4",
   );
 
   function detailClick(e: any) {
     setDetail(e.target.name);
+    showModal(
+      <InfoModal title={e.target.name}>
+        <div>
+          {selectedFeature?.details.map((detail, index) => (
+            <p key={index} className="mb-4 text-left">
+              {detail.trim()}
+            </p>
+          ))}
+        </div>
+      </InfoModal>,
+    );
   }
 
   function handleClick(buttonType: Category) {
@@ -71,7 +83,7 @@ export default function FeaturesSection() {
   );
 
   return (
-    <section className="FeaturesSection flex w-[90%] flex-col items-center justify-center p-4 sm:p-20">
+    <section className="FeaturesSection flex w-[95%] flex-col items-center justify-center p-4 sm:p-14">
       {/* Features Heading */}
       <div className="FeaturesHeading flex flex-col items-center justify-center gap-8 pb-8 sm:flex-row">
         <div className="FeaturesTitle mr-14 flex flex-col text-left">

@@ -8,7 +8,7 @@ import ButtonContainer from "@/components/buttonContainer";
 function HeaderSection() {
   const { showModal } = useModal();
   return (
-    <section className="HeaderSection flex w-full flex-grow flex-col justify-center gap-4">
+    <section className="HeaderSection items-left flex w-full flex-grow flex-col gap-4">
       <AnimatePresence>
         <motion.div
           className="ModalInnerContents"
@@ -37,7 +37,7 @@ function HeaderSection() {
             duration: 1,
           }}
         >
-          <ButtonContainer>
+          <ButtonContainer addClasses="justify-center sm:justify-start">
             <SiteButton
               aria="sign up"
               size="large"
