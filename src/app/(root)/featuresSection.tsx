@@ -61,7 +61,11 @@ export default function FeaturesSection() {
   function detailClick(e: any) {
     setDetail(e.target.name);
     showModal(
-      <InfoModal title={e.target.name}>
+      <InfoModal
+        colorScheme={selectedFeature?.colorScheme}
+        title={e.target.name}
+        variant="filled"
+      >
         <div>
           {selectedFeature?.details.map((detail, index) => (
             <p key={index} className="mb-4 text-left">

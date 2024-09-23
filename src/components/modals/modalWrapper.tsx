@@ -3,14 +3,36 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useModal } from "@/contexts/ModalContext";
+import clsx from "clsx";
+import {
+  largeShadowColors,
+  LargeShadowColorOption,
+} from "@/lib/stylingData/largeShadowColors";
 
 interface ModalWrapperProps {
   children: React.ReactNode;
   modalKey: number;
+  variant?: "filled";
+  colorScheme?: LargeShadowColorOption;
 }
 
-const ModalWrapper: React.FC<ModalWrapperProps> = ({ children, modalKey }) => {
+const ModalWrapper: React.FC<ModalWrapperProps> = ({
+  children,
+  modalKey,
+  variant = "standard",
+  colorScheme = "d6",
+}) => {
   const { hideModal, goBack, isBackButtonVisible } = useModal();
+
+  const modalInnerContentsClasses = clsx(
+    "ModalInnerContents absolute rounded-[50px] px-14 pb-12 pt-14",
+    {
+      // variant
+      "border-[3px] border-solid border-jade bg-cream text-jade drop-shadow-jade":
+        variant === "standard",
+      [`text-eggshell ${largeShadowColors[colorScheme]}`]: variant === "filled",
+    },
+  );
 
   const handleModalContentClick = (event: React.MouseEvent) => {
     event.stopPropagation();
@@ -34,7 +56,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({ children, modalKey }) => {
         >
           <AnimatePresence>
             <motion.div
-              className="ModalInnerContents absolute rounded-[50px] border-[3px] border-solid border-jade bg-cream px-14 pb-12 pt-14 text-jade drop-shadow-jade"
+              className={modalInnerContentsClasses}
               onClick={handleModalContentClick}
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
