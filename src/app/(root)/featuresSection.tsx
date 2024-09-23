@@ -53,8 +53,8 @@ export default function FeaturesSection() {
   const featuresButtonStyles = clsx(
     "flex max-w-5xl",
     detail === "" || detail === "none"
-      ? "flex-wrap justify-center gap-6 px-20 pt-4"
-      : "flex-col items-end justify-start gap-4",
+      ? "flex-wrap justify-center gap-6 sm:px-20 pt-4"
+      : "flex-col  items-center sm:items-end justify-start gap-4",
   );
 
   function detailClick(e: any) {
@@ -71,32 +71,32 @@ export default function FeaturesSection() {
   );
 
   return (
-    <section className="FeaturesSection flex w-[90%] flex-col items-center justify-center p-20">
+    <section className="FeaturesSection flex w-[90%] flex-col items-center justify-center p-4 sm:p-20">
       {/* Features Heading */}
-      <div className="FeaturesHeading flex items-center justify-center pb-8">
+      <div className="FeaturesHeading flex flex-col items-center justify-center gap-8 pb-8 sm:flex-row">
         <div className="FeaturesTitle mr-14 flex flex-col text-left">
           <h1 className="FeaturesTitle">our features:</h1>
           <p className="PromisesSubtitle font-semibold italic">
             choose category:
           </p>
         </div>
-        <div className="ButtonContainer flex gap-10">
+        <div className="ButtonContainer flex flex-col items-center gap-4 sm:flex-row sm:gap-10">
           <SiteButton
             aria="features for businesses"
-            size="large"
+            size="extraLarge"
             variant="filled"
             colorScheme="b3"
-            addClasses="px-14"
+            padding="extra"
             onClick={() => handleClick("business")}
           >
             for businesses
           </SiteButton>
           <SiteButton
             aria="features for job seekers"
-            size="large"
+            size="extraLarge"
             variant="filled"
             colorScheme="c4"
-            addClasses="px-14"
+            padding="extra"
             onClick={() => handleClick("individual")}
           >
             for job-seekers
@@ -104,34 +104,36 @@ export default function FeaturesSection() {
         </div>
       </div>
       {/* Features */}
-      <div className="FeaturesContainer flex flex-row items-start self-center pt-4 align-middle">
+      <div className="FeaturesContainer flex flex-col items-center self-center pt-4 align-middle sm:flex-row sm:items-start">
         {
           <>
-            <motion.ul
+            <div className={`FeatureButtons ${featuresButtonStyles}`}>
+              {/* <motion.ul
               className={`FeatureButtons ${featuresButtonStyles}`}
               variants={motionContainer}
               whileInView={"show"}
               viewport={{ once: true }}
               initial="hidden"
-            >
+            > */}
               {features[category].map(({ colorScheme, title }) => {
                 return (
-                  <motion.li key={`button-${title}`} variants={motionItem}>
-                    <SiteButton
-                      aria={title}
-                      variant="filled"
-                      size="large"
-                      colorScheme={colorScheme as ButtonColorOption}
-                      onClick={detailClick}
-                      name={title}
-                      key={`button-${title}`}
-                    >
-                      {title}
-                    </SiteButton>
-                  </motion.li>
+                  // <motion.li key={`button-${title}`} variants={motionItem}>
+                  <SiteButton
+                    aria={title}
+                    variant="filled"
+                    size="extraLarge"
+                    colorScheme={colorScheme as ButtonColorOption}
+                    onClick={detailClick}
+                    name={title}
+                    key={`button-${title}`}
+                  >
+                    {title}
+                  </SiteButton>
+                  // </motion.li>
                 );
               })}
-            </motion.ul>
+              {/* </motion.ul> */}
+            </div>
             <div className="TallFeaturesDetails flex max-w-lg">
               {selectedFeature && (
                 <InfoBox

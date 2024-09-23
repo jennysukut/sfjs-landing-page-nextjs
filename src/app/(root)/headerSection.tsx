@@ -21,7 +21,7 @@ function HeaderSection() {
             duration: 0.8,
           }}
         >
-          <h1 className="LandingPageText max-w-[700px] text-2xl font-bold text-midnight">
+          <h1 className="LandingPageText max-w-[700px] pl-4 text-[1.25rem] font-bold leading-8 text-midnight sm:text-2xl">
             our mission: to bring simplicity, honesty, and transparency to the
             job market.
           </h1>

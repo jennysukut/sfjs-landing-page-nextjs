@@ -60,12 +60,14 @@ function PromisesSection() {
         viewport={{ once: true }}
       >
         <motion.div className="MotionContainer" variants={motionTitle}>
-          <h1 className="PromisesTitle">our promises:</h1>
+          <h1 className="PromisesTitle text-[1.25rem] sm:text-2xl">
+            our promises:
+          </h1>
           <p className="PromisesSubtitle mb-5 font-semibold italic">
             to businesses and job-seekers
           </p>
         </motion.div>
-        <ul className="PromisesGuarantees mb-8 flex flex-col items-end">
+        <ul className="PromisesGuarantees mb-3 flex flex-col items-center text-center sm:mb-8 sm:items-end sm:text-right">
           {landingPageText.guarantees.map((guarantee: string) => {
             return (
               <motion.li

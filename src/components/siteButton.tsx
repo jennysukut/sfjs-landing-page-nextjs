@@ -9,7 +9,7 @@ import clsx from "clsx";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   addClasses?: string;
-  size?: "large" | "largeCircle" | "smallCircle";
+  size?: "large" | "largeCircle" | "smallCircle" | "extraLarge";
   variant: "hollow" | "filled" | "avatar";
   colorScheme: ButtonColorOption;
   aria: string;
@@ -39,10 +39,11 @@ const SiteButton: React.FC<ButtonProps> = ({
     "SiteButton relative z-[1] cursor-pointer rounded-full font-semibold transition-all duration-200 tracking-superwide hover:saturate-[120%]",
     {
       // size
-      "px-10 py-4 text-sm": size === "large",
+      "px-6 py-4 text-[0.85rem] md:px-10 md:text-sm": size === "large",
       "h-16 w-16": size === "largeCircle",
       "h-6 w-6": size === "smallCircle",
       "px-4 py-2 text-xs min-w-[65px]": size === "default",
+      "px-14 py-4 text-[0.85rem] md:px-16 md:text-sm": size === "extraLarge",
 
       // variant
       "bg-cream border-jade border-[2px]": variant === "hollow",
@@ -66,8 +67,8 @@ const SiteButton: React.FC<ButtonProps> = ({
         isSelected && size === "smallCircle",
 
       //padding
-      "px-12": padding === "more",
-      "px-16": padding === "extra",
+      "px-8 sm:px-12": padding === "more",
+      "px-12 sm:px-16": padding === "extra",
 
       // diabled
       "disabled:translate-x-1 disabled:translate-y-1 disabled:bg-blush disabled:text-white disabled:hover:cursor-not-allowed disabled:hover:saturate-100":
@@ -81,10 +82,13 @@ const SiteButton: React.FC<ButtonProps> = ({
     "ButtonShadow absolute rounded-full text-transparent font-semibold tracking-superwide",
     {
       // size
-      "px-10 py-4 text-sm -right-1.5 top-1.5": size === "large",
+      "px-6 py-4  text-[0.85rem] md:px-10 md:text-sm -right-1.5 top-1.5":
+        size === "large",
       "h-16 w-16 -right-1.5 top-1.5": size === "largeCircle",
       "h-6 w-6 -right-1 top-1": size === "smallCircle",
       "px-4 py-2 text-xs min-w-[65px] -right-1.5 top-1.5": size === "default",
+      "px-14 py-4 text-[0.85rem] md:px-16 md:text-sm -right-1.5 top-1.5":
+        size === "extraLarge",
 
       // variant
       [`border-[2px] border-jade bg-jade ${buttonColors[colorScheme].color7} ${buttonColors[colorScheme].color8}`]:

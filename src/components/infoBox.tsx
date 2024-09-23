@@ -32,7 +32,7 @@ const InfoBox: React.FC<InfoBoxProps> = ({
   children,
   title,
   addClasses,
-  textSize,
+  textSize = "large",
   width = "standard",
   shadowSize = "standard",
   ...props
@@ -49,13 +49,13 @@ const InfoBox: React.FC<InfoBoxProps> = ({
         variant === "filled" && shadowSize === "small",
 
       //textSize
-      "text-xs": textSize === "small",
-      "text-sm": textSize === "medium",
-      "text-m": textSize === "large",
+      "text-[0.6rem] sm:text-xs": textSize === "small",
+      "text-xs sm:text-sm": textSize === "medium",
+      "text-sm sm:text-m": textSize === "large",
 
       // size
-      "py-6 px-10": size === "standard",
-      "py-4 px-14": size === "small",
+      "py-4 px-8 sm:py-6 sm:px-10": size === "standard",
+      "py-3 px-10 sm:py-4 sm:px-14": size === "small",
 
       //width
       "max-w-screen-sm": width === "standard",

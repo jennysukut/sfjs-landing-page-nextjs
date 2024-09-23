@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <div className="Footer flex h-24 w-full items-end justify-between px-8 py-8">
+    <div className="Footer flex h-24 flex-col items-end justify-between px-8 py-8 sm:w-full sm:flex-row">
       <div className="FooterButtonContainer flex gap-4">
         <SiteButton variant="filled" colorScheme="b2" aria="contact us">
           signup

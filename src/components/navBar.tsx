@@ -27,7 +27,7 @@ export default function NavBar() {
   }, [clickedButton]);
 
   return (
-    <div className="NavBar mx-auto flex h-fit w-[98%] justify-between px-16 py-6">
+    <div className="NavBar mx-auto flex h-fit w-[98%] justify-between px-8 py-6 md:px-16">
       <Link href={"/"}>
         <Image
           className="Logo mt-4 max-w-44 cursor-pointer transition-transform duration-300 hover:scale-105"
@@ -38,7 +38,7 @@ export default function NavBar() {
         />
       </Link>
 
-      <div className="NavButtonContainer flex items-center gap-6">
+      <div className="NavButtonContainer hidden items-end gap-6 sm:flex sm:flex-row sm:items-center">
         <SiteButton
           variant="filled"
           colorScheme="b4"
