@@ -10,6 +10,7 @@ export default function StatusTimelineGoalsSection() {
         aria="our current status"
         variant="hollow"
         addClasses="max-w-md leading-relaxed py-14 px-12"
+        size="large"
       >
         {supportPageInfo.currentStatus.map((status, index) => (
           <p key={index} className="mb-6 last:mb-0">
@@ -23,6 +24,7 @@ export default function StatusTimelineGoalsSection() {
         variant="filled"
         colorScheme="c4"
         addClasses="max-w-md leading-relaxed py-14 px-12"
+        size="large"
       >
         {supportPageInfo.crowdfundingNeed.map((status, index) => (
           <p key={index} className="mb-6 mt-4 last:mb-0">
@@ -35,6 +37,7 @@ export default function StatusTimelineGoalsSection() {
         variant="hollow"
         addClasses="max-w-md text-center flex flex-col items-center leading-relaxed py-14 px-12"
         textSize="large"
+        size="large"
       >
         our goal is to raise between:
         <SiteLabel

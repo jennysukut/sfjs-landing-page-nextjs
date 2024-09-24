@@ -14,6 +14,7 @@ export default function EstTimelineSection() {
         aria="our est. timeline"
         variant="hollow"
         addClasses="leading-relaxed sm:py-14 px-12 self-end"
+        size="large"
       >
         {supportPageInfo.estTimeline.map((status, index) => (
           <p key={index} className="mb-6 text-right last:mb-0">

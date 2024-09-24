@@ -46,7 +46,6 @@ export default function CrowdfundingRewardsSection() {
         direction="x"
         addClasses="IntroContainer mb-12 self-center flex flex-col"
       >
-        {/* <div className="IntroContainer mb-12 self-center"> */}
         <h1 className="RewardIncentivesTitle pb-4 pl-12 sm:pb-8">
           our incentives & rewards:
         </h1>
@@ -55,6 +54,7 @@ export default function CrowdfundingRewardsSection() {
           aria="our incentives & rewards"
           addClasses="min-w-screen-lg leading-relaxed py-14 px-12"
           width="extraWide"
+          size="large"
         >
           {supportPageInfo.incentivesAndRewards.map((reward, index) => (
             <p key={index} className="mb-6 last:mb-0">
@@ -62,12 +62,11 @@ export default function CrowdfundingRewardsSection() {
             </p>
           ))}
         </InfoBox>
-        {/* </div> */}
       </MotionContainer>
       <h1 className="RewardsSectionTitle pb-12 pt-12">
         our rewards breakdown:
       </h1>
-      <div className="RewardsSections w-full flex-col justify-between gap-10 sm:flex-row">
+      <div className="RewardsSections flex w-full flex-col justify-between gap-10 sm:flex-row">
         <div className="IndividualRewards flex flex-col items-start py-0 sm:gap-6">
           <InfoBox
             aria="for individuals"
