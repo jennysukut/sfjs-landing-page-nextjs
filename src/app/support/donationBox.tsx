@@ -241,6 +241,7 @@ function DonationBox() {
           variant="hollow"
           aria={amount}
           addClasses=" text-xs mt-8 text-left"
+          size="small"
         >
           <ul className="w-full">
             {description.map((item, index) => (

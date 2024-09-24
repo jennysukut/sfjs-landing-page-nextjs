@@ -1,17 +1,20 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { signal, useSignal } from "@preact/signals-react";
+import { signal } from "@preact/signals-react";
+import { useModal } from "@/contexts/ModalContext";
 
 import Image from "next/image";
 import SiteButton from "./siteButton";
 import Link from "next/link";
 import ShareOptions from "./shareOptions";
 import SignupOptions from "./signupOptions";
+import MobileMenuModal from "./modals/mobileMenuModal";
 
 export const dropDown = signal(false);
 
 export default function NavBar() {
+  const { showModal } = useModal();
   const [clickedButton, setClickedButton] = useState("");
 
   function handleNavButtonClick(e: any) {
@@ -96,6 +99,15 @@ export default function NavBar() {
       ) : (
         ""
       )}
+      <div className="MobileMenuButton py-4 sm:hidden">
+        <img
+          src="/BurgerMenu.svg"
+          alt="mobile menu"
+          width={30}
+          height={30}
+          onClick={() => showModal(<MobileMenuModal />)}
+        />
+      </div>
     </div>
   );
 }

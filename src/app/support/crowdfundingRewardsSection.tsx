@@ -19,7 +19,12 @@ export default function CrowdfundingRewardsSection() {
           <MotionContainer key={amount}>
             <div key={amount} className="RewardBox">
               <h1 className="Amount mb-3">{amount}</h1>
-              <InfoBox variant="hollow" aria={amount} addClasses="mb-8">
+              <InfoBox
+                variant="hollow"
+                aria={amount}
+                addClasses="mb-8"
+                size="small"
+              >
                 <ul className="w-full">
                   {description.map((item, index) => (
                     <li key={index} className="relative mb-2 list-disc pl-6">

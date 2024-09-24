@@ -81,6 +81,7 @@ function PromisesSection() {
                   key={guarantee}
                   addClasses="mb-6 w-fit"
                   textSize="large"
+                  size="small"
                 >
                   {guarantee}
                 </InfoBox>

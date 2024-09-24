@@ -52,7 +52,7 @@ export default function FeaturesSection() {
   };
 
   const featuresButtonStyles = clsx(
-    "flex max-w-5xl",
+    "flex max-w-[67rem]",
     detail === "" || detail === "none"
       ? "flex-wrap justify-center gap-6 sm:px-14 pt-4"
       : "flex-col  items-center sm:items-end justify-start gap-4",
@@ -60,21 +60,21 @@ export default function FeaturesSection() {
 
   function detailClick(e: any) {
     setDetail(e.target.name);
-    showModal(
-      <InfoModal
-        colorScheme={selectedFeature?.colorScheme}
-        title={e.target.name}
-        variant="filled"
-      >
-        <div>
-          {selectedFeature?.details.map((detail, index) => (
-            <p key={index} className="mb-4 text-left">
-              {detail.trim()}
-            </p>
-          ))}
-        </div>
-      </InfoModal>,
-    );
+    // showModal(
+    //   <InfoModal
+    //     colorScheme={selectedFeature?.colorScheme}
+    //     title={e.target.name}
+    //     variant="filled"
+    //   >
+    //     <div>
+    //       {selectedFeature?.details.map((detail, index) => (
+    //         <p key={index} className="mb-4 text-left">
+    //           {detail.trim()}
+    //         </p>
+    //       ))}
+    //     </div>
+    //   </InfoModal>,
+    // );
   }
 
   function handleClick(buttonType: Category) {
@@ -120,7 +120,9 @@ export default function FeaturesSection() {
         </div>
       </div>
       {/* Features */}
-      <div className="FeaturesContainer flex flex-col items-center self-center pt-4 align-middle sm:flex-row sm:items-start">
+      <div
+        className={`FeaturesContainer flex flex-col items-center self-center pt-4 align-middle ${detail === "" || detail === "none" ? "" : "sm:flex-row"}`}
+      >
         {
           <>
             <div className={`FeatureButtons ${featuresButtonStyles}`}>
@@ -150,7 +152,7 @@ export default function FeaturesSection() {
               })}
               {/* </motion.ul> */}
             </div>
-            <div className="TallFeaturesDetails flex max-w-lg">
+            <div className="TallFeaturesDetails flex max-w-lg bg-cream p-8 pt-0">
               {selectedFeature && (
                 <InfoBox
                   key={`info-${selectedFeature.title}`}
@@ -185,7 +187,7 @@ export default function FeaturesSection() {
           ></Image>
         </div>
       )}
-      <ButtonContainer addClasses="self-end">
+      <ButtonContainer addClasses="self-end mt-8">
         <SiteButton
           aria="sign up"
           size="large"

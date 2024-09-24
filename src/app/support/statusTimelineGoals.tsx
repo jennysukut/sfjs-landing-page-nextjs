@@ -34,13 +34,14 @@ export default function StatusTimelineGoalsSection() {
         aria="our current status"
         variant="hollow"
         addClasses="max-w-md text-center flex flex-col items-center leading-relaxed py-14 px-12"
+        textSize="large"
       >
         our goal is to raise between:
         <SiteLabel
           aria="goal"
           variant="display"
           addClasses="px-8 m-5"
-          textSize="medium"
+          textSize="large"
         >
           $15,000 - $216,000
         </SiteLabel>

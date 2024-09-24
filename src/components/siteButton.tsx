@@ -43,7 +43,7 @@ const SiteButton: React.FC<ButtonProps> = ({
       "h-16 w-16": size === "largeCircle",
       "h-6 w-6": size === "smallCircle",
       "px-4 py-2 text-xs min-w-[65px]": size === "default",
-      "px-16 py-6 text-[0.85rem] md:px-16 sm:py-4 md:text-sm":
+      "px-16 py-6 text-[0.85rem] md:px-12 sm:py-4 md:text-sm":
         size === "extraLarge",
 
       // variant
@@ -84,12 +84,12 @@ const SiteButton: React.FC<ButtonProps> = ({
     "ButtonShadow absolute rounded-full text-transparent font-semibold tracking-superwide",
     {
       // size
-      "px-6 py-4  text-[0.85rem] md:px-10 md:text-sm -right-2 top-2":
+      "px-6 py-4 text-[0.85rem] md:px-10 md:text-sm -right-2 top-2":
         size === "large",
       "h-16 w-16 -right-1.5 top-1.5": size === "largeCircle",
       "h-6 w-6 -right-1 top-1": size === "smallCircle",
       "px-4 py-2 text-xs min-w-[65px] -right-1.5 top-1.5": size === "default",
-      "px-16 py-6 text-[0.85rem] sm:py-4 sm:px-16 sm:text-sm -right-2 top-2":
+      "px-16 py-6 text-[0.85rem] md:px-12 sm:py-4 md:text-sm -right-2 top-2":
         size === "extraLarge",
 
       // variant
