@@ -31,7 +31,7 @@ export default function HopesSection() {
             to change perspectives in the current work landscape
           </InfoBox>
           <div className="HopesDetails flex flex-col gap-8 sm:flex-row">
-            <div className="infoBoxesLeft mt-1 flex max-w-sm flex-col justify-center gap-8 py-4 sm:items-end sm:py-6">
+            <div className="infoBoxesLeft mt-1 flex max-w-sm flex-col items-center justify-center gap-8 py-4 sm:items-end sm:py-6">
               <div className="MotionContainer">
                 <InfoBox
                   aria="change perspectives"
@@ -55,14 +55,14 @@ export default function HopesSection() {
                 </InfoBox>
               </div>
             </div>
-            <div className="infoBoxesRight -mt-8 flex max-w-sm flex-col-reverse justify-center gap-8 py-4 sm:flex-col sm:items-start sm:py-6">
+            <div className="infoBoxesRight -mt-8 flex max-w-sm flex-col-reverse items-center justify-center gap-8 py-4 sm:flex-col sm:items-start sm:py-6">
               <div className="MotionContainer">
                 <InfoBox
                   aria="change perspectives"
                   variant="filled"
                   colorScheme="c5"
                   size="small"
-                  addClasses="text-sm rounded-full"
+                  addClasses="text-sm rounded-full text-center"
                 >
                   to empower individuals
                 </InfoBox>

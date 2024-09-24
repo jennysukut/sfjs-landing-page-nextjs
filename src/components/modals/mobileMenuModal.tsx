@@ -7,7 +7,7 @@ import ShareOptionsModal from "./shareModals/shareOptionsModal";
 import ModalWrapper from "./modalWrapper";
 
 export default function MobileMenuModal() {
-  const { showModal } = useModal();
+  const { showModal, hideModal } = useModal();
 
   return (
     // <ModalWrapper modalKey={10} variant="hollow">
@@ -18,7 +18,7 @@ export default function MobileMenuModal() {
       <div className="SignupButtons flex flex-col items-start gap-y-6">
         <SiteButton
           variant="filled"
-          colorScheme="c1"
+          colorScheme="b4"
           aria="job-seeker"
           addClasses="w-[200px]"
           size="large"
@@ -29,10 +29,11 @@ export default function MobileMenuModal() {
         <Link href="/support">
           <SiteButton
             variant="filled"
-            colorScheme="b3"
+            colorScheme="e5"
             aria="business"
             addClasses="w-[200px]"
             size="large"
+            onClick={hideModal}
           >
             support us
           </SiteButton>
@@ -40,17 +41,18 @@ export default function MobileMenuModal() {
         <Link href="/pricing">
           <SiteButton
             variant="filled"
-            colorScheme="f1"
+            colorScheme="d4"
             aria="collaborator"
             addClasses="w-[200px]"
             size="large"
+            onClick={hideModal}
           >
             pricing
           </SiteButton>
         </Link>
         <SiteButton
           variant="filled"
-          colorScheme="c1"
+          colorScheme="f3"
           aria="job-seeker"
           addClasses="w-[200px]"
           size="large"

@@ -12,7 +12,7 @@ import SiteButton from "@/components/siteButton";
 import InfoBox from "@/components/infoBox";
 import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsModal";
 import ButtonContainer from "@/components/buttonContainer";
-import InfoModal from "@/components/modals/infoModal";
+import DropDownButton from "@/components/dropDownButton";
 
 import { landingPageText } from "@/lib/siteCopy/landingPageText";
 import { ButtonColorOption } from "@/lib/stylingData/buttonColors";
@@ -25,6 +25,7 @@ export default function FeaturesSection() {
   // I have the detail set to none with a differentiation between "" and "none" because
   //we've got the little note + arrow after the features section that I want to only exist before someone has clicked one of the detail buttons.
   const [detail, setDetail] = useState("none");
+  const [mobileDetail, setMobileDetail] = useState("none");
   const { showModal } = useModal();
 
   const fadeInItem = {
@@ -42,41 +43,25 @@ export default function FeaturesSection() {
   };
 
   const featuresButtonStyles = clsx(
-    "flex max-w-[60rem]",
+    "hidden sm:flex max-w-[60rem]",
     detail === "" || detail === "none"
       ? "flex-wrap justify-center gap-6 sm:px-14 pt-4"
       : "flex-col  items-center sm:items-end justify-start gap-4",
   );
 
-  function detailClick(e: any) {
-    if (detail === e.target.name) {
+  function detailClick(name: string) {
+    if (detail === name) {
       setDetail("");
     } else {
-      setDetail(e.target.name);
+      setDetail(name);
+    }
+  }
 
-      // set the feature modal to show only at a mobile screen size
-      // if (window.innerWidth < 640) {
-      //   const updatedSelectedFeature = features[category].find(
-      //     (feature) => feature.title === e.target.name,
-      //   );
-      //   showModal(
-      //     <InfoModal
-      //       colorScheme={
-      //         updatedSelectedFeature?.colorScheme as ButtonColorOption
-      //       }
-      //       title={e.target.name}
-      //       variant="filled"
-      //     >
-      //       <div>
-      //         {updatedSelectedFeature?.details.map((detail, index) => (
-      //           <p key={index} className="mb-4 text-left">
-      //             {detail.trim()}
-      //           </p>
-      //         ))}
-      //       </div>
-      //     </InfoModal>,
-      //   );
-      // }
+  function mobileDetailClick(name: string) {
+    if (mobileDetail === name) {
+      setMobileDetail("");
+    } else {
+      setMobileDetail(name);
     }
   }
 
@@ -107,6 +92,7 @@ export default function FeaturesSection() {
             colorScheme="b3"
             padding="extra"
             onClick={() => handleClick("business")}
+            addClasses="w-[20rem] text-[1rem]"
           >
             for businesses
           </SiteButton>
@@ -117,6 +103,7 @@ export default function FeaturesSection() {
             colorScheme="c4"
             padding="extra"
             onClick={() => handleClick("individual")}
+            addClasses="w-[20rem] text-[1rem]"
           >
             for job-seekers
           </SiteButton>
@@ -126,6 +113,26 @@ export default function FeaturesSection() {
       <div
         className={`FeaturesContainer items-top flex flex-col self-center pt-4 align-middle ${detail === "" || detail === "none" ? "" : "sm:flex-row"}`}
       >
+        <div
+          className={`MobileFeatureButtons flex flex-col items-center gap-6 sm:hidden`}
+        >
+          {features[category].map(({ colorScheme, title, details }) => {
+            return (
+              <DropDownButton
+                aria={title}
+                variant="filled"
+                colorScheme={colorScheme as ButtonColorOption}
+                onClick={() => mobileDetailClick(title)} // Pass title directly
+                name={title}
+                key={`button-${title}`}
+                details={details}
+                isSelected={mobileDetail === title}
+              >
+                {title}
+              </DropDownButton>
+            );
+          })}
+        </div>
         {
           <>
             <div className={`FeatureButtons ${featuresButtonStyles}`}>
@@ -136,7 +143,7 @@ export default function FeaturesSection() {
                     variant="filled"
                     size="large"
                     colorScheme={colorScheme as ButtonColorOption}
-                    onClick={detailClick}
+                    onClick={() => detailClick(title)}
                     name={title}
                     key={`button-${title}`}
                   >
@@ -165,13 +172,12 @@ export default function FeaturesSection() {
           </>
         }
       </div>
-      {/* //animate this to fade in after a bit of time */}
       {detail === "none" && (
         <motion.div
           initial="hidden"
           whileInView={"show"}
           variants={fadeInItem}
-          className="FeaturesPrompt mt-12 flex self-center pb-8 sm:-translate-x-[50%] sm:items-start"
+          className={`FeaturesPrompt mt-12 flex self-center pb-8 sm:-translate-x-[50%] sm:items-start ${mobileDetail !== "none" ? "hidden" : "last:"}`}
         >
           <p className="FeaturesPrompt max-w-44 text-center text-xs text-jade">
             {landingPageText.arrowprompts.feature}
