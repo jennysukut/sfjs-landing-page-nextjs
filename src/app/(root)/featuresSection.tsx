@@ -1,18 +1,20 @@
 "useclient";
 
-import SiteButton from "@/components/siteButton";
-import InfoBox from "@/components/infoBox";
-import { useState } from "react";
-import { landingPageText } from "@/lib/siteCopy/landingPageText";
-import Image from "next/image";
-import { ButtonColorOption } from "@/lib/stylingData/buttonColors";
 import clsx from "clsx";
 import Link from "next/link";
+import Image from "next/image";
+
+import { useState } from "react";
 import { useModal } from "@/contexts/ModalContext";
+
+import SiteButton from "@/components/siteButton";
+import InfoBox from "@/components/infoBox";
 import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsModal";
-import { motion } from "framer-motion";
 import ButtonContainer from "@/components/buttonContainer";
 import InfoModal from "@/components/modals/infoModal";
+
+import { landingPageText } from "@/lib/siteCopy/landingPageText";
+import { ButtonColorOption } from "@/lib/stylingData/buttonColors";
 
 type Category = "individual" | "business";
 
@@ -24,33 +26,6 @@ export default function FeaturesSection() {
   const [detail, setDetail] = useState("none");
   const { showModal } = useModal();
 
-  const motionContainer = {
-    show: {
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.4,
-      },
-    },
-  };
-
-  const motionItem = {
-    hidden: { opacity: 0, x: -50 },
-    show: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        x: {
-          type: "spring",
-          duration: 0.8,
-        },
-        opacity: {
-          duration: 0.5,
-          ease: "easeInOut",
-        },
-      },
-    },
-  };
-
   const featuresButtonStyles = clsx(
     "flex max-w-[67rem]",
     detail === "" || detail === "none"
@@ -59,22 +34,31 @@ export default function FeaturesSection() {
   );
 
   function detailClick(e: any) {
-    setDetail(e.target.name);
-    // showModal(
-    //   <InfoModal
-    //     colorScheme={selectedFeature?.colorScheme}
-    //     title={e.target.name}
-    //     variant="filled"
-    //   >
-    //     <div>
-    //       {selectedFeature?.details.map((detail, index) => (
-    //         <p key={index} className="mb-4 text-left">
-    //           {detail.trim()}
-    //         </p>
-    //       ))}
-    //     </div>
-    //   </InfoModal>,
-    // );
+    if (detail === e.target.name) {
+      setDetail("");
+    } else {
+      setDetail(e.target.name);
+
+      const updatedSelectedFeature = features[category].find(
+        (feature) => feature.title === e.target.name,
+      );
+
+      showModal(
+        <InfoModal
+          colorScheme={updatedSelectedFeature?.colorScheme}
+          title={e.target.name}
+          variant="filled"
+        >
+          <div>
+            {updatedSelectedFeature?.details.map((detail, index) => (
+              <p key={index} className="mb-4 text-left">
+                {detail.trim()}
+              </p>
+            ))}
+          </div>
+        </InfoModal>,
+      );
+    }
   }
 
   function handleClick(buttonType: Category) {
@@ -126,20 +110,12 @@ export default function FeaturesSection() {
         {
           <>
             <div className={`FeatureButtons ${featuresButtonStyles}`}>
-              {/* <motion.ul
-              className={`FeatureButtons ${featuresButtonStyles}`}
-              variants={motionContainer}
-              whileInView={"show"}
-              viewport={{ once: true }}
-              initial="hidden"
-            > */}
               {features[category].map(({ colorScheme, title }) => {
                 return (
-                  // <motion.li key={`button-${title}`} variants={motionItem}>
                   <SiteButton
                     aria={title}
                     variant="filled"
-                    size="extraLarge"
+                    size="large"
                     colorScheme={colorScheme as ButtonColorOption}
                     onClick={detailClick}
                     name={title}
@@ -147,12 +123,10 @@ export default function FeaturesSection() {
                   >
                     {title}
                   </SiteButton>
-                  // </motion.li>
                 );
               })}
-              {/* </motion.ul> */}
             </div>
-            <div className="TallFeaturesDetails flex max-w-lg bg-cream p-8 pt-0">
+            <div className="TallFeaturesDetails hidden max-w-lg bg-cream p-8 pt-0 sm:flex">
               {selectedFeature && (
                 <InfoBox
                   key={`info-${selectedFeature.title}`}
