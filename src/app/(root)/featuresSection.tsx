@@ -27,7 +27,7 @@ export default function FeaturesSection() {
   const { showModal } = useModal();
 
   const featuresButtonStyles = clsx(
-    "flex max-w-[67rem]",
+    "flex max-w-[60rem]",
     detail === "" || detail === "none"
       ? "flex-wrap justify-center gap-6 sm:px-14 pt-4"
       : "flex-col  items-center sm:items-end justify-start gap-4",
@@ -109,7 +109,7 @@ export default function FeaturesSection() {
       </div>
       {/* Features */}
       <div
-        className={`FeaturesContainer flex flex-col items-center self-center pt-4 align-middle ${detail === "" || detail === "none" ? "" : "sm:flex-row"}`}
+        className={`FeaturesContainer items-top flex flex-col self-center pt-4 align-middle ${detail === "" || detail === "none" ? "" : "sm:flex-row"}`}
       >
         {
           <>
