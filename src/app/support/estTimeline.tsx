@@ -6,14 +6,14 @@ export default function EstTimelineSection() {
   return (
     <MotionContainer
       direction="y"
-      addClasses="EstimatedTimelineContainer flex w-full flex-col items-end pb-10 pt-12"
+      addClasses="EstimatedTimelineContainer max-w-[100%] flex w-full flex-col items-end px-8 py-8 sm:pb-10 sm:pt-12"
     >
       {/* <div className="EstimatedTimelineContainer mx-auto flex w-full flex-col self-end pb-10 pt-12"> */}
       <h1 className="EstimatedTimelineTitle self-end">our est. timeline:</h1>
       <InfoBox
         aria="our est. timeline"
         variant="hollow"
-        addClasses="leading-relaxed py-14 px-12 self-end"
+        addClasses="leading-relaxed sm:py-14 px-12 self-end"
       >
         {supportPageInfo.estTimeline.map((status, index) => (
           <p key={index} className="mb-6 text-right last:mb-0">

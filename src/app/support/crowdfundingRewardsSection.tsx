@@ -41,7 +41,7 @@ export default function CrowdfundingRewardsSection() {
   }
 
   return (
-    <section className="CrowdfundingRewardsSection mt-20 flex w-full flex-col items-center border-t-2 border-olive/20 pt-12">
+    <section className="CrowdfundingRewardsSection mx-8 flex max-w-[98%] flex-col items-center border-t-2 border-olive/20 pt-12 sm:mt-20 sm:w-full">
       <MotionContainer
         direction="x"
         addClasses="IntroContainer mb-12 self-center flex flex-col"
@@ -67,7 +67,7 @@ export default function CrowdfundingRewardsSection() {
       <h1 className="RewardsSectionTitle pb-12 pt-12">
         our rewards breakdown:
       </h1>
-      <div className="RewardsSections flex w-full justify-between gap-10">
+      <div className="RewardsSections w-full flex-col justify-between gap-10 sm:flex-row">
         <div className="IndividualRewards flex flex-col items-start gap-6 py-0">
           <InfoBox
             aria="for individuals"
@@ -84,7 +84,7 @@ export default function CrowdfundingRewardsSection() {
           </div>
         </div>
 
-        <div className="BusinessRewards flex flex-col items-start gap-6 border-l-2 border-olive/20 pl-10">
+        <div className="BusinessRewards flex flex-col items-start gap-6 border-olive/20 sm:border-l-2 sm:pl-10">
           <InfoBox
             aria="for businesses"
             variant="filled"
