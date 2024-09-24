@@ -67,7 +67,7 @@ function PromisesSection() {
             to businesses and job-seekers
           </p>
         </motion.div>
-        <ul className="PromisesGuarantees mb-3 flex flex-col items-center text-center sm:mb-8 sm:items-end sm:text-right">
+        <ul className="PromisesGuarantees mb-3 flex flex-col items-center text-left sm:mb-8 sm:items-end sm:text-right">
           {landingPageText.guarantees.map((guarantee: string) => {
             return (
               <motion.li

@@ -39,25 +39,29 @@ export default function FeaturesSection() {
     } else {
       setDetail(e.target.name);
 
-      const updatedSelectedFeature = features[category].find(
-        (feature) => feature.title === e.target.name,
-      );
-
-      showModal(
-        <InfoModal
-          colorScheme={updatedSelectedFeature?.colorScheme}
-          title={e.target.name}
-          variant="filled"
-        >
-          <div>
-            {updatedSelectedFeature?.details.map((detail, index) => (
-              <p key={index} className="mb-4 text-left">
-                {detail.trim()}
-              </p>
-            ))}
-          </div>
-        </InfoModal>,
-      );
+      // set the feature modal to show only at a mobile screen size
+      if (window.innerWidth < 640) {
+        const updatedSelectedFeature = features[category].find(
+          (feature) => feature.title === e.target.name,
+        );
+        showModal(
+          <InfoModal
+            colorScheme={
+              updatedSelectedFeature?.colorScheme as ButtonColorOption
+            }
+            title={e.target.name}
+            variant="filled"
+          >
+            <div>
+              {updatedSelectedFeature?.details.map((detail, index) => (
+                <p key={index} className="mb-4 text-left">
+                  {detail.trim()}
+                </p>
+              ))}
+            </div>
+          </InfoModal>,
+        );
+      }
     }
   }
 
@@ -148,7 +152,7 @@ export default function FeaturesSection() {
       </div>
       {/* //animate this to fade in after a bit of time */}
       {detail === "none" && (
-        <div className="FeaturesPrompt mt-4 flex self-center pb-8 sm:mt-12 sm:-translate-x-[50%] sm:items-start">
+        <div className="FeaturesPrompt mt-12 flex self-center pb-8 sm:-translate-x-[50%] sm:items-start">
           <p className="FeaturesPrompt max-w-44 text-center text-xs text-jade">
             {landingPageText.arrowprompts.feature}
           </p>

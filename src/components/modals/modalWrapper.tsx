@@ -49,7 +49,11 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
         />
       </Dialog.Overlay>
       {/* aria-describedby={undefined} is used to prevent the modal from being announced as a dialog */}
-      <Dialog.Content asChild aria-describedby={undefined}>
+      <Dialog.Content
+        asChild
+        aria-describedby={undefined}
+        className="max-w-[95%]"
+      >
         <motion.div
           className="ModalOuterContainer fixed inset-0 z-20 flex items-center justify-center"
           onClick={hideModal}
