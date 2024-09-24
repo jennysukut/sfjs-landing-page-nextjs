@@ -55,28 +55,28 @@ export default function FeaturesSection() {
       setDetail(e.target.name);
 
       // set the feature modal to show only at a mobile screen size
-      if (window.innerWidth < 640) {
-        const updatedSelectedFeature = features[category].find(
-          (feature) => feature.title === e.target.name,
-        );
-        showModal(
-          <InfoModal
-            colorScheme={
-              updatedSelectedFeature?.colorScheme as ButtonColorOption
-            }
-            title={e.target.name}
-            variant="filled"
-          >
-            <div>
-              {updatedSelectedFeature?.details.map((detail, index) => (
-                <p key={index} className="mb-4 text-left">
-                  {detail.trim()}
-                </p>
-              ))}
-            </div>
-          </InfoModal>,
-        );
-      }
+      // if (window.innerWidth < 640) {
+      //   const updatedSelectedFeature = features[category].find(
+      //     (feature) => feature.title === e.target.name,
+      //   );
+      //   showModal(
+      //     <InfoModal
+      //       colorScheme={
+      //         updatedSelectedFeature?.colorScheme as ButtonColorOption
+      //       }
+      //       title={e.target.name}
+      //       variant="filled"
+      //     >
+      //       <div>
+      //         {updatedSelectedFeature?.details.map((detail, index) => (
+      //           <p key={index} className="mb-4 text-left">
+      //             {detail.trim()}
+      //           </p>
+      //         ))}
+      //       </div>
+      //     </InfoModal>,
+      //   );
+      // }
     }
   }
 

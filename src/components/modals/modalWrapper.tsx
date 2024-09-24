@@ -16,25 +16,8 @@ interface ModalWrapperProps {
   colorScheme?: LargeShadowColorOption;
 }
 
-const ModalWrapper: React.FC<ModalWrapperProps> = ({
-  children,
-  modalKey,
-  variant = "hollow",
-  colorScheme = "e6",
-}) => {
+const ModalWrapper: React.FC<ModalWrapperProps> = ({ children, modalKey }) => {
   const { hideModal, goBack, isBackButtonVisible } = useModal();
-
-  // const modalInnerContentsClasses = clsx(
-  //   "ModalInnerContents absolute rounded-[50px] px-14 pb-12 pt-14",
-  //   {
-  //     // variant
-  //     //the drop-shadow-jade from the hollow variant is being shown even if the passed-through variant is filled.
-  //     //I'm not sure if I'm passing information to the modal/modalWrapper correctly.
-  //     "border-[3px] border-solid border-jade bg-cream text-jade drop-shadow-jade":
-  //       variant === "hollow",
-  //     [`text-eggshell ${largeShadowColors[colorScheme]}`]: variant === "filled",
-  //   },
-  // );
 
   const handleModalContentClick = (event: React.MouseEvent) => {
     event.stopPropagation();

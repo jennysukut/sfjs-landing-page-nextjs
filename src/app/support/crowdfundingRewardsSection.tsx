@@ -47,7 +47,7 @@ export default function CrowdfundingRewardsSection() {
         addClasses="IntroContainer mb-12 self-center flex flex-col"
       >
         {/* <div className="IntroContainer mb-12 self-center"> */}
-        <h1 className="RewardIncentivesTitle pb-8 pl-12">
+        <h1 className="RewardIncentivesTitle pb-4 pl-12 sm:pb-8">
           our incentives & rewards:
         </h1>
         <InfoBox
@@ -68,7 +68,7 @@ export default function CrowdfundingRewardsSection() {
         our rewards breakdown:
       </h1>
       <div className="RewardsSections w-full flex-col justify-between gap-10 sm:flex-row">
-        <div className="IndividualRewards flex flex-col items-start gap-6 py-0">
+        <div className="IndividualRewards flex flex-col items-start py-0 sm:gap-6">
           <InfoBox
             aria="for individuals"
             variant="filled"
@@ -79,12 +79,12 @@ export default function CrowdfundingRewardsSection() {
             for individuals:
           </InfoBox>
 
-          <div className="IndividualRewardsContainer flex flex-col items-start gap-6">
+          <div className="IndividualRewardsContainer flex flex-col items-start gap-4 sm:gap-6">
             {printRewardsArray(individualRewardsArray)}
           </div>
         </div>
 
-        <div className="BusinessRewards flex flex-col items-start gap-6 border-olive/20 sm:border-l-2 sm:pl-10">
+        <div className="BusinessRewards mt-12 flex flex-col items-start gap-4 border-olive/20 sm:mt-0 sm:gap-6 sm:border-l-2 sm:pl-10">
           <InfoBox
             aria="for businesses"
             variant="filled"
