@@ -77,7 +77,7 @@ export default function FeaturesSection() {
   return (
     <section className="FeaturesSection flex flex-col items-center justify-center p-4 md:w-[95%] md:p-14">
       {/* Features Heading */}
-      <div className="FeaturesHeading flex flex-col items-center justify-center gap-8 pb-8 lg:flex-row">
+      <div className="FeaturesHeading flex flex-col items-center justify-center gap-8 pb-8 xl:flex-row">
         <div className="FeaturesTitle items-left mr-14 flex flex-col text-left sm:max-lg:mr-64">
           <h1 className="FeaturesTitle">our features:</h1>
           <p className="PromisesSubtitle font-semibold italic">
