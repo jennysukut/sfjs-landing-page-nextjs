@@ -5,7 +5,6 @@ import SiteButton from "@/components/siteButton";
 import Link from "next/link";
 import { useModal } from "@/contexts/ModalContext";
 import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsModal";
-import { motion } from "framer-motion";
 import MotionContainer from "@/components/motionContainer";
 import ButtonContainer from "@/components/buttonContainer";
 
@@ -13,11 +12,11 @@ export default function HopesSection() {
   const { showModal } = useModal();
 
   return (
-    <section className="HopesSection flex w-full flex-col items-center p-20 pb-8">
+    <section className="HopesSection flex w-full flex-col items-center p-8 pb-8 sm:p-20">
       <div className="HopesContainer flex flex-col">
-        <div className="HopesTitleContainer w-full">
+        <div className="HopesTitleContainer w-full p-8">
           <h1 className="HopeTitle text-start">our hopes:</h1>
-          <p className="HopeSubtitle mb-12 max-w-xl font-semibold italic">
+          <p className="HopeSubtitle mb-2 max-w-xl font-semibold italic sm:mb-12">
             we have big ideals and even bigger dreams
           </p>
         </div>
@@ -31,8 +30,8 @@ export default function HopesSection() {
           >
             to change perspectives in the current work landscape
           </InfoBox>
-          <div className="HopesDetails flex gap-8">
-            <div className="infoBoxesLeft flex max-w-sm flex-col items-end gap-8 py-6">
+          <div className="HopesDetails flex flex-col gap-8 sm:flex-row">
+            <div className="infoBoxesLeft mt-1 flex max-w-sm flex-col justify-center gap-8 py-4 sm:items-end sm:py-6">
               <div className="MotionContainer">
                 <InfoBox
                   aria="change perspectives"
@@ -50,13 +49,13 @@ export default function HopesSection() {
                   variant="filled"
                   colorScheme="f4"
                   size="small"
-                  addClasses="rounded-full text-sm"
+                  addClasses="rounded-full text-sm text-center"
                 >
                   to do good{" "}
                 </InfoBox>
               </div>
             </div>
-            <div className="infoBoxesRight flex max-w-sm flex-col items-start gap-8 py-6">
+            <div className="infoBoxesRight -mt-8 flex max-w-sm flex-col-reverse justify-center gap-8 py-4 sm:flex-col sm:items-start sm:py-6">
               <div className="MotionContainer">
                 <InfoBox
                   aria="change perspectives"
@@ -83,7 +82,7 @@ export default function HopesSection() {
           </div>
         </MotionContainer>
 
-        <ButtonContainer addClasses="ButtonContainer mt-24 flex gap-6 self-start pl-20">
+        <ButtonContainer addClasses="ButtonContainer mt-8 sm:mt-24 flex-col sm:flex-row gap-6 self-start sm:pl-20">
           <Link href={"/support"}>
             <SiteButton
               aria="support us"

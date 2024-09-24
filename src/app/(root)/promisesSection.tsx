@@ -89,7 +89,7 @@ function PromisesSection() {
             );
           })}
         </ul>
-        <ButtonContainer addClasses="justify-end">
+        <ButtonContainer addClasses="justify-center sm:justify-end">
           <Link href={"/support"}>
             <SiteButton
               aria="support us"

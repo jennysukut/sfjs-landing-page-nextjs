@@ -56,7 +56,7 @@ export default function MakersSection() {
   //the random line should be displayed in a siteLabel
 
   return (
-    <section className="MakersSection flex w-full flex-col self-center border-b-2 border-t-2 border-olive/20 pt-8 sm:pt-20">
+    <section className="MakersSection flex w-full flex-col self-center border-b-2 border-t-2 border-olive/20 pt-16 sm:pt-20">
       <div className="MakersContainer">
         <div className="MakersTitles ml-4 sm:ml-16">
           <h1 className="MakersTitle">our makers:</h1>
@@ -65,7 +65,7 @@ export default function MakersSection() {
             and expertise to make this idea a reality
           </p>
         </div>
-        <MotionContainer addClasses="AllMakers mb-20 mt-14 flex max-w-4xl flex-wrap items-center justify-center gap-10 gap-x-16">
+        <MotionContainer addClasses="AllMakers mb-20 mt-14 flex max-w-4xl flex-wrap items-center justify-center gap-10  gap-x-10 sm:gap-x-16">
           {/* MakersButtonContainer */}
           {makersArray.map(([key, maker]) => (
             <motion.div
@@ -96,7 +96,7 @@ export default function MakersSection() {
           <SiteLabel
             variant="display"
             aria={randomMakerDetail}
-            addClasses="ml-16 max-w-[600px]"
+            addClasses="sm:ml-16 max-w-[600px]"
           >
             {randomMakerDetail}
           </SiteLabel>

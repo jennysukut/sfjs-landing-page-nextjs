@@ -174,7 +174,7 @@ export default function FeaturesSection() {
       </div>
       {/* //animate this to fade in after a bit of time */}
       {detail === "none" && (
-        <div className="FeaturesPrompt mt-12 flex -translate-x-[50%] items-start pb-8">
+        <div className="FeaturesPrompt mt-4 flex self-center pb-8 sm:mt-12 sm:-translate-x-[50%] sm:items-start">
           <p className="FeaturesPrompt max-w-44 text-center text-xs text-jade">
             {landingPageText.arrowprompts.feature}
           </p>
@@ -187,7 +187,7 @@ export default function FeaturesSection() {
           ></Image>
         </div>
       )}
-      <ButtonContainer addClasses="self-end mt-8">
+      <ButtonContainer addClasses="self-end items-end mr-4 flex-col mt-8 sm:mr-0 sm:flex-row ">
         <SiteButton
           aria="sign up"
           size="large"
