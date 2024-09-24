@@ -107,7 +107,7 @@ export default function PricingPage() {
 
         {/* business pricing details */}
         {category === "business" && (
-          <div className="BusinessInfo flex flex-col">
+          <div className="BusinessInfo flex flex-col items-center">
             <InfoBox
               aria="business pricing"
               variant="filled"
@@ -128,7 +128,7 @@ export default function PricingPage() {
               </p>
             </InfoBox>
             <div
-              className={`transition-opacity duration-500 ease-in-out ${showListingQuestion ? "opacity-100" : "opacity-0"}`}
+              className={`transition-opacity duration-500 ease-in-out ${showListingQuestion ? "opacity-100" : "opacity-0"} self-start`}
             >
               <SiteButton
                 aria="inactive job question"
@@ -141,7 +141,7 @@ export default function PricingPage() {
               </SiteButton>
             </div>
 
-            <div className="PricingDetailsContainer flex flex-row-reverse items-center justify-between">
+            <div className="PricingDetailsContainer flex max-w-[40rem] flex-row-reverse items-center justify-between">
               <div className="InactiveDetailsContainer flex flex-col self-end">
                 {showInactiveDetails && (
                   <InfoBox
@@ -174,15 +174,13 @@ export default function PricingPage() {
                   </SiteButton>
                 </div>
               </div>
-              {showInactiveDetails && dumb && (
-                <Image
-                  width={200}
-                  height={100}
-                  alt="dumb"
-                  src="/wait-what.gif"
-                  className="mr-12 self-end rounded-3xl drop-shadow-lilac"
-                ></Image>
-              )}
+              <Image
+                width={200}
+                height={100}
+                alt="dumb"
+                src="/wait-what.gif"
+                className={`mr-12 self-end rounded-3xl drop-shadow-lilac ${dumb ? "opacity-100" : "opacity-0"} mb-12`}
+              ></Image>
             </div>
           </div>
         )}
