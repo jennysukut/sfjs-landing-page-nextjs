@@ -6,6 +6,7 @@ import Image from "next/image";
 
 import { useState } from "react";
 import { useModal } from "@/contexts/ModalContext";
+import { motion } from "framer-motion";
 
 import SiteButton from "@/components/siteButton";
 import InfoBox from "@/components/infoBox";
@@ -25,6 +26,20 @@ export default function FeaturesSection() {
   //we've got the little note + arrow after the features section that I want to only exist before someone has clicked one of the detail buttons.
   const [detail, setDetail] = useState("none");
   const { showModal } = useModal();
+
+  const fadeInItem = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        opacity: {
+          delay: 0.5,
+          duration: 0.8,
+          ease: "easeInOut",
+        },
+      },
+    },
+  };
 
   const featuresButtonStyles = clsx(
     "flex max-w-[60rem]",
@@ -152,7 +167,12 @@ export default function FeaturesSection() {
       </div>
       {/* //animate this to fade in after a bit of time */}
       {detail === "none" && (
-        <div className="FeaturesPrompt mt-12 flex self-center pb-8 sm:-translate-x-[50%] sm:items-start">
+        <motion.div
+          initial="hidden"
+          whileInView={"show"}
+          variants={fadeInItem}
+          className="FeaturesPrompt mt-12 flex self-center pb-8 sm:-translate-x-[50%] sm:items-start"
+        >
           <p className="FeaturesPrompt max-w-44 text-center text-xs text-jade">
             {landingPageText.arrowprompts.feature}
           </p>
@@ -163,7 +183,7 @@ export default function FeaturesSection() {
             width={146}
             height={86}
           ></Image>
-        </div>
+        </motion.div>
       )}
       <ButtonContainer addClasses="self-end items-end mr-4 flex-col mt-8 sm:mr-0 sm:flex-row ">
         <SiteButton

@@ -5,7 +5,7 @@ import Link from "next/link";
 import InfoBox from "@/components/infoBox";
 import { useModal } from "@/contexts/ModalContext";
 import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsModal";
-import { motion } from "framer-motion";
+import { delay, motion } from "framer-motion";
 import ButtonContainer from "@/components/buttonContainer";
 
 function PromisesSection() {
@@ -44,6 +44,20 @@ function PromisesSection() {
         },
         opacity: {
           duration: 0.5,
+          ease: "easeInOut",
+        },
+      },
+    },
+  };
+
+  const fadeInItem = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        opacity: {
+          delay: 1,
+          duration: 0.8,
           ease: "easeInOut",
         },
       },
@@ -114,7 +128,12 @@ function PromisesSection() {
         </ButtonContainer>
 
         {/* //animate this to fade in after a bit of time */}
-        <div className="PromisePrompt flex justify-end gap-2 pr-8 pt-8">
+        <motion.div
+          className="PromisePrompt flex justify-end gap-2 pr-8 pt-8"
+          initial="hidden"
+          whileInView={"show"}
+          variants={fadeInItem}
+        >
           <Image
             src="/PurpleArrow.svg"
             alt="arrow"
@@ -125,7 +144,7 @@ function PromisesSection() {
           <p className="PromisesPrompt max-w-44 pt-12 text-center text-xs text-lilac">
             {landingPageText.arrowprompts.guarantee}
           </p>
-        </div>
+        </motion.div>
       </motion.div>
     </section>
   );

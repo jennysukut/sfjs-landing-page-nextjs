@@ -1,6 +1,6 @@
 import React from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, color } from "framer-motion";
 import Image from "next/image";
 import { useModal } from "@/contexts/ModalContext";
 import clsx from "clsx";
@@ -12,15 +12,15 @@ import {
 interface ModalWrapperProps {
   children: React.ReactNode;
   modalKey: number;
-  variant?: "filled";
+  variant?: "filled" | "hollow";
   colorScheme?: LargeShadowColorOption;
 }
 
 const ModalWrapper: React.FC<ModalWrapperProps> = ({
   children,
   modalKey,
-  variant = "standard",
-  colorScheme = "d6",
+  variant = "hollow",
+  colorScheme = "e6",
 }) => {
   const { hideModal, goBack, isBackButtonVisible } = useModal();
 
@@ -28,8 +28,10 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
     "ModalInnerContents absolute rounded-[50px] px-14 pb-12 pt-14",
     {
       // variant
-      "border-[3px] border-solid border-jade bg-cream text-jade drop-shadow-jade":
-        variant === "standard",
+      //the drop-shadow-jade from the hollow variant is being shown even if the passed-through variant is filled.
+      //I'm not sure if I'm passing information to the modalWrapper correctly.
+      [`border-[3px] border-solid border-jade bg-cream text-jade drop-shadow-jade`]:
+        variant === "hollow",
       [`text-eggshell ${largeShadowColors[colorScheme]}`]: variant === "filled",
     },
   );
