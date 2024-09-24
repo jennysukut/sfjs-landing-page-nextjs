@@ -24,17 +24,17 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
 }) => {
   const { hideModal, goBack, isBackButtonVisible } = useModal();
 
-  const modalInnerContentsClasses = clsx(
-    "ModalInnerContents absolute rounded-[50px] px-14 pb-12 pt-14",
-    {
-      // variant
-      //the drop-shadow-jade from the hollow variant is being shown even if the passed-through variant is filled.
-      //I'm not sure if I'm passing information to the modalWrapper correctly.
-      [`border-[3px] border-solid border-jade bg-cream text-jade drop-shadow-jade`]:
-        variant === "hollow",
-      [`text-eggshell ${largeShadowColors[colorScheme]}`]: variant === "filled",
-    },
-  );
+  // const modalInnerContentsClasses = clsx(
+  //   "ModalInnerContents absolute rounded-[50px] px-14 pb-12 pt-14",
+  //   {
+  //     // variant
+  //     //the drop-shadow-jade from the hollow variant is being shown even if the passed-through variant is filled.
+  //     //I'm not sure if I'm passing information to the modal/modalWrapper correctly.
+  //     "border-[3px] border-solid border-jade bg-cream text-jade drop-shadow-jade":
+  //       variant === "hollow",
+  //     [`text-eggshell ${largeShadowColors[colorScheme]}`]: variant === "filled",
+  //   },
+  // );
 
   const handleModalContentClick = (event: React.MouseEvent) => {
     event.stopPropagation();
@@ -62,7 +62,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
         >
           <AnimatePresence>
             <motion.div
-              className={modalInnerContentsClasses}
+              className="ModalInnerContents absolute rounded-[50px] border-[3px] border-solid border-jade bg-cream px-14 pb-12 pt-14 text-jade drop-shadow-jade"
               onClick={handleModalContentClick}
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
