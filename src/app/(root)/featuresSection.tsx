@@ -43,7 +43,7 @@ export default function FeaturesSection() {
   };
 
   const featuresButtonStyles = clsx(
-    "hidden sm:flex max-w-[60rem]",
+    "hidden lg:flex max-w-[80rem] md:max-w-[60rem]",
     detail === "" || detail === "none"
       ? "flex-wrap justify-center gap-6 sm:px-14 pt-4"
       : "flex-col  items-center sm:items-end justify-start gap-4",
@@ -75,10 +75,10 @@ export default function FeaturesSection() {
   );
 
   return (
-    <section className="FeaturesSection flex w-[95%] flex-col items-center justify-center p-4 sm:p-14">
+    <section className="FeaturesSection flex flex-col items-center justify-center p-4 md:w-[95%] md:p-14">
       {/* Features Heading */}
-      <div className="FeaturesHeading flex flex-col items-center justify-center gap-8 pb-8 sm:flex-row">
-        <div className="FeaturesTitle mr-14 flex flex-col text-left">
+      <div className="FeaturesHeading flex flex-col items-center justify-center gap-8 pb-8 lg:flex-row">
+        <div className="FeaturesTitle items-left mr-14 flex flex-col text-left sm:max-lg:mr-64">
           <h1 className="FeaturesTitle">our features:</h1>
           <p className="PromisesSubtitle font-semibold italic">
             choose category:
@@ -113,8 +113,9 @@ export default function FeaturesSection() {
       <div
         className={`FeaturesContainer items-top flex flex-col self-center pt-4 align-middle ${detail === "" || detail === "none" ? "" : "sm:flex-row"}`}
       >
+        {/* Mobile Features */}
         <div
-          className={`MobileFeatureButtons flex flex-col items-center gap-6 sm:hidden`}
+          className={`MobileFeatureButtons flex flex-col items-center gap-6 lg:hidden`}
         >
           {features[category].map(({ colorScheme, title, details }) => {
             return (
@@ -122,7 +123,7 @@ export default function FeaturesSection() {
                 aria={title}
                 variant="filled"
                 colorScheme={colorScheme as ButtonColorOption}
-                onClick={() => mobileDetailClick(title)} // Pass title directly
+                onClick={() => mobileDetailClick(title)}
                 name={title}
                 key={`button-${title}`}
                 details={details}
@@ -152,7 +153,7 @@ export default function FeaturesSection() {
                 );
               })}
             </div>
-            <div className="TallFeaturesDetails hidden max-w-lg bg-cream p-8 pt-0 sm:flex">
+            <div className="TallFeaturesDetails hidden max-w-lg bg-cream p-8 pt-0 lg:flex">
               {selectedFeature && (
                 <InfoBox
                   key={`info-${selectedFeature.title}`}

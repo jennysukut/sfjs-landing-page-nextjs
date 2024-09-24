@@ -271,7 +271,7 @@ function DonationBox() {
         src="https://secure.helcim.app/helcim-pay/services/start.js"
       />
       <div
-        className={`DonationStation flex flex-col gap-6 px-8 pb-8 sm:w-5/12 ${dropDown.value === true ? "mt-20" : "mt-8"}`}
+        className={`DonationStation flex flex-col items-center gap-6 px-8 pb-8 lg:w-5/12 ${dropDown.value === true ? "mt-20" : "mt-8"}`}
       >
         <div className="ProgressBarContainer mb-4 mt-10 sm:mt-0">
           <p className="ProgressBarStatus">

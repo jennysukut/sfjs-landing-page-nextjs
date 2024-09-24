@@ -51,7 +51,7 @@ export default function PricingPage() {
     <div className="PricingPage flex w-[95%] max-w-[1600px] flex-col self-center p-14 pb-4 sm:w-[75%]">
       <div className="PricingTitleContainer flex flex-col self-start text-left">
         <h1 className="PricingTitle">our straightforward pricing:</h1>
-        <p className="PricingSubtitle w-[75%] self-end text-right text-sm italic sm:w-full sm:text-left sm:text-lg">
+        <p className="PricingSubtitle mt-8 w-[70%] self-end text-right text-sm italic sm:w-full sm:text-left sm:text-lg md:mt-4">
           {`because that's how all pricing should be`}
         </p>
       </div>
@@ -69,7 +69,7 @@ export default function PricingPage() {
 
         {/* business pricing details - MOBILE*/}
         {category === "business" && (
-          <div className="BusinessInfo flex flex-col items-center sm:hidden">
+          <div className="BusinessInfo flex flex-col items-center md:hidden">
             <InfoBox
               aria="business pricing"
               variant="filled"
@@ -103,7 +103,7 @@ export default function PricingPage() {
               </SiteButton>
             </div>
 
-            <div className="PricingDetailsContainer flex max-w-[40rem] flex-col items-center justify-between sm:flex-row-reverse">
+            <div className="PricingDetailsContainer flex max-w-[40rem] flex-col items-center justify-between lg:flex-row-reverse">
               <div className="InactiveDetailsContainer flex flex-col self-end">
                 {showInactiveDetails && (
                   <InfoBox
@@ -159,7 +159,7 @@ export default function PricingPage() {
 
         {/* individual pricing details - MOBILE*/}
         {category === "individual" && (
-          <div className="IndivualPricing sm:hidden">
+          <div className="IndivualPricing md:hidden">
             <InfoBox
               aria="individual pricing"
               variant="filled"
@@ -188,7 +188,7 @@ export default function PricingPage() {
         )}
       </div>
 
-      <div className="PricingDetails hidden gap-12 self-center pt-12 sm:flex">
+      <div className="PricingDetails hidden gap-12 self-center pt-12 md:flex">
         {/* individual pricing details */}
         {category === "individual" && (
           <InfoBox
@@ -219,7 +219,7 @@ export default function PricingPage() {
 
         {/* business pricing details */}
         {category === "business" && (
-          <div className="BusinessInfo flex flex-col items-center">
+          <div className="BusinessInfo hidden flex-col items-center md:flex">
             <InfoBox
               aria="business pricing"
               variant="filled"
@@ -253,7 +253,7 @@ export default function PricingPage() {
               </SiteButton>
             </div>
 
-            <div className="PricingDetailsContainer flex max-w-[40rem] flex-col items-center justify-between sm:flex-row-reverse">
+            <div className="PricingDetailsContainer flex max-w-[40rem] flex-col items-center justify-between lg:flex-row-reverse">
               <div className="InactiveDetailsContainer flex flex-col self-end">
                 {showInactiveDetails && (
                   <InfoBox
@@ -291,7 +291,7 @@ export default function PricingPage() {
                 height={100}
                 alt="dumb"
                 src="/wait-what.gif"
-                className={`mr-12 self-end rounded-3xl drop-shadow-lilac ${dumb ? "opacity-100" : "opacity-0"} mb-12 mt-8 sm:mt-0`}
+                className={`mr-12 self-end rounded-3xl drop-shadow-lilac ${dumb ? "opacity-100" : "opacity-0"} mb-12 mt-8 lg:mt-0`}
               ></Image>
             </div>
           </div>

@@ -6,7 +6,7 @@ export default function EstTimelineSection() {
   return (
     <MotionContainer
       direction="y"
-      addClasses="EstimatedTimelineContainer max-w-[100%] flex w-full flex-col items-end px-8 py-8 sm:pb-10 sm:pt-12"
+      addClasses="EstimatedTimelineContainer max-w-[100%] flex w-full flex-col items-end px-8 py-8 sm:pb-10 sm:pt-12 sm:mr-14"
     >
       {/* <div className="EstimatedTimelineContainer mx-auto flex w-full flex-col self-end pb-10 pt-12"> */}
       <h1 className="EstimatedTimelineTitle self-end">our est. timeline:</h1>

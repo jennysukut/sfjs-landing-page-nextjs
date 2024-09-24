@@ -10,6 +10,8 @@ import Link from "next/link";
 import ShareOptions from "./shareOptions";
 import SignupOptions from "./signupOptions";
 import MobileMenuModal from "./modals/mobileMenuModal";
+import SignupOptionsModal from "./modals/signupModals/signupOptionsModal";
+import ShareOptionsModal from "./modals/shareModals/shareOptionsModal";
 
 export const dropDown = signal(false);
 
@@ -30,7 +32,7 @@ export default function NavBar() {
   }, [clickedButton]);
 
   return (
-    <div className="NavBar mx-auto flex h-fit w-[98%] justify-between px-8 py-6 md:px-16">
+    <div className="NavBar mx-auto flex h-fit w-[98%] justify-between px-8 py-6 sm:px-16">
       <Link href={"/"}>
         <Image
           className="Logo mt-4 max-w-44 cursor-pointer transition-transform duration-300 hover:scale-105"
@@ -41,14 +43,22 @@ export default function NavBar() {
         />
       </Link>
 
-      <div className="NavButtonContainer hidden items-end gap-6 sm:flex sm:flex-row sm:items-center">
+      <div className="NavButtonContainer hidden items-end gap-4 sm:flex sm:flex-row sm:items-center sm:max-md:-mr-8">
         <SiteButton
           variant="filled"
           colorScheme="b4"
           aria="sign up"
           value="signup"
-          onClick={handleNavButtonClick}
+          onClick={(e) => {
+            if (window.innerWidth < 1024) {
+              // Check for small screen size
+              showModal(<SignupOptionsModal />);
+            } else {
+              handleNavButtonClick(e);
+            }
+          }}
           isSelected={clickedButton === "signup"}
+          className="hidden lg:block"
         >
           sign up
         </SiteButton>
@@ -82,7 +92,14 @@ export default function NavBar() {
           colorScheme="f3"
           aria="share on socials"
           value="share"
-          onClick={handleNavButtonClick}
+          onClick={(e) => {
+            if (window.innerWidth < 1024) {
+              // Check for small screen size
+              showModal(<ShareOptionsModal />);
+            } else {
+              handleNavButtonClick(e);
+            }
+          }}
           isSelected={clickedButton === "share"}
         >
           share

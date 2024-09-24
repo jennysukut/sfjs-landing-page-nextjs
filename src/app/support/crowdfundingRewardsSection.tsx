@@ -41,7 +41,7 @@ export default function CrowdfundingRewardsSection() {
   }
 
   return (
-    <section className="CrowdfundingRewardsSection mx-8 flex max-w-[98%] flex-col items-center border-t-2 border-olive/20 pt-12 sm:mt-20 sm:w-full">
+    <section className="CrowdfundingRewardsSection mx-8 flex max-w-[98%] flex-col items-center border-t-2 border-olive/20 pt-12 sm:mt-20 lg:w-full">
       <MotionContainer
         direction="x"
         addClasses="IntroContainer mb-12 self-center flex flex-col"
