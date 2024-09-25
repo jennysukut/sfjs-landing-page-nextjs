@@ -30,6 +30,8 @@ export default function SignupModalCollaborator1() {
   // I'd like to send this data to the next modal that pops up so we can send all the data to the server at once.
   // Would I send it through the <SignupModalCollaborator2 /> when I click the form's button?
   const onSubmit: SubmitHandler<FormData> = (data) => {
+    showModal(<SignupModalCollaborator2 data={data} />);
+
     console.log(data);
   };
 
@@ -81,10 +83,7 @@ export default function SignupModalCollaborator1() {
             variant="hollow"
             colorScheme="f4"
             aria="submit"
-            onClick={handleSubmit((data) => {
-              console.log(data);
-              showModal(<SignupModalCollaborator2 />);
-            })}
+            onClick={handleSubmit(onSubmit)}
           >
             tell us about you
           </SiteButton>
