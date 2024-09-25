@@ -30,7 +30,7 @@ export default function SignupModalIndividual3() {
             onClick={hideModal}
             addClasses="px-6"
           >
-            donate some dollarbucks
+            support our development
           </SiteButton>
         </Link>
         <SiteButton

@@ -43,15 +43,21 @@ export default function SignupModalIndividual1() {
   };
 
   const sendFellowSignupEmail = async (email: string, name: string) => {
-    //sending the request to the API endpoint and attaching the Body information: email and firstname
-    //we can add more information depending on the type of email
+    const firstName = name.split(" ")[0];
+    console.log(firstName);
     await fetch("/api/emails/signupEmails/fellowSignupEmail", {
       method: "POST",
       body: JSON.stringify({
         email: email,
-        firstName: name, //we only have access to the entire name. Perhaps we should separate into firstName and lastName?
+        firstName: firstName,
       }),
-    });
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const [signUp, { loading, error }] = useMutation(SIGNUP_MUTATION);
@@ -61,6 +67,8 @@ export default function SignupModalIndividual1() {
     try {
       const result = await signUp({ variables: data });
       console.log("Signup successful:", result.data.signUp);
+      console.log(data); //IT WORKS!!!!!!!!!
+
       //send confirmation email here using the person's name and email
       sendFellowSignupEmail(data.email, data.name);
       showModal(<SignupModalIndividual2 />);

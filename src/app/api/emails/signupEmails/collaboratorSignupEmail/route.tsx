@@ -9,7 +9,7 @@ export async function POST(request: Request) {
   await resend.emails.send({
     from: "onboarding@resend.dev",
     to: email,
-    subject: "Thank You from Straightforward Job Site!",
+    subject: "welcome to Straightforward Job Site!",
     react: CollaboratorSignupEmail({ firstName }),
   });
 

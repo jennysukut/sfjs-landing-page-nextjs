@@ -5,9 +5,7 @@ type SignupEmailProps = {
   firstName: string;
 };
 
-export default function IndividualSignupEmail({
-  firstName = "testName",
-}: SignupEmailProps) {
+export default function IndividualSignupEmail({ firstName }: SignupEmailProps) {
   const baseUrl = "http://localhost:3000";
   return (
     <Html>

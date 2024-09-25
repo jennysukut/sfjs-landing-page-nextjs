@@ -88,7 +88,10 @@ export const makersInfo = {
     lastName: "vilas",
     img: "bg-[url('/makers/lean.svg')]",
     shadow: "bg-sky",
-    details: [],
+    details: [
+      "the kind of person to google raw potatoes before trying them.",
+      "is still skeptical about said potatoes",
+    ],
   },
   "joshua caldwell": {
     firstName: "joshua",
@@ -124,7 +127,14 @@ export const makersInfo = {
     lastName: "sonthalia",
     img: "bg-[url('/makers/vishal.svg')]",
     shadow: "bg-olive",
-    details: [],
+    details: [
+      "Father",
+      "Software Engineer",
+      "Curious",
+      "Enjoys potatoes! Especially Indian cuisine",
+      "Vegetarian since birth",
+      "And not curious about meat.",
+    ],
   },
   "katelyn lusher": {
     firstName: "katelyn",
