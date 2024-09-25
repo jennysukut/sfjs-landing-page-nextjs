@@ -1,12 +1,14 @@
-import SiteButton from "@/components/siteButton";
-import { landingPageText } from "@/lib/siteCopy/landingPageText";
+import { motion } from "framer-motion";
+import { useModal } from "@/contexts/ModalContext";
+
 import Image from "next/image";
 import Link from "next/link";
+import SiteButton from "@/components/siteButton";
 import InfoBox from "@/components/infoBox";
-import { useModal } from "@/contexts/ModalContext";
-import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsModal";
-import { delay, motion } from "framer-motion";
 import ButtonContainer from "@/components/buttonContainer";
+import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsModal";
+
+import { landingPageText } from "@/lib/siteCopy/landingPageText";
 
 function PromisesSection() {
   const { showModal } = useModal();

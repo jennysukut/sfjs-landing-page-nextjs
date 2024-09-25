@@ -1,7 +1,7 @@
-import { supportPageInfo } from "@/lib/siteCopy/supportPageInfo";
-import SiteButton from "@/components/siteButton";
 import InfoBox from "@/components/infoBox";
 import MotionContainer from "@/components/motionContainer";
+
+import { supportPageInfo } from "@/lib/siteCopy/supportPageInfo";
 
 const individualRewardsArray = Object.entries(
   supportPageInfo.rewards.individual,

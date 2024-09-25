@@ -1,6 +1,7 @@
 import InfoBox from "@/components/infoBox";
-import { supportPageInfo } from "@/lib/siteCopy/supportPageInfo";
 import MotionContainer from "@/components/motionContainer";
+
+import { supportPageInfo } from "@/lib/siteCopy/supportPageInfo";
 
 export default function EstTimelineSection() {
   return (

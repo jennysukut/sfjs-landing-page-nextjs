@@ -1,5 +1,6 @@
 import InfoBox from "@/components/infoBox";
 import SiteLabel from "@/components/siteLabel";
+
 import { supportPageInfo } from "@/lib/siteCopy/supportPageInfo";
 
 export default function StatusTimelineGoalsSection() {

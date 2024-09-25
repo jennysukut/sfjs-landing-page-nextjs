@@ -1,12 +1,13 @@
 "useclient";
 
+import { useModal } from "@/contexts/ModalContext";
+
+import Link from "next/link";
 import InfoBox from "@/components/infoBox";
 import SiteButton from "@/components/siteButton";
-import Link from "next/link";
-import { useModal } from "@/contexts/ModalContext";
-import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsModal";
 import MotionContainer from "@/components/motionContainer";
 import ButtonContainer from "@/components/buttonContainer";
+import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsModal";
 
 export default function HopesSection() {
   const { showModal } = useModal();
@@ -51,7 +52,7 @@ export default function HopesSection() {
                   size="small"
                   addClasses="rounded-full text-sm text-center"
                 >
-                  to do good{" "}
+                  to write our own stories
                 </InfoBox>
               </div>
             </div>

@@ -20,6 +20,7 @@ type FormData = z.infer<typeof fellowSchema>;
 export default function SignupModalIndividual1() {
   const { showModal } = useModal();
   const [betaTester, setBetaTester] = useState(false);
+  const [disabledButton, setDisabledButton] = useState(false);
   const {
     register,
     handleSubmit,
@@ -39,12 +40,27 @@ export default function SignupModalIndividual1() {
     setBetaTester(newValue);
   };
 
+  const sendFellowSignupEmail = async (email: string, name: string) => {
+    //sending the request to the API endpoint and attaching the Body information: email and firstname
+    //we can add more information depending on the type of email
+    await fetch("/api/emails/signupEmails/fellowSignupEmail", {
+      method: "POST",
+      body: JSON.stringify({
+        email: email,
+        firstName: name, //we only have access to the entire name. Perhaps we should separate into firstName and lastName?
+      }),
+    });
+  };
+
   const [signUp, { loading, error }] = useMutation(SIGNUP_MUTATION);
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
+    setDisabledButton(true);
     try {
       const result = await signUp({ variables: data });
       console.log("Signup successful:", result.data.signUp);
+      //send confirmation email here using the person's name and email
+      sendFellowSignupEmail(data.email, data.name);
       showModal(<SignupModalIndividual2 />);
     } catch (err) {
       console.error("Signup error:", err);
@@ -116,9 +132,9 @@ export default function SignupModalIndividual1() {
             colorScheme="f1"
             aria="submit"
             onClick={handleSubmit(onSubmit)}
-            disabled={loading}
+            disabled={disabledButton}
           >
-            {loading ? "Signing up..." : "sign me up!"}
+            {disabledButton ? "Signing up..." : "sign me up!"}
           </SiteButton>
         </div>
       </form>

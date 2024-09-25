@@ -1,17 +1,20 @@
 "useclient";
 
+import { useState } from "react";
+import { useModal } from "@/contexts/ModalContext";
+import { motion } from "framer-motion";
+
+import Link from "next/link";
 import SiteButton from "@/components/siteButton";
 import SiteLabel from "@/components/siteLabel";
-import { useState } from "react";
-import { makersInfo } from "@/lib/makersInfo";
-import getRandomMakerDetails from "@/utils/getRandomMaker";
-import { MakerInfoType } from "@/lib/makersInfo";
-import Link from "next/link";
-import { useModal } from "@/contexts/ModalContext";
-import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsModal";
-import { motion } from "framer-motion";
 import MotionContainer from "@/components/motionContainer";
 import ButtonContainer from "@/components/buttonContainer";
+import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsModal";
+import SignupModalCollaborator1 from "@/components/modals/signupModals/signupCollaborator1";
+import getRandomMakerDetails from "@/utils/getRandomMaker";
+
+import { makersInfo } from "@/lib/makersInfo";
+import { MakerInfoType } from "@/lib/makersInfo";
 
 const makersArray = Object.entries(makersInfo);
 
@@ -24,15 +27,6 @@ export default function MakersSection() {
     setClickedMaker(maker);
     setRandomMakerDetail(getRandomMakerDetails(maker, randomMakerDetail));
   }
-
-  const motionContainer = {
-    show: {
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.4,
-      },
-    },
-  };
 
   const motionItem = {
     hidden: { opacity: 0, y: 50 },
@@ -122,6 +116,7 @@ export default function MakersSection() {
             variant="filled"
             colorScheme="b4"
             addClasses="px-14"
+            onClick={() => showModal(<SignupModalCollaborator1 />)}
           >
             collaborate with us
           </SiteButton>

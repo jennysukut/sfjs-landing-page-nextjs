@@ -40,10 +40,11 @@ export default function NavBar() {
           width={229}
           height={75}
           alt="Straightforward Job Site logo"
+          onClick={() => setClickedButton("main")}
         />
       </Link>
 
-      <div className="NavButtonContainer hidden items-end gap-4 sm:flex sm:flex-row sm:items-center sm:max-md:-mr-8">
+      <div className="NavButtonContainer hidden items-end gap-4 sm:flex sm:flex-row sm:items-center sm:max-md:-mr-8 md:gap-6">
         <SiteButton
           variant="filled"
           colorScheme="b4"

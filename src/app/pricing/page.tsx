@@ -1,10 +1,13 @@
 "use client";
 
+import { useState } from "react";
+
+import Image from "next/image";
 import SiteButton from "@/components/siteButton";
 import InfoBox from "@/components/infoBox";
-import { useState } from "react";
+
 import { pricingDetails } from "@/lib/siteCopy/pricingDetails";
-import Image from "next/image";
+
 type Category = "individual" | "business";
 
 export default function PricingPage() {

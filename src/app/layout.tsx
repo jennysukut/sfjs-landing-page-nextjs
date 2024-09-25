@@ -1,9 +1,11 @@
-import type { Metadata } from "next";
 import "./globals.css";
+import type { Metadata } from "next";
+import dynamic from "next/dynamic";
+
+import { ModalProvider } from "@/contexts/ModalContext";
+
 import NavBar from "@/components/navBar";
 import Footer from "@/components/footer";
-import { ModalProvider } from "@/contexts/ModalContext";
-import dynamic from "next/dynamic";
 
 const ApolloWrapper = dynamic(() => import("@/app/apolloClient"), {
   ssr: false,

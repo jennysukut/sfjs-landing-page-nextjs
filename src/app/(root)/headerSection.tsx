@@ -1,8 +1,9 @@
-import SiteButton from "@/components/siteButton";
-import Link from "next/link";
 import { useModal } from "@/contexts/ModalContext";
-import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsModal";
+
+import Link from "next/link";
+import SiteButton from "@/components/siteButton";
 import ButtonContainer from "@/components/buttonContainer";
+import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsModal";
 
 function HeaderSection() {
   const { showModal } = useModal();

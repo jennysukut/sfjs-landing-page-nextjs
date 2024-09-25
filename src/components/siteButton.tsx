@@ -73,7 +73,7 @@ const SiteButton: React.FC<ButtonProps> = ({
       "px-12 sm:px-16": padding === "extra",
 
       // diabled
-      "disabled:translate-x-1 disabled:translate-y-1 disabled:bg-blush disabled:text-white disabled:hover:cursor-not-allowed disabled:hover:saturate-100":
+      "disabled:translate-x-1 disabled:translate-y-1 disabled:border-midnight disabled:bg-midnight disabled:text-emerald disabled:hover:cursor-not-allowed disabled:hover:saturate-100":
         disabled,
     },
     addClasses,

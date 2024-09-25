@@ -5,10 +5,15 @@ export const makersInfo = {
     img: "bg-[url('/makers/jenny.svg')]",
     shadow: "bg-magenta",
     details: [
-      "comes up with silly prompts for websites",
-      "like one where you see the makers of a website",
-      "and get little details of them when you click on their faces",
-      "also, she laughs at her own jokes",
+      "is a digital nomad, living out of a backpack",
+      "believes in the magical power of color",
+      "has a history of baking fantastical french macarons",
+      "thinks imagination and creativity can change the world",
+      "also thinks the avatar, master of all 4 elements, can change the world",
+      "can sew pants",
+      "wants to make everything herself",
+      "is a major proponent of creative chaos",
+      "laughs at her own jokes",
     ],
   },
   "joshua duncan": {
@@ -48,6 +53,13 @@ export const makersInfo = {
       "Has never eaten a raw potato and is now tempted to take a bite of one",
       "Is a huge fan of video games, especially retro arcade games",
     ],
+  },
+  "dillon arnold": {
+    firstName: "dillon",
+    lastName: "arnold",
+    img: "bg-[url('/makers/dillon.svg')]",
+    shadow: "bg-orange",
+    details: [],
   },
 
   "jacob sukut": {
