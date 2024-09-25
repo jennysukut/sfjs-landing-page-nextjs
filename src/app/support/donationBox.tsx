@@ -6,6 +6,7 @@ import { useSignals } from "@preact/signals-react/runtime";
 import { gql } from "@apollo/client";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useModal } from "@/contexts/ModalContext";
 
 import Script from "next/script";
 
@@ -17,6 +18,7 @@ import { supportPageInfo } from "@/lib/siteCopy/supportPageInfo";
 import { dropDown } from "@/components/navBar";
 
 import getRandomColorScheme from "@/utils/getRandomColorScheme";
+import DonationThanksModal from "@/components/modals/donationThanksModal";
 
 type DonationCategory = "business" | "individual";
 
@@ -45,6 +47,7 @@ type BusinessFormData = z.infer<typeof businessDonationSchema>;
 
 function DonationBox() {
   useSignals();
+  const { showModal } = useModal();
   const rewards = supportPageInfo.rewards;
   const targetAmount = 15000;
   const [currentAmount, setCurrentAmount] = useState(0);
@@ -154,6 +157,7 @@ function DonationBox() {
       data.email,
       data.amount,
     );
+    showModal(<DonationThanksModal />);
     console.log("Individual donation:", data);
   };
 
@@ -167,6 +171,8 @@ function DonationBox() {
     const parsedAmount = parseAmount(selectedAmount);
     setCurrentAmount((prevAmount) => prevAmount + parsedAmount);
     sendBusinessDonationEmail(data.businessName, data.email, data.amount);
+    showModal(<DonationThanksModal />);
+
     console.log("Business donation:", data);
   };
 
