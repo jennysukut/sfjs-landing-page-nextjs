@@ -148,6 +148,12 @@ function DonationBox() {
 
     const parsedAmount = parseAmount(selectedAmount);
     setCurrentAmount((prevAmount) => prevAmount + parsedAmount);
+    sendFellowDonationEmail(
+      data.firstName,
+      data.lastName,
+      data.email,
+      data.amount,
+    );
     console.log("Individual donation:", data);
   };
 
@@ -160,6 +166,7 @@ function DonationBox() {
 
     const parsedAmount = parseAmount(selectedAmount);
     setCurrentAmount((prevAmount) => prevAmount + parsedAmount);
+    sendBusinessDonationEmail(data.businessName, data.email, data.amount);
     console.log("Business donation:", data);
   };
 
@@ -169,6 +176,39 @@ function DonationBox() {
   };
   const logBusinessErrors = (errors: typeof errorsBusiness) => {
     console.log("Form Errors:", errors);
+  };
+
+  // donation emails
+  const sendFellowDonationEmail = async (
+    email: string,
+    firstName: string,
+    lastName: string,
+    amount: string,
+  ) => {
+    await fetch("/api/emails/signupEmails/businessDonationEmail", {
+      method: "POST",
+      body: JSON.stringify({
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        amount: amount,
+      }),
+    });
+  };
+
+  const sendBusinessDonationEmail = async (
+    email: string,
+    businessName: string,
+    amount: string,
+  ) => {
+    await fetch("/api/emails/signupEmails/businessDonationEmail", {
+      method: "POST",
+      body: JSON.stringify({
+        email: email,
+        businessName: businessName,
+        amount: amount,
+      }),
+    });
   };
 
   //setting chosen amount for donation via buttons
