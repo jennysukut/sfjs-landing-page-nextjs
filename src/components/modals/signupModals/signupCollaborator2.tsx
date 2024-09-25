@@ -1,11 +1,13 @@
-import SiteButton from "../../siteButton";
 import * as Dialog from "@radix-ui/react-dialog";
+import * as z from "zod";
+
 import { useModal } from "@/contexts/ModalContext";
-import SignupModalCollaborator3 from "./signupCollaborator3";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+
+import SiteButton from "../../siteButton";
+import SignupModalCollaborator3 from "./signupCollaborator3";
 
 const collaboratorSchema2 = z.object({
   message: z.string().min(10, { message: "Please provide more details" }),
@@ -30,8 +32,24 @@ export default function SignupModalCollaborator2() {
     },
   });
 
+  const sendCollaboratorSignupEmail = async (email: string, name: string) => {
+    //sending the request to the API endpoint and attaching the Body information: email and firstname
+    //we can add more information depending on the type of email
+    await fetch("/api/emails/signupEmails/collaboratorSignupEmail", {
+      method: "POST",
+      body: JSON.stringify({
+        email: email,
+        firstName: name, //we only have access to the entire name. Perhaps we should separate into firstName and lastName?
+      }),
+    });
+  };
+
   // I'd like to grab the data from the first Collaborator Signup modal and plug it into this formData to send to the server
-  const onSubmit: SubmitHandler<FormData> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    console.log(data);
+    //send email confirmation - need to grab data from the previous modal
+    // sendCollaboratorSignupEmail()
+  };
 
   return (
     <div className="SignupModal flex w-[400px] max-w-[450px] flex-col gap-4 text-jade">

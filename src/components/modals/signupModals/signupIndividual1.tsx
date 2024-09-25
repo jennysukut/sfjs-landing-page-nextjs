@@ -1,13 +1,15 @@
-import SiteButton from "../../siteButton";
 import * as Dialog from "@radix-ui/react-dialog";
-import SignupModalIndividual2 from "./signupIndividual2";
+import * as z from "zod";
+
 import { useModal } from "@/contexts/ModalContext";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import { SIGNUP_MUTATION } from "@/graphql/mutations";
 import { useMutation } from "@apollo/client";
+
+import SiteButton from "../../siteButton";
+import SignupModalIndividual2 from "./signupIndividual2";
 
 const fellowSchema = z.object({
   name: z.string().min(2, { message: "Required" }),

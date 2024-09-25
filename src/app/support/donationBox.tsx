@@ -87,12 +87,62 @@ function DonationBox() {
     },
   });
 
+  //FRONT END NEEDED INFO FOR PAYMENT: Carl's Helpful Notes
+  // 1) add a script: <script type="text/javascript" src="https://secure.helcim.app/helcim-pay/services/start.js"></script>
+  // 2) call the backend api initializeCheckout to obtain the "checkoutToken"
+  // 3) call the function "appendHelcimPayIframe" like this:
+  // // Link HTML example
+  // <a href="javascript: appendHelcimPayIframe(checkoutToken)">
+  //   Pay Now
+  // </a>
+
+  // // Onclick HTML example
+  // // Requires JavaScript onclick event handler
+
+  // <a href="#" id="pay-now">Pay Now</a>
+
+  // CODE FROM EARLIER DONATION BOX
+  // Helcim Payment Initializer
+  // const INITIALIZE_PAYMENT = gql`
+  //   mutation InitializePayment($payment: PaymentInput!) {
+  //     initializePayment(payment: $payment) {
+  //       checkoutToken
+  //     }
+  //   }
+  // `;
+
+  // const testPayment = () => {
+  //   const payment = {
+  //     paymentType: "purchase",
+  //     amount: "0.01",
+  //     currency: "USD",
+  //     email: "test@gmail.com",
+  //     accountName: "test name",
+  //   };
+
+  //   console.log(payment);
+
+  //   client
+  //     .mutate({
+  //       mutation: INITIALIZE_PAYMENT,
+  //       variables: { payment },
+  //     })
+  //     .then(({ data }) => {
+  //       console.log("success");
+  //       // @ts-ignore // this function is added by an external script
+  //       appendHelcimPayIframe(data.initializePayment.checkoutToken);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.message);
+  //     });
+  // };
+
   // options for form submission
   const onIndividualDonation: SubmitHandler<FellowFormData> = (data) => {
     //set isSubmitting to reflect a "submitting"
     setIsSubmitting(true);
 
-    // open Helcim payment processor. If the processing is successful and the amount matches the data.amount
+    // open Helcim payment processor. If the processing is successful
     // and the data.amount === selectedAmount,
     // show the new percentage and reroute the fellow to a successful modal and send a fellow receipt email
 

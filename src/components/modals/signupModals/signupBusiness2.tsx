@@ -1,7 +1,8 @@
-import SiteButton from "../../siteButton";
 import * as Dialog from "@radix-ui/react-dialog";
-import { useModal } from "@/contexts/ModalContext";
 import Link from "next/link";
+import { useModal } from "@/contexts/ModalContext";
+
+import SiteButton from "../../siteButton";
 
 export default function SignupModalBusiness2() {
   const { hideModal } = useModal();

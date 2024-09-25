@@ -1,9 +1,10 @@
-import React from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { motion, AnimatePresence, color } from "framer-motion";
+
+import React from "react";
 import Image from "next/image";
+
 import { useModal } from "@/contexts/ModalContext";
-import clsx from "clsx";
+import { motion, AnimatePresence, color } from "framer-motion";
 import {
   largeShadowColors,
   LargeShadowColorOption,

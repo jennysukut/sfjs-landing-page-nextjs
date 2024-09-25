@@ -1,11 +1,13 @@
-import SiteButton from "../../siteButton";
 import * as Dialog from "@radix-ui/react-dialog";
+import * as z from "zod";
+
 import { useModal } from "@/contexts/ModalContext";
-import SignupModalBusiness2 from "./signupBusiness2";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+
+import SiteButton from "../../siteButton";
+import SignupModalBusiness2 from "./signupBusiness2";
 
 const businessSchema = z.object({
   business: z.string().min(2, { message: "Required" }),
@@ -33,8 +35,29 @@ export default function SignupModalBusiness1() {
     },
   });
 
+  const sendBusinessSignupEmail = async (
+    email: string,
+    business: string,
+    betaTester?: boolean,
+  ) => {
+    //sending the request to the API endpoint and attaching the Body information: email and firstname
+    //we can add more information depending on the type of email
+    await fetch("/api/emails/signupEmails/collaboratorSignupEmail", {
+      method: "POST",
+      body: JSON.stringify({
+        email: email,
+        businessName: business,
+        betaTester: betaTester,
+      }),
+    });
+  };
+
   // Submission Handler - send this data to the server.
-  const onSubmit: SubmitHandler<FormData> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    //send email after form is submitted successfully
+    sendBusinessSignupEmail(data.business, data.email, data.betaTester);
+    console.log(data);
+  };
 
   return (
     <div className="SignupModal flex max-w-[450px] flex-col gap-4 text-jade">

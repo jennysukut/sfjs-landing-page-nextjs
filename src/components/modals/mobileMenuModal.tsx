@@ -1,16 +1,16 @@
-import SiteButton from "../siteButton";
-import { useModal } from "@/contexts/ModalContext";
 import * as Dialog from "@radix-ui/react-dialog";
-import SignupOptionsModal from "./signupModals/signupOptionsModal";
+
+import { useModal } from "@/contexts/ModalContext";
+
 import Link from "next/link";
+import SiteButton from "../siteButton";
+import SignupOptionsModal from "./signupModals/signupOptionsModal";
 import ShareOptionsModal from "./shareModals/shareOptionsModal";
-import ModalWrapper from "./modalWrapper";
 
 export default function MobileMenuModal() {
   const { showModal, hideModal } = useModal();
 
   return (
-    // <ModalWrapper modalKey={10} variant="hollow">
     <div className="SignupOptionsModal flex w-[250px] flex-col items-center gap-4">
       <Dialog.Title className="Title w-full pb-4 text-center text-xl font-bold">
         our menu:
@@ -62,6 +62,5 @@ export default function MobileMenuModal() {
         </SiteButton>
       </div>
     </div>
-    // </ModalWrapper>
   );
 }

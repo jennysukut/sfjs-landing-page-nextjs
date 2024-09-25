@@ -1,10 +1,12 @@
-import SiteButton from "../../siteButton";
 import * as Dialog from "@radix-ui/react-dialog";
+import * as z from "zod";
+
 import { useModal } from "@/contexts/ModalContext";
-import SignupModalCollaborator2 from "./signupCollaborator2";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+
+import SiteButton from "../../siteButton";
+import SignupModalCollaborator2 from "./signupCollaborator2";
 
 // this is the first part of a two-part form, this schema covers this modal, I've got another one on the signupCollaborator2 modal
 const collaboratorSchema = z.object({
@@ -20,8 +22,6 @@ export default function SignupModalCollaborator1() {
   const {
     register,
     handleSubmit,
-    setValue,
-    watch,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(collaboratorSchema),
@@ -29,7 +29,9 @@ export default function SignupModalCollaborator1() {
 
   // I'd like to send this data to the next modal that pops up so we can send all the data to the server at once.
   // Would I send it through the <SignupModalCollaborator2 /> when I click the form's button?
-  const onSubmit: SubmitHandler<FormData> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    console.log(data);
+  };
 
   return (
     <div className="SignupCollaboratorModal flex max-w-[450px] flex-col gap-4 text-jade">
