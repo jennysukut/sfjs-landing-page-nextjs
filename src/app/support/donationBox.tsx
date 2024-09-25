@@ -24,8 +24,7 @@ type DonationCategory = "business" | "individual";
 
 // zod schemas
 const fellowDonationSchema = z.object({
-  firstName: z.string().min(2, { message: "Your first name is required" }),
-  lastName: z.string().min(2, { message: "Your last name is required" }),
+  name: z.string().min(2, { message: "Your name is required" }),
   email: z.string().email({ message: "Invalid email address" }),
   amount: z.string().min(1, { message: "Amount is required" }),
   address: z.string().optional(),
@@ -151,13 +150,16 @@ function DonationBox() {
 
     const parsedAmount = parseAmount(selectedAmount);
     setCurrentAmount((prevAmount) => prevAmount + parsedAmount);
-    sendFellowDonationEmail(
-      data.firstName,
-      data.lastName,
-      data.email,
-      data.amount,
-    );
+    const { name, email, amount } = data;
+    sendFellowDonationEmail(email, name, amount)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     showModal(<DonationThanksModal />);
+    //CLEAR FORMS
     console.log("Individual donation:", data);
   };
 
@@ -170,9 +172,16 @@ function DonationBox() {
 
     const parsedAmount = parseAmount(selectedAmount);
     setCurrentAmount((prevAmount) => prevAmount + parsedAmount);
-    sendBusinessDonationEmail(data.businessName, data.email, data.amount);
+    const { email, businessName, amount } = data;
+    sendBusinessDonationEmail(email, businessName, amount)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     showModal(<DonationThanksModal />);
-
+    //CLEAR FORMS
     console.log("Business donation:", data);
   };
 
@@ -187,16 +196,16 @@ function DonationBox() {
   // donation emails
   const sendFellowDonationEmail = async (
     email: string,
-    firstName: string,
-    lastName: string,
+    name: string,
     amount: string,
   ) => {
-    await fetch("/api/emails/signupEmails/businessDonationEmail", {
+    const firstName = name.split(" ")[0];
+    console.log(firstName);
+    await fetch("/api/emails/donationEmails/fellowDonationEmail", {
       method: "POST",
       body: JSON.stringify({
         email: email,
         firstName: firstName,
-        lastName: lastName,
         amount: amount,
       }),
     });
@@ -207,7 +216,7 @@ function DonationBox() {
     businessName: string,
     amount: string,
   ) => {
-    await fetch("/api/emails/signupEmails/businessDonationEmail", {
+    await fetch("/api/emails/donationEmails/businessDonationEmail", {
       method: "POST",
       body: JSON.stringify({
         email: email,
@@ -220,6 +229,7 @@ function DonationBox() {
   //setting chosen amount for donation via buttons
   const handleAmountChange = (amount: any) => {
     setCustomAmount("");
+
     //remove amounts if a button is already selected then gets clicked again
     if (String(amount) === selectedAmount) {
       if (donationCategory === "individual") {
@@ -473,28 +483,17 @@ function DonationBox() {
                 <>
                   <input
                     type="name"
-                    placeholder="Your First Name*"
+                    placeholder="First & Last Name*"
                     className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
-                    aria-label="firstName"
-                    {...registerIndividual("firstName")}
+                    aria-label="name"
+                    {...registerIndividual("name")}
                   />
-                  {errorsIndividual.firstName?.message && (
+                  {errorsIndividual.name?.message && (
                     <p className="text-left text-xs font-medium text-orange">
-                      {errorsIndividual.firstName.message.toString()}
+                      {errorsIndividual.name.message.toString()}
                     </p>
                   )}
-                  <input
-                    type="name"
-                    placeholder="Your Last Name*"
-                    className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
-                    aria-label="lastName"
-                    {...registerIndividual("lastName")}
-                  />
-                  {errorsIndividual.lastName?.message && (
-                    <p className="text-left text-xs font-medium text-orange">
-                      {errorsIndividual.lastName.message.toString()}
-                    </p>
-                  )}
+
                   <input
                     type="email"
                     placeholder="Your Email*"

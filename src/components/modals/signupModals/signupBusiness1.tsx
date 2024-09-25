@@ -40,8 +40,6 @@ export default function SignupModalBusiness1() {
     business: string,
     betaTester?: boolean,
   ) => {
-    //sending the request to the API endpoint and attaching the Body information: email and firstname
-    //we can add more information depending on the type of email
     await fetch("/api/emails/signupEmails/collaboratorSignupEmail", {
       method: "POST",
       body: JSON.stringify({

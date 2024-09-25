@@ -33,13 +33,12 @@ export default function SignupModalCollaborator2() {
   });
 
   const sendCollaboratorSignupEmail = async (email: string, name: string) => {
-    //sending the request to the API endpoint and attaching the Body information: email and firstname
-    //we can add more information depending on the type of email
+    const firstName = name.split(" ")[0];
     await fetch("/api/emails/signupEmails/collaboratorSignupEmail", {
       method: "POST",
       body: JSON.stringify({
         email: email,
-        firstName: name, //we only have access to the entire name. Perhaps we should separate into firstName and lastName?
+        firstName: firstName,
       }),
     });
   };

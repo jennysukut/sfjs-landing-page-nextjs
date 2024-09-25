@@ -41,6 +41,7 @@ export default function IndividualSignupEmail({ firstName }: SignupEmailProps) {
           <Preview>Welcome to Straightforward Job Site {firstName}!</Preview>
           <Head>
             <Img
+              //we'll need to make sure this logo is working + the baseUrl is updated when the site goes live so we can access the URL
               src={`${baseUrl}/sfjs-logo.png`}
               width="153"
               height="50"
