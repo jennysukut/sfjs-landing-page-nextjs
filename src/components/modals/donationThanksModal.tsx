@@ -10,8 +10,7 @@ export default function DonationThanksModal() {
         your support is deeply appreciated
       </p>
       <p className="Subtitle w-full text-center italic text-olive">
-        {`we'll be sending you any necessary details about your rewards + updates
-        to you via email`}
+        {`we'll keep you updated about our launch and will be in touch about your rewards!`}
       </p>
     </div>
   );

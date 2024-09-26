@@ -66,7 +66,6 @@ export default function SignupModalCollaborator2({ data }: any) {
   };
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    showModal(<SignupModalCollaborator3 />);
     //on submit, I want to be able to add the referralCode to our database. Is there any way I can simply grab it if it exists and pass it to the database?
 
     //if referralPartner is true, take their name and
@@ -83,6 +82,8 @@ export default function SignupModalCollaborator2({ data }: any) {
       .catch((err) => {
         console.log(err);
       });
+
+    showModal(<SignupModalCollaborator3 referralPartner={referralPartner} />);
   };
 
   return (
@@ -146,7 +147,7 @@ export default function SignupModalCollaborator2({ data }: any) {
             htmlFor="referralPartner"
             className="cursor-pointer pl-2 text-sm"
           >
-            interested in being a referralPartner?
+            {`interested in being a referral partner?`}
           </label>
         </div>
 

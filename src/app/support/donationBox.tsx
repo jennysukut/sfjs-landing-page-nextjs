@@ -141,15 +141,18 @@ function DonationBox() {
 
   // options for form submission
   const onIndividualDonation: SubmitHandler<FellowFormData> = (data) => {
-    //set isSubmitting to reflect a "submitting"
     setIsSubmitting(true);
+    console.log("Individual donation:", data);
 
     // open Helcim payment processor. If the processing is successful
     // and the data.amount === selectedAmount,
     // show the new percentage and reroute the fellow to a successful modal and send a fellow receipt email
 
+    //set the amount after successful donation
     const parsedAmount = parseAmount(selectedAmount);
     setCurrentAmount((prevAmount) => prevAmount + parsedAmount);
+
+    //send a confirmation / thank you email + show thanks modal after successful donation
     const { name, email, amount } = data;
     sendFellowDonationEmail(email, name, amount)
       .then((res) => {
@@ -160,18 +163,22 @@ function DonationBox() {
       });
     showModal(<DonationThanksModal />);
     //CLEAR FORMS
-    console.log("Individual donation:", data);
+    clearIndividualForm();
   };
 
   const onBusinessDonation: SubmitHandler<BusinessFormData> = (data) => {
     setIsSubmitting(true);
+    console.log("Business donation:", data);
 
     // open Helcim payment processor. If the processing is successful and the amount matches the data.amount
     // and the data.amount === selectedAmount,
     // show the new percentage and reroute the business to a successful modal and send a business receipt email
 
+    //set the amount after successful donation
     const parsedAmount = parseAmount(selectedAmount);
     setCurrentAmount((prevAmount) => prevAmount + parsedAmount);
+
+    //send a confirmation / thank you email + show thanks modal after successful donation
     const { email, businessName, amount } = data;
     sendBusinessDonationEmail(email, businessName, amount)
       .then((res) => {
@@ -181,8 +188,26 @@ function DonationBox() {
         console.log(err);
       });
     showModal(<DonationThanksModal />);
-    //CLEAR FORMS
-    console.log("Business donation:", data);
+
+    //CLEAR FORMS - hmm, perhaps we should actually put some kind of blur on the donationBox after a submission?
+    clearBusinessForm();
+  };
+
+  // form-clearing functions
+  const clearBusinessForm = () => {
+    setBusinessValue("businessName", "");
+    setBusinessValue("contactName", "");
+    setBusinessValue("email", "");
+    setBusinessValue("referral", "");
+    setSelectedAmount("");
+    setIsSubmitting(false);
+  };
+  const clearIndividualForm = () => {
+    setIndividualValue("name", "");
+    setIndividualValue("email", "");
+    setIndividualValue("address", "");
+    setSelectedAmount("");
+    setIsSubmitting(false);
   };
 
   // log errors
