@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useModal } from "@/contexts/ModalContext";
 
 import Script from "next/script";
+import client from "../../lib/apollo-client";
 
 import ProgressBar from "@/components/progressBar";
 import InfoBox from "@/components/infoBox";
@@ -90,59 +91,62 @@ function DonationBox() {
   });
 
   //FRONT END NEEDED INFO FOR PAYMENT: Carl's Helpful Notes
-  // 1) add a script: <script type="text/javascript" src="https://secure.helcim.app/helcim-pay/services/start.js"></script>
-  // 2) call the backend api initializeCheckout to obtain the "checkoutToken"
+  // 1) add a script: <script type="text/javascript" src="https://secure.helcim.app/helcim-pay/services/start.js"></script> -- got this in the return statement / code body
+  // 2) call the backend api initializeCheckout to obtain the "checkoutToken" --
   // 3) call the function "appendHelcimPayIframe" like this:
   // // Link HTML example
   // <a href="javascript: appendHelcimPayIframe(checkoutToken)">
   //   Pay Now
   // </a>
-
   // // Onclick HTML example
   // // Requires JavaScript onclick event handler
-
   // <a href="#" id="pay-now">Pay Now</a>
 
-  // CODE FROM EARLIER DONATION BOX
-  // Helcim Payment Initializer
-  // const INITIALIZE_PAYMENT = gql`
-  //   mutation InitializePayment($payment: PaymentInput!) {
-  //     initializePayment(payment: $payment) {
-  //       checkoutToken
-  //     }
-  //   }
-  // `;
+  // payment initializer
+  const INITIALIZE_PAYMENT = gql`
+    mutation InitializePayment($payment: PaymentInput!) {
+      initializePayment(payment: $payment) {
+        checkoutToken
+      }
+    }
+  `;
 
-  // const testPayment = () => {
-  //   const payment = {
-  //     paymentType: "purchase",
-  //     amount: "0.01",
-  //     currency: "USD",
-  //     email: "test@gmail.com",
-  //     accountName: "test name",
-  //   };
+  //payment function
+  const testPayment = ({ name, email, amount }: any) => {
+    console.log("trying testPayment");
 
-  //   console.log(payment);
+    // we'd set up the "payment" with the
+    const payment = {
+      paymentType: "purchase",
+      amount: amount,
+      currency: "USD",
+      email: email,
+      accountName: name,
+    };
 
-  //   client
-  //     .mutate({
-  //       mutation: INITIALIZE_PAYMENT,
-  //       variables: { payment },
-  //     })
-  //     .then(({ data }) => {
-  //       console.log("success");
-  //       // @ts-ignore // this function is added by an external script
-  //       appendHelcimPayIframe(data.initializePayment.checkoutToken);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.message);
-  //     });
-  // };
+    console.log(payment);
+
+    client
+      .mutate({
+        mutation: INITIALIZE_PAYMENT, // this isn't working right now, I'm getting errors when trying the Graphiql request also
+        variables: { payment },
+      })
+      .then(({ data }) => {
+        console.log("success");
+        // @ts-ignore // this function is added by an external script
+        appendHelcimPayIframe(data.initializePayment.checkoutToken);
+      }) // we'll need to write something that grabs the information sent back by the Helcim Iframe and uses it to set the amount and send a confirmation email
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
 
   // options for form submission
   const onIndividualDonation: SubmitHandler<FellowFormData> = (data) => {
     setIsSubmitting(true);
     console.log("Individual donation:", data);
+    const { name, email, amount } = data;
+    testPayment({ name, email, amount });
 
     // open Helcim payment processor. If the processing is successful
     // and the data.amount === selectedAmount,
@@ -153,7 +157,6 @@ function DonationBox() {
     setCurrentAmount((prevAmount) => prevAmount + parsedAmount);
 
     //send a confirmation / thank you email + show thanks modal after successful donation
-    const { name, email, amount } = data;
     sendFellowDonationEmail(email, name, amount)
       .then((res) => {
         console.log(res);
@@ -169,6 +172,8 @@ function DonationBox() {
   const onBusinessDonation: SubmitHandler<BusinessFormData> = (data) => {
     setIsSubmitting(true);
     console.log("Business donation:", data);
+    const { email, businessName: name, amount } = data; //we need to change the "businessName" to "name" for the payment processor
+    testPayment({ name, email, amount });
 
     // open Helcim payment processor. If the processing is successful and the amount matches the data.amount
     // and the data.amount === selectedAmount,
@@ -179,14 +184,14 @@ function DonationBox() {
     setCurrentAmount((prevAmount) => prevAmount + parsedAmount);
 
     //send a confirmation / thank you email + show thanks modal after successful donation
-    const { email, businessName, amount } = data;
-    sendBusinessDonationEmail(email, businessName, amount)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // const { email, businessName, amount } = data;
+    // sendBusinessDonationEmail(email, businessName, amount) //should I keep this as businessName or make it simple "name"?
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
     showModal(<DonationThanksModal />);
 
     //CLEAR FORMS - hmm, perhaps we should actually put some kind of blur on the donationBox after a submission?
@@ -385,15 +390,6 @@ function DonationBox() {
       </div>
     );
   }
-
-  // payment initializer
-  const INITIALIZE_PAYMENT = gql`
-    mutation InitializePayment($payment: PaymentInput!) {
-      initializePayment(payment: $payment) {
-        checkoutToken
-      }
-    }
-  `;
 
   return (
     <>

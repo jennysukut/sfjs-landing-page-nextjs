@@ -64,7 +64,12 @@ export const makersInfo = {
     lastName: "arnold",
     img: "bg-[url('/makers/dillon.svg')]",
     shadow: "bg-orange",
-    details: [],
+    details: [
+      "My second passion is flying planes!",
+      "I have my degree in finance.",
+      "Husband and dog dad",
+      "If I wasn't a software developer and didnt have a degree finance, I'd love to get into the field of homicide investigation!",
+    ],
   },
 
   "jacob sukut": {
