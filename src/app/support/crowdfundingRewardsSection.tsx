@@ -1,6 +1,7 @@
-import { supportPageInfo } from "@/lib/siteCopy/supportPageInfo";
-import SiteButton from "@/components/siteButton";
 import InfoBox from "@/components/infoBox";
+import MotionContainer from "@/components/motionContainer";
+
+import { supportPageInfo } from "@/lib/siteCopy/supportPageInfo";
 
 const individualRewardsArray = Object.entries(
   supportPageInfo.rewards.individual,
@@ -15,27 +16,37 @@ export default function CrowdfundingRewardsSection() {
     return (
       <>
         {rewardsArray.map(([amount, description]) => (
-          <div key={amount} className="RewardBox">
-            <h1 className="Amount mb-3">{amount}</h1>
-            <InfoBox variant="hollow" aria={amount} addClasses="mb-8">
-              <ul className="w-full">
-                {description.map((item, index) => (
-                  <li key={index} className="relative mb-2 list-disc pl-6">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </InfoBox>
-          </div>
+          <MotionContainer key={amount}>
+            <div key={amount} className="RewardBox">
+              <h1 className="Amount mb-3">{amount}</h1>
+              <InfoBox
+                variant="hollow"
+                aria={amount}
+                addClasses="mb-8"
+                size="small"
+              >
+                <ul className="w-full">
+                  {description.map((item, index) => (
+                    <li key={index} className="relative mb-2 list-disc pl-6">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </InfoBox>
+            </div>
+          </MotionContainer>
         ))}
       </>
     );
   }
 
   return (
-    <section className="CrowdfundingRewardsSection mt-20 flex w-full flex-col items-center border-t-2 border-olive/20 pt-12">
-      <div className="IntroContainer mb-12 self-center">
-        <h1 className="RewardIncentivesTitle pb-8 pl-12">
+    <section className="CrowdfundingRewardsSection mx-8 flex max-w-[98%] flex-col items-center border-t-2 border-olive/20 pt-12 sm:mt-20 lg:w-full">
+      <MotionContainer
+        direction="x"
+        addClasses="IntroContainer mb-12 self-center flex flex-col"
+      >
+        <h1 className="RewardIncentivesTitle pb-4 sm:pb-8 sm:pl-12">
           our incentives & rewards:
         </h1>
         <InfoBox
@@ -43,6 +54,7 @@ export default function CrowdfundingRewardsSection() {
           aria="our incentives & rewards"
           addClasses="min-w-screen-lg leading-relaxed py-14 px-12"
           width="extraWide"
+          size="large"
         >
           {supportPageInfo.incentivesAndRewards.map((reward, index) => (
             <p key={index} className="mb-6 last:mb-0">
@@ -50,12 +62,12 @@ export default function CrowdfundingRewardsSection() {
             </p>
           ))}
         </InfoBox>
-      </div>
+      </MotionContainer>
       <h1 className="RewardsSectionTitle pb-12 pt-12">
         our rewards breakdown:
       </h1>
-      <div className="RewardsSections flex w-full justify-between gap-10">
-        <div className="IndividualRewards flex flex-col items-start gap-6 py-0">
+      <div className="RewardsSections flex w-full flex-col justify-between gap-10 sm:flex-row">
+        <div className="IndividualRewards flex flex-col items-start py-0 sm:gap-6">
           <InfoBox
             aria="for individuals"
             variant="filled"
@@ -66,12 +78,12 @@ export default function CrowdfundingRewardsSection() {
             for individuals:
           </InfoBox>
 
-          <div className="IndividualRewardsContainer flex flex-col items-start gap-6">
+          <div className="IndividualRewardsContainer flex flex-col items-start gap-4 sm:gap-6">
             {printRewardsArray(individualRewardsArray)}
           </div>
         </div>
 
-        <div className="BusinessRewards flex flex-col items-start gap-6 border-l-2 border-olive/20 pl-10">
+        <div className="BusinessRewards mt-12 flex flex-col items-start gap-4 border-olive/20 sm:mt-0 sm:gap-6 sm:border-l-2 sm:pl-10">
           <InfoBox
             aria="for businesses"
             variant="filled"

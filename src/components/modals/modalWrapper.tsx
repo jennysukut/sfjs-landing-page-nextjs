@@ -1,12 +1,16 @@
-import React from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { motion, AnimatePresence } from "framer-motion";
+
+import React from "react";
 import Image from "next/image";
+
 import { useModal } from "@/contexts/ModalContext";
+import { motion, AnimatePresence } from "framer-motion";
+import { LargeShadowColorOption } from "@/lib/stylingData/largeShadowColors";
 
 interface ModalWrapperProps {
   children: React.ReactNode;
   modalKey: number;
+  colorScheme?: LargeShadowColorOption;
 }
 
 const ModalWrapper: React.FC<ModalWrapperProps> = ({ children, modalKey }) => {
@@ -27,14 +31,18 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({ children, modalKey }) => {
         />
       </Dialog.Overlay>
       {/* aria-describedby={undefined} is used to prevent the modal from being announced as a dialog */}
-      <Dialog.Content asChild aria-describedby={undefined}>
+      <Dialog.Content
+        asChild
+        aria-describedby={undefined}
+        className="max-w-[95vw]"
+      >
         <motion.div
           className="ModalOuterContainer fixed inset-0 z-20 flex items-center justify-center"
           onClick={hideModal}
         >
           <AnimatePresence>
             <motion.div
-              className="ModalInnerContents absolute rounded-[50px] border-[3px] border-solid border-jade bg-cream px-14 pb-12 pt-14 text-jade drop-shadow-jade"
+              className="ModalInnerContents absolute -mr-2 -mt-10 flex max-h-[90%] max-w-[90%] flex-col items-center rounded-[50px] border-[3px] border-solid border-jade bg-cream px-10 pb-12 pt-14 text-jade drop-shadow-jade sm:-mr-0 sm:px-14"
               onClick={handleModalContentClick}
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -51,13 +59,13 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({ children, modalKey }) => {
                   alt="back"
                   width={28}
                   height={28}
-                  className="absolute left-8 top-8 opacity-80 hover:cursor-pointer hover:opacity-100"
+                  className="absolute left-6 top-6 opacity-80 hover:cursor-pointer hover:opacity-100 sm:left-8 sm:top-8"
                   onClick={goBack}
                 />
               )}
               <Dialog.Close asChild>
                 <button
-                  className="absolute right-8 top-8 text-gray-400 opacity-70 hover:text-gray-600 hover:opacity-100"
+                  className="absolute right-6 top-6 text-gray-400 opacity-70 hover:text-gray-600 hover:opacity-100 sm:right-8 sm:top-8"
                   aria-label="Close"
                   onClick={hideModal}
                 >

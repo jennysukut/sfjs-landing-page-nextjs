@@ -5,10 +5,15 @@ export const makersInfo = {
     img: "bg-[url('/makers/jenny.svg')]",
     shadow: "bg-magenta",
     details: [
-      "comes up with silly prompts for websites",
-      "like one where you see the makers of a website",
-      "and get little details of them when you click on their faces",
-      "also, she laughs at her own jokes",
+      "Is a digital nomad, living out of a backpack",
+      "Believes in the magical power of color",
+      "Has a history of baking fantastical french macarons",
+      "Thinks imagination and creativity can change the world",
+      "Also thinks the avatar, master of all 4 elements, can change the world",
+      "Can sew pants",
+      "Wants to make everything herself",
+      "Is a major proponent of creative chaos",
+      "Laughs at her own jokes",
     ],
   },
   "joshua duncan": {
@@ -32,7 +37,12 @@ export const makersInfo = {
     lastName: "thronson",
     img: "bg-[url('/makers/carl.svg')]",
     shadow: "bg-lilac",
-    details: [],
+    details: [
+      "Likes running",
+      "From a small town in wisconsin",
+      "Still does the wordle every day",
+      "Fan of the green bay packers",
+    ],
   },
   "stephen walker": {
     firstName: "stephen",
@@ -47,6 +57,18 @@ export const makersInfo = {
       "In his free time, Stephen likes going to the park with his wife and daughter",
       "Has never eaten a raw potato and is now tempted to take a bite of one",
       "Is a huge fan of video games, especially retro arcade games",
+    ],
+  },
+  "dillon arnold": {
+    firstName: "dillon",
+    lastName: "arnold",
+    img: "bg-[url('/makers/dillon.svg')]",
+    shadow: "bg-orange",
+    details: [
+      "My second passion is flying planes!",
+      "I have my degree in finance.",
+      "Husband and dog dad",
+      "If I wasn't a software developer and didnt have a degree finance, I'd love to get into the field of homicide investigation!",
     ],
   },
 
@@ -71,7 +93,10 @@ export const makersInfo = {
     lastName: "vilas",
     img: "bg-[url('/makers/lean.svg')]",
     shadow: "bg-sky",
-    details: [],
+    details: [
+      "the kind of person to google raw potatoes before trying them.",
+      "is still skeptical about said potatoes",
+    ],
   },
   "joshua caldwell": {
     firstName: "joshua",
@@ -107,7 +132,14 @@ export const makersInfo = {
     lastName: "sonthalia",
     img: "bg-[url('/makers/vishal.svg')]",
     shadow: "bg-olive",
-    details: [],
+    details: [
+      "Father",
+      "Software Engineer",
+      "Curious",
+      "Enjoys potatoes! Especially Indian cuisine",
+      "Vegetarian since birth",
+      "And not curious about meat.",
+    ],
   },
   "katelyn lusher": {
     firstName: "katelyn",
@@ -115,12 +147,12 @@ export const makersInfo = {
     img: "bg-[url('/makers/katelyn.svg')]",
     shadow: "bg-jade",
     details: [
-      "has a PhD in Rhetoric & Composition",
-      "born and raised in Michigan",
-      "lives in Cincinnati",
+      "Has a PhD in Rhetoric & Composition",
+      "Born and raised in Michigan",
+      "Lives in Cincinnati",
       "WILL fight you about Skyline Chili (delish)",
-      "is a mother to 2 cats and an Australian cattle dog",
-      "coffee is part of her personality",
+      "Is a mother to 2 cats and an Australian cattle dog",
+      "Coffee is part of her personality",
     ],
   },
 };
@@ -135,13 +167,13 @@ export type MakerInfoType = {
 };
 
 export function printMakersInfo() {
-  Object.entries(makersInfo).forEach(([key, maker]) => {
-    console.log(`Maker: ${key}`);
-    console.log(`Name: ${maker.firstName} ${maker.lastName}`);
-    console.log(`Image: ${maker.img}`);
-    console.log(`Shadow: ${maker.shadow}`);
-    console.log("Details:");
-    maker.details.forEach((detail) => console.log(`- ${detail}`));
-    console.log("-------------------");
-  });
+  // Object.entries(makersInfo).forEach(([key, maker]) => {
+  //   console.log(`Maker: ${key}`);
+  //   console.log(`Name: ${maker.firstName} ${maker.lastName}`);
+  //   console.log(`Image: ${maker.img}`);
+  //   console.log(`Shadow: ${maker.shadow}`);
+  //   console.log("Details:");
+  //   maker.details.forEach((detail) => console.log(`- ${detail}`));
+  //   console.log("-------------------");
+  // });
 }

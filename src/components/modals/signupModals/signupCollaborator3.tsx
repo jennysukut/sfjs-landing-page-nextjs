@@ -1,9 +1,11 @@
-import SiteButton from "../../siteButton";
 import * as Dialog from "@radix-ui/react-dialog";
+
 import { useModal } from "@/contexts/ModalContext";
+
+import SiteButton from "../../siteButton";
 import SignupModalIndividual3 from "./signupIndividual3";
 
-export default function SignupModalCollaborator3() {
+export default function SignupModalCollaborator3(referralPartner: any) {
   const { showModal } = useModal();
 
   return (
@@ -17,6 +19,11 @@ export default function SignupModalCollaborator3() {
       <Dialog.Description className="Text w-full text-center text-midnight">
         {`let's change this job market together!`}
       </Dialog.Description>
+      {referralPartner && (
+        <Dialog.Description className="Text w-full text-center italic text-olive">
+          {`It looks like you're interested in being a referral partner, we'll send you an email with more information`}
+        </Dialog.Description>
+      )}
       <div className="ButtonContainer flex flex-col items-center">
         <SiteButton
           variant="filled"

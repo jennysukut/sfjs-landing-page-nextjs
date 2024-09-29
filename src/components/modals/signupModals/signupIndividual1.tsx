@@ -1,13 +1,16 @@
-import SiteButton from "../../siteButton";
 import * as Dialog from "@radix-ui/react-dialog";
-import SignupModalIndividual2 from "./signupIndividual2";
+import * as z from "zod";
+
 import { useModal } from "@/contexts/ModalContext";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import { SIGNUP_MUTATION } from "@/graphql/mutations";
 import { useMutation } from "@apollo/client";
+
+import SiteButton from "../../siteButton";
+import { sendFellowSignupEmail } from "@/utils/emailUtils";
+import SignupModalIndividual2 from "./signupIndividual2";
 
 const fellowSchema = z.object({
   name: z.string().min(2, { message: "Required" }),
@@ -20,6 +23,7 @@ type FormData = z.infer<typeof fellowSchema>;
 export default function SignupModalIndividual1() {
   const { showModal } = useModal();
   const [betaTester, setBetaTester] = useState(false);
+  const [disabledButton, setDisabledButton] = useState(false);
   const {
     register,
     handleSubmit,
@@ -42,9 +46,11 @@ export default function SignupModalIndividual1() {
   const [signUp, { loading, error }] = useMutation(SIGNUP_MUTATION);
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
+    setDisabledButton(true);
     try {
       const result = await signUp({ variables: data });
-      console.log("Signup successful:", result.data.signUp);
+      //send confirmation email here using the person's name and email
+      sendFellowSignupEmail(data.email, data.name);
       showModal(<SignupModalIndividual2 />);
     } catch (err) {
       console.error("Signup error:", err);
@@ -54,14 +60,14 @@ export default function SignupModalIndividual1() {
 
   return (
     <div className="SignupModal flex max-w-[450px] flex-col gap-4 text-jade">
-      <Dialog.Title className="Title w-full text-center text-xl font-bold">
+      <Dialog.Title className="Title max-w-[450px] self-center text-center text-xl font-bold">
         hello there!
       </Dialog.Title>
-      <Dialog.Description className="Subtitle w-full text-center">
+      <Dialog.Description className="Subtitle w-full text-center text-xs sm:text-sm">
         sign up to be notified when we launch this Straightforward Job Site
       </Dialog.Description>
       <form
-        className="IndividualSignupForm flex flex-col gap-2"
+        className="IndividualSignupForm xs:pt-8 flex flex-col gap-2"
         onSubmit={handleSubmit(onSubmit)}
       >
         {/* name input */}
@@ -116,9 +122,9 @@ export default function SignupModalIndividual1() {
             colorScheme="f1"
             aria="submit"
             onClick={handleSubmit(onSubmit)}
-            disabled={loading}
+            disabled={disabledButton}
           >
-            {loading ? "Signing up..." : "sign me up!"}
+            {disabledButton ? "Signing up..." : "sign me up!"}
           </SiteButton>
         </div>
       </form>

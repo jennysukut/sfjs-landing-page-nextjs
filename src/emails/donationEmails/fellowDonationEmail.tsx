@@ -10,7 +10,7 @@ export default function FellowDonationEmail({
   firstName = "testName",
   amount,
 }: FellowDonationProps) {
-  const baseUrl = "http://localhost:3000";
+  const baseUrl = "http://straightforwardjobsite.com";
   return (
     <Html>
       <Tailwind

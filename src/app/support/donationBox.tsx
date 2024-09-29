@@ -6,8 +6,10 @@ import { useSignals } from "@preact/signals-react/runtime";
 import { gql } from "@apollo/client";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useModal } from "@/contexts/ModalContext";
 
 import Script from "next/script";
+import client from "../../lib/apollo-client";
 
 import ProgressBar from "@/components/progressBar";
 import InfoBox from "@/components/infoBox";
@@ -17,13 +19,18 @@ import { supportPageInfo } from "@/lib/siteCopy/supportPageInfo";
 import { dropDown } from "@/components/navBar";
 
 import getRandomColorScheme from "@/utils/getRandomColorScheme";
+import { parseAmount, calculatePercentage } from "@/utils/numberUtils";
+import {
+  sendBusinessDonationEmail,
+  sendFellowDonationEmail,
+} from "@/utils/emailUtils";
+import DonationThanksModal from "@/components/modals/donationThanksModal";
 
 type DonationCategory = "business" | "individual";
 
 // zod schemas
 const fellowDonationSchema = z.object({
-  firstName: z.string().min(2, { message: "Your first name is required" }),
-  lastName: z.string().min(2, { message: "Your last name is required" }),
+  name: z.string().min(2, { message: "Your name is required" }),
   email: z.string().email({ message: "Invalid email address" }),
   amount: z.string().min(1, { message: "Amount is required" }),
   address: z.string().optional(),
@@ -45,6 +52,7 @@ type BusinessFormData = z.infer<typeof businessDonationSchema>;
 
 function DonationBox() {
   useSignals();
+  const { showModal } = useModal();
   const rewards = supportPageInfo.rewards;
   const targetAmount = 15000;
   const [currentAmount, setCurrentAmount] = useState(0);
@@ -87,30 +95,88 @@ function DonationBox() {
     },
   });
 
+  // payment mutation
+  const INITIALIZE_PAYMENT = gql`
+    mutation InitializePayment($payment: PaymentInput!) {
+      initializePayment(payment: $payment) {
+        checkoutToken
+      }
+    }
+  `;
+
+  // payment function
+  const testPayment = ({ name, email, amount }: any) => {
+    console.log("trying testPayment");
+
+    const payment = {
+      paymentType: "purchase",
+      amount: amount,
+      currency: "USD",
+      email: email,
+      accountName: name,
+    };
+
+    console.log(payment);
+
+    client
+      .mutate({
+        mutation: INITIALIZE_PAYMENT,
+        variables: { payment },
+      })
+      .then(({ data }) => {
+        console.log("success");
+        // @ts-ignore // this function is added by an external script
+        appendHelcimPayIframe(data.initializePayment.checkoutToken);
+      }) // we'll need to write something that grabs the information sent back by the Helcim Iframe and uses it to set the amount and send a confirmation email
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+  // form submission function
+  const submitForm = (data: any) => {
+    setIsSubmitting(true);
+    if (donationCategory === "individual") {
+      //individual donation handling
+      const { name, email, amount } = data;
+      testPayment({ name, email, amount });
+      //if the payment works, send the email and show thanks modal, and clear forms
+
+      sendFellowDonationEmail(email, name, amount);
+      clearForms();
+      showModal(<DonationThanksModal />);
+    } else {
+      // business donation handling
+      const { email, businessName: name, amount } = data;
+      testPayment({ name, email, amount });
+      // if the payment works, send the email and show thanks modal, and clear forms
+
+      sendBusinessDonationEmail(email, name, amount); //should I keep this as businessName or make it simple "name"?
+      showModal(<DonationThanksModal />);
+      clearForms();
+    }
+  };
+
   // options for form submission
   const onIndividualDonation: SubmitHandler<FellowFormData> = (data) => {
-    //set isSubmitting to reflect a "submitting"
-    setIsSubmitting(true);
-
-    // open Helcim payment processor. If the processing is successful and the amount matches the data.amount
-    // and the data.amount === selectedAmount,
-    // show the new percentage and reroute the fellow to a successful modal and send a fellow receipt email
-
-    const parsedAmount = parseAmount(selectedAmount);
-    setCurrentAmount((prevAmount) => prevAmount + parsedAmount);
-    console.log("Individual donation:", data);
+    submitForm(data);
   };
 
   const onBusinessDonation: SubmitHandler<BusinessFormData> = (data) => {
-    setIsSubmitting(true);
+    submitForm(data);
+  };
 
-    // open Helcim payment processor. If the processing is successful and the amount matches the data.amount
-    // and the data.amount === selectedAmount,
-    // show the new percentage and reroute the business to a successful modal and send a business receipt email
-
-    const parsedAmount = parseAmount(selectedAmount);
-    setCurrentAmount((prevAmount) => prevAmount + parsedAmount);
-    console.log("Business donation:", data);
+  // form-clearing function
+  const clearForms = () => {
+    setBusinessValue("businessName", "");
+    setBusinessValue("contactName", "");
+    setBusinessValue("email", "");
+    setBusinessValue("referral", "");
+    setIndividualValue("name", "");
+    setIndividualValue("email", "");
+    setIndividualValue("address", "");
+    setSelectedAmount("");
+    setIsSubmitting(false);
   };
 
   // log errors
@@ -121,27 +187,24 @@ function DonationBox() {
     console.log("Form Errors:", errors);
   };
 
-  //setting chosen amount for donation via buttons
-  const handleAmountChange = (amount: any) => {
-    setCustomAmount("");
-    //remove amounts if a button is already selected then gets clicked again
-    if (String(amount) === selectedAmount) {
-      if (donationCategory === "individual") {
-        setIndividualValue("amount", "0");
-      } else {
-        setBusinessValue("amount", "0");
-      }
-      setSelectedAmount("");
-      handleAddressOption(0);
-      return;
-    }
-
-    // if an individual amount gets selected, update the IndividualDonation information, if not, set it as business
+  function setDollarAmount(amount: any) {
     if (donationCategory === "individual") {
       setIndividualValue("amount", amount);
     } else {
       setBusinessValue("amount", amount);
     }
+  }
+
+  const handleAmountChange = (amount: any) => {
+    setCustomAmount("");
+    if (String(amount) === selectedAmount) {
+      setDollarAmount("0");
+      setSelectedAmount("");
+      handleAddressOption(0);
+      return;
+    }
+
+    setDollarAmount(amount);
     setSelectedAmount(String(amount));
     handleAddressOption(amount);
   };
@@ -164,11 +227,7 @@ function DonationBox() {
 
     setCustomAmount("$" + value);
     setSelectedAmount(value);
-    if (donationCategory === "individual") {
-      setIndividualValue("amount", value);
-    } else {
-      setBusinessValue("amount", value);
-    }
+    setDollarAmount(value);
   };
 
   // handler responsible to assessing if the Address option should be displayed
@@ -177,30 +236,18 @@ function DonationBox() {
     setShowAddress(numericValue >= 100.0 && donationCategory === "individual");
   };
 
-  // number parsing for handling
-  const parseAmount = (amount: string | number): number => {
-    if (typeof amount === "number") return amount;
-    return parseFloat(amount.replace(/[^0-9.]/g, "")) || 0;
-  };
-
-  // calculating the percentage of funds raised
-  const calculatePercentage = () => {
-    const percentage = (currentAmount / targetAmount) * 100;
-    return percentage.toFixed(1);
-  };
-
   // display rewards relevant to selectedAmount
   function printRewardsArray(
     rewardsArray: [string, string[]][],
   ): React.ReactNode {
     if (selectedAmount === "0" || selectedAmount === "") return null;
 
-    // Convert selectedAmount to a number
+    // convert selectedAmount to a number
     const selectedAmountNum = parseFloat(
       selectedAmount.replace(/[^0-9.]/g, ""),
     );
 
-    // Check for individual donations over $1,000
+    // check for individual donations over $1,000
     if (donationCategory === "individual" && selectedAmountNum >= 1001) {
       const thousandPlusReward = rewardsArray.find(
         ([amount]) => amount === "$1000+",
@@ -211,7 +258,7 @@ function DonationBox() {
       }
     }
 
-    // Find the closest reward amount that's less than or equal to the selected amount
+    // find the closest reward amount that's less than or equal to the selected amount
     const closestReward = rewardsArray.reduce((closest, current) => {
       const currentAmount = parseFloat(current[0].replace(/[^0-9.]/g, ""));
       if (
@@ -241,10 +288,11 @@ function DonationBox() {
           variant="hollow"
           aria={amount}
           addClasses=" text-xs mt-8 text-left"
+          size="small"
         >
           <ul className="w-full">
             {description.map((item, index) => (
-              <li key={index} className="relative mb-2 list-disc pl-6">
+              <li key={index} className="relative mb-2 list-disc pl-2 sm:pl-6">
                 {item}
               </li>
             ))}
@@ -254,15 +302,6 @@ function DonationBox() {
     );
   }
 
-  // payment initializer
-  const INITIALIZE_PAYMENT = gql`
-    mutation InitializePayment($payment: PaymentInput!) {
-      initializePayment(payment: $payment) {
-        checkoutToken
-      }
-    }
-  `;
-
   return (
     <>
       <Script
@@ -270,11 +309,12 @@ function DonationBox() {
         src="https://secure.helcim.app/helcim-pay/services/start.js"
       />
       <div
-        className={`DonationStation flex w-5/12 flex-col gap-6 ${dropDown.value === true ? "mt-20" : "mt-8"}`}
+        className={`DonationStation flex max-w-[95vw] flex-col items-center gap-6 px-8 pb-8 lg:w-5/12 ${dropDown.value === true ? "mt-20" : "mt-8"}`}
       >
-        <div className="ProgressBarContainer mb-4">
+        <div className="ProgressBarContainer mb-4 mt-10 sm:mt-0">
           <p className="ProgressBarStatus">
-            current amount raised: ${currentAmount} / {calculatePercentage()}%
+            current amount raised: ${currentAmount} /{" "}
+            {calculatePercentage({ currentAmount, targetAmount })}%
           </p>
           <ProgressBar current={currentAmount} total={targetAmount} />
         </div>
@@ -284,7 +324,7 @@ function DonationBox() {
           className="DonateHere"
           aria="support us"
           variant="hollow"
-          addClasses="flex flex-col text-center items-center"
+          addClasses="flex flex-col text-center items-center max-w-[85vw]"
         >
           {/* form submission: individual and business options */}
           <form
@@ -306,7 +346,7 @@ function DonationBox() {
             </p>
 
             {/* donor categories: business / individual */}
-            <div className="DonationOptions mt-8 flex gap-6">
+            <div className="DonationOptions xs:flex-row mt-8 flex flex-col items-center gap-6">
               <SiteButton
                 aria="individual"
                 variant="filled"
@@ -336,7 +376,7 @@ function DonationBox() {
             {/* donation amount options */}
             <div className="AmountOptions mt-8 flex max-w-sm flex-wrap items-center justify-center gap-4">
               {Object.entries(rewards[donationCategory as DonationCategory])
-                .filter(([amount]) => amount !== "$1000+") // filter the 1000+ option from the buttonlist
+                .filter(([amount]) => amount !== "$1000+")
                 .map(([amount]) => (
                   <SiteButton
                     key={amount}
@@ -376,28 +416,17 @@ function DonationBox() {
                 <>
                   <input
                     type="name"
-                    placeholder="Your First Name*"
+                    placeholder="First & Last Name*"
                     className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
-                    aria-label="firstName"
-                    {...registerIndividual("firstName")}
+                    aria-label="name"
+                    {...registerIndividual("name")}
                   />
-                  {errorsIndividual.firstName?.message && (
+                  {errorsIndividual.name?.message && (
                     <p className="text-left text-xs font-medium text-orange">
-                      {errorsIndividual.firstName.message.toString()}
+                      {errorsIndividual.name.message.toString()}
                     </p>
                   )}
-                  <input
-                    type="name"
-                    placeholder="Your Last Name*"
-                    className="rounded-full border-2 border-jade bg-cream p-2 px-4 text-left text-sm placeholder-jade placeholder-opacity-50 drop-shadow-jade"
-                    aria-label="lastName"
-                    {...registerIndividual("lastName")}
-                  />
-                  {errorsIndividual.lastName?.message && (
-                    <p className="text-left text-xs font-medium text-orange">
-                      {errorsIndividual.lastName.message.toString()}
-                    </p>
-                  )}
+
                   <input
                     type="email"
                     placeholder="Your Email*"

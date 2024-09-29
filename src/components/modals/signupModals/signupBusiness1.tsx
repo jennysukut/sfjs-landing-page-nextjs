@@ -1,11 +1,14 @@
-import SiteButton from "../../siteButton";
 import * as Dialog from "@radix-ui/react-dialog";
+import * as z from "zod";
+
 import { useModal } from "@/contexts/ModalContext";
-import SignupModalBusiness2 from "./signupBusiness2";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+
+import SiteButton from "../../siteButton";
+import { sendBusinessSignupEmail } from "@/utils/emailUtils";
+import SignupModalBusiness2 from "./signupBusiness2";
 
 const businessSchema = z.object({
   business: z.string().min(2, { message: "Required" }),
@@ -34,7 +37,11 @@ export default function SignupModalBusiness1() {
   });
 
   // Submission Handler - send this data to the server.
-  const onSubmit: SubmitHandler<FormData> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    //send email after form is submitted successfully
+    sendBusinessSignupEmail(data.business, data.email, data.betaTester);
+    console.log(data);
+  };
 
   return (
     <div className="SignupModal flex max-w-[450px] flex-col gap-4 text-jade">
@@ -42,14 +49,13 @@ export default function SignupModalBusiness1() {
         sign up
       </Dialog.Title>
       <Dialog.Description className="Subtitle w-full text-center">
-        to be notified when we launch this Straightforward Job Site
+        to be notified when we launch Straightforward Job Site
       </Dialog.Description>
       <form
         className="BusinessSignupForm flex flex-col gap-2"
         onSubmit={handleSubmit(onSubmit)}
       >
         {/* businessname input */}
-
         <label htmlFor="business">business name*</label>
         <input
           type="business"

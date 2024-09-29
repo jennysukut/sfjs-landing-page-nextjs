@@ -1,15 +1,20 @@
 "useclient";
 
+import { useState } from "react";
+import { useModal } from "@/contexts/ModalContext";
+import { motion } from "framer-motion";
+
+import Link from "next/link";
 import SiteButton from "@/components/siteButton";
 import SiteLabel from "@/components/siteLabel";
-import { useState } from "react";
-import { makersInfo } from "@/lib/makersInfo";
-import getRandomMakerDetails from "@/utils/getRandomMaker";
-import { MakerInfoType } from "@/lib/makersInfo";
-import Link from "next/link";
-import { useModal } from "@/contexts/ModalContext";
+import MotionContainer from "@/components/motionContainer";
+import ButtonContainer from "@/components/buttonContainer";
 import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsModal";
-import { motion } from "framer-motion";
+import SignupModalCollaborator1 from "@/components/modals/signupModals/signupCollaborator1";
+import getRandomMakerDetails from "@/utils/getRandomMaker";
+
+import { makersInfo } from "@/lib/makersInfo";
+import { MakerInfoType } from "@/lib/makersInfo";
 
 const makersArray = Object.entries(makersInfo);
 
@@ -22,15 +27,6 @@ export default function MakersSection() {
     setClickedMaker(maker);
     setRandomMakerDetail(getRandomMakerDetails(maker, randomMakerDetail));
   }
-
-  const motionContainer = {
-    show: {
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.4,
-      },
-    },
-  };
 
   const motionItem = {
     hidden: { opacity: 0, y: 50 },
@@ -50,43 +46,20 @@ export default function MakersSection() {
     },
   };
 
-  const jumpItem = {
-    hidden: { opacity: 0, y: 50 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        y: {
-          type: "spring",
-          duration: 0.8,
-        },
-        opacity: {
-          duration: 0.5,
-          ease: "easeInOut",
-        },
-      },
-    },
-  };
   //make a way to display a random line from the maker's details when their picture is clicked.
   //the random line should be displayed in a siteLabel
 
   return (
-    <section className="MakersSection flex w-full flex-col self-center border-b-2 border-t-2 border-olive/20 pt-20">
+    <section className="MakersSection flex w-full flex-col self-center border-b-2 border-t-2 border-olive/20 pt-16 sm:pt-20">
       <div className="MakersContainer">
-        <div className="MakersTitles ml-16">
+        <div className="MakersTitles ml-4 sm:ml-16">
           <h1 className="MakersTitle">our makers:</h1>
           <p className="MakersSubtitle mb-5 max-w-xl font-semibold italic">
             this is our group of amazing humans volunteering their time, energy,
             and expertise to make this idea a reality
           </p>
         </div>
-        <motion.div
-          className="AllMakers mb-20 mt-14 flex max-w-4xl flex-wrap items-center justify-center gap-10 gap-x-16"
-          variants={motionContainer}
-          initial="hidden"
-          whileInView={"show"}
-          viewport={{ once: true }}
-        >
+        <MotionContainer addClasses="AllMakers mb-20 mt-14 flex max-w-4xl flex-wrap items-center justify-center gap-10  gap-x-10 sm:gap-x-16">
           {/* MakersButtonContainer */}
           {makersArray.map(([key, maker]) => (
             <motion.div
@@ -109,36 +82,22 @@ export default function MakersSection() {
                 <p>{maker.firstName}</p>
                 <p>{maker.lastName}</p>
               </div>
-
-              {clickedMaker === maker.lastName && (
-                <motion.div variants={motionItem}>
-                  <ul>
-                    <SiteLabel
-                      variant="display"
-                      aria={randomMakerDetail}
-                      key={randomMakerDetail}
-                    >
-                      {randomMakerDetail}
-                    </SiteLabel>
-                  </ul>
-                </motion.div>
-              )}
             </motion.div>
           ))}
-        </motion.div>
+        </MotionContainer>
+
         {randomMakerDetail && (
-          <motion.div variants={motionItem}>
-            <SiteLabel
-              variant="display"
-              aria={randomMakerDetail}
-              addClasses="ml-16 max-w-[600px]"
-            >
-              {randomMakerDetail}
-            </SiteLabel>
-          </motion.div>
+          <SiteLabel
+            variant="display"
+            aria={randomMakerDetail}
+            addClasses="sm:ml-16 max-w-[600px]"
+          >
+            {randomMakerDetail}
+          </SiteLabel>
         )}
       </div>
-      <div className="ButtonContainer mb-20 mt-5 flex max-w-2xl flex-col items-end justify-end gap-8 self-end">
+
+      <ButtonContainer addClasses="ButtonContainer mb-20 mt-5 flex max-w-2xl flex-col items-end justify-end gap-4 sm:gap-8 self-end">
         <Link href={"/support"}>
           <SiteButton
             aria="help support us"
@@ -150,13 +109,14 @@ export default function MakersSection() {
             help this bunch of hooligans{" "}
           </SiteButton>
         </Link>
-        <div className="OtherButtons flex justify-end gap-4">
+        <div className="OtherButtons flex flex-col items-end justify-end gap-6 sm:flex-row">
           <SiteButton
             aria="collaborate"
             size="large"
             variant="filled"
             colorScheme="b4"
             addClasses="px-14"
+            onClick={() => showModal(<SignupModalCollaborator1 />)}
           >
             collaborate with us
           </SiteButton>
@@ -170,7 +130,7 @@ export default function MakersSection() {
             sign up!{" "}
           </SiteButton>
         </div>
-      </div>
+      </ButtonContainer>
     </section>
   );
 }

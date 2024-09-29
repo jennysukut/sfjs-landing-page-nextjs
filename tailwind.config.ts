@@ -8,6 +8,12 @@ const config: Config = {
       sans: ["satoshi", "sans-serif"],
     },
     extend: {
+      screens: {
+        xs: "400px",
+      },
+      borderRadius: {
+        ml: "1.75rem",
+      },
       colors: {
         //If you need a reference, there are color names outlined on the Figma design with the Color Palette
         // cream + purple

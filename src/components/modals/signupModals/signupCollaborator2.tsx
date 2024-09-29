@@ -1,22 +1,34 @@
-import SiteButton from "../../siteButton";
 import * as Dialog from "@radix-ui/react-dialog";
+import * as z from "zod";
+
 import { useModal } from "@/contexts/ModalContext";
-import SignupModalCollaborator3 from "./signupCollaborator3";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+
+import SiteButton from "../../siteButton";
+import { makeReferralCode } from "@/utils/makeReferralCode";
+import { sendCollaboratorSignupEmail } from "@/utils/emailUtils";
+import SignupModalCollaborator3 from "./signupCollaborator3";
 
 const collaboratorSchema2 = z.object({
   message: z.string().min(10, { message: "Please provide more details" }),
   betaTester: z.boolean().optional(),
+  referralPartner: z.boolean().optional(),
+  name: z.string().min(2, { message: "Required" }),
+  email: z.string().email(),
 });
 
 type FormData = z.infer<typeof collaboratorSchema2>;
 
-export default function SignupModalCollaborator2() {
+export default function SignupModalCollaborator2({ data }: any) {
   const { showModal } = useModal();
+
+  const { name, email } = data;
+
   const [betaTester, setBetaTester] = useState(false);
+  const [referralPartner, setReferralPartner] = useState(false);
+  const [fellowReferralCode, setFellowReferralCode] = useState("");
   const {
     register,
     handleSubmit,
@@ -27,21 +39,35 @@ export default function SignupModalCollaborator2() {
     resolver: zodResolver(collaboratorSchema2),
     defaultValues: {
       betaTester: false,
+      referralPartner: false,
+      name: name,
+      email: email,
     },
   });
 
-  // I'd like to grab the data from the first Collaborator Signup modal and plug it into this formData to send to the server
-  const onSubmit: SubmitHandler<FormData> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    //on submit, I want to be able to add the referralCode to our database. Is there any way I can simply grab it if it exists and pass it to the database?
+
+    //if referralPartner is true, take their name and
+    //run it through a function to make their code and
+    //send it to them in their confirmation email?
+    if (data.referralPartner === true) {
+      makeReferralCode(name, setFellowReferralCode);
+    }
+
+    sendCollaboratorSignupEmail(email, name);
+    showModal(<SignupModalCollaborator3 referralPartner={referralPartner} />);
+  };
 
   return (
-    <div className="SignupModal flex w-[400px] max-w-[450px] flex-col gap-4 text-jade">
-      <Dialog.Title className="Title w-full text-center text-xl font-bold">
+    <div className="SignupModal flex w-[75vw] max-w-[450px] flex-col items-center gap-4 text-jade sm:w-[400px]">
+      <Dialog.Title className="Title w-full max-w-[50vw] text-center text-xl font-bold">
         more about you
       </Dialog.Title>
       <Dialog.Description className="Subtitle w-full pb-8 text-center">
         share your skills + ideas
       </Dialog.Description>
-      <form className="flex flex-col gap-2">
+      <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
         {/* message section */}
         <label htmlFor="collaborationIdeas">
           how are you wanting to collaborate?
@@ -77,18 +103,35 @@ export default function SignupModalCollaborator2() {
             sign up to be a beta tester
           </label>
         </div>
+        <div className="ReferralPartnerButton mt-0 flex items-center gap-2">
+          <SiteButton
+            variant="hollow"
+            colorScheme="b4"
+            aria="referralPartner"
+            size="smallCircle"
+            isSelected={watch("referralPartner")}
+            onClick={() => {
+              const newValue = !watch("referralPartner");
+              setValue("referralPartner", newValue);
+              setBetaTester(newValue);
+            }}
+          />
+          <label
+            htmlFor="referralPartner"
+            className="cursor-pointer pl-2 text-sm"
+          >
+            {`interested in being a referral partner?`}
+          </label>
+        </div>
 
         {/* submit button */}
-        <div className="ButtonContainer mt-8 flex justify-end">
+        <div className="ButtonContainer mt-8 flex self-center sm:justify-end sm:self-end">
           <SiteButton
             variant="hollow"
             colorScheme="c1"
             aria="submit"
             addClasses="px-8"
-            onClick={handleSubmit((data) => {
-              console.log(data);
-              showModal(<SignupModalCollaborator3 />);
-            })}
+            onClick={handleSubmit(onSubmit)}
           >
             get on our list!
           </SiteButton>

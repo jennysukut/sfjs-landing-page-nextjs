@@ -5,10 +5,7 @@ import {
   LargeShadowColorOption,
   largeShadowColors,
 } from "@/lib/stylingData/largeShadowColors";
-import {
-  smallShadowColors,
-  SmallShadowColorOption,
-} from "@/lib/stylingData/smallShadowColors";
+import { smallShadowColors } from "@/lib/stylingData/smallShadowColors";
 
 interface InfoBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   variant: "hollow" | "filled";
@@ -18,7 +15,7 @@ interface InfoBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   title?: string;
   textSize?: "small" | "medium" | "large";
   addClasses?: string;
-  size?: "small" | null;
+  size?: "small" | "standard" | "large";
   width?: "extraWide" | null;
   shadowSize?: "small";
 }
@@ -32,13 +29,13 @@ const InfoBox: React.FC<InfoBoxProps> = ({
   children,
   title,
   addClasses,
-  textSize,
+  textSize = "large",
   width = "standard",
   shadowSize = "standard",
   ...props
 }) => {
   const boxClasses = clsx(
-    "InfoBox relative z-[1] font-semibold rounded-3xl leading-5 transition-all duration-200 tracking-superwide",
+    "InfoBox relative z-[1] font-semibold leading-5 transition-all duration-200 tracking-superwide",
     {
       // variant + shadowSize
       "bg-cream border-jade drop-shadow-jade text-jade font-semibold border-[3px]":
@@ -49,13 +46,16 @@ const InfoBox: React.FC<InfoBoxProps> = ({
         variant === "filled" && shadowSize === "small",
 
       //textSize
-      "text-xs": textSize === "small",
-      "text-sm": textSize === "medium",
-      "text-m": textSize === "large",
+      "text-[0.6rem] sm:text-xs": textSize === "small",
+      "text-xs sm:text-sm": textSize === "medium",
+      "text-md sm:text-md": textSize === "large",
 
       // size
-      "py-6 px-10": size === "standard",
-      "py-4 px-14": size === "small",
+      "py-4 px-8 sm:py-6 sm:px-10 md:py-14 md:px-16 rounded-3xl":
+        size === "standard",
+      "py-4 px-10 sm:py-6 sm:px-14 rounded-ml sm:rounded-3xl": size === "small",
+      "py-8 px-8 xs:px-10 sm:py-8 sm:px-12 md:py-14 md:px-16 rounded-3xl":
+        size === "large",
 
       //width
       "max-w-screen-sm": width === "standard",

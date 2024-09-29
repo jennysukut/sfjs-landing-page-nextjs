@@ -8,7 +8,7 @@ type CollaboratorEmailProps = {
 export default function CollaboratorSignupEmail({
   firstName = "testName",
 }: CollaboratorEmailProps) {
-  const baseUrl = "http://localhost:3000";
+  const baseUrl = "http://straightforwardjobsite.com";
   return (
     <Html>
       <Tailwind

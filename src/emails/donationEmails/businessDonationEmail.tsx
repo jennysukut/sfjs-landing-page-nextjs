@@ -10,7 +10,7 @@ export default function BusinessDonationEmail({
   businessName = "testBusinessName",
   amount,
 }: TestEmailProps) {
-  const baseUrl = "http://localhost:3000";
+  const baseUrl = "http://straightforwardjobsite.com";
   return (
     <Html>
       <Tailwind

@@ -1,10 +1,12 @@
-import SiteButton from "../../siteButton";
 import * as Dialog from "@radix-ui/react-dialog";
+import * as z from "zod";
+
 import { useModal } from "@/contexts/ModalContext";
-import SignupModalCollaborator2 from "./signupCollaborator2";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+
+import SiteButton from "../../siteButton";
+import SignupModalCollaborator2 from "./signupCollaborator2";
 
 // this is the first part of a two-part form, this schema covers this modal, I've got another one on the signupCollaborator2 modal
 const collaboratorSchema = z.object({
@@ -20,8 +22,6 @@ export default function SignupModalCollaborator1() {
   const {
     register,
     handleSubmit,
-    setValue,
-    watch,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(collaboratorSchema),
@@ -29,20 +29,27 @@ export default function SignupModalCollaborator1() {
 
   // I'd like to send this data to the next modal that pops up so we can send all the data to the server at once.
   // Would I send it through the <SignupModalCollaborator2 /> when I click the form's button?
-  const onSubmit: SubmitHandler<FormData> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    showModal(<SignupModalCollaborator2 data={data} />);
+
+    console.log(data);
+  };
 
   return (
     <div className="SignupCollaboratorModal flex max-w-[450px] flex-col gap-4 text-jade">
       <Dialog.Title className="Title w-full text-center text-xl font-bold">
         hello there!
       </Dialog.Title>
-      <Dialog.Description className="Subtitle w-full text-center">
+      <Dialog.Description className="Subtitle w-full text-center text-xs sm:text-sm">
         {`you’d like to collaborate with us here at straightforward job site - how exciting!`}
       </Dialog.Description>
-      <Dialog.Description className="Text w-full text-center font-medium italic text-olive">
+      <Dialog.Description className="Text w-full text-center text-xs font-medium italic text-olive sm:text-sm">
         {`tell us a little bit about you and we’ll see if there’s a way we can work together.`}
       </Dialog.Description>
-      <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="xs:pt-8 flex flex-col gap-2"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         {/* name input */}
         <label htmlFor="name">your name*</label>
         <input
@@ -79,10 +86,7 @@ export default function SignupModalCollaborator1() {
             variant="hollow"
             colorScheme="f4"
             aria="submit"
-            onClick={handleSubmit((data) => {
-              console.log(data);
-              showModal(<SignupModalCollaborator2 />);
-            })}
+            onClick={handleSubmit(onSubmit)}
           >
             tell us about you
           </SiteButton>

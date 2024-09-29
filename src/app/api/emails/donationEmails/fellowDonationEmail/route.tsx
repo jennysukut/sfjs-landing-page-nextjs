@@ -8,7 +8,7 @@ export async function POST(request: Request) {
   const { email, firstName, amount } = await request.json();
 
   await resend.emails.send({
-    from: "onboarding@resend.dev",
+    from: "simple@straightforwardjobsite.com",
     to: email,
     subject: "Thank You from Straightforward Job Site!",
     react: FellowDonationEmail({ firstName, amount }),
