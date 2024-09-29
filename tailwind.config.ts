@@ -9,7 +9,7 @@ const config: Config = {
     },
     extend: {
       screens: {
-        xs: "320px",
+        xs: "400px",
       },
       borderRadius: {
         ml: "1.75rem",

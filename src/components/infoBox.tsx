@@ -54,7 +54,7 @@ const InfoBox: React.FC<InfoBoxProps> = ({
       "py-4 px-8 sm:py-6 sm:px-10 md:py-14 md:px-16 rounded-3xl":
         size === "standard",
       "py-4 px-10 sm:py-6 sm:px-14 rounded-ml sm:rounded-3xl": size === "small",
-      "py-8 px-6 sm:py-8 sm:px-12 md:py-14 md:px-16 rounded-3xl":
+      "py-8 px-8 xs:px-10 sm:py-8 sm:px-12 md:py-14 md:px-16 rounded-3xl":
         size === "large",
 
       //width

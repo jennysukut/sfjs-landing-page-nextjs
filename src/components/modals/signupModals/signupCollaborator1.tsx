@@ -40,13 +40,16 @@ export default function SignupModalCollaborator1() {
       <Dialog.Title className="Title w-full text-center text-xl font-bold">
         hello there!
       </Dialog.Title>
-      <Dialog.Description className="Subtitle w-full text-center">
+      <Dialog.Description className="Subtitle w-full text-center text-xs sm:text-sm">
         {`you’d like to collaborate with us here at straightforward job site - how exciting!`}
       </Dialog.Description>
-      <Dialog.Description className="Text w-full text-center font-medium italic text-olive">
+      <Dialog.Description className="Text w-full text-center text-xs font-medium italic text-olive sm:text-sm">
         {`tell us a little bit about you and we’ll see if there’s a way we can work together.`}
       </Dialog.Description>
-      <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="xs:pt-8 flex flex-col gap-2"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         {/* name input */}
         <label htmlFor="name">your name*</label>
         <input

@@ -161,7 +161,7 @@ export default function PricingPage() {
 
         {/* individual pricing details - MOBILE*/}
         {category === "individual" && (
-          <div className="IndivualPricing md:hidden`}">
+          <div className="IndividualPricing md:hidden">
             <InfoBox
               aria="individual pricing"
               variant="filled"

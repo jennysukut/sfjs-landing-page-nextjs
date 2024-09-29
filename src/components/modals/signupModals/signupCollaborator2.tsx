@@ -60,8 +60,8 @@ export default function SignupModalCollaborator2({ data }: any) {
   };
 
   return (
-    <div className="SignupModal flex w-[400px] max-w-[450px] flex-col gap-4 text-jade">
-      <Dialog.Title className="Title w-full text-center text-xl font-bold">
+    <div className="SignupModal flex w-[75vw] max-w-[450px] flex-col items-center gap-4 text-jade sm:w-[400px]">
+      <Dialog.Title className="Title w-full max-w-[50vw] text-center text-xl font-bold">
         more about you
       </Dialog.Title>
       <Dialog.Description className="Subtitle w-full pb-8 text-center">
@@ -125,7 +125,7 @@ export default function SignupModalCollaborator2({ data }: any) {
         </div>
 
         {/* submit button */}
-        <div className="ButtonContainer mt-8 flex justify-end">
+        <div className="ButtonContainer mt-8 flex self-center sm:justify-end sm:self-end">
           <SiteButton
             variant="hollow"
             colorScheme="c1"

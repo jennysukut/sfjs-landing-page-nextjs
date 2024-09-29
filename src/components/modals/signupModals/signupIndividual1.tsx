@@ -59,15 +59,15 @@ export default function SignupModalIndividual1() {
   };
 
   return (
-    <div className="SignupModal flex max-w-[450px] flex-col items-center gap-4 text-jade">
-      <Dialog.Title className="Title max-w-[40vw] text-center text-xl font-bold">
+    <div className="SignupModal flex max-w-[450px] flex-col gap-4 text-jade">
+      <Dialog.Title className="Title max-w-[450px] self-center text-center text-xl font-bold">
         hello there!
       </Dialog.Title>
-      <Dialog.Description className="Subtitle w-full text-center">
+      <Dialog.Description className="Subtitle w-full text-center text-xs sm:text-sm">
         sign up to be notified when we launch this Straightforward Job Site
       </Dialog.Description>
       <form
-        className="IndividualSignupForm flex flex-col gap-2"
+        className="IndividualSignupForm xs:pt-8 flex flex-col gap-2"
         onSubmit={handleSubmit(onSubmit)}
       >
         {/* name input */}

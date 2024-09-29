@@ -366,7 +366,7 @@ function DonationBox() {
             </p>
 
             {/* donor categories: business / individual */}
-            <div className="DonationOptions mt-8 flex flex-col items-center gap-6 sm:flex-row">
+            <div className="DonationOptions xs:flex-row mt-8 flex flex-col items-center gap-6">
               <SiteButton
                 aria="individual"
                 variant="filled"

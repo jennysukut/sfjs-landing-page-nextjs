@@ -43,7 +43,7 @@ export default function FeaturesSection() {
   };
 
   const featuresButtonStyles = clsx(
-    "hidden lg:flex max-w-[80rem] md:max-w-[60rem]",
+    "hidden md:flex max-w-[80rem] md:max-w-[60rem]",
     detail === "" || detail === "none"
       ? "flex-wrap justify-center gap-6 sm:px-14 pt-4"
       : "flex-col  items-center sm:items-end justify-start gap-4",
@@ -113,7 +113,7 @@ export default function FeaturesSection() {
       >
         {/* Mobile Features */}
         <div
-          className={`MobileFeatureButtons flex flex-col items-center gap-6 lg:hidden`}
+          className={`MobileFeatureButtons flex flex-col items-center gap-6 md:hidden`}
         >
           {features[category].map(({ colorScheme, title, details }) => {
             return (
@@ -151,7 +151,7 @@ export default function FeaturesSection() {
                 );
               })}
             </div>
-            <div className="TallFeaturesDetails hidden max-w-lg bg-cream p-8 pt-0 lg:flex">
+            <div className="TallFeaturesDetails hidden max-w-lg bg-cream pt-0 md:flex lg:px-8">
               {selectedFeature && (
                 <InfoBox
                   key={`info-${selectedFeature.title}`}
