@@ -9,6 +9,7 @@ import { SIGNUP_MUTATION } from "@/graphql/mutations";
 import { useMutation } from "@apollo/client";
 
 import SiteButton from "../../siteButton";
+import { sendFellowSignupEmail } from "@/utils/emailUtils";
 import SignupModalIndividual2 from "./signupIndividual2";
 
 const fellowSchema = z.object({
@@ -42,33 +43,12 @@ export default function SignupModalIndividual1() {
     setBetaTester(newValue);
   };
 
-  const sendFellowSignupEmail = async (email: string, name: string) => {
-    const firstName = name.split(" ")[0];
-    console.log(firstName);
-    await fetch("/api/emails/signupEmails/fellowSignupEmail", {
-      method: "POST",
-      body: JSON.stringify({
-        email: email,
-        firstName: firstName,
-      }),
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   const [signUp, { loading, error }] = useMutation(SIGNUP_MUTATION);
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     setDisabledButton(true);
     try {
       const result = await signUp({ variables: data });
-      console.log("Signup successful:", result.data.signUp);
-      console.log(data); //IT WORKS!!!!!!!!!
-
       //send confirmation email here using the person's name and email
       sendFellowSignupEmail(data.email, data.name);
       showModal(<SignupModalIndividual2 />);
@@ -79,8 +59,8 @@ export default function SignupModalIndividual1() {
   };
 
   return (
-    <div className="SignupModal flex max-w-[450px] flex-col gap-4 text-jade">
-      <Dialog.Title className="Title w-full text-center text-xl font-bold">
+    <div className="SignupModal flex max-w-[450px] flex-col items-center gap-4 text-jade">
+      <Dialog.Title className="Title max-w-[40vw] text-center text-xl font-bold">
         hello there!
       </Dialog.Title>
       <Dialog.Description className="Subtitle w-full text-center">

@@ -1,13 +1,10 @@
 "use client";
 
-import { useState } from "react";
-
-import Image from "next/image";
 import SiteButton from "@/components/siteButton";
 import InfoBox from "@/components/infoBox";
-
+import { useState } from "react";
 import { pricingDetails } from "@/lib/siteCopy/pricingDetails";
-
+import Image from "next/image";
 type Category = "individual" | "business";
 
 export default function PricingPage() {
@@ -51,20 +48,20 @@ export default function PricingPage() {
   }
 
   return (
-    <div className="PricingPage flex w-[95%] max-w-[1600px] flex-col self-center p-14 pb-4 sm:w-[75%]">
+    <div className="PricingPage flex w-[95vw] max-w-[1600px] flex-col self-center p-10 pb-4 sm:w-[75vw] sm:p-14">
       <div className="PricingTitleContainer flex flex-col self-start text-left">
         <h1 className="PricingTitle">our straightforward pricing:</h1>
         <p className="PricingSubtitle mt-8 w-[70%] self-end text-right text-sm italic sm:w-full sm:text-left sm:text-lg md:mt-4">
           {`because that's how all pricing should be`}
         </p>
       </div>
-      <div className="PricingOptions flex flex-col gap-8 self-center pt-12 sm:flex-row sm:gap-12">
+      <div className="PricingOptions flex flex-col items-center gap-8 self-center pt-12 sm:gap-12 md:flex-row">
         <SiteButton
           aria="features for businesses"
-          size="large"
+          size="extraLarge"
           variant="filled"
           colorScheme="b3"
-          addClasses="px-14 w-[20rem]"
+          addClasses="sm:w-[20rem]"
           onClick={() => handleClick("business")}
         >
           for businesses
@@ -78,7 +75,8 @@ export default function PricingPage() {
               variant="filled"
               colorScheme="b3"
               textSize="medium"
-              addClasses="self-center text-center py-12 leading-6 mb-8"
+              size="large"
+              addClasses="self-center text-center leading-6 mb-8"
               className="BusinessPricing"
             >
               <p className="PricingDetail">
@@ -114,6 +112,7 @@ export default function PricingPage() {
                     variant="filled"
                     colorScheme="f3"
                     textSize="medium"
+                    size="large"
                     addClasses="mt-8 text-center max-w-[26rem] self-end py-12 px-14"
                   >
                     {pricingDetails.inactiveJobDetails.map((detail, index) => (
@@ -144,17 +143,17 @@ export default function PricingPage() {
                 height={100}
                 alt="dumb"
                 src="/wait-what.gif"
-                className={`mr-12 self-end rounded-3xl drop-shadow-lilac ${dumb ? "flex" : "hidden"} mb-12 mt-8 sm:mt-0`}
+                className={`mr-12 self-end rounded-3xl drop-shadow-lilac ${dumb ? "flex" : "hidden"} mb-12 mt-8 md:mt-0`}
               ></Image>
             </div>
           </div>
         )}
         <SiteButton
           aria="features for job seekers"
-          size="large"
+          size="extraLarge"
           variant="filled"
           colorScheme="c4"
-          addClasses="px-14 w-[20rem]"
+          addClasses={`sm:w-[20rem] ${category === "" ? "mb-20 sm:mb-0" : ""}`}
           onClick={() => handleClick("individual")}
         >
           for job-seekers
@@ -162,14 +161,15 @@ export default function PricingPage() {
 
         {/* individual pricing details - MOBILE*/}
         {category === "individual" && (
-          <div className="IndivualPricing md:hidden">
+          <div className="IndivualPricing md:hidden`}">
             <InfoBox
               aria="individual pricing"
               variant="filled"
               colorScheme="c4"
               textSize="medium"
+              size="large"
               className="BusinessPricing self-end"
-              addClasses="self-start text-center py-12 leading-6 mb-8"
+              addClasses="self-start text-center leading-6 mb-8"
             >
               <p className="PricingDetails py-2">
                 {`Our pricing model is pay-what-you-want!`}

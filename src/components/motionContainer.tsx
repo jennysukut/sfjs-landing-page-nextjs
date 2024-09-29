@@ -39,7 +39,7 @@ export default function MotionContainer({
 
   return (
     <motion.div
-      className={`MotionContainer flex gap-6 pt-8 ${addClasses}`}
+      className={`MotionContainer flex gap-2 pt-8 sm:gap-6 ${addClasses}`}
       initial="hidden"
       variants={motionContainer}
       viewport={{ once: true }}

@@ -28,7 +28,6 @@ const SiteLabel: React.FC<LabelProps> = ({
   ...props
 }) => {
   function handleDelete() {
-    console.log("delete button clicked");
     // tie this into the data to update list of labels at it's source
   }
 

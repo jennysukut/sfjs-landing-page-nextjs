@@ -75,24 +75,23 @@ export default function FeaturesSection() {
   );
 
   return (
-    <section className="FeaturesSection flex flex-col items-center justify-center p-4 md:w-[95%] md:p-14">
+    <section className="FeaturesSection flex max-w-[95vw] flex-col items-center justify-center p-4 md:p-14">
       {/* Features Heading */}
-      <div className="FeaturesHeading flex flex-col items-center justify-center gap-8 pb-8 xl:flex-row">
-        <div className="FeaturesTitle items-left mr-14 flex flex-col text-left sm:max-lg:mr-64">
+      <div className="FeaturesHeading flex max-w-[90vw] flex-col items-start justify-center gap-8 pb-8 xl:flex-row">
+        <div className="FeaturesTitle items-left mr-14 flex flex-col justify-start text-left">
           <h1 className="FeaturesTitle">our features:</h1>
           <p className="PromisesSubtitle font-semibold italic">
             choose category:
           </p>
         </div>
-        <div className="ButtonContainer flex flex-col items-center gap-4 sm:flex-row sm:gap-10">
+        <div className="ButtonContainer flex flex-col items-center gap-4 sm:gap-10 md:flex-row">
           <SiteButton
             aria="features for businesses"
             size="extraLarge"
             variant="filled"
             colorScheme="b3"
-            padding="extra"
             onClick={() => handleClick("business")}
-            addClasses="w-[20rem] text-[1rem]"
+            addClasses="sm:w-[20rem] text-base"
           >
             for businesses
           </SiteButton>
@@ -101,9 +100,8 @@ export default function FeaturesSection() {
             size="extraLarge"
             variant="filled"
             colorScheme="c4"
-            padding="extra"
             onClick={() => handleClick("individual")}
-            addClasses="w-[20rem] text-[1rem]"
+            addClasses="sm:w-[20rem] text-base"
           >
             for job-seekers
           </SiteButton>
@@ -160,7 +158,7 @@ export default function FeaturesSection() {
                   variant="filled"
                   aria={selectedFeature.title}
                   colorScheme={selectedFeature.colorScheme as ButtonColorOption}
-                  addClasses="text-sm max-w-5xl py-16 px-20 ml-8 flex flex-col justify-center leading-6"
+                  addClasses="text-sm max-w-[64rem] py-16 px-20 ml-8 flex flex-col justify-center leading-6"
                 >
                   {selectedFeature.details.map((detail, index) => (
                     <p key={index} className="mb-4 text-left">
@@ -184,7 +182,7 @@ export default function FeaturesSection() {
             {landingPageText.arrowprompts.feature}
           </p>
           <Image
-            className="w-[90px] translate-y-[-20px]"
+            className="w-[90px] max-w-14 translate-y-[-20px] -rotate-12 sm:max-w-full sm:rotate-0"
             src="/GreenArrow.svg"
             alt="arrow"
             width={146}

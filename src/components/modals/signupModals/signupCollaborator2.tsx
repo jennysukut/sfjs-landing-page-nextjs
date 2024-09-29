@@ -7,6 +7,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import SiteButton from "../../siteButton";
+import { makeReferralCode } from "@/utils/makeReferralCode";
+import { sendCollaboratorSignupEmail } from "@/utils/emailUtils";
 import SignupModalCollaborator3 from "./signupCollaborator3";
 
 const collaboratorSchema2 = z.object({
@@ -43,28 +45,6 @@ export default function SignupModalCollaborator2({ data }: any) {
     },
   });
 
-  const makeReferralCode = (name: string) => {
-    const nameParts = name.trim().split(" ");
-    const firstPart = nameParts[0].slice(0, 3);
-    const lastPart = nameParts[nameParts.length - 1].slice(0, 3);
-    const randomNumbers = Math.floor(100 + Math.random() * 900);
-    const referralCode =
-      `${firstPart}${lastPart}${randomNumbers}`.toUpperCase();
-    console.log(referralCode);
-    setFellowReferralCode(referralCode);
-  };
-
-  const sendCollaboratorSignupEmail = async (email: string, name: string) => {
-    const firstName = name.split(" ")[0];
-    await fetch("/api/emails/signupEmails/collaboratorSignupEmail", {
-      method: "POST",
-      body: JSON.stringify({
-        email: email,
-        firstName: firstName,
-      }),
-    });
-  };
-
   const onSubmit: SubmitHandler<FormData> = (data) => {
     //on submit, I want to be able to add the referralCode to our database. Is there any way I can simply grab it if it exists and pass it to the database?
 
@@ -72,17 +52,10 @@ export default function SignupModalCollaborator2({ data }: any) {
     //run it through a function to make their code and
     //send it to them in their confirmation email?
     if (data.referralPartner === true) {
-      makeReferralCode(name);
+      makeReferralCode(name, setFellowReferralCode);
     }
 
-    sendCollaboratorSignupEmail(email, name)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
+    sendCollaboratorSignupEmail(email, name);
     showModal(<SignupModalCollaborator3 referralPartner={referralPartner} />);
   };
 

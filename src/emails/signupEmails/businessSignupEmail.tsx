@@ -8,7 +8,7 @@ type BusinessEmailProps = {
 export default function BusinessSignupEmail({
   businessName = "busniessName",
 }: BusinessEmailProps) {
-  const baseUrl = "http://localhost:3000";
+  const baseUrl = "http://straightforwardjobsite.com";
   return (
     <Html>
       <Tailwind

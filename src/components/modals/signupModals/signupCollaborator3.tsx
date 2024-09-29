@@ -19,12 +19,10 @@ export default function SignupModalCollaborator3(referralPartner: any) {
       <Dialog.Description className="Text w-full text-center text-midnight">
         {`let's change this job market together!`}
       </Dialog.Description>
-      {referralPartner ? (
+      {referralPartner && (
         <Dialog.Description className="Text w-full text-center italic text-olive">
           {`It looks like you're interested in being a referral partner, we'll send you an email with more information`}
         </Dialog.Description>
-      ) : (
-        ""
       )}
       <div className="ButtonContainer flex flex-col items-center">
         <SiteButton

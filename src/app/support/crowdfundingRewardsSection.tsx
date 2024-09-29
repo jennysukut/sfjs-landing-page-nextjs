@@ -46,7 +46,7 @@ export default function CrowdfundingRewardsSection() {
         direction="x"
         addClasses="IntroContainer mb-12 self-center flex flex-col"
       >
-        <h1 className="RewardIncentivesTitle pb-4 pl-12 sm:pb-8">
+        <h1 className="RewardIncentivesTitle pb-4 sm:pb-8 sm:pl-12">
           our incentives & rewards:
         </h1>
         <InfoBox

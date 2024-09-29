@@ -7,6 +7,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import SiteButton from "../../siteButton";
+import { sendBusinessSignupEmail } from "@/utils/emailUtils";
 import SignupModalBusiness2 from "./signupBusiness2";
 
 const businessSchema = z.object({
@@ -35,21 +36,6 @@ export default function SignupModalBusiness1() {
     },
   });
 
-  const sendBusinessSignupEmail = async (
-    email: string,
-    business: string,
-    betaTester?: boolean,
-  ) => {
-    await fetch("/api/emails/signupEmails/collaboratorSignupEmail", {
-      method: "POST",
-      body: JSON.stringify({
-        email: email,
-        businessName: business,
-        betaTester: betaTester,
-      }),
-    });
-  };
-
   // Submission Handler - send this data to the server.
   const onSubmit: SubmitHandler<FormData> = (data) => {
     //send email after form is submitted successfully
@@ -63,7 +49,7 @@ export default function SignupModalBusiness1() {
         sign up
       </Dialog.Title>
       <Dialog.Description className="Subtitle w-full text-center">
-        to be notified when we launch this Straightforward Job Site
+        to be notified when we launch Straightforward Job Site
       </Dialog.Description>
       <form
         className="BusinessSignupForm flex flex-col gap-2"

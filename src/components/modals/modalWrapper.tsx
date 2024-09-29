@@ -4,16 +4,12 @@ import React from "react";
 import Image from "next/image";
 
 import { useModal } from "@/contexts/ModalContext";
-import { motion, AnimatePresence, color } from "framer-motion";
-import {
-  largeShadowColors,
-  LargeShadowColorOption,
-} from "@/lib/stylingData/largeShadowColors";
+import { motion, AnimatePresence } from "framer-motion";
+import { LargeShadowColorOption } from "@/lib/stylingData/largeShadowColors";
 
 interface ModalWrapperProps {
   children: React.ReactNode;
   modalKey: number;
-  variant?: "filled" | "hollow";
   colorScheme?: LargeShadowColorOption;
 }
 
@@ -38,7 +34,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({ children, modalKey }) => {
       <Dialog.Content
         asChild
         aria-describedby={undefined}
-        className="max-w-[95%]"
+        className="max-w-[95vw]"
       >
         <motion.div
           className="ModalOuterContainer fixed inset-0 z-20 flex items-center justify-center"
@@ -46,7 +42,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({ children, modalKey }) => {
         >
           <AnimatePresence>
             <motion.div
-              className="ModalInnerContents absolute -mt-10 flex max-h-[90%] max-w-[90%] rounded-[50px] border-[3px] border-solid border-jade bg-cream px-14 pb-12 pt-14 text-jade drop-shadow-jade"
+              className="ModalInnerContents absolute -mt-10 flex max-h-[90%] max-w-[90%] flex-col items-center rounded-[50px] border-[3px] border-solid border-jade bg-cream px-10 pb-12 pt-14 text-jade drop-shadow-jade sm:px-14"
               onClick={handleModalContentClick}
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}

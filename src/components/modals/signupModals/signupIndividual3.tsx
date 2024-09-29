@@ -13,15 +13,15 @@ export default function SignupModalIndividual3() {
   const handleShareOptionsModal = () => showModal(<ShareOptionsModal />);
 
   return (
-    <div className="SignupModalIndividual2 flex max-w-[450px] flex-col gap-4 text-jade">
-      <Dialog.Title className="Title w-full text-center text-xl font-bold">
+    <div className="SignupModalIndividual2 flex max-w-[450px] flex-col items-center gap-4 text-jade">
+      <Dialog.Title className="Title w-full max-w-[50vw] text-center text-xl font-bold">
         how you can help
       </Dialog.Title>
       <Dialog.Description className="SmallText w-full text-center font-normal italic">
         {`watch this quick video to learn more:`}
       </Dialog.Description>
       <video src="" className="aspect-video w-full rounded-3xl bg-peach" />
-      <div className="ButtonContainer mt-4 flex justify-end gap-4">
+      <div className="ButtonContainer mt-4 flex flex-col items-center justify-end gap-4 sm:flex-row">
         <Link href={"/support"}>
           <SiteButton
             variant="filled"

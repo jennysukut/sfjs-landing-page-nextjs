@@ -105,7 +105,7 @@ function PromisesSection() {
             );
           })}
         </ul>
-        <ButtonContainer addClasses="justify-center sm:justify-end">
+        <ButtonContainer addClasses="flex flex-col items-start sm:items-end sm:flex-row justify-center sm:justify-end">
           <Link href={"/support"}>
             <SiteButton
               aria="support us"
@@ -131,7 +131,7 @@ function PromisesSection() {
 
         {/* //animate this to fade in after a bit of time */}
         <motion.div
-          className="PromisePrompt flex justify-end gap-2 pr-8 pt-8"
+          className="PromisePrompt flex justify-end gap-2 pt-8 sm:pr-8"
           initial="hidden"
           whileInView={"show"}
           variants={fadeInItem}

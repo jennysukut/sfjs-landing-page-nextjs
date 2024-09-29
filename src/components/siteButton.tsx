@@ -13,7 +13,6 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant: "hollow" | "filled" | "avatar";
   colorScheme: ButtonColorOption;
   aria: string;
-  padding?: "more" | "extra";
   addImage?: string;
   isSelected?: boolean;
 }
@@ -28,7 +27,6 @@ const SiteButton: React.FC<ButtonProps> = ({
   variant,
   colorScheme = "e5",
   children,
-  padding,
   addImage,
   isSelected,
   ...props
@@ -39,11 +37,11 @@ const SiteButton: React.FC<ButtonProps> = ({
     "SiteButton relative z-[1] cursor-pointer rounded-full font-semibold transition-all duration-200 tracking-superwide hover:saturate-[120%]",
     {
       // size
-      "px-6 py-4 text-[0.85rem] md:px-10 md:text-sm": size === "large",
+      "px-8 py-4 text-[0.85rem] sm:px-10 md:text-sm": size === "large",
       "h-16 w-16": size === "largeCircle",
       "h-6 w-6": size === "smallCircle",
       "px-4 py-2 text-xs min-w-[65px]": size === "default",
-      "px-16 py-6 text-[0.85rem] md:px-12 sm:py-4 md:text-sm":
+      "px-12 py-6 text-[0.85rem] sm:py-6 md:px-10 md:py-4 md:text-sm":
         size === "extraLarge",
 
       // variant
@@ -68,10 +66,6 @@ const SiteButton: React.FC<ButtonProps> = ({
       [`${buttonColors[colorScheme].color5} ${buttonColors[colorScheme].color6} translate-x-[2px] translate-y-[2px] text-eggshell`]:
         isSelected && size === "smallCircle",
 
-      //padding
-      "px-8 sm:px-12": padding === "more",
-      "px-12 sm:px-16": padding === "extra",
-
       // diabled
       "disabled:translate-x-1 disabled:translate-y-1 disabled:border-midnight disabled:bg-midnight disabled:text-jade disabled:hover:cursor-not-allowed disabled:hover:saturate-100":
         disabled,
@@ -84,13 +78,13 @@ const SiteButton: React.FC<ButtonProps> = ({
     "ButtonShadow absolute rounded-full text-transparent font-semibold tracking-superwide",
     {
       // size
-      "px-6 py-4 text-[0.85rem] md:px-10 md:text-sm left-2 -right-2 top-2":
+      "px-8 py-4 text-[0.85rem] sm:px-10 md:text-sm left-2 -right-2 top-2":
         size === "large",
       "h-16 w-16 -right-1.5 top-1.5 left-1.5": size === "largeCircle",
       "h-6 w-6 -right-1 top-1 left-1": size === "smallCircle",
       "px-4 py-2 text-xs min-w-[65px] -right-1.5 top-1.5  left-1.5":
         size === "default",
-      "px-16 py-6 text-[0.85rem] md:px-12 sm:py-4 md:text-sm  left-2 -right-2 top-2":
+      "px-12 py-6 text-[0.85rem] sm:py-6 md:px-10 md:text-sm md:py-4 left-2 -right-2 top-2":
         size === "extraLarge",
 
       // variant
@@ -102,10 +96,6 @@ const SiteButton: React.FC<ButtonProps> = ({
       //selected state
       [` ${buttonColors[colorScheme].color2} ${buttonColors[colorScheme].color4} ${buttonColors[colorScheme].color7} ${buttonColors[colorScheme].color8}`]:
         isSelected && variant === "hollow",
-
-      //padding
-      "px-8 sm:px-12": padding === "more",
-      "px-12 sm:px-16": padding === "extra",
     },
     addClasses,
   );

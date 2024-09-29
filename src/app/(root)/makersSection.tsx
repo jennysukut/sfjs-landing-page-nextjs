@@ -97,7 +97,7 @@ export default function MakersSection() {
         )}
       </div>
 
-      <ButtonContainer addClasses="ButtonContainer mb-20 mt-5 flex max-w-2xl flex-col items-end justify-end gap-8 self-end">
+      <ButtonContainer addClasses="ButtonContainer mb-20 mt-5 flex max-w-2xl flex-col items-end justify-end gap-4 sm:gap-8 self-end">
         <Link href={"/support"}>
           <SiteButton
             aria="help support us"
@@ -109,7 +109,7 @@ export default function MakersSection() {
             help this bunch of hooligans{" "}
           </SiteButton>
         </Link>
-        <div className="OtherButtons flex justify-end gap-4">
+        <div className="OtherButtons flex flex-col items-end justify-end gap-6 sm:flex-row">
           <SiteButton
             aria="collaborate"
             size="large"

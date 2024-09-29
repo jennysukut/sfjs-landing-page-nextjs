@@ -19,6 +19,11 @@ import { supportPageInfo } from "@/lib/siteCopy/supportPageInfo";
 import { dropDown } from "@/components/navBar";
 
 import getRandomColorScheme from "@/utils/getRandomColorScheme";
+import { parseAmount, calculatePercentage } from "@/utils/numberUtils";
+import {
+  sendBusinessDonationEmail,
+  sendFellowDonationEmail,
+} from "@/utils/emailUtils";
 import DonationThanksModal from "@/components/modals/donationThanksModal";
 
 type DonationCategory = "business" | "individual";
@@ -90,19 +95,7 @@ function DonationBox() {
     },
   });
 
-  //FRONT END NEEDED INFO FOR PAYMENT: Carl's Helpful Notes
-  // 1) add a script: <script type="text/javascript" src="https://secure.helcim.app/helcim-pay/services/start.js"></script> -- got this in the return statement / code body
-  // 2) call the backend api initializeCheckout to obtain the "checkoutToken" --
-  // 3) call the function "appendHelcimPayIframe" like this:
-  // // Link HTML example
-  // <a href="javascript: appendHelcimPayIframe(checkoutToken)">
-  //   Pay Now
-  // </a>
-  // // Onclick HTML example
-  // // Requires JavaScript onclick event handler
-  // <a href="#" id="pay-now">Pay Now</a>
-
-  // payment initializer
+  //payment mutation
   const INITIALIZE_PAYMENT = gql`
     mutation InitializePayment($payment: PaymentInput!) {
       initializePayment(payment: $payment) {
@@ -115,7 +108,6 @@ function DonationBox() {
   const testPayment = ({ name, email, amount }: any) => {
     console.log("trying testPayment");
 
-    // we'd set up the "payment" with the
     const payment = {
       paymentType: "purchase",
       amount: amount,
@@ -128,7 +120,7 @@ function DonationBox() {
 
     client
       .mutate({
-        mutation: INITIALIZE_PAYMENT, // this isn't working right now, I'm getting errors when trying the Graphiql request also
+        mutation: INITIALIZE_PAYMENT,
         variables: { payment },
       })
       .then(({ data }) => {
@@ -157,16 +149,10 @@ function DonationBox() {
     setCurrentAmount((prevAmount) => prevAmount + parsedAmount);
 
     //send a confirmation / thank you email + show thanks modal after successful donation
-    sendFellowDonationEmail(email, name, amount)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    sendFellowDonationEmail(email, name, amount);
     showModal(<DonationThanksModal />);
     //CLEAR FORMS
-    clearIndividualForm();
+    clearForms();
   };
 
   const onBusinessDonation: SubmitHandler<BusinessFormData> = (data) => {
@@ -185,29 +171,19 @@ function DonationBox() {
 
     //send a confirmation / thank you email + show thanks modal after successful donation
     // const { email, businessName, amount } = data;
-    // sendBusinessDonationEmail(email, businessName, amount) //should I keep this as businessName or make it simple "name"?
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    // sendBusinessDonationEmail(email, businessName, amount); //should I keep this as businessName or make it simple "name"?
     showModal(<DonationThanksModal />);
 
     //CLEAR FORMS - hmm, perhaps we should actually put some kind of blur on the donationBox after a submission?
-    clearBusinessForm();
+    clearForms();
   };
 
   // form-clearing functions
-  const clearBusinessForm = () => {
+  const clearForms = () => {
     setBusinessValue("businessName", "");
     setBusinessValue("contactName", "");
     setBusinessValue("email", "");
     setBusinessValue("referral", "");
-    setSelectedAmount("");
-    setIsSubmitting(false);
-  };
-  const clearIndividualForm = () => {
     setIndividualValue("name", "");
     setIndividualValue("email", "");
     setIndividualValue("address", "");
@@ -221,39 +197,6 @@ function DonationBox() {
   };
   const logBusinessErrors = (errors: typeof errorsBusiness) => {
     console.log("Form Errors:", errors);
-  };
-
-  // donation emails
-  const sendFellowDonationEmail = async (
-    email: string,
-    name: string,
-    amount: string,
-  ) => {
-    const firstName = name.split(" ")[0];
-    console.log(firstName);
-    await fetch("/api/emails/donationEmails/fellowDonationEmail", {
-      method: "POST",
-      body: JSON.stringify({
-        email: email,
-        firstName: firstName,
-        amount: amount,
-      }),
-    });
-  };
-
-  const sendBusinessDonationEmail = async (
-    email: string,
-    businessName: string,
-    amount: string,
-  ) => {
-    await fetch("/api/emails/donationEmails/businessDonationEmail", {
-      method: "POST",
-      body: JSON.stringify({
-        email: email,
-        businessName: businessName,
-        amount: amount,
-      }),
-    });
   };
 
   //setting chosen amount for donation via buttons
@@ -313,18 +256,6 @@ function DonationBox() {
     setShowAddress(numericValue >= 100.0 && donationCategory === "individual");
   };
 
-  // number parsing for handling
-  const parseAmount = (amount: string | number): number => {
-    if (typeof amount === "number") return amount;
-    return parseFloat(amount.replace(/[^0-9.]/g, "")) || 0;
-  };
-
-  // calculating the percentage of funds raised
-  const calculatePercentage = () => {
-    const percentage = (currentAmount / targetAmount) * 100;
-    return percentage.toFixed(1);
-  };
-
   // display rewards relevant to selectedAmount
   function printRewardsArray(
     rewardsArray: [string, string[]][],
@@ -381,7 +312,7 @@ function DonationBox() {
         >
           <ul className="w-full">
             {description.map((item, index) => (
-              <li key={index} className="relative mb-2 list-disc pl-6">
+              <li key={index} className="relative mb-2 list-disc pl-2 sm:pl-6">
                 {item}
               </li>
             ))}
@@ -398,11 +329,12 @@ function DonationBox() {
         src="https://secure.helcim.app/helcim-pay/services/start.js"
       />
       <div
-        className={`DonationStation flex flex-col items-center gap-6 px-8 pb-8 lg:w-5/12 ${dropDown.value === true ? "mt-20" : "mt-8"}`}
+        className={`DonationStation flex max-w-[95vw] flex-col items-center gap-6 px-8 pb-8 lg:w-5/12 ${dropDown.value === true ? "mt-20" : "mt-8"}`}
       >
         <div className="ProgressBarContainer mb-4 mt-10 sm:mt-0">
           <p className="ProgressBarStatus">
-            current amount raised: ${currentAmount} / {calculatePercentage()}%
+            current amount raised: ${currentAmount} /{" "}
+            {calculatePercentage({ currentAmount, targetAmount })}%
           </p>
           <ProgressBar current={currentAmount} total={targetAmount} />
         </div>
@@ -412,7 +344,7 @@ function DonationBox() {
           className="DonateHere"
           aria="support us"
           variant="hollow"
-          addClasses="flex flex-col text-center items-center"
+          addClasses="flex flex-col text-center items-center max-w-[85vw]"
         >
           {/* form submission: individual and business options */}
           <form
@@ -434,7 +366,7 @@ function DonationBox() {
             </p>
 
             {/* donor categories: business / individual */}
-            <div className="DonationOptions mt-8 flex gap-6">
+            <div className="DonationOptions mt-8 flex flex-col items-center gap-6 sm:flex-row">
               <SiteButton
                 aria="individual"
                 variant="filled"

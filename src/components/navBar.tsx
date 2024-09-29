@@ -23,6 +23,10 @@ export default function NavBar() {
     setClickedButton(clickedButton === e.target.value ? "" : e.target.value);
   }
 
+  function navClickOption({ e, modal }: any): void {
+    window.innerWidth < 1024 ? showModal(modal) : handleNavButtonClick(e);
+  }
+
   useEffect(() => {
     if (clickedButton === "share" || clickedButton === "signup") {
       dropDown.value = true;
@@ -32,7 +36,7 @@ export default function NavBar() {
   }, [clickedButton]);
 
   return (
-    <div className="NavBar mx-auto flex h-fit w-[98%] justify-between px-8 py-6 sm:px-16">
+    <div className="NavBar mx-auto flex h-fit w-[95vw] justify-between px-8 py-6 sm:w-[98vw] sm:px-16">
       <Link href={"/"}>
         <Image
           className="Logo mt-4 max-w-44 cursor-pointer transition-transform duration-300 hover:scale-105"
@@ -44,20 +48,13 @@ export default function NavBar() {
         />
       </Link>
 
-      <div className="NavButtonContainer hidden items-end gap-4 sm:flex sm:flex-row sm:items-center sm:max-md:-mr-8 md:gap-6">
+      <div className="NavButtonContainer hidden items-end gap-4 md:flex md:flex-row md:items-center md:max-lg:-mr-8 lg:gap-6">
         <SiteButton
           variant="filled"
           colorScheme="b4"
           aria="sign up"
           value="signup"
-          onClick={(e) => {
-            if (window.innerWidth < 1024) {
-              // Check for small screen size
-              showModal(<SignupOptionsModal />);
-            } else {
-              handleNavButtonClick(e);
-            }
-          }}
+          onClick={(e) => navClickOption({ e, modal: <SignupOptionsModal /> })}
           isSelected={clickedButton === "signup"}
           className="hidden lg:block"
         >
@@ -93,14 +90,7 @@ export default function NavBar() {
           colorScheme="f3"
           aria="share on socials"
           value="share"
-          onClick={(e) => {
-            if (window.innerWidth < 1024) {
-              // Check for small screen size
-              showModal(<ShareOptionsModal />);
-            } else {
-              handleNavButtonClick(e);
-            }
-          }}
+          onClick={(e) => navClickOption({ e, modal: <ShareOptionsModal /> })}
           isSelected={clickedButton === "share"}
         >
           share
@@ -117,7 +107,7 @@ export default function NavBar() {
       ) : (
         ""
       )}
-      <div className="MobileMenuButton py-4 sm:hidden">
+      <div className="MobileMenuButton py-4 md:hidden">
         <img
           src="/BurgerMenu.svg"
           alt="mobile menu"

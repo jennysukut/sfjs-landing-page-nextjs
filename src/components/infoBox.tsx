@@ -5,10 +5,7 @@ import {
   LargeShadowColorOption,
   largeShadowColors,
 } from "@/lib/stylingData/largeShadowColors";
-import {
-  smallShadowColors,
-  SmallShadowColorOption,
-} from "@/lib/stylingData/smallShadowColors";
+import { smallShadowColors } from "@/lib/stylingData/smallShadowColors";
 
 interface InfoBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   variant: "hollow" | "filled";
@@ -38,7 +35,7 @@ const InfoBox: React.FC<InfoBoxProps> = ({
   ...props
 }) => {
   const boxClasses = clsx(
-    "InfoBox relative z-[1] font-semibold rounded-3xl leading-5 transition-all duration-200 tracking-superwide",
+    "InfoBox relative z-[1] font-semibold leading-5 transition-all duration-200 tracking-superwide",
     {
       // variant + shadowSize
       "bg-cream border-jade drop-shadow-jade text-jade font-semibold border-[3px]":
@@ -54,9 +51,11 @@ const InfoBox: React.FC<InfoBoxProps> = ({
       "text-md sm:text-md": textSize === "large",
 
       // size
-      "py-4 px-8 sm:py-6 sm:px-10 md:py-14 md:px-16": size === "standard",
-      "py-4 px-10 sm:py-6 sm:px-14": size === "small",
-      "py-10 px-10 sm:py-6 sm:px-10 md:py-14 md:px-16": size === "large",
+      "py-4 px-8 sm:py-6 sm:px-10 md:py-14 md:px-16 rounded-3xl":
+        size === "standard",
+      "py-4 px-10 sm:py-6 sm:px-14 rounded-ml sm:rounded-3xl": size === "small",
+      "py-8 px-6 sm:py-8 sm:px-12 md:py-14 md:px-16 rounded-3xl":
+        size === "large",
 
       //width
       "max-w-screen-sm": width === "standard",

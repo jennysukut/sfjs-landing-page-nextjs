@@ -6,7 +6,7 @@ type SignupEmailProps = {
 };
 
 export default function IndividualSignupEmail({ firstName }: SignupEmailProps) {
-  const baseUrl = "http://localhost:3000";
+  const baseUrl = "http://straightforwardjobsite.com";
   return (
     <Html>
       <Tailwind

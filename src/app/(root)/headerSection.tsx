@@ -13,7 +13,7 @@ function HeaderSection() {
         our mission: to bring simplicity, honesty, and transparency to the job
         market.
       </h1>
-      <ButtonContainer addClasses="justify-center sm:justify-start">
+      <ButtonContainer addClasses="justify-center flex items-end pr-6 sm:pr-0 flex-col sm:flex-row sm:justify-start">
         <SiteButton
           aria="sign up"
           size="large"

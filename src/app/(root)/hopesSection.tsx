@@ -13,7 +13,7 @@ export default function HopesSection() {
   const { showModal } = useModal();
 
   return (
-    <section className="HopesSection flex w-full flex-col items-center p-8 pb-8 sm:p-20">
+    <section className="HopesSection flex w-full flex-col items-center p-4 pb-8 sm:p-20">
       <div className="HopesContainer flex flex-col">
         <div className="HopesTitleContainer w-full sm:p-8">
           <h1 className="HopeTitle text-start">our hopes:</h1>
@@ -26,7 +26,7 @@ export default function HopesSection() {
             aria="change perspectives"
             variant="filled"
             colorScheme="f3"
-            addClasses="rounded-full text-sm text-center self-center -mb-4"
+            addClasses="rounded-full text-sm text-center self-center"
             size="small"
           >
             to change perspectives in the current work landscape
