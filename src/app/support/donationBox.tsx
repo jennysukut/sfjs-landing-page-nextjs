@@ -95,7 +95,7 @@ function DonationBox() {
     },
   });
 
-  //payment mutation
+  // payment mutation
   const INITIALIZE_PAYMENT = gql`
     mutation InitializePayment($payment: PaymentInput!) {
       initializePayment(payment: $payment) {
@@ -104,7 +104,7 @@ function DonationBox() {
     }
   `;
 
-  //payment function
+  // payment function
   const testPayment = ({ name, email, amount }: any) => {
     console.log("trying testPayment");
 
@@ -133,52 +133,40 @@ function DonationBox() {
       });
   };
 
+  // form submission function
+  const submitForm = (data: any) => {
+    setIsSubmitting(true);
+    if (donationCategory === "individual") {
+      //individual donation handling
+      const { name, email, amount } = data;
+      testPayment({ name, email, amount });
+      //if the payment works, send the email and show thanks modal, and clear forms
+
+      sendFellowDonationEmail(email, name, amount);
+      clearForms();
+      showModal(<DonationThanksModal />);
+    } else {
+      // business donation handling
+      const { email, businessName: name, amount } = data;
+      testPayment({ name, email, amount });
+      // if the payment works, send the email and show thanks modal, and clear forms
+
+      sendBusinessDonationEmail(email, name, amount); //should I keep this as businessName or make it simple "name"?
+      showModal(<DonationThanksModal />);
+      clearForms();
+    }
+  };
+
   // options for form submission
   const onIndividualDonation: SubmitHandler<FellowFormData> = (data) => {
-    setIsSubmitting(true);
-    console.log("Individual donation:", data);
-    const { name, email, amount } = data;
-    testPayment({ name, email, amount });
-
-    // open Helcim payment processor. If the processing is successful
-    // and the data.amount === selectedAmount,
-    // show the new percentage and reroute the fellow to a successful modal and send a fellow receipt email
-
-    //set the amount after successful donation
-    const parsedAmount = parseAmount(selectedAmount);
-    setCurrentAmount((prevAmount) => prevAmount + parsedAmount);
-
-    //send a confirmation / thank you email + show thanks modal after successful donation
-    sendFellowDonationEmail(email, name, amount);
-    showModal(<DonationThanksModal />);
-    //CLEAR FORMS
-    clearForms();
+    submitForm(data);
   };
 
   const onBusinessDonation: SubmitHandler<BusinessFormData> = (data) => {
-    setIsSubmitting(true);
-    console.log("Business donation:", data);
-    const { email, businessName: name, amount } = data; //we need to change the "businessName" to "name" for the payment processor
-    testPayment({ name, email, amount });
-
-    // open Helcim payment processor. If the processing is successful and the amount matches the data.amount
-    // and the data.amount === selectedAmount,
-    // show the new percentage and reroute the business to a successful modal and send a business receipt email
-
-    //set the amount after successful donation
-    const parsedAmount = parseAmount(selectedAmount);
-    setCurrentAmount((prevAmount) => prevAmount + parsedAmount);
-
-    //send a confirmation / thank you email + show thanks modal after successful donation
-    // const { email, businessName, amount } = data;
-    // sendBusinessDonationEmail(email, businessName, amount); //should I keep this as businessName or make it simple "name"?
-    showModal(<DonationThanksModal />);
-
-    //CLEAR FORMS - hmm, perhaps we should actually put some kind of blur on the donationBox after a submission?
-    clearForms();
+    submitForm(data);
   };
 
-  // form-clearing functions
+  // form-clearing function
   const clearForms = () => {
     setBusinessValue("businessName", "");
     setBusinessValue("contactName", "");
@@ -199,28 +187,24 @@ function DonationBox() {
     console.log("Form Errors:", errors);
   };
 
-  //setting chosen amount for donation via buttons
-  const handleAmountChange = (amount: any) => {
-    setCustomAmount("");
-
-    //remove amounts if a button is already selected then gets clicked again
-    if (String(amount) === selectedAmount) {
-      if (donationCategory === "individual") {
-        setIndividualValue("amount", "0");
-      } else {
-        setBusinessValue("amount", "0");
-      }
-      setSelectedAmount("");
-      handleAddressOption(0);
-      return;
-    }
-
-    // if an individual amount gets selected, update the IndividualDonation information, if not, set it as business
+  function setDollarAmount(amount: any) {
     if (donationCategory === "individual") {
       setIndividualValue("amount", amount);
     } else {
       setBusinessValue("amount", amount);
     }
+  }
+
+  const handleAmountChange = (amount: any) => {
+    setCustomAmount("");
+    if (String(amount) === selectedAmount) {
+      setDollarAmount("0");
+      setSelectedAmount("");
+      handleAddressOption(0);
+      return;
+    }
+
+    setDollarAmount(amount);
     setSelectedAmount(String(amount));
     handleAddressOption(amount);
   };
@@ -243,11 +227,7 @@ function DonationBox() {
 
     setCustomAmount("$" + value);
     setSelectedAmount(value);
-    if (donationCategory === "individual") {
-      setIndividualValue("amount", value);
-    } else {
-      setBusinessValue("amount", value);
-    }
+    setDollarAmount(value);
   };
 
   // handler responsible to assessing if the Address option should be displayed
@@ -262,12 +242,12 @@ function DonationBox() {
   ): React.ReactNode {
     if (selectedAmount === "0" || selectedAmount === "") return null;
 
-    // Convert selectedAmount to a number
+    // convert selectedAmount to a number
     const selectedAmountNum = parseFloat(
       selectedAmount.replace(/[^0-9.]/g, ""),
     );
 
-    // Check for individual donations over $1,000
+    // check for individual donations over $1,000
     if (donationCategory === "individual" && selectedAmountNum >= 1001) {
       const thousandPlusReward = rewardsArray.find(
         ([amount]) => amount === "$1000+",
@@ -278,7 +258,7 @@ function DonationBox() {
       }
     }
 
-    // Find the closest reward amount that's less than or equal to the selected amount
+    // find the closest reward amount that's less than or equal to the selected amount
     const closestReward = rewardsArray.reduce((closest, current) => {
       const currentAmount = parseFloat(current[0].replace(/[^0-9.]/g, ""));
       if (
@@ -396,7 +376,7 @@ function DonationBox() {
             {/* donation amount options */}
             <div className="AmountOptions mt-8 flex max-w-sm flex-wrap items-center justify-center gap-4">
               {Object.entries(rewards[donationCategory as DonationCategory])
-                .filter(([amount]) => amount !== "$1000+") // filter the 1000+ option from the buttonlist
+                .filter(([amount]) => amount !== "$1000+")
                 .map(([amount]) => (
                   <SiteButton
                     key={amount}

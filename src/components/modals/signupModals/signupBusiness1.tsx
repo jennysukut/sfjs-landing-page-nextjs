@@ -56,7 +56,6 @@ export default function SignupModalBusiness1() {
         onSubmit={handleSubmit(onSubmit)}
       >
         {/* businessname input */}
-
         <label htmlFor="business">business name*</label>
         <input
           type="business"

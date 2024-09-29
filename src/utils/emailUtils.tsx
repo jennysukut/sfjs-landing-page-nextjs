@@ -82,14 +82,14 @@ export const sendFellowDonationEmail = async (
 
 export const sendBusinessDonationEmail = async (
   email: string,
-  businessName: string,
+  name: string,
   amount: string,
 ) => {
   await fetch("/api/emails/donationEmails/businessDonationEmail", {
     method: "POST",
     body: JSON.stringify({
       email: email,
-      businessName: businessName,
+      businessName: name,
       amount: amount,
     }),
   })
