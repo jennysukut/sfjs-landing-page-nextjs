@@ -5,6 +5,8 @@ import { useModal } from "@/contexts/ModalContext";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { SIGNUP_MUTATION } from "@/graphql/mutations";
+import { useMutation } from "@apollo/client";
 
 import SiteButton from "../../siteButton";
 import { makeReferralCode } from "@/utils/makeReferralCode";
@@ -15,6 +17,7 @@ const collaboratorSchema2 = z.object({
   message: z.string().min(10, { message: "Please provide more details" }),
   betaTester: z.boolean().optional(),
   referralPartner: z.boolean().optional(),
+  referralCode: z.string().optional(),
   name: z.string().min(2, { message: "Required" }),
   email: z.string().email(),
 });
@@ -29,6 +32,7 @@ export default function SignupModalCollaborator2({ data }: any) {
   const [betaTester, setBetaTester] = useState(false);
   const [referralPartner, setReferralPartner] = useState(false);
   const [fellowReferralCode, setFellowReferralCode] = useState("");
+  const [disabledButton, setDisabledButton] = useState(false);
   const {
     register,
     handleSubmit,
@@ -40,23 +44,40 @@ export default function SignupModalCollaborator2({ data }: any) {
     defaultValues: {
       betaTester: false,
       referralPartner: false,
+      referralCode: fellowReferralCode,
       name: name,
       email: email,
     },
   });
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    //on submit, I want to be able to add the referralCode to our database. Is there any way I can simply grab it if it exists and pass it to the database?
+  const [signUp, { loading, error }] = useMutation(SIGNUP_MUTATION);
 
-    //if referralPartner is true, take their name and
-    //run it through a function to make their code and
-    //send it to them in their confirmation email?
+  // Submission Function
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
     if (data.referralPartner === true) {
       makeReferralCode(name, setFellowReferralCode);
+      //use the referral code in the email and add to our FormData
+      //send Referral Email
+    }
+    setDisabledButton(true);
+    try {
+      const result = await signUp({ variables: data })
+        .then((result) => {
+          sendCollaboratorSignupEmail(email, name);
+          showModal(
+            <SignupModalCollaborator3 referralPartner={referralPartner} />,
+          );
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (err) {
+      console.error("Signup error:", err);
+      //what kind of error do we want to have here?
     }
 
-    sendCollaboratorSignupEmail(email, name);
-    showModal(<SignupModalCollaborator3 referralPartner={referralPartner} />);
+    // sendCollaboratorSignupEmail(email, name);
+    // showModal(<SignupModalCollaborator3 referralPartner={referralPartner} />);
   };
 
   return (
@@ -113,7 +134,7 @@ export default function SignupModalCollaborator2({ data }: any) {
             onClick={() => {
               const newValue = !watch("referralPartner");
               setValue("referralPartner", newValue);
-              setBetaTester(newValue);
+              setReferralPartner(newValue);
             }}
           />
           <label
@@ -132,8 +153,9 @@ export default function SignupModalCollaborator2({ data }: any) {
             aria="submit"
             addClasses="px-8"
             onClick={handleSubmit(onSubmit)}
+            disabled={disabledButton}
           >
-            get on our list!
+            {disabledButton ? "adding to list..." : "get on our list!"}
           </SiteButton>
         </div>
       </form>

@@ -5,8 +5,9 @@ export const makersInfo = {
     img: "bg-[url('/makers/jenny.svg')]",
     shadow: "bg-magenta",
     details: [
-      "Is a digital nomad, living out of a backpack",
+      "Is a digital nomad",
       "Believes in the magical power of color",
+      "Made 3 small humans",
       "Has a history of baking fantastical french macarons",
       "Thinks imagination and creativity can change the world",
       "Also thinks the avatar, master of all 4 elements, can change the world",
@@ -94,8 +95,11 @@ export const makersInfo = {
     img: "bg-[url('/makers/lean.svg')]",
     shadow: "bg-sky",
     details: [
-      "the kind of person to google raw potatoes before trying them.",
-      "is still skeptical about said potatoes",
+      "Senior Software Engineer with 11 years of experience in the industry",
+      "Prepares developers for their next job",
+      "Is a proponent of the radical candor formula",
+      "Will google raw potatoes before trying them.",
+      "Is still skeptical about raw potatoes",
     ],
   },
   "joshua caldwell": {

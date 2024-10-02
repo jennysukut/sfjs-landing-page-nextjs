@@ -48,13 +48,17 @@ export default function SignupModalIndividual1() {
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     setDisabledButton(true);
     try {
-      const result = await signUp({ variables: data });
-      //send confirmation email here using the person's name and email
-      sendFellowSignupEmail(data.email, data.name);
-      showModal(<SignupModalIndividual2 />);
+      const result = await signUp({ variables: data })
+        .then((result) => {
+          sendFellowSignupEmail(data.email, data.name);
+          showModal(<SignupModalIndividual2 />);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } catch (err) {
       console.error("Signup error:", err);
-      // Handle error (e.g., show error message to user)
+      //what kind of error do we want to have here?
     }
   };
 

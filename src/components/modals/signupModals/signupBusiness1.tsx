@@ -5,6 +5,8 @@ import { useModal } from "@/contexts/ModalContext";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@apollo/client";
+import { BUSINESS_SIGNUP_MUTATION } from "@/graphql/mutations";
 
 import SiteButton from "../../siteButton";
 import { sendBusinessSignupEmail } from "@/utils/emailUtils";
@@ -23,6 +25,8 @@ export default function SignupModalBusiness1() {
   const { showModal } = useModal();
   const [earlySignup, setEarlySignup] = useState(false);
   const [betaTester, setBetaTester] = useState(false);
+  const [disabledButton, setDisabledButton] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -33,14 +37,29 @@ export default function SignupModalBusiness1() {
     resolver: zodResolver(businessSchema),
     defaultValues: {
       betaTester: false,
+      earlySignup: false,
     },
   });
 
-  // Submission Handler - send this data to the server.
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    //send email after form is submitted successfully
-    sendBusinessSignupEmail(data.business, data.email, data.betaTester);
+  const [signUp, { loading, error }] = useMutation(BUSINESS_SIGNUP_MUTATION);
+
+  // Submission Handler
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    setDisabledButton(true);
     console.log(data);
+    try {
+      const result = await signUp({ variables: data })
+        .then((result) => {
+          sendBusinessSignupEmail(data.business, data.email, data.betaTester);
+          showModal(<SignupModalBusiness2 />);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (err) {
+      console.error("Signup error:", err);
+      //what kind of error do we want to have here?
+    }
   };
 
   return (
@@ -94,7 +113,7 @@ export default function SignupModalBusiness1() {
             onClick={() => {
               const newValue = !watch("earlySignup");
               setValue("earlySignup", newValue);
-              setBetaTester(newValue);
+              setEarlySignup(newValue);
             }}
           />
           <label htmlFor="betaTester" className="cursor-pointer pl-2 text-sm">
@@ -126,10 +145,7 @@ export default function SignupModalBusiness1() {
             variant="hollow"
             colorScheme="c1"
             aria="submit"
-            onClick={handleSubmit((data) => {
-              console.log(data);
-              showModal(<SignupModalBusiness2 />);
-            })}
+            onClick={handleSubmit(onSubmit)}
           >
             sign us up!
           </SiteButton>
