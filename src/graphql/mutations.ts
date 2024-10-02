@@ -9,6 +9,12 @@ export const SIGNUP_MUTATION = gql`
   }
 `;
 
+export const FELLOW_SIGNUP_MUTATION = gql`
+  mutation FellowSignUp($requestBody: FellowInput!) {
+    signupFellow(requestBody: $requestBody)
+  }
+`;
+
 export const BUSINESS_SIGNUP_MUTATION = gql`
   mutation BusinessSignUp($requestBody: BusinessInput!) {
     signupBusiness(requestBody: $requestBody)
