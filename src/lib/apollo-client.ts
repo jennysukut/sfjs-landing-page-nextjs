@@ -2,7 +2,7 @@ import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
 
 const client = new ApolloClient({
   link: new HttpLink({
-    uri: "http://localhost:8082/graphql",
+    uri: "https://straightforward-job-site-backend-obsy.onrender.com/graphql",
   }),
   cache: new InMemoryCache(),
 });

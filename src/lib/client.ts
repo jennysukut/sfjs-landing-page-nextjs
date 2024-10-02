@@ -16,7 +16,7 @@ export const { getClient } = registerApolloClient(
     new ApolloClient({
       cache: new InMemoryCache(),
       link: new HttpLink({
-        uri: "http://localhost:8082/graphql",
+        uri: "https://straightforward-job-site-backend-obsy.onrender.com/graphql",
       }),
     }),
 );
