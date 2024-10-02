@@ -41,14 +41,24 @@ export default function SignupModalBusiness1() {
     },
   });
 
-  const [signUp, { loading, error }] = useMutation(BUSINESS_SIGNUP_MUTATION);
+  const [signUp, { data, loading, error }] = useMutation(BUSINESS_SIGNUP_MUTATION);
 
   // Submission Handler
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     setDisabledButton(true);
     console.log(data);
     try {
-      const result = await signUp({ variables: data })
+      const result = await signUp({
+        variables: {
+          requestBody: {
+            business: data.business,
+            email: data.email,
+            earlySignup: data.earlySignup,
+            betaTester: true
+          }
+        }
+      })
+
         .then((result) => {
           sendBusinessSignupEmail(data.business, data.email, data.betaTester);
           showModal(<SignupModalBusiness2 />);
