@@ -82,14 +82,18 @@ export default function SignupModalCollaborator2({ data }: any) {
             referralPartner,
             referralCode,
           );
-          // sendReferralEmail(data.email, data.name, referralCode);
-          sendReferralManagementEmail(
-            data.email,
-            data.name,
-            referralCode,
-            data.message,
-          );
-          //THIS WORKS!!!
+          if (referralPartner) {
+            sendReferralManagementEmail(
+              data.email,
+              data.name,
+              referralCode,
+              data.message,
+            );
+            //timeout so we don't exceed 2 emails in 1 second
+            setTimeout(() => {
+              sendReferralEmail(data.email, data.name, referralCode);
+            }, 5000);
+          }
           showModal(
             <SignupModalCollaborator3
               referralPartner={referralPartner}
@@ -98,6 +102,7 @@ export default function SignupModalCollaborator2({ data }: any) {
             />,
           );
         })
+
         .catch((error) => {
           console.error(error);
         });

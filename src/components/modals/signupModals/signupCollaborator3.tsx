@@ -5,20 +5,9 @@ import { useEffect } from "react";
 
 import SiteButton from "../../siteButton";
 import SignupModalIndividual3 from "./signupIndividual3";
-import { sendReferralEmail } from "@/utils/emailUtils";
 
-export default function SignupModalCollaborator3({
-  referralPartner,
-  data,
-  referralCode,
-}: any) {
+export default function SignupModalCollaborator3({ referralPartner }: any) {
   const { showModal } = useModal();
-  const { email, name } = data;
-  useEffect(() => {
-    if (referralPartner === true) {
-      sendReferralEmail(email, name, referralCode);
-    }
-  }, []);
 
   return (
     <div className="SignupModalCollaborator3 flex max-w-[450px] flex-col gap-4 text-jade">
