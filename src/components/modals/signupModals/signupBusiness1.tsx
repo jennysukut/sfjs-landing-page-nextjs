@@ -41,7 +41,9 @@ export default function SignupModalBusiness1() {
     },
   });
 
-  const [signUp, { data, loading, error }] = useMutation(BUSINESS_SIGNUP_MUTATION);
+  const [signUp, { data, loading, error }] = useMutation(
+    BUSINESS_SIGNUP_MUTATION,
+  );
 
   // Submission Handler
   const onSubmit: SubmitHandler<FormData> = async (data) => {
@@ -54,13 +56,12 @@ export default function SignupModalBusiness1() {
             business: data.business,
             email: data.email,
             earlySignup: data.earlySignup,
-            betaTester: true
-          }
-        }
+            betaTester: true,
+          },
+        },
       })
-
         .then((result) => {
-          sendBusinessSignupEmail(data.business, data.email, data.betaTester);
+          sendBusinessSignupEmail(data.email, data.business, data.betaTester);
           showModal(<SignupModalBusiness2 />);
         })
         .catch((error) => {

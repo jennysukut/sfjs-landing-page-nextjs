@@ -15,7 +15,7 @@ export default function SignupModalBusiness2() {
       <Dialog.Description className="Text w-full text-center">
         {`we’re so glad to have you join us in this intentional group of businesses`}
       </Dialog.Description>
-      <Dialog.Description className="Text w-full text-center font-medium italic text-midnight">
+      <Dialog.Description className="Text w-full text-center font-medium italic text-olive">
         {`if you’re interested in supporting us + getting some great deals for job posts with us, check out our crowdfunding rewards`}
       </Dialog.Description>
       <div className="ButtonContainer flex flex-col items-center">

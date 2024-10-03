@@ -70,9 +70,9 @@ export default function SignupModalCollaborator2({ data }: any) {
             collaborator: true,
             message: data.message,
             referralPartner: data.referralPartner,
-            referralCode: data.referralCode
-          }
-        }
+            referralCode: data.referralCode,
+          },
+        },
       })
         .then((result) => {
           sendCollaboratorSignupEmail(email, name);

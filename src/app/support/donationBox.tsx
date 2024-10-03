@@ -302,6 +302,28 @@ function DonationBox() {
     );
   }
 
+  //payment integration message from previous Donation Box
+  // useEffect(() => {
+  //   // @ts-ignore
+  //   const handleMessage = (event) => {
+  //     console.log(JSON.stringify(event));
+  //     // if (event.origin === 'https://secure.helcim.com') {
+  //     if (event.origin.includes("helcim")) {
+  //       const { paymentStatus, transactionId } = event.data;
+  //       if (paymentStatus === "success") {
+  //         // Handle successful payment
+  //         console.log("payment success");
+  //       } else if (paymentStatus === "failed") {
+  //         // Handle failed payment
+  //         console.log("payment failed");
+  //       }
+  //     }
+  //   };
+
+  //   window.addEventListener("message", handleMessage);
+  //   return () => window.removeEventListener("message", handleMessage);
+  // }, []);
+
   return (
     <>
       <Script
@@ -346,7 +368,7 @@ function DonationBox() {
             </p>
 
             {/* donor categories: business / individual */}
-            <div className="DonationOptions xs:flex-row mt-8 flex flex-col items-center gap-6">
+            <div className="DonationOptions mt-8 flex flex-col items-center gap-6 xs:flex-row">
               <SiteButton
                 aria="individual"
                 variant="filled"

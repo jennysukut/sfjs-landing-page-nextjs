@@ -62,9 +62,9 @@ export default function CollaboratorSignupEmail({
             <p className="EmailInfo mt-12 text-jade">
               {`Thank you for your time and we hope to chat with you soon!✨`}
             </p>
-            {/* <p className="EmailInfo mt-12 text-jade">
-              {`If you have any questions or want to get in touch with our Founders, you can contact Jenny Sukut via LinkedIn: `}
-            </p> */}
+            <p className="EmailInfo mt-12 text-end text-xs italic text-midnight">
+              {`If you have any questions or want to get in touch with our Founders, you can contact Jenny & Jacob by responding to this email!`}
+            </p>
             <p className="EmailInfo mt-20 text-end text-sm italic tracking-superwide text-olive">
               - the makers of straightforward job site
             </p>

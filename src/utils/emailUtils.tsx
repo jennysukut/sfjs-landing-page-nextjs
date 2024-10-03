@@ -20,7 +20,7 @@ export const sendBusinessSignupEmail = async (
   business: string,
   betaTester?: boolean,
 ) => {
-  await fetch("/api/emails/signupEmails/collaboratorSignupEmail", {
+  await fetch("/api/emails/signupEmails/businessSignupEmail", {
     method: "POST",
     body: JSON.stringify({
       email: email,

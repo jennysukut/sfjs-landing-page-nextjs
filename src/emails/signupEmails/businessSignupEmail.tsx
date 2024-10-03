@@ -59,6 +59,7 @@ export default function BusinessSignupEmail({
             <p className="EmailInfo mt-12 text-end text-olive">
               {`We will be opening our platform early to business on our list so you can create a job post to be active on our launch!`}
             </p>
+            {/* Add information here for the businesses who would like to be a beta tester? */}
             <p className="EmailInfo mt-12 text-jade">
               {`We hope you'll enjoy the conscious + thoughtful + simple +
               human-focused enviornment we're working so hard to create ✨`}
