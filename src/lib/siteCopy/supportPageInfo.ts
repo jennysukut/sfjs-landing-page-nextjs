@@ -16,8 +16,8 @@ export const supportPageInfo = {
 
   estTimeline: [
     "If you are wondering when you will get access to this amazing job site, rest assured it will be soon!",
-    "Our team is working hard to deliver an MVP before the end of October.*",
-    "We will set up a soft launch for our Beta Testers after a quick run through QA and are aiming for a full launch in November 2024!*",
+    "Our team is working hard to deliver an MVP before the end of November.*",
+    "We will set up a soft launch for our Beta Testers after a quick run through QA and are aiming for a full launch in December 2024!*",
   ],
 
   timelineAst:
@@ -76,7 +76,7 @@ export const supportPageInfo = {
       "$50,000": [
         "Get your name on our sponsor page with a brightly colored box ",
         "This Time Only: Get a digital “elite” sponsor sticker on your profile",
-        "Get a Lifetime of Free Job Listings* [so much value]",
+        "Get a Lifetime of Free Job Listings* [almost priceless]",
       ],
     },
     individual: {

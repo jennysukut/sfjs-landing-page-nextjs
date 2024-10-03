@@ -3,9 +3,13 @@ import * as React from "react";
 
 type SignupEmailProps = {
   firstName: string;
+  betaTester?: boolean;
 };
 
-export default function IndividualSignupEmail({ firstName }: SignupEmailProps) {
+export default function IndividualSignupEmail({
+  firstName,
+  betaTester,
+}: SignupEmailProps) {
   const baseUrl = "http://straightforwardjobsite.com";
   return (
     <Html>
@@ -59,6 +63,9 @@ export default function IndividualSignupEmail({ firstName }: SignupEmailProps) {
               {`We will respect your inbox and send you a notice when we launch so you can make
               your profile + start job-searching the simple way!`}
             </p>
+            {betaTester && (
+              <p className="EmailInfo text-end italic text-olive">{`Since you're interested in being a betaTester, we'll be in touch as soon as our MVP is ready for testing!`}</p>
+            )}
             <p className="EmailInfo mt-12 text-jade">
               {`We hope you'll enjoy the conscious + thoughtful +
               human-focused enviornment we're working so hard to create ✨`}

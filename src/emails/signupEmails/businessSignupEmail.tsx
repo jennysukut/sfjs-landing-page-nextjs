@@ -3,12 +3,15 @@ import * as React from "react";
 
 type BusinessEmailProps = {
   businessName: string;
+  betaTester?: boolean;
 };
 
 export default function BusinessSignupEmail({
   businessName = "busniessName",
+  betaTester,
 }: BusinessEmailProps) {
   const baseUrl = "http://straightforwardjobsite.com";
+
   return (
     <Html>
       <Tailwind
@@ -57,9 +60,14 @@ export default function BusinessSignupEmail({
               Job Site and we couldn't be happier to have you join us!`}
             </p>
             <p className="EmailInfo mt-12 text-end text-olive">
-              {`We will be opening our platform early to business on our list so you can create a job post to be active on our launch!`}
+              {`We will be opening our platform early to businesses on our list so you can create a job post to be active on our launch!`}
             </p>
             {/* Add information here for the businesses who would like to be a beta tester? */}
+            {betaTester && (
+              <p className="EmailInfo">
+                you signed up to be a beta tester - hooray!
+              </p>
+            )}
             <p className="EmailInfo mt-12 text-jade">
               {`We hope you'll enjoy the conscious + thoughtful + simple +
               human-focused enviornment we're working so hard to create ✨`}

@@ -1,10 +1,15 @@
-export const sendFellowSignupEmail = async (email: string, name: string) => {
+export const sendFellowSignupEmail = async (
+  email: string,
+  name: string,
+  betaTester: boolean,
+) => {
   const firstName = name.split(" ")[0];
   await fetch("/api/emails/signupEmails/fellowSignupEmail", {
     method: "POST",
     body: JSON.stringify({
       email: email,
       firstName: firstName,
+      betaTester: betaTester,
     }),
   })
     .then((res) => {

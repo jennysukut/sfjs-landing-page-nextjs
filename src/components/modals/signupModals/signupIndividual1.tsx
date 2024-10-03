@@ -50,7 +50,7 @@ export default function SignupModalIndividual1() {
     try {
       const result = await signUp({ variables: data })
         .then((result) => {
-          sendFellowSignupEmail(data.email, data.name);
+          sendFellowSignupEmail(data.email, data.name, betaTester);
           showModal(<SignupModalIndividual2 />);
         })
         .catch((error) => {
@@ -71,7 +71,7 @@ export default function SignupModalIndividual1() {
         sign up to be notified when we launch this Straightforward Job Site
       </Dialog.Description>
       <form
-        className="IndividualSignupForm xs:pt-8 flex flex-col gap-2"
+        className="IndividualSignupForm flex flex-col gap-2 xs:pt-8"
         onSubmit={handleSubmit(onSubmit)}
       >
         {/* name input */}
