@@ -1,7 +1,7 @@
 "use client";
 
 import * as z from "zod";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSignals } from "@preact/signals-react/runtime";
 import { gql } from "@apollo/client";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -64,6 +64,7 @@ function DonationBox() {
   const [customAmount, setCustomAmount] = useState("");
   const [referral, setReferral] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [checkoutToken, setCheckoutToken] = useState("");
 
   // rewards arrays
   const individualRewardsArray = Object.entries(
@@ -109,26 +110,25 @@ function DonationBox() {
   // payment function
   const testPayment = ({ name, email, amount }: any) => {
     console.log("trying testPayment");
-
     const donation = {
       name: name,
       amount: "0.01",
+      // amount: parseFloat(amount).toFixed(2),
+      // amount: String(parseFloat(amount).toFixed(2)), //this works when you type in an amount, but not when you use the buttons?
       email: email,
     };
 
-    console.log(donation);
-
+    //send request to our server
     client
       .mutate({
         mutation: ACCEPT_FELLOW_DONATION,
         variables: { donation },
       })
       .then(({ data }) => {
-        console.log("success");
-        console.log(data);
+        setCheckoutToken(data.acceptFellowDonation.checkoutToken);
         // @ts-ignore // this function is added by an external script
         appendHelcimPayIframe(data.acceptFellowDonation.checkoutToken);
-      }) // we'll need to write something that grabs the information sent back by the Helcim Iframe and uses it to set the amount and send a confirmation email
+      })
       .catch((error) => {
         console.log(error.message);
       });
@@ -155,6 +155,32 @@ function DonationBox() {
       // clearForms();
     }
   };
+
+  //listen for a successful or aborted payment
+  window.addEventListener("message", (event) => {
+    if (checkoutToken !== "") {
+      const helcimPayJsIdentifierKey = "helcim-pay-js-" + checkoutToken;
+      if (event.data.eventName === helcimPayJsIdentifierKey) {
+        if (event.data.eventStatus === "ABORTED") {
+          console.error("Transaction failed!", event.data.eventMessage);
+          //do something when a transaction fails?
+        }
+
+        if (event.data.eventStatus === "SUCCESS") {
+          const transactionData = JSON.parse(event.data.eventMessage);
+          const donationData = transactionData.data.data;
+          console.log(donationData); //here's all the data you'll need to send to the backend!
+
+          //clear the forms and show the DonationThanksModal, send Thanks Email?
+          // if (donationCategory === "individual") {
+          //   sendFellowDonationEmail(email, name, amount);
+          // }
+          clearForms(); //this needs to clear the custom input as well
+          showModal(<DonationThanksModal />);
+        }
+      }
+    }
+  });
 
   // options for form submission
   const onIndividualDonation: SubmitHandler<FellowFormData> = (data) => {
@@ -301,17 +327,16 @@ function DonationBox() {
     );
   }
 
-  //payment integration message from previous Donation Box
   // useEffect(() => {
   //   // @ts-ignore
   //   const handleMessage = (event) => {
   //     console.log(JSON.stringify(event));
-  //     // if (event.origin === 'https://secure.helcim.com') {
   //     if (event.origin.includes("helcim")) {
-  //       const { paymentStatus, transactionId } = event.data;
+  //       const { paymentStatus, transactionId, amount } = event.data; // Add amount to capture it
   //       if (paymentStatus === "success") {
   //         // Handle successful payment
-  //         console.log("payment success");
+  //         console.log("payment success", transactionId, amount); // Log transactionId and amount
+  //         // Here you can set the amount and send a confirmation email
   //       } else if (paymentStatus === "failed") {
   //         // Handle failed payment
   //         console.log("payment failed");
