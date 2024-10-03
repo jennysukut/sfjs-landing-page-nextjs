@@ -169,15 +169,3 @@ export type MakerInfoType = {
   shadow: string;
   details: string[];
 };
-
-export function printMakersInfo() {
-  // Object.entries(makersInfo).forEach(([key, maker]) => {
-  //   console.log(`Maker: ${key}`);
-  //   console.log(`Name: ${maker.firstName} ${maker.lastName}`);
-  //   console.log(`Image: ${maker.img}`);
-  //   console.log(`Shadow: ${maker.shadow}`);
-  //   console.log("Details:");
-  //   maker.details.forEach((detail) => console.log(`- ${detail}`));
-  //   console.log("-------------------");
-  // });
-}

@@ -15,9 +15,10 @@ export default function SignupOptionsModal() {
         signup
       </Dialog.Title>
       <p className="Subtitle w-full text-center">who are you?</p>
-      <div className="SignupButtons flex flex-col items-start gap-y-4">
+      <div className="SignupButtons mt-4 flex flex-col items-start gap-y-4">
         <SiteButton
           variant="hollow"
+          size="large"
           colorScheme="c1"
           aria="job-seeker"
           addClasses="w-[200px]"
@@ -27,6 +28,7 @@ export default function SignupOptionsModal() {
         </SiteButton>
         <SiteButton
           variant="hollow"
+          size="large"
           colorScheme="b3"
           aria="business"
           addClasses="w-[200px]"
@@ -36,6 +38,7 @@ export default function SignupOptionsModal() {
         </SiteButton>
         <SiteButton
           variant="hollow"
+          size="large"
           colorScheme="f1"
           aria="collaborator"
           addClasses="w-[200px]"

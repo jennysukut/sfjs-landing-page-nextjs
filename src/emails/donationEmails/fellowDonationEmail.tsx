@@ -58,7 +58,7 @@ export default function FellowDonationEmail({
               {`Thank you so much for your donation to Straightforward Job Site!`}
             </p>
             <p className="EmailInfo mt-12 text-end text-olive">
-              {`That ${amount} means so much to us and our group of makers is so grateful for your support.`}
+              {`That ${amount} means a lot to us and our group of makers is so grateful for your support. We're excited to showcase you on our sponsors page!`}
             </p>
             <p className="EmailInfo mt-12 text-jade">
               {`We hope you'll enjoy the conscious + thoughtful +

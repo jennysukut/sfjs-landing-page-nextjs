@@ -62,10 +62,9 @@ export default function BusinessSignupEmail({
             <p className="EmailInfo mt-12 text-end text-olive">
               {`We will be opening our platform early to businesses on our list so you can create a job post to be active on our launch!`}
             </p>
-            {/* Add information here for the businesses who would like to be a beta tester? */}
             {betaTester && (
-              <p className="EmailInfo">
-                you signed up to be a beta tester - hooray!
+              <p className="EmailInfo text-end text-olive">
+                {`We'll be choosing a small handful of businesses to be beta testers and get a free job post in exchange for feedback. We'll let you know if you make the list!`}
               </p>
             )}
             <p className="EmailInfo mt-12 text-jade">

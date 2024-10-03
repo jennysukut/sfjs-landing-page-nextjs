@@ -48,7 +48,6 @@ export default function SignupModalBusiness1() {
   // Submission Handler
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     setDisabledButton(true);
-    console.log(data);
     try {
       const result = await signUp({
         variables: {
@@ -157,8 +156,9 @@ export default function SignupModalBusiness1() {
             colorScheme="c1"
             aria="submit"
             onClick={handleSubmit(onSubmit)}
+            disabled={disabledButton}
           >
-            sign us up!
+            {disabledButton ? "Signing up..." : "sign us up!"}
           </SiteButton>
         </div>
       </form>

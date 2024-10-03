@@ -74,7 +74,6 @@ export default function SignupModalCollaborator2({ data }: any) {
         },
       })
         .then((result) => {
-          console.log(betaTester, referralPartner, referralCode);
           sendCollaboratorSignupEmail(
             data.email,
             data.name,

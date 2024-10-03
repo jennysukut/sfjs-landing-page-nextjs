@@ -31,8 +31,6 @@ export default function SignupModalCollaborator1() {
   // Would I send it through the <SignupModalCollaborator2 /> when I click the form's button?
   const onSubmit: SubmitHandler<FormData> = (data) => {
     showModal(<SignupModalCollaborator2 data={data} />);
-
-    console.log(data);
   };
 
   return (
@@ -47,7 +45,7 @@ export default function SignupModalCollaborator1() {
         {`tell us a little bit about you and we’ll see if there’s a way we can work together.`}
       </Dialog.Description>
       <form
-        className="xs:pt-8 flex flex-col gap-2"
+        className="flex flex-col gap-2 xs:pt-8"
         onSubmit={handleSubmit(onSubmit)}
       >
         {/* name input */}

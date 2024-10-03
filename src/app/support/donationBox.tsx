@@ -53,8 +53,10 @@ type BusinessFormData = z.infer<typeof businessDonationSchema>;
 function DonationBox() {
   useSignals();
   const { showModal } = useModal();
+
   const rewards = supportPageInfo.rewards;
   const targetAmount = 15000;
+
   const [currentAmount, setCurrentAmount] = useState(0);
   const [donationCategory, setDonationCategory] = useState("individual");
   const [showAddress, setShowAddress] = useState(false);
@@ -141,7 +143,6 @@ function DonationBox() {
       const { name, email, amount } = data;
       testPayment({ name, email, amount });
       //if the payment works, send the email and show thanks modal, and clear forms
-
       sendFellowDonationEmail(email, name, amount);
       clearForms();
       showModal(<DonationThanksModal />);
@@ -150,7 +151,6 @@ function DonationBox() {
       const { email, businessName: name, amount } = data;
       testPayment({ name, email, amount });
       // if the payment works, send the email and show thanks modal, and clear forms
-
       sendBusinessDonationEmail(email, name, amount); //should I keep this as businessName or make it simple "name"?
       showModal(<DonationThanksModal />);
       clearForms();
