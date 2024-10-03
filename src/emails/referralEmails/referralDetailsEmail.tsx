@@ -1,19 +1,15 @@
 import { Tailwind, Html, Img, Head, Preview } from "@react-email/components";
 import * as React from "react";
 
-type CollaboratorEmailProps = {
+type ReferralEmailProps = {
   firstName: string;
-  betaTester?: boolean;
-  referralPartner?: boolean;
   referralCode?: string;
 };
 
-export default function CollaboratorSignupEmail({
+export default function ReferralDetailsEmail({
   firstName = "testName",
-  betaTester,
-  referralPartner,
   referralCode,
-}: CollaboratorEmailProps) {
+}: ReferralEmailProps) {
   const baseUrl = "http://straightforwardjobsite.com";
   return (
     <Html>
@@ -46,7 +42,9 @@ export default function CollaboratorSignupEmail({
         }}
       >
         <body className="Email h-[100%] gap-12 bg-cream pb-40 font-sans font-semibold tracking-widest text-midnight">
-          <Preview>Welcome to Straightforward Job Site {firstName}!</Preview>
+          <Preview>
+            {`Welcome to Straightforward Job Site's Referral Program!`}
+          </Preview>
           <Head>
             <Img
               src={`${baseUrl}/sfjs-logo.png`}
@@ -57,38 +55,26 @@ export default function CollaboratorSignupEmail({
             />
           </Head>
           <section className="EmailBody mb-8 px-[15%] py-[5%] text-left text-[1rem] leading-relaxed">
-            <p className="EmailInfo text-jade">Hello there {firstName}!</p>
+            <p className="EmailInfo text-jade">{`Hello there ${firstName}! Here are the referral program details we mentioned earlier:`}</p>
             <p className="EmailInfo">
-              {`You've been  added to the list of potential collaborators for Straightforward
-              Job Site!`}
+              {`Over at Straightforward Job Site we've got an exciting crowdfunding campaign going, where fellow job-seekers can pitch in and businesses can get extra special deals + rewards by signing up and funding our development!`}
             </p>
-
-            {betaTester && (
-              <p className="EmailInfo mt-12 text-olive">{`Since you've signed up to be a beta tester, we'll let you know when our MVP is ready for testing!`}</p>
-            )}
-            {referralPartner && (
-              <div className="EmailInfo mt-12 text-end italic text-jade">
-                {" "}
-                {`You've also expressed interest in being a referral partner with us! We've got some details we'll send along in an email shortly. For now, you can `}
-                <a
-                  href="https://cal.com/jacobsf"
-                  className="Link text-jade underline"
-                >
-                  click here
-                </a>
-                {` to schedule a 15 minute meeting with Jacob where you'll go over details + activate your referral code!`}
-              </div>
-            )}
 
             <p className="EmailInfo mt-12 text-end text-olive">
-              {`We will be using this list to find people to partner with in the future. We'll be sure to let you know if your skillset + ideas align with our needs!`}
+              {`We know things are difficult out there and we thought it would be a fun idea to set up a referral program that's mutually beneficial to us and other awesome people such as yourself!`}
             </p>
-            <p className="EmailInfo mt-12 text-jade">
-              {`Thank you for your time and we hope to chat with you soon!✨`}
+            <p className="EmailInfo mt-12 text-end text-jade">
+              {`How it plays out is pretty simple: If you get a business on board and they donate to our campaign, you get 10% of what they spend! They get a great deal, you get some cash, and we get jobs to fill our site and fund our build - Triple-Win!`}
             </p>
-            {/* betaTester info goes here */}
+            <p className="EmailInfo mt-12">
+              {`Here's your very own referral code: ${referralCode}`}
+            </p>
+            <p className="EmailInfo mt-12 text-olive">
+              {/* add the contract link here */}
+              {`We've got a contract here for you to look over and sign before you're officially part of the program - you should also have a meeting scheduled with Jacob {one of our founders} to go over details and any questions you might have.`}
+            </p>
             <p className="EmailInfo mt-12 text-end italic text-midnight">
-              {`If you have any questions or want to get in touch with our Founders, you can contact Jenny & Jacob by responding to this email!`}
+              {`Give it a glance and we're excited to have you as part of our cohort of creative humans making the world better for the people in it, one step at a time. Talk to you soon ✨`}
             </p>
             <p className="EmailInfo mt-20 text-end text-sm italic tracking-superwide text-olive">
               - the makers of straightforward job site

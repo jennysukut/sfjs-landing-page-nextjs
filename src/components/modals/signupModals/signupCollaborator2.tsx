@@ -10,7 +10,11 @@ import { useMutation } from "@apollo/client";
 
 import SiteButton from "../../siteButton";
 import { makeReferralCode } from "@/utils/makeReferralCode";
-import { sendCollaboratorSignupEmail } from "@/utils/emailUtils";
+import {
+  sendCollaboratorSignupEmail,
+  sendReferralEmail,
+  sendReferralManagementEmail,
+} from "@/utils/emailUtils";
 import SignupModalCollaborator3 from "./signupCollaborator3";
 
 const collaboratorSchema2 = z.object({
@@ -31,7 +35,7 @@ export default function SignupModalCollaborator2({ data }: any) {
 
   const [betaTester, setBetaTester] = useState(false);
   const [referralPartner, setReferralPartner] = useState(false);
-  const [fellowReferralCode, setFellowReferralCode] = useState("");
+  const [referralCode, setReferralCode] = useState("");
   const [disabledButton, setDisabledButton] = useState(false);
   const {
     register,
@@ -44,7 +48,7 @@ export default function SignupModalCollaborator2({ data }: any) {
     defaultValues: {
       betaTester: false,
       referralPartner: false,
-      referralCode: fellowReferralCode,
+      referralCode: referralCode,
       name: name,
       email: email,
     },
@@ -54,11 +58,6 @@ export default function SignupModalCollaborator2({ data }: any) {
 
   // Submission Function
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    if (data.referralPartner === true) {
-      makeReferralCode(name, setFellowReferralCode);
-      //use the referral code in the email and add to our FormData
-      //send Referral Email
-    }
     setDisabledButton(true);
     try {
       const result = await signUp({
@@ -70,26 +69,42 @@ export default function SignupModalCollaborator2({ data }: any) {
             collaborator: true,
             message: data.message,
             referralPartner: data.referralPartner,
-            referralCode: data.referralCode,
+            referralCode: referralCode,
           },
         },
       })
         .then((result) => {
-          sendCollaboratorSignupEmail(email, name);
+          console.log(betaTester, referralPartner, referralCode);
+          sendCollaboratorSignupEmail(
+            data.email,
+            data.name,
+            betaTester,
+            referralPartner,
+            referralCode,
+          );
+          // sendReferralEmail(data.email, data.name, referralCode);
+          sendReferralManagementEmail(
+            data.email,
+            data.name,
+            referralCode,
+            data.message,
+          );
+          //THIS WORKS!!!
           showModal(
-            <SignupModalCollaborator3 referralPartner={referralPartner} />,
+            <SignupModalCollaborator3
+              referralPartner={referralPartner}
+              referralCode={referralCode}
+              data={data}
+            />,
           );
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
     } catch (err) {
       console.error("Signup error:", err);
       //what kind of error do we want to have here?
     }
-
-    // sendCollaboratorSignupEmail(email, name);
-    // showModal(<SignupModalCollaborator3 referralPartner={referralPartner} />);
   };
 
   return (
@@ -147,6 +162,7 @@ export default function SignupModalCollaborator2({ data }: any) {
               const newValue = !watch("referralPartner");
               setValue("referralPartner", newValue);
               setReferralPartner(newValue);
+              makeReferralCode(name, setReferralCode);
             }}
           />
           <label

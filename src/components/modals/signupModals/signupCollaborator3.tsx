@@ -1,12 +1,24 @@
 import * as Dialog from "@radix-ui/react-dialog";
 
 import { useModal } from "@/contexts/ModalContext";
+import { useEffect } from "react";
 
 import SiteButton from "../../siteButton";
 import SignupModalIndividual3 from "./signupIndividual3";
+import { sendReferralEmail } from "@/utils/emailUtils";
 
-export default function SignupModalCollaborator3(referralPartner: any) {
+export default function SignupModalCollaborator3({
+  referralPartner,
+  data,
+  referralCode,
+}: any) {
   const { showModal } = useModal();
+  const { email, name } = data;
+  useEffect(() => {
+    if (referralPartner === true) {
+      sendReferralEmail(email, name, referralCode);
+    }
+  }, []);
 
   return (
     <div className="SignupModalCollaborator3 flex max-w-[450px] flex-col gap-4 text-jade">
@@ -21,7 +33,7 @@ export default function SignupModalCollaborator3(referralPartner: any) {
       </Dialog.Description>
       {referralPartner && (
         <Dialog.Description className="Text w-full text-center italic text-olive">
-          {`It looks like you're interested in being a referral partner, we'll send you an email with more information`}
+          {`It looks like you're interested in being a referral partner, we'll send you an email with more information soon!`}
         </Dialog.Description>
       )}
       <div className="ButtonContainer flex flex-col items-center">

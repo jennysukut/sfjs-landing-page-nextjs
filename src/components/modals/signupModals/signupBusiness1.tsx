@@ -61,7 +61,7 @@ export default function SignupModalBusiness1() {
         },
       })
         .then((result) => {
-          sendBusinessSignupEmail(data.email, data.business, data.betaTester);
+          sendBusinessSignupEmail(data.email, data.business, betaTester);
           showModal(<SignupModalBusiness2 />);
         })
         .catch((error) => {

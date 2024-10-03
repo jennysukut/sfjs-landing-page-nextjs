@@ -23,7 +23,7 @@ export const sendFellowSignupEmail = async (
 export const sendBusinessSignupEmail = async (
   email: string,
   business: string,
-  betaTester?: boolean,
+  betaTester: boolean,
 ) => {
   await fetch("/api/emails/signupEmails/businessSignupEmail", {
     method: "POST",
@@ -44,6 +44,9 @@ export const sendBusinessSignupEmail = async (
 export const sendCollaboratorSignupEmail = async (
   email: string,
   name: string,
+  betaTester: boolean,
+  referralPartner: boolean,
+  referralCode: string,
 ) => {
   const firstName = name.split(" ")[0];
   await fetch("/api/emails/signupEmails/collaboratorSignupEmail", {
@@ -51,6 +54,54 @@ export const sendCollaboratorSignupEmail = async (
     body: JSON.stringify({
       email: email,
       firstName: firstName,
+      betaTester: betaTester,
+      referralPartner: referralPartner,
+      referralCode: referralCode,
+    }),
+  })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+// referralEmails
+export const sendReferralEmail = async (
+  email: string,
+  name: string,
+  referralCode: string,
+) => {
+  const firstName = name.split(" ")[0];
+  await fetch("/api/emails/referralEmails/referralFellowEmail", {
+    method: "POST",
+    body: JSON.stringify({
+      email: email,
+      firstName: firstName,
+      referralCode: referralCode,
+    }),
+  })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+export const sendReferralManagementEmail = async (
+  email: string,
+  name: string,
+  referralCode: string,
+  message: string,
+) => {
+  await fetch("/api/emails/referralEmails/referralManagementEmail", {
+    method: "POST",
+    body: JSON.stringify({
+      email: email,
+      name: name,
+      referralCode: referralCode,
+      message: message,
     }),
   })
     .then((res) => {
