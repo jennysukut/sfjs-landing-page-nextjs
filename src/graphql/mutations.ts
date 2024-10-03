@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 
+//we'd need to update this to submit a single request body to be in line with the other requests
 export const SIGNUP_MUTATION = gql`
   mutation SignUp($name: String!, $email: String!, $betaTester: Boolean!) {
     signUp(name: $name, email: $email, betaTester: $betaTester) {
@@ -20,22 +21,3 @@ export const BUSINESS_SIGNUP_MUTATION = gql`
     signupBusiness(requestBody: $requestBody)
   }
 `;
-
-// export const BUSINESS_SIGNUP_MUTATION = gql`
-//   mutation BusinessSignUp(
-//     $betaTester: Boolean!
-//     $business: String!
-//     $earlySignup: Boolean!
-//     $email: String!
-//   ) {
-//     signupBusiness(
-//       betaTester: $betaTester
-//       business: $business
-//       earlySignup: $earlySignup
-//       email: $email
-//     ) {
-//       success
-//       message
-//     }
-//   }
-// `;
