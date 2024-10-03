@@ -97,10 +97,10 @@ function DonationBox() {
     },
   });
 
-  // payment mutation
-  const INITIALIZE_PAYMENT = gql`
-    mutation InitializePayment($payment: PaymentInput!) {
-      initializePayment(payment: $payment) {
+  // fellow donation mutation
+  const ACCEPT_FELLOW_DONATION = gql`
+    mutation AcceptFellowDonation($donation: FellowDonationInput!) {
+      acceptFellowDonation(donation: $donation) {
         checkoutToken
       }
     }
@@ -110,25 +110,24 @@ function DonationBox() {
   const testPayment = ({ name, email, amount }: any) => {
     console.log("trying testPayment");
 
-    const payment = {
-      paymentType: "purchase",
-      amount: amount,
-      currency: "USD",
+    const donation = {
+      name: name,
+      amount: "0.01",
       email: email,
-      accountName: name,
     };
 
-    console.log(payment);
+    console.log(donation);
 
     client
       .mutate({
-        mutation: INITIALIZE_PAYMENT,
-        variables: { payment },
+        mutation: ACCEPT_FELLOW_DONATION,
+        variables: { donation },
       })
       .then(({ data }) => {
         console.log("success");
+        console.log(data);
         // @ts-ignore // this function is added by an external script
-        appendHelcimPayIframe(data.initializePayment.checkoutToken);
+        appendHelcimPayIframe(data.acceptFellowDonation.checkoutToken);
       }) // we'll need to write something that grabs the information sent back by the Helcim Iframe and uses it to set the amount and send a confirmation email
       .catch((error) => {
         console.log(error.message);
