@@ -5,7 +5,7 @@ import { useModal } from "@/contexts/ModalContext";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SIGNUP_MUTATION } from "@/graphql/mutations";
+import { FELLOW_SIGNUP_MUTATION } from "@/graphql/mutations";
 import { useMutation } from "@apollo/client";
 
 import SiteButton from "../../siteButton";
@@ -50,7 +50,7 @@ export default function SignupModalCollaborator2({ data }: any) {
     },
   });
 
-  const [signUp, { loading, error }] = useMutation(SIGNUP_MUTATION);
+  const [signUp, { loading, error }] = useMutation(FELLOW_SIGNUP_MUTATION);
 
   // Submission Function
   const onSubmit: SubmitHandler<FormData> = async (data) => {
@@ -61,7 +61,19 @@ export default function SignupModalCollaborator2({ data }: any) {
     }
     setDisabledButton(true);
     try {
-      const result = await signUp({ variables: data })
+      const result = await signUp({
+        variables: {
+          requestBody: {
+            name: data.name,
+            email: data.email,
+            betaTester: data.betaTester,
+            collaborator: true,
+            message: data.message,
+            referralPartner: data.referralPartner,
+            referralCode: data.referralCode
+          }
+        }
+      })
         .then((result) => {
           sendCollaboratorSignupEmail(email, name);
           showModal(
