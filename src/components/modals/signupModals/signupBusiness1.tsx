@@ -11,6 +11,7 @@ import { BUSINESS_SIGNUP_MUTATION } from "@/graphql/mutations";
 import SiteButton from "../../siteButton";
 import { sendBusinessSignupEmail } from "@/utils/emailUtils";
 import SignupModalBusiness2 from "./signupBusiness2";
+import ErrorModal from "../errorModal";
 
 const businessSchema = z.object({
   business: z.string().min(2, { message: "Required" }),
@@ -64,11 +65,11 @@ export default function SignupModalBusiness1() {
           showModal(<SignupModalBusiness2 />);
         })
         .catch((error) => {
-          console.log(error);
+          showModal(<ErrorModal />);
         });
     } catch (err) {
       console.error("Signup error:", err);
-      //what kind of error do we want to have here?
+      showModal(<ErrorModal />);
     }
   };
 

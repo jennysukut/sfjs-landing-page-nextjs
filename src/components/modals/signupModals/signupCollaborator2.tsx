@@ -16,6 +16,7 @@ import {
   sendReferralManagementEmail,
 } from "@/utils/emailUtils";
 import SignupModalCollaborator3 from "./signupCollaborator3";
+import ErrorModal from "../errorModal";
 
 const collaboratorSchema2 = z.object({
   message: z.string().min(10, { message: "Please provide more details" }),
@@ -103,11 +104,11 @@ export default function SignupModalCollaborator2({ data }: any) {
         })
 
         .catch((error) => {
-          console.error(error);
+          showModal(<ErrorModal />);
         });
     } catch (err) {
       console.error("Signup error:", err);
-      //what kind of error do we want to have here?
+      showModal(<ErrorModal />);
     }
   };
 

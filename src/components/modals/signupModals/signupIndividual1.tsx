@@ -11,6 +11,7 @@ import { useMutation } from "@apollo/client";
 import SiteButton from "../../siteButton";
 import { sendFellowSignupEmail } from "@/utils/emailUtils";
 import SignupModalIndividual2 from "./signupIndividual2";
+import ErrorModal from "../errorModal";
 
 const fellowSchema = z.object({
   name: z.string().min(2, { message: "Required" }),
@@ -54,11 +55,10 @@ export default function SignupModalIndividual1() {
           showModal(<SignupModalIndividual2 />);
         })
         .catch((error) => {
-          console.log(error);
+          showModal(<ErrorModal />);
         });
     } catch (err) {
-      console.error("Signup error:", err);
-      //what kind of error do we want to have here?
+      showModal(<ErrorModal />);
     }
   };
 

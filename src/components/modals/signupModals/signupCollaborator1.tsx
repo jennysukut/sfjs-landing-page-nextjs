@@ -27,8 +27,6 @@ export default function SignupModalCollaborator1() {
     resolver: zodResolver(collaboratorSchema),
   });
 
-  // I'd like to send this data to the next modal that pops up so we can send all the data to the server at once.
-  // Would I send it through the <SignupModalCollaborator2 /> when I click the form's button?
   const onSubmit: SubmitHandler<FormData> = (data) => {
     showModal(<SignupModalCollaborator2 data={data} />);
   };
