@@ -65,6 +65,7 @@ function DonationBox() {
   const [referral, setReferral] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [checkoutToken, setCheckoutToken] = useState("");
+  const [checkoutId, setCheckoutId] = useState(0);
 
   // rewards arrays
   const individualRewardsArray = Object.entries(
@@ -102,7 +103,21 @@ function DonationBox() {
   const ACCEPT_FELLOW_DONATION = gql`
     mutation AcceptFellowDonation($donation: FellowDonationInput!) {
       acceptFellowDonation(donation: $donation) {
+        id
         checkoutToken
+      }
+    }
+  `;
+
+  const COMPLETE_PAYMENT = gql`
+    mutation CompletePayment($input: PaymentResultInput!) {
+      completePayment(input: $input) {
+        success
+        message
+        payment {
+          id
+          status
+        }
       }
     }
   `;
@@ -123,9 +138,11 @@ function DonationBox() {
       .mutate({
         mutation: ACCEPT_FELLOW_DONATION,
         variables: { donation },
+        fetchPolicy: 'no-cache',
       })
       .then(({ data }) => {
         setCheckoutToken(data.acceptFellowDonation.checkoutToken);
+        setCheckoutId(data.acceptFellowDonation.id);
         // @ts-ignore // this function is added by an external script
         appendHelcimPayIframe(data.acceptFellowDonation.checkoutToken);
       })
@@ -168,8 +185,27 @@ function DonationBox() {
 
         if (event.data.eventStatus === "SUCCESS") {
           const transactionData = JSON.parse(event.data.eventMessage);
-          const donationData = transactionData.data.data;
-          console.log(donationData); //here's all the data you'll need to send to the backend!
+          const input = {
+            paymentId: checkoutId,
+            hash: transactionData.data.hash,
+            data: transactionData.data.data,
+          };
+          console.log(input); //here's all the data you'll need to send to the backend!
+
+          client
+            .mutate({
+              mutation: COMPLETE_PAYMENT,
+              variables: { input },
+              fetchPolicy: 'no-cache',
+            })
+            .then(({ data }) => {
+              console.log('Success:', data.completePayment);
+            })
+            .catch((error) => {
+              console.log('Error:', error.message);
+              console.log('GraphQL Errors:', error.graphQLErrors);
+              console.log('Network Error:', error.networkError);
+            });
 
           //clear the forms and show the DonationThanksModal, send Thanks Email?
           // if (donationCategory === "individual") {
