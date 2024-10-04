@@ -25,6 +25,12 @@ import {
   sendFellowDonationEmail,
 } from "@/utils/emailUtils";
 import DonationThanksModal from "@/components/modals/donationThanksModal";
+import ErrorModal from "@/components/modals/errorModal";
+import {
+  ACCEPT_FELLOW_DONATION,
+  ACCEPT_BUSINESS_DONATION,
+  COMPLETE_PAYMENT,
+} from "@/graphql/mutations";
 
 type DonationCategory = "business" | "individual";
 
@@ -65,6 +71,13 @@ function DonationBox() {
   const [referral, setReferral] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [checkoutToken, setCheckoutToken] = useState("");
+  const [checkoutId, setCheckoutId] = useState(0);
+  const [donationData, setDonationData] = useState({
+    name: "",
+    businessName: "",
+    email: "",
+    amount: "",
+  });
 
   // rewards arrays
   const individualRewardsArray = Object.entries(
@@ -98,90 +111,6 @@ function DonationBox() {
     },
   });
 
-  // fellow donation mutation
-  const ACCEPT_FELLOW_DONATION = gql`
-    mutation AcceptFellowDonation($donation: FellowDonationInput!) {
-      acceptFellowDonation(donation: $donation) {
-        checkoutToken
-      }
-    }
-  `;
-
-  // payment function
-  const testPayment = ({ name, email, amount }: any) => {
-    console.log("trying testPayment");
-    const donation = {
-      name: name,
-      amount: "0.01",
-      // amount: parseFloat(amount).toFixed(2),
-      // amount: String(parseFloat(amount).toFixed(2)), //this works when you type in an amount, but not when you use the buttons?
-      email: email,
-    };
-
-    //send request to our server
-    client
-      .mutate({
-        mutation: ACCEPT_FELLOW_DONATION,
-        variables: { donation },
-      })
-      .then(({ data }) => {
-        setCheckoutToken(data.acceptFellowDonation.checkoutToken);
-        // @ts-ignore // this function is added by an external script
-        appendHelcimPayIframe(data.acceptFellowDonation.checkoutToken);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  };
-
-  // form submission function
-  const submitForm = (data: any) => {
-    setIsSubmitting(true);
-    if (donationCategory === "individual") {
-      //individual donation handling
-      const { name, email, amount } = data;
-      testPayment({ name, email, amount });
-      //if the payment works, send the email and show thanks modal, and clear forms
-      // sendFellowDonationEmail(email, name, amount);
-      // clearForms();
-      // showModal(<DonationThanksModal />);
-    } else {
-      // business donation handling
-      const { email, businessName: name, amount } = data;
-      testPayment({ name, email, amount });
-      // if the payment works, send the email and show thanks modal, and clear forms
-      // sendBusinessDonationEmail(email, name, amount); //should I keep this as businessName or make it simple "name"?
-      // showModal(<DonationThanksModal />);
-      // clearForms();
-    }
-  };
-
-  //listen for a successful or aborted payment
-  window.addEventListener("message", (event) => {
-    if (checkoutToken !== "") {
-      const helcimPayJsIdentifierKey = "helcim-pay-js-" + checkoutToken;
-      if (event.data.eventName === helcimPayJsIdentifierKey) {
-        if (event.data.eventStatus === "ABORTED") {
-          console.error("Transaction failed!", event.data.eventMessage);
-          //do something when a transaction fails?
-        }
-
-        if (event.data.eventStatus === "SUCCESS") {
-          const transactionData = JSON.parse(event.data.eventMessage);
-          const donationData = transactionData.data.data;
-          console.log(donationData); //here's all the data you'll need to send to the backend!
-
-          //clear the forms and show the DonationThanksModal, send Thanks Email?
-          // if (donationCategory === "individual") {
-          //   sendFellowDonationEmail(email, name, amount);
-          // }
-          clearForms(); //this needs to clear the custom input as well
-          showModal(<DonationThanksModal />);
-        }
-      }
-    }
-  });
-
   // options for form submission
   const onIndividualDonation: SubmitHandler<FellowFormData> = (data) => {
     submitForm(data);
@@ -189,6 +118,117 @@ function DonationBox() {
 
   const onBusinessDonation: SubmitHandler<BusinessFormData> = (data) => {
     submitForm(data);
+  };
+
+  // form submission function
+  const submitForm = (data: any) => {
+    setDonationData(data);
+    setIsSubmitting(true);
+    if (donationCategory === "individual") {
+      const { name, email, amount } = data;
+      initiateDonation({ name, email, amount }, ACCEPT_FELLOW_DONATION);
+    } else {
+      const { email, businessName: name, amount } = data;
+      initiateDonation({ name, email, amount }, ACCEPT_BUSINESS_DONATION);
+    }
+  };
+
+  // initiate donation function
+  const initiateDonation = ({ name, email, amount }: any, mutation: any) => {
+    const donation = {
+      name: name,
+      amount: String(parseFloat(amount.replace(/^\$/, "")).toFixed(2)),
+      email: email,
+    };
+
+    client
+      .mutate({
+        mutation: mutation,
+        variables: { donation },
+        fetchPolicy: "no-cache",
+      })
+      //get the checkout token and open Helcim for payment
+      .then(({ data }) => {
+        setCheckoutToken(data.acceptFellowDonation.checkoutToken);
+        setCheckoutId(data.acceptFellowDonation.id);
+        // @ts-ignore // this function is added by an external script
+        appendHelcimPayIframe(data.acceptFellowDonation.checkoutToken);
+      })
+      .catch((error) => {
+        console.log(error.message);
+        setIsSubmitting(false);
+        showModal(<ErrorModal />);
+      });
+  };
+
+  //checking for payment success
+  useEffect(() => {
+    if (checkoutToken !== "") {
+      const handleEvent = (event: MessageEvent) => {
+        const helcimPayJsIdentifierKey = "helcim-pay-js-" + checkoutToken;
+        if (event.data.eventName === helcimPayJsIdentifierKey) {
+          if (event.data.eventStatus === "ABORTED") {
+            // Handle aborted transaction
+            setIsSubmitting(false);
+          }
+          if (event.data.eventStatus === "SUCCESS") {
+            // if it's a success, we'll need to update the successful transaction field in the donation mutation to true
+            const transactionData = JSON.parse(event.data.eventMessage);
+            const input = {
+              paymentId: checkoutId,
+              hash: transactionData.data.hash,
+              amount: transactionData.data.data.amount,
+              transactionId: transactionData.data.data.transactionId,
+              // data: transactionData.data.data, -- I think we'll only need the amount and transactionId
+            };
+            //here's all the data you'll need to send to the backend!
+            confirmPayment(input);
+            return;
+          }
+        }
+      };
+
+      window.addEventListener("message", handleEvent);
+
+      // Cleanup function to remove the event listener
+      return () => {
+        window.removeEventListener("message", handleEvent);
+      };
+    }
+  }, [checkoutToken]);
+
+  // confirming donation
+  const confirmPayment = (input: any) => {
+    //I think we'd just need to send another mutation with the same information, but only update the successful field
+
+    ////perhaps we'll save this kind of mutation for our MVP
+    // client
+    //   .mutate({
+    //     mutation: COMPLETE_PAYMENT,
+    //     variables: { input },
+    //     fetchPolicy: "no-cache",
+    //   })
+    //   .then(({ data }) => {
+    //     console.log("Success:", data.completePayment);
+    //   })
+    //   .catch((error) => {
+    //     console.log("Error:", error.message);
+    //     console.log("GraphQL Errors:", error.graphQLErrors);
+    //     console.log("Network Error:", error.networkError);
+    //   });
+
+    setIsSubmitting(false);
+    updateCurrentAmount(parseFloat(input.amount));
+    if (donationCategory === "individual") {
+      const { name, email, amount } = donationData;
+      sendFellowDonationEmail(email, name, amount);
+    } else {
+      const { businessName: name, email, amount } = donationData;
+      sendBusinessDonationEmail(email, name, amount);
+    }
+    clearForms();
+    removeHelcimPayIframe();
+    showModal(<DonationThanksModal />);
   };
 
   // form-clearing function
@@ -202,7 +242,22 @@ function DonationBox() {
     setIndividualValue("address", "");
     setSelectedAmount("");
     setIsSubmitting(false);
+    setCustomAmount("");
   };
+
+  function watchForExit(event: MessageEvent) {
+    //not sure why this exists, but the window.removeEventListener needed this to exist?
+  }
+
+  function removeHelcimPayIframe() {
+    const frame: HTMLElement | null =
+      document.getElementById("helcimPayIframe");
+
+    if (frame instanceof HTMLIFrameElement) {
+      frame.remove();
+      window.removeEventListener("message", watchForExit, false);
+    }
+  }
 
   // log errors
   const logErrors = (errors: typeof errorsIndividual) => {
@@ -272,6 +327,11 @@ function DonationBox() {
       selectedAmount.replace(/[^0-9.]/g, ""),
     );
 
+    //check for business donations under $250
+    if (donationCategory === "business" && selectedAmountNum < 250) {
+      return null; // return nothing for business donations under $250
+    }
+
     // check for individual donations over $1,000
     if (donationCategory === "individual" && selectedAmountNum >= 1001) {
       const thousandPlusReward = rewardsArray.find(
@@ -289,7 +349,7 @@ function DonationBox() {
       if (
         currentAmount <= selectedAmountNum &&
         currentAmount > parseFloat(closest[0].replace(/[^0-9.]/g, "")) &&
-        current[0] !== "$1000+" // Exclude the $1000+ option from normal comparison
+        current[0] !== "$1000+"
       ) {
         return current;
       }
@@ -327,26 +387,10 @@ function DonationBox() {
     );
   }
 
-  // useEffect(() => {
-  //   // @ts-ignore
-  //   const handleMessage = (event) => {
-  //     console.log(JSON.stringify(event));
-  //     if (event.origin.includes("helcim")) {
-  //       const { paymentStatus, transactionId, amount } = event.data; // Add amount to capture it
-  //       if (paymentStatus === "success") {
-  //         // Handle successful payment
-  //         console.log("payment success", transactionId, amount); // Log transactionId and amount
-  //         // Here you can set the amount and send a confirmation email
-  //       } else if (paymentStatus === "failed") {
-  //         // Handle failed payment
-  //         console.log("payment failed");
-  //       }
-  //     }
-  //   };
-
-  //   window.addEventListener("message", handleMessage);
-  //   return () => window.removeEventListener("message", handleMessage);
-  // }, []);
+  //make a way to perpetuate this currentAmount
+  const updateCurrentAmount = (amount: number) => {
+    setCurrentAmount((prevAmount) => prevAmount + amount);
+  };
 
   return (
     <>
