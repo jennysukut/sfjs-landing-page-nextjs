@@ -1,10 +1,25 @@
-import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
+import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client";
+import { setContext } from '@apollo/client/link/context';
+
+const httpLink = createHttpLink({
+  uri: "https://straightforward-job-site-backend-obsy.onrender.com/graphql",
+});
+
+const authLink = setContext((_, { headers }) => {
+  // Get the API key from an environment variable
+  const apiKey = process.env.NEXT_PUBLIC_API_KEY;
+
+  return {
+    headers: {
+      ...headers,
+      'X-Api-Key': apiKey,
+    }
+  };
+});
 
 const client = new ApolloClient({
-  link: new HttpLink({
-    uri: "https://straightforward-job-site-backend-obsy.onrender.com/graphql",
-  }),
   cache: new InMemoryCache(),
+  link: authLink.concat(httpLink),
 });
 
 export default client;
