@@ -6,10 +6,11 @@ export default function DonationThanksModal() {
       <Dialog.Title className="Title w-full pb-4 text-center text-xl font-bold">
         thank you so much!
       </Dialog.Title>
-      <p className="Subtitle w-full text-center">
-        your support is deeply appreciated
+
+      <p className="Subtitle w-full text-center italic lg:max-w-[35vw]">
+        your payment was successful & your support is deeply appreciated
       </p>
-      <p className="Subtitle w-full text-center italic text-olive">
+      <p className="Subtitle mt-4 w-full text-center italic text-olive lg:max-w-[35vw]">
         {`we'll keep you updated about our launch and will be in touch about your rewards!`}
       </p>
     </div>

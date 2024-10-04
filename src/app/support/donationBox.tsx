@@ -159,7 +159,6 @@ function DonationBox() {
         setIsSubmitting(false);
         showModal(<ErrorModal />);
       });
-    setIsSubmitting(false);
   };
 
   //checking for payment success
@@ -218,6 +217,7 @@ function DonationBox() {
     //     console.log("Network Error:", error.networkError);
     //   });
 
+    setIsSubmitting(false);
     updateCurrentAmount(parseFloat(input.amount));
     if (donationCategory === "individual") {
       const { name, email, amount } = donationData;
@@ -227,6 +227,7 @@ function DonationBox() {
       sendBusinessDonationEmail(email, name, amount);
     }
     clearForms();
+    removeHelcimPayIframe();
     showModal(<DonationThanksModal />);
   };
 
@@ -243,6 +244,20 @@ function DonationBox() {
     setIsSubmitting(false);
     setCustomAmount("");
   };
+
+  function watchForExit(event: MessageEvent) {
+    //not sure why this exists, but the window.removeEventListener needed this to exist?
+  }
+
+  function removeHelcimPayIframe() {
+    const frame: HTMLElement | null =
+      document.getElementById("helcimPayIframe");
+
+    if (frame instanceof HTMLIFrameElement) {
+      frame.remove();
+      window.removeEventListener("message", watchForExit, false);
+    }
+  }
 
   // log errors
   const logErrors = (errors: typeof errorsIndividual) => {
