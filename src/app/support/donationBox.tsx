@@ -135,7 +135,6 @@ function DonationBox() {
 
   // initiate donation function
   const initiateDonation = ({ name, email, amount }: any, mutation: any) => {
-    console.log(amount, selectedAmount);
     const donation = {
       name: name,
       amount: String(parseFloat(amount.replace(/^\$/, "")).toFixed(2)),
@@ -167,16 +166,13 @@ function DonationBox() {
   useEffect(() => {
     if (checkoutToken !== "") {
       const handleEvent = (event: MessageEvent) => {
-        console.log("window event listener added");
         const helcimPayJsIdentifierKey = "helcim-pay-js-" + checkoutToken;
         if (event.data.eventName === helcimPayJsIdentifierKey) {
           if (event.data.eventStatus === "ABORTED") {
-            console.log("there was a transaction aborted");
             // Handle aborted transaction
             setIsSubmitting(false);
           }
           if (event.data.eventStatus === "SUCCESS") {
-            console.log("there was a successful transaction!");
             // if it's a success, we'll need to update the successful transaction field in the donation mutation to true
             const transactionData = JSON.parse(event.data.eventMessage);
             const input = {
@@ -204,9 +200,6 @@ function DonationBox() {
 
   // confirming donation
   const confirmPayment = (input: any) => {
-    console.log("confirming payment");
-    console.log(input);
-
     //I think we'd just need to send another mutation with the same information, but only update the successful field
 
     ////perhaps we'll save this kind of mutation for our MVP
