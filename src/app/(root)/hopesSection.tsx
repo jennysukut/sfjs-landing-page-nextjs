@@ -8,6 +8,7 @@ import SiteButton from "@/components/siteButton";
 import MotionContainer from "@/components/motionContainer";
 import ButtonContainer from "@/components/buttonContainer";
 import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsModal";
+import HelpUsModal from "@/components/modals/helpUsModal";
 
 export default function HopesSection() {
   const { showModal } = useModal();
@@ -84,17 +85,16 @@ export default function HopesSection() {
         </MotionContainer>
 
         <ButtonContainer addClasses="ButtonContainer mt-8 sm:mt-24 flex-col sm:flex-row gap-6 self-start sm:pl-20">
-          <Link href={"/support"}>
-            <SiteButton
-              aria="support us"
-              size="large"
-              variant="filled"
-              colorScheme="c4"
-              addClasses="px-14"
-            >
-              how can i help?
-            </SiteButton>
-          </Link>
+          <SiteButton
+            aria="support us"
+            size="large"
+            variant="filled"
+            colorScheme="c4"
+            addClasses="px-14"
+            onClick={() => showModal(<HelpUsModal />)}
+          >
+            how can i help?
+          </SiteButton>
           <SiteButton
             aria="sign up"
             size="large"

@@ -13,6 +13,7 @@ import InfoBox from "@/components/infoBox";
 import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsModal";
 import ButtonContainer from "@/components/buttonContainer";
 import DropDownButton from "@/components/dropDownButton";
+import HelpUsModal from "@/components/modals/helpUsModal";
 
 import { landingPageText } from "@/lib/siteCopy/landingPageText";
 import { ButtonColorOption } from "@/lib/stylingData/buttonColors";
@@ -200,16 +201,15 @@ export default function FeaturesSection() {
         >
           sign me up!
         </SiteButton>
-        <Link href={"/support"}>
-          <SiteButton
-            aria="support us"
-            size="large"
-            variant="filled"
-            colorScheme="b4"
-          >
-            show your support{" "}
-          </SiteButton>
-        </Link>
+        <SiteButton
+          aria="support us"
+          size="large"
+          variant="filled"
+          colorScheme="b4"
+          onClick={() => showModal(<HelpUsModal />)}
+        >
+          show your support{" "}
+        </SiteButton>
       </ButtonContainer>
     </section>
   );

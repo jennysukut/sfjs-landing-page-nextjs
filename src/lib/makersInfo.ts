@@ -8,6 +8,7 @@ export const makersInfo = {
       "Is a digital nomad",
       "Believes in the magical power of color",
       "Made 3 small humans",
+      "Is passionate about design + general goodness",
       "Has a history of baking fantastical french macarons",
       "Thinks imagination and creativity can change the world",
       "Also thinks the avatar, master of all 4 elements, can change the world",
@@ -15,6 +16,7 @@ export const makersInfo = {
       "Wants to make everything herself",
       "Is a major proponent of creative chaos",
       "Laughs at her own jokes",
+      "A bit of a serial Entrepreneur",
     ],
   },
   "joshua duncan": {
@@ -40,9 +42,9 @@ export const makersInfo = {
     shadow: "bg-lilac",
     details: [
       "Likes running",
-      "From a small town in wisconsin",
+      "From a small town in Wisconsin",
       "Still does the wordle every day",
-      "Fan of the green bay packers",
+      "Fan of the Green Bay Packers",
     ],
   },
   "stephen walker": {
@@ -55,7 +57,7 @@ export const makersInfo = {
       "Is participating in the Innovative Entrepreneurs Cohort",
       "Has a passion for learning new technologies and tackling complex challenges",
       "Enjoys going to the gym and running to get his day started",
-      "In his free time, Stephen likes going to the park with his wife and daughter",
+      "In his free time, he likes going to the park with his wife and daughter",
       "Has never eaten a raw potato and is now tempted to take a bite of one",
       "Is a huge fan of video games, especially retro arcade games",
     ],
@@ -66,10 +68,10 @@ export const makersInfo = {
     img: "bg-[url('/makers/dillon.svg')]",
     shadow: "bg-orange",
     details: [
-      "My second passion is flying planes!",
-      "I have my degree in finance.",
+      "His passion is flying planes",
+      "Has a degree in finance",
       "Husband and dog dad",
-      "If I wasn't a software developer and didnt have a degree finance, I'd love to get into the field of homicide investigation!",
+      "If he wasn't a software developer with a degree in finance, he's love to get into the field of homicide investigation",
     ],
   },
 
@@ -80,13 +82,13 @@ export const makersInfo = {
     shadow: "bg-olive",
     details: [
       "Is from Montana but has moved about 30 times",
-      "He was a literature and history teacher and Ultimate coach",
-      "Is a badass blacksmith",
+      "He was a Literature and History Teacher and Ultimate coach",
+      "Is a badass Blacksmith",
       "Eats peanut-butter and syrup on pancakes",
-      "Sometimes he eats potatoes raw",
       "Thinks spiders are kinda cute",
       "He thinks sauteeing onions in butter is one of the best smells in the world",
       "Loves books and stories",
+      "Sometimes he eats potatoes raw",
     ],
   },
   "lean vilas": {
@@ -96,6 +98,7 @@ export const makersInfo = {
     shadow: "bg-sky",
     details: [
       "Senior Software Engineer with 11 years of experience in the industry",
+      "Is from Spain, but lives in Germany",
       "Prepares developers for their next job",
       "Is a proponent of the radical candor formula",
       "Will google raw potatoes before trying them.",
@@ -142,7 +145,7 @@ export const makersInfo = {
       "Curious",
       "Enjoys potatoes! Especially Indian cuisine",
       "Vegetarian since birth",
-      "And not curious about meat.",
+      "Is not curious about meat",
     ],
   },
   "katelyn lusher": {

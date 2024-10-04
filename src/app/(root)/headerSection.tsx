@@ -4,6 +4,7 @@ import Link from "next/link";
 import SiteButton from "@/components/siteButton";
 import ButtonContainer from "@/components/buttonContainer";
 import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsModal";
+import HelpUsModal from "@/components/modals/helpUsModal";
 
 function HeaderSection() {
   const { showModal } = useModal();
@@ -23,16 +24,15 @@ function HeaderSection() {
         >
           sign me up!
         </SiteButton>
-        <Link href={"/support"}>
-          <SiteButton
-            aria="support us"
-            size="large"
-            variant="filled"
-            colorScheme="e5"
-          >
-            how can i help?
-          </SiteButton>
-        </Link>
+        <SiteButton
+          aria="support us"
+          size="large"
+          variant="filled"
+          colorScheme="e5"
+          onClick={() => showModal(<HelpUsModal />)}
+        >
+          how can i help?
+        </SiteButton>
       </ButtonContainer>
     </section>
   );

@@ -144,7 +144,7 @@ export const landingPageText = {
         details: [
           "We want to replace the frantic + dehumanizing + confusing mess that is the current job search into something reasonable + intentional.",
           "Because our application process is so simple {instant-apply with the option to add a note if you so choose}, we offer each job-seeker a maximum of 5 job application submissions per day. ",
-          "This help foster more deliberate actions that actually pay off, because your effort  + choices matters.",
+          "This help foster more deliberate actions that actually pay off, because your effort  + choices matter.",
           "You should be able to spend a moderate amount of time looking + applying for jobs, then call it a day - because you can see the results of your efforts at each step. No need to drown in an unending list of job search tasks.",
         ],
       },
