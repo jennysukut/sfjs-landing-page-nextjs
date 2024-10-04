@@ -21,3 +21,34 @@ export const BUSINESS_SIGNUP_MUTATION = gql`
     signupBusiness(requestBody: $requestBody)
   }
 `;
+
+export const ACCEPT_FELLOW_DONATION = gql`
+  mutation AcceptFellowDonation($donation: FellowDonationInput!) {
+    acceptFellowDonation(donation: $donation) {
+      id
+      checkoutToken
+    }
+  }
+`;
+
+export const ACCEPT_BUSINESS_DONATION = gql`
+  mutation AcceptFellowDonation($donation: FellowDonationInput!) {
+    acceptFellowDonation(donation: $donation) {
+      id
+      checkoutToken
+    }
+  }
+`;
+
+export const COMPLETE_PAYMENT = gql`
+  mutation CompletePayment($input: PaymentResultInput!) {
+    completePayment(input: $input) {
+      success
+      message
+      payment {
+        id
+        status
+      }
+    }
+  }
+`;

@@ -26,6 +26,11 @@ import {
 } from "@/utils/emailUtils";
 import DonationThanksModal from "@/components/modals/donationThanksModal";
 import ErrorModal from "@/components/modals/errorModal";
+import {
+  ACCEPT_FELLOW_DONATION,
+  ACCEPT_BUSINESS_DONATION,
+  COMPLETE_PAYMENT,
+} from "@/graphql/mutations";
 
 type DonationCategory = "business" | "individual";
 
@@ -69,6 +74,7 @@ function DonationBox() {
   const [checkoutId, setCheckoutId] = useState(0);
   const [donationData, setDonationData] = useState({
     name: "",
+    businessName: "",
     email: "",
     amount: "",
   });
@@ -105,6 +111,15 @@ function DonationBox() {
     },
   });
 
+  // options for form submission
+  const onIndividualDonation: SubmitHandler<FellowFormData> = (data) => {
+    submitForm(data);
+  };
+
+  const onBusinessDonation: SubmitHandler<BusinessFormData> = (data) => {
+    submitForm(data);
+  };
+
   // form submission function
   const submitForm = (data: any) => {
     setDonationData(data);
@@ -118,46 +133,12 @@ function DonationBox() {
     }
   };
 
-  //put these mutations in the graphql mutations file
-  // fellow donation mutation
-  const ACCEPT_FELLOW_DONATION = gql`
-    mutation AcceptFellowDonation($donation: FellowDonationInput!) {
-      acceptFellowDonation(donation: $donation) {
-        id
-        checkoutToken
-      }
-    }
-  `;
-
-  const ACCEPT_BUSINESS_DONATION = gql`
-    mutation AcceptFellowDonation($donation: FellowDonationInput!) {
-      acceptFellowDonation(donation: $donation) {
-        id
-        checkoutToken
-      }
-    }
-  `;
-
-  const COMPLETE_PAYMENT = gql`
-    mutation CompletePayment($input: PaymentResultInput!) {
-      completePayment(input: $input) {
-        success
-        message
-        payment {
-          id
-          status
-        }
-      }
-    }
-  `;
-
   // initiate donation function
   const initiateDonation = ({ name, email, amount }: any, mutation: any) => {
     console.log(amount, selectedAmount);
     const donation = {
       name: name,
-      amount: "0.01",
-      // amount: String(parseFloat(amount).toFixed(2)), //this works when you type in an amount, but not when you use the buttons?
+      amount: String(parseFloat(amount.replace(/^\$/, "")).toFixed(2)),
       email: email,
     };
 
@@ -177,43 +158,12 @@ function DonationBox() {
       .catch((error) => {
         console.log(error.message);
         setIsSubmitting(false);
-        showModal(<ErrorModal />); //this error gets thrown if the Name + email exists in our system but doesn't line up with the current inputs, should we have a more specific error modal?
+        showModal(<ErrorModal />);
       });
+    setIsSubmitting(false);
   };
 
-  const confirmPayment = (input: any) => {
-    console.log("confirming payment");
-    console.log(input);
-
-    //if amount === successful payment amount, update current amount of donations,
-    //I think we need to have an option for the Accept Donation that has an option of "successful" that is marked false, but we can go and assign it as "true" here
-
-    // client
-    //   .mutate({
-    //     mutation: COMPLETE_PAYMENT,
-    //     variables: { input },
-    //     fetchPolicy: "no-cache",
-    //   })
-    //   .then(({ data }) => {
-    //     console.log("Success:", data.completePayment);
-    //   })
-    //   .catch((error) => {
-    //     console.log("Error:", error.message);
-    //     console.log("GraphQL Errors:", error.graphQLErrors);
-    //     console.log("Network Error:", error.networkError);
-    //   });
-
-    //clear the forms and show the DonationThanksModal, send Thanks Email?
-    if (donationCategory === "individual") {
-      console.log("a fellow donated something");
-      const { name, email, amount } = donationData;
-      console.log(name, email, amount);
-      sendFellowDonationEmail(email, name, amount);
-    }
-    clearForms();
-    showModal(<DonationThanksModal />);
-  };
-
+  //checking for payment success
   useEffect(() => {
     if (checkoutToken !== "") {
       const handleEvent = (event: MessageEvent) => {
@@ -250,15 +200,41 @@ function DonationBox() {
         window.removeEventListener("message", handleEvent);
       };
     }
-  }, [checkoutToken]); // Dependency array to re-run effect when checkoutToken changes
+  }, [checkoutToken]);
 
-  // options for form submission
-  const onIndividualDonation: SubmitHandler<FellowFormData> = (data) => {
-    submitForm(data);
-  };
+  // confirming donation
+  const confirmPayment = (input: any) => {
+    console.log("confirming payment");
+    console.log(input);
 
-  const onBusinessDonation: SubmitHandler<BusinessFormData> = (data) => {
-    submitForm(data);
+    //I think we'd just need to send another mutation with the same information, but only update the successful field
+
+    ////perhaps we'll save this kind of mutation for our MVP
+    // client
+    //   .mutate({
+    //     mutation: COMPLETE_PAYMENT,
+    //     variables: { input },
+    //     fetchPolicy: "no-cache",
+    //   })
+    //   .then(({ data }) => {
+    //     console.log("Success:", data.completePayment);
+    //   })
+    //   .catch((error) => {
+    //     console.log("Error:", error.message);
+    //     console.log("GraphQL Errors:", error.graphQLErrors);
+    //     console.log("Network Error:", error.networkError);
+    //   });
+
+    updateCurrentAmount(parseFloat(input.amount));
+    if (donationCategory === "individual") {
+      const { name, email, amount } = donationData;
+      sendFellowDonationEmail(email, name, amount);
+    } else {
+      const { businessName: name, email, amount } = donationData;
+      sendBusinessDonationEmail(email, name, amount);
+    }
+    clearForms();
+    showModal(<DonationThanksModal />);
   };
 
   // form-clearing function
@@ -343,6 +319,11 @@ function DonationBox() {
       selectedAmount.replace(/[^0-9.]/g, ""),
     );
 
+    //check for business donations under $250
+    if (donationCategory === "business" && selectedAmountNum < 250) {
+      return null; // return nothing for business donations under $250
+    }
+
     // check for individual donations over $1,000
     if (donationCategory === "individual" && selectedAmountNum >= 1001) {
       const thousandPlusReward = rewardsArray.find(
@@ -360,7 +341,7 @@ function DonationBox() {
       if (
         currentAmount <= selectedAmountNum &&
         currentAmount > parseFloat(closest[0].replace(/[^0-9.]/g, "")) &&
-        current[0] !== "$1000+" // Exclude the $1000+ option from normal comparison
+        current[0] !== "$1000+"
       ) {
         return current;
       }
@@ -397,6 +378,11 @@ function DonationBox() {
       </div>
     );
   }
+
+  //make a way to perpetuate this currentAmount
+  const updateCurrentAmount = (amount: number) => {
+    setCurrentAmount((prevAmount) => prevAmount + amount);
+  };
 
   return (
     <>
