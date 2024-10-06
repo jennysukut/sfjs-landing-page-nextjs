@@ -52,3 +52,13 @@ export const COMPLETE_PAYMENT = gql`
     }
   }
 `;
+
+export const UPDATE_CURRENT_AMOUNT = gql`
+mutation UpdateAmount() {
+
+}`;
+
+export const GET_CURRENT_AMOUNT = gql`
+query GetCurrentAmount() {
+
+}`;

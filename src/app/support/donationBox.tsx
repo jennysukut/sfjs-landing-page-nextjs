@@ -3,7 +3,6 @@
 import * as z from "zod";
 import { useState, useEffect } from "react";
 import { useSignals } from "@preact/signals-react/runtime";
-import { gql } from "@apollo/client";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useModal } from "@/contexts/ModalContext";
@@ -177,11 +176,8 @@ function DonationBox() {
             const input = {
               paymentId: checkoutId,
               hash: transactionData.data.hash,
-              // amount: transactionData.data.data.amount,
-              // transactionId: transactionData.data.data.transactionId,
-              data: transactionData.data.data, // -- I think we'll only need the amount and transactionId
+              data: transactionData.data.data,
             };
-            //here's all the data you'll need to send to the backend!
             confirmPayment(input);
             return;
           }
@@ -199,9 +195,6 @@ function DonationBox() {
 
   // confirming donation
   const confirmPayment = (input: any) => {
-    //I think we'd just need to send another mutation with the same information, but only update the successful field
-
-    //perhaps we'll save this kind of mutation for our MVP
     client
       .mutate({
         mutation: COMPLETE_PAYMENT,
@@ -218,7 +211,8 @@ function DonationBox() {
       });
 
     setIsSubmitting(false);
-    updateCurrentAmount(parseFloat(input.amount));
+    //update the currentDonationAmount status bar
+    updateCurrentAmount(parseFloat(input.data.amount));
     if (donationCategory === "individual") {
       const { name, email, amount } = donationData;
       sendFellowDonationEmail(email, name, amount);
@@ -267,6 +261,7 @@ function DonationBox() {
     console.log("Form Errors:", errors);
   };
 
+  //setting donation amounts
   function setDollarAmount(amount: any) {
     if (donationCategory === "individual") {
       setIndividualValue("amount", amount);
@@ -305,9 +300,10 @@ function DonationBox() {
       value = parts.join(".");
     }
 
+    //do we set each of the amounts with a dollar at the beginning, or remove the dollar sign on everything?
     setCustomAmount("$" + value);
-    setSelectedAmount(value);
-    setDollarAmount(value);
+    setSelectedAmount("$" + value);
+    setDollarAmount("$" + value);
   };
 
   // handler responsible to assessing if the Address option should be displayed
@@ -388,6 +384,7 @@ function DonationBox() {
   }
 
   //make a way to perpetuate this currentAmount
+  //we'll need to make a call to the backend to set this new number
   const updateCurrentAmount = (amount: number) => {
     setCurrentAmount((prevAmount) => prevAmount + amount);
   };
