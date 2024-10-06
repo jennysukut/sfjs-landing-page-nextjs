@@ -58,7 +58,10 @@ export const COMPLETE_PAYMENT = gql`
 
 // }`;
 
-// export const GET_CURRENT_AMOUNT = gql`
-// query GetCurrentAmount() {
-
-// }`;
+export const GET_CURRENT_AMOUNT = gql`
+  query GetCurrentDonations {
+    currentDonations {
+      amount
+    }
+  }
+`;

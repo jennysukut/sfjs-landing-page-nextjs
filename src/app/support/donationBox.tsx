@@ -29,6 +29,7 @@ import {
   ACCEPT_FELLOW_DONATION,
   ACCEPT_BUSINESS_DONATION,
   COMPLETE_PAYMENT,
+  GET_CURRENT_AMOUNT,
 } from "@/graphql/mutations";
 
 type DonationCategory = "business" | "individual";
@@ -387,7 +388,27 @@ function DonationBox() {
   //we'll need to make a call to the backend to set this new number
   const updateCurrentAmount = (amount: number) => {
     setCurrentAmount((prevAmount) => prevAmount + amount);
+    //send the updated amount to the backend here
   };
+
+  //get the current amount of donations
+  const getCurrentAmount = () => {
+    client
+      .mutate({
+        mutation: GET_CURRENT_AMOUNT,
+      })
+      .then(({ data }) => {
+        console.log({ data });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  //get the current amount of donations on re-render
+  useEffect(() => {
+    getCurrentAmount();
+  }, []);
 
   return (
     <>
