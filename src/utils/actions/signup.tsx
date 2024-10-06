@@ -48,7 +48,7 @@ export function signupFellow({ fellow }: any): any {
     // do something
     validatedFields.data;
   }
-  console.log(fellow + "signed up");
+  // console.log(fellow + "signed up");
 }
 
 // if (!validatedFields.success) {

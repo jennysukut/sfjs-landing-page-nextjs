@@ -202,9 +202,9 @@ function DonationBox() {
         variables: { input },
         fetchPolicy: "no-cache",
       })
-      .then(({ data }) => {
-        console.log("Success:", data.completePayment);
-      })
+      // .then(({ data }) => {
+      //   console.log("Success:", data.completePayment);
+      // })
       .catch((error) => {
         console.log("Error:", error.message);
         console.log("GraphQL Errors:", error.graphQLErrors);
@@ -384,7 +384,6 @@ function DonationBox() {
 
   //get the current amount of donations
   const getCurrentAmount = () => {
-    console.log("getting current amount of donations from the server");
     client
       .mutate({
         mutation: GET_CURRENT_AMOUNT,

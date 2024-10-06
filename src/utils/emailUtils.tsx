@@ -99,7 +99,6 @@ export const sendFellowDonationEmail = async (
   amount: string,
 ) => {
   const firstName = name.split(" ")[0];
-  console.log(firstName);
   await fetch("/api/emails/donationEmails/fellowDonationEmail", {
     method: "POST",
     body: JSON.stringify({
