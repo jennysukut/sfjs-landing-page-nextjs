@@ -49,7 +49,7 @@ export default function HelpUsModal() {
       <Link href={"/support"}>
         <SiteButton
           variant="filled"
-          colorScheme="e5"
+          colorScheme="c4"
           aria="submit"
           size="large"
           onClick={hideModal}
