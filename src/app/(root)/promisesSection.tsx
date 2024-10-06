@@ -105,7 +105,7 @@ function PromisesSection() {
             );
           })}
         </ul>
-        <ButtonContainer addClasses="flex flex-col items-start sm:items-end sm:flex-row justify-center sm:justify-end">
+        <ButtonContainer addClasses="flex flex-col-reverse items-start sm:items-end sm:flex-row justify-center sm:justify-end">
           <Link href={"/support"}>
             <SiteButton
               aria="support us"
