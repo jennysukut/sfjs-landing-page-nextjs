@@ -24,7 +24,7 @@ export default function HelpUsModal() {
       <Dialog.Description className="SmallText w-full text-center text-xs italic text-midnight sm:text-base">
         {`We also have a crowdfunding campaign active and we never say no to paying our developers`}
       </Dialog.Description>
-      <div className="ButtonContainer mt-4 flex flex-col items-center justify-end gap-4 sm:flex-row">
+      <div className="ButtonContainer mt-4 flex flex-col flex-wrap items-center justify-end gap-4 sm:flex-row">
         <SiteButton
           variant="filled"
           colorScheme="b4"
@@ -55,7 +55,7 @@ export default function HelpUsModal() {
           onClick={hideModal}
           addClasses="px-6 lg:mt-2"
         >
-          support our development
+          support us
         </SiteButton>
       </Link>
     </div>
