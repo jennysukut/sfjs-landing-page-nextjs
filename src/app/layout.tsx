@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 
 import { ModalProvider } from "@/contexts/ModalContext";
+import { Analytics } from "@vercel/analytics/react";
 
 import NavBar from "@/components/navBar";
 import Footer from "@/components/footer";
@@ -23,6 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Analytics />
       <body className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-cream">
         <ApolloWrapper>
           <ModalProvider>
