@@ -211,9 +211,6 @@ function DonationBox() {
         console.log("Network Error:", error.networkError);
       });
 
-    setIsSubmitting(false);
-    //update the currentDonationAmount status bar
-    updateCurrentAmount(parseFloat(input.data.amount));
     if (donationCategory === "individual") {
       const { name, email, amount } = donationData;
       sendFellowDonationEmail(email, name, amount);
@@ -221,6 +218,7 @@ function DonationBox() {
       const { businessName: name, email, amount } = donationData;
       sendBusinessDonationEmail(email, name, amount);
     }
+    setIsSubmitting(false);
     clearForms();
     removeHelcimPayIframe();
     showModal(<DonationThanksModal />);
@@ -384,21 +382,15 @@ function DonationBox() {
     );
   }
 
-  //make a way to perpetuate this currentAmount
-  //we'll need to make a call to the backend to set this new number
-  const updateCurrentAmount = (amount: number) => {
-    setCurrentAmount((prevAmount) => prevAmount + amount);
-    //send the updated amount to the backend here
-  };
-
   //get the current amount of donations
   const getCurrentAmount = () => {
+    console.log("getting current amount of donations from the server");
     client
       .mutate({
         mutation: GET_CURRENT_AMOUNT,
       })
       .then(({ data }) => {
-        console.log({ data });
+        setCurrentAmount(data.currentDonations);
       })
       .catch((err) => {
         console.log(err);
@@ -408,7 +400,7 @@ function DonationBox() {
   //get the current amount of donations on re-render
   useEffect(() => {
     getCurrentAmount();
-  }, []);
+  }, [isSubmitting]);
 
   return (
     <>
