@@ -31,7 +31,7 @@ const DropDownButton: React.FC<ButtonProps> = ({
   const [isPressed, setIsPressed] = useState(false);
 
   const buttonClasses = clsx(
-    "SiteButton relative z-[1] w-[18rem] cursor-pointer leading-6 font-semibold transition-all duration-150 tracking-superwide hover:saturate-[120%] px-8 py-4 text-[0.85rem]",
+    "SiteButton relative z-[1] w-[85vw] cursor-pointer leading-6 font-semibold transition-all duration-150 tracking-superwide hover:saturate-[120%] px-8 py-4 text-[0.85rem]",
     {
       // isSelected
       "rounded-full": !isSelected,
@@ -52,7 +52,7 @@ const DropDownButton: React.FC<ButtonProps> = ({
   );
 
   const shadowClasses = clsx(
-    "ButtonShadow absolute w-[18rem] text-transparent leading-6 font-semibold tracking-superwide text-[0.85rem] -right-2 top-2 px-8 py-4",
+    "ButtonShadow absolute w-[85vw] text-transparent leading-6 font-semibold tracking-superwide text-[0.85rem] -right-2 top-2 px-8 py-4",
     {
       // isSelected
       "rounded-full": !isSelected,
