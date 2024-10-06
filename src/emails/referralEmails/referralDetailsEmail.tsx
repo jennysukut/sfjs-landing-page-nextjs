@@ -71,14 +71,14 @@ export default function ReferralDetailsEmail({
             </p>
             <p className="EmailInfo mt-12 text-olive">
               {/* add the contract link here */}
-              {`We've got a contract here for you to look over`}
+              {`We've got a contract here for you to look over `}
               <a
                 href="http://straightforwardjobsite.com/sfjs-referral-contract.pdf"
-                className="Link text-jade underline"
+                className="Link italic text-olive underline"
               >
                 here
               </a>
-              {`and sign before you're officially part of the program - you should also have a meeting scheduled with Jacob {one of our founders} to go over details and any questions you might have.`}
+              {` and sign before you're officially part of the program - you should also have a meeting scheduled with Jacob {one of our founders} to go over details and any questions you might have.`}
             </p>
             <p className="EmailInfo mt-12 text-end italic text-midnight">
               {`Give it a glance and we're excited to have you as part of our cohort of creative humans making the world better for the people in it, one step at a time. Talk to you soon ✨`}
