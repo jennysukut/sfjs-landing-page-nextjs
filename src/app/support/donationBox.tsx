@@ -211,6 +211,8 @@ function DonationBox() {
         console.log("Network Error:", error.networkError);
       });
 
+    setIsSubmitting(false);
+
     if (donationCategory === "individual") {
       const { name, email, amount } = donationData;
       sendFellowDonationEmail(email, name, amount);
@@ -218,7 +220,6 @@ function DonationBox() {
       const { businessName: name, email, amount } = donationData;
       sendBusinessDonationEmail(email, name, amount);
     }
-    setIsSubmitting(false);
     clearForms();
     removeHelcimPayIframe();
     showModal(<DonationThanksModal />);
