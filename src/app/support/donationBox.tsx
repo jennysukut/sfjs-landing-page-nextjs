@@ -177,9 +177,9 @@ function DonationBox() {
             const input = {
               paymentId: checkoutId,
               hash: transactionData.data.hash,
-              amount: transactionData.data.data.amount,
-              transactionId: transactionData.data.data.transactionId,
-              // data: transactionData.data.data, -- I think we'll only need the amount and transactionId
+              // amount: transactionData.data.data.amount,
+              // transactionId: transactionData.data.data.transactionId,
+              data: transactionData.data.data, // -- I think we'll only need the amount and transactionId
             };
             //here's all the data you'll need to send to the backend!
             confirmPayment(input);
@@ -201,21 +201,21 @@ function DonationBox() {
   const confirmPayment = (input: any) => {
     //I think we'd just need to send another mutation with the same information, but only update the successful field
 
-    ////perhaps we'll save this kind of mutation for our MVP
-    // client
-    //   .mutate({
-    //     mutation: COMPLETE_PAYMENT,
-    //     variables: { input },
-    //     fetchPolicy: "no-cache",
-    //   })
-    //   .then(({ data }) => {
-    //     console.log("Success:", data.completePayment);
-    //   })
-    //   .catch((error) => {
-    //     console.log("Error:", error.message);
-    //     console.log("GraphQL Errors:", error.graphQLErrors);
-    //     console.log("Network Error:", error.networkError);
-    //   });
+    //perhaps we'll save this kind of mutation for our MVP
+    client
+      .mutate({
+        mutation: COMPLETE_PAYMENT,
+        variables: { input },
+        fetchPolicy: "no-cache",
+      })
+      .then(({ data }) => {
+        console.log("Success:", data.completePayment);
+      })
+      .catch((error) => {
+        console.log("Error:", error.message);
+        console.log("GraphQL Errors:", error.graphQLErrors);
+        console.log("Network Error:", error.networkError);
+      });
 
     setIsSubmitting(false);
     updateCurrentAmount(parseFloat(input.amount));
