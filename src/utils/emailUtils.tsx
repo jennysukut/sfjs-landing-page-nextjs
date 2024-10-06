@@ -11,13 +11,9 @@ export const sendFellowSignupEmail = async (
       firstName: firstName,
       betaTester: betaTester,
     }),
-  })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  }).catch((err) => {
+    console.log(err);
+  });
 };
 
 export const sendBusinessSignupEmail = async (
@@ -32,13 +28,9 @@ export const sendBusinessSignupEmail = async (
       businessName: business,
       betaTester: betaTester,
     }),
-  })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  }).catch((err) => {
+    console.log(err);
+  });
 };
 
 export const sendCollaboratorSignupEmail = async (
@@ -58,13 +50,9 @@ export const sendCollaboratorSignupEmail = async (
       referralPartner: referralPartner,
       referralCode: referralCode,
     }),
-  })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  }).catch((err) => {
+    console.log(err);
+  });
 };
 
 // referralEmails
@@ -81,13 +69,9 @@ export const sendReferralEmail = async (
       firstName: firstName,
       referralCode: referralCode,
     }),
-  })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  }).catch((err) => {
+    console.log(err);
+  });
 };
 export const sendReferralManagementEmail = async (
   email: string,
@@ -103,13 +87,9 @@ export const sendReferralManagementEmail = async (
       referralCode: referralCode,
       message: message,
     }),
-  })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  }).catch((err) => {
+    console.log(err);
+  });
 };
 
 // donation emails
@@ -127,13 +107,9 @@ export const sendFellowDonationEmail = async (
       firstName: firstName,
       amount: amount,
     }),
-  })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  }).catch((err) => {
+    console.log(err);
+  });
 };
 
 export const sendBusinessDonationEmail = async (
@@ -148,11 +124,7 @@ export const sendBusinessDonationEmail = async (
       businessName: name,
       amount: amount,
     }),
-  })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  }).catch((err) => {
+    console.log(err);
+  });
 };

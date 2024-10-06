@@ -64,7 +64,7 @@ export default function IndividualSignupEmail({
               your profile + start job-searching the simple way!`}
             </p>
             {betaTester && (
-              <p className="EmailInfo text-end italic text-olive">{`Since you're interested in being a betaTester, we'll be in touch as soon as our MVP is ready for testing!`}</p>
+              <p className="EmailInfo text-end italic text-olive">{`Since you're interested in being a beta tester, we'll be in touch as soon as our MVP is ready for testing!`}</p>
             )}
             <p className="EmailInfo mt-12 text-jade">
               {`We hope you'll enjoy the conscious + thoughtful +
