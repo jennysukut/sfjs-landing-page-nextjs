@@ -2,8 +2,9 @@
 const nextConfig = {
   env: {
     RESEND_API_KEY: "re_ZacMr3bG_MZCB3tg788UrUieq3XgMh3hX",
-    NEXT_PUBLIC_API_KEY: "NmrbgWVGLVfcA3pnGAYGTOeLY4OvanBaFOl9VRiP5ys",
+    API_KEY: process.env.API_KEY,
     //when the server is run locally, I believe this key is "whatever"
+    API_URL: process.env.API_URL,
   },
 };
 
