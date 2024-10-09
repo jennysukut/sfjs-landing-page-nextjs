@@ -126,15 +126,15 @@ function DonationBox() {
     setIsSubmitting(true);
     if (donationCategory === "individual") {
       const { name, email, amount } = data;
-      initiateDonation({ name, email, amount }, ACCEPT_FELLOW_DONATION);
+      initiateFellowDonation({ name, email, amount }, ACCEPT_FELLOW_DONATION);
     } else {
-      const { email, businessName: name, amount } = data;
-      initiateDonation({ name, email, amount }, ACCEPT_BUSINESS_DONATION);
+      const { businessName, contactName, email, amount, referral} = data;
+      initiateBusinessDonation({ businessName, contactName, email, amount, referral }, ACCEPT_BUSINESS_DONATION);
     }
   };
 
   // initiate donation function
-  const initiateDonation = ({ name, email, amount }: any, mutation: any) => {
+  const initiateFellowDonation = ({ name, email, amount }: any, mutation: any) => {
     const donation = {
       name: name,
       amount: String(parseFloat(amount.replace(/^\$/, "")).toFixed(2)),
@@ -153,6 +153,36 @@ function DonationBox() {
         setCheckoutId(data.acceptFellowDonation.id);
         // @ts-ignore // this function is added by an external script
         appendHelcimPayIframe(data.acceptFellowDonation.checkoutToken);
+      })
+      .catch((error) => {
+        console.log(error.message);
+        setIsSubmitting(false);
+        showModal(<ErrorModal />);
+      });
+  };
+
+  // initiate donation function
+  const initiateBusinessDonation = ({ businessName, contactName, email, amount, referral }: any, mutation: any) => {
+    const donation = {
+      businessName: businessName,
+      contactName: contactName,
+      amount: String(parseFloat(amount.replace(/^\$/, "")).toFixed(2)),
+      email: email,
+      referral: referral,
+    };
+
+    client
+      .mutate({
+        mutation: mutation,
+        variables: { donation },
+        fetchPolicy: "no-cache",
+      })
+      //get the checkout token and open Helcim for payment
+      .then(({ data }) => {
+        setCheckoutToken(data.acceptBusinessDonation.checkoutToken);
+        setCheckoutId(data.acceptBusinessDonation.id);
+        // @ts-ignore // this function is added by an external script
+        appendHelcimPayIframe(data.acceptBusinessDonation.checkoutToken);
       })
       .catch((error) => {
         console.log(error.message);

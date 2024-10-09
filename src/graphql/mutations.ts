@@ -32,8 +32,8 @@ export const ACCEPT_FELLOW_DONATION = gql`
 `;
 
 export const ACCEPT_BUSINESS_DONATION = gql`
-  mutation AcceptFellowDonation($donation: FellowDonationInput!) {
-    acceptFellowDonation(donation: $donation) {
+  mutation AcceptBusinessDonation($donation: BusinessDonationInput!) {
+    acceptBusinessDonation(donation: $donation) {
       id
       checkoutToken
     }
