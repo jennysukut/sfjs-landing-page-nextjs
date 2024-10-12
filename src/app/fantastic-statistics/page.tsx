@@ -1,12 +1,17 @@
 import InfoBox from "@/components/infoBox";
 import ProgressBar from "@/components/progressBar";
 import { calculatePercentage } from "@/utils/numberUtils";
-import SiteLabel from "@/components/siteLabel";
 import SiteButton from "@/components/siteButton";
 
 export default function FantasticStatistics() {
-  const fellows = 12;
+  const fellows = 250;
+  const businesses = 40;
+  const donations = 50;
+  const currentDonationAmount = 265;
+
   const targetFellows = 10000;
+  const targetBusinesses = 200;
+  const targetDonationAmount = 15000;
 
   return (
     <div className="FantasticStatisticsPage flex justify-evenly pt-8">
@@ -113,42 +118,55 @@ export default function FantasticStatistics() {
             fellows signed up: {fellows} /{" "}
             {calculatePercentage({ fellows, targetFellows })}%
           </p>
-          <ProgressBar current={fellows} total={targetFellows} />
+          <ProgressBar
+            current={fellows}
+            total={targetFellows}
+            fillColor="bg-watermelon"
+          />
         </div>
         <div className="ProgressBarContainer mb-4 mt-10 sm:mt-0">
           <p className="ProgressBarStatus w-[35vw] pb-2">
-            businesses signed up: {fellows} /{" "}
-            {calculatePercentage({ fellows, targetFellows })}%
+            businesses signed up: {businesses} /{" "}
+            {calculatePercentage({ businesses, targetBusinesses })}%
           </p>
-          <ProgressBar current={fellows} total={targetFellows} />
+          <ProgressBar
+            current={businesses}
+            total={targetBusinesses}
+            fillColor="bg-lime"
+          />
         </div>
         <div className="ProgressBarContainer mb-4 mt-10 sm:mt-0">
           <p className="ProgressBarStatus w-[35vw] pb-2">
-            total donations: {fellows} /{" "}
-            {calculatePercentage({ fellows, targetFellows })}%
+            total donations: {donations}
           </p>
-          <ProgressBar current={fellows} total={targetFellows} />
+          <ProgressBar current={donations} total={100} fillColor="bg-sky" />
         </div>
         <div className="ProgressBarContainer mb-4 mt-10 sm:mt-0">
           <p className="ProgressBarStatus w-[35vw] pb-2">
-            fellow donations: {fellows} /{" "}
-            {calculatePercentage({ fellows, targetFellows })}%
+            fellow donations: {30}
           </p>
-          <ProgressBar current={fellows} total={targetFellows} />
+          <ProgressBar current={30} total={100} fillColor="bg-orange" />
         </div>
         <div className="ProgressBarContainer mb-4 mt-10 sm:mt-0">
           <p className="ProgressBarStatus w-[35vw] pb-2">
-            business donations: {fellows} /{" "}
-            {calculatePercentage({ fellows, targetFellows })}%
+            business donations: {20}
           </p>
-          <ProgressBar current={fellows} total={targetFellows} />
+          <ProgressBar current={20} total={100} fillColor="bg-lilac" />
         </div>
         <div className="ProgressBarContainer mb-4 mt-10 sm:mt-0">
           <p className="ProgressBarStatus w-[35vw] pb-2">
-            current donation amount: {fellows} /{" "}
-            {calculatePercentage({ fellows, targetFellows })}%
+            current donation amount: {currentDonationAmount} /{" "}
+            {calculatePercentage({
+              currentDonationAmount,
+              targetDonationAmount,
+            })}
+            %
           </p>
-          <ProgressBar current={fellows} total={targetFellows} />
+          <ProgressBar
+            current={currentDonationAmount}
+            total={targetDonationAmount}
+            fillColor="bg-magenta"
+          />
         </div>
       </div>
     </div>

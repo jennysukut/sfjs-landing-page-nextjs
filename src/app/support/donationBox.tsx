@@ -416,7 +416,11 @@ function DonationBox() {
             current amount raised: ${currentAmount} /{" "}
             {calculatePercentage({ currentAmount, targetAmount })}%
           </p>
-          <ProgressBar current={currentAmount} total={targetAmount} />
+          <ProgressBar
+            current={currentAmount}
+            total={targetAmount}
+            fillColor="bg-watermelon"
+          />
         </div>
 
         {/* Donation Box */}
