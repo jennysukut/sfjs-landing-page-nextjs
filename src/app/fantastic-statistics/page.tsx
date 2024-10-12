@@ -1,17 +1,44 @@
+"use client";
+
+import client from "@/lib/apollo-client";
+import { GET_CURRENT_AMOUNT } from "@/graphql/mutations";
+import { useState, useEffect } from "react";
+
 import InfoBox from "@/components/infoBox";
 import ProgressBar from "@/components/progressBar";
-import { calculatePercentage } from "@/utils/numberUtils";
 import SiteButton from "@/components/siteButton";
+import { calculatePercentage } from "@/utils/numberUtils";
 
 export default function FantasticStatistics() {
   const fellows = 250;
   const businesses = 40;
   const donations = 50;
-  const currentDonationAmount = 265;
+  const [currentDonationAmount, setCurrentDonationAmount] = useState(0);
 
   const targetFellows = 10000;
   const targetBusinesses = 200;
   const targetDonationAmount = 15000;
+
+  //get the current amount of donations
+  const getCurrentAmount = () => {
+    client
+      .mutate({
+        mutation: GET_CURRENT_AMOUNT,
+      })
+      .then(({ data }) => {
+        setCurrentDonationAmount(data.currentDonations);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  //get the current amount of donations on re-render
+  useEffect(() => {
+    getCurrentAmount();
+  }, []);
+
+  console.log(currentDonationAmount, targetDonationAmount);
 
   return (
     <div className="FantasticStatisticsPage flex justify-evenly pt-8">
@@ -116,7 +143,11 @@ export default function FantasticStatistics() {
         <div className="ProgressBarContainer mb-4 mt-10 sm:mt-0">
           <p className="ProgressBarStatus w-[35vw] pb-2">
             fellows signed up: {fellows} /{" "}
-            {calculatePercentage({ fellows, targetFellows })}%
+            {calculatePercentage({
+              currentAmount: fellows,
+              targetAmount: targetFellows,
+            })}
+            %
           </p>
           <ProgressBar
             current={fellows}
@@ -127,7 +158,11 @@ export default function FantasticStatistics() {
         <div className="ProgressBarContainer mb-4 mt-10 sm:mt-0">
           <p className="ProgressBarStatus w-[35vw] pb-2">
             businesses signed up: {businesses} /{" "}
-            {calculatePercentage({ businesses, targetBusinesses })}%
+            {calculatePercentage({
+              currentAmount: businesses,
+              targetAmount: targetBusinesses,
+            })}
+            %
           </p>
           <ProgressBar
             current={businesses}
@@ -157,8 +192,8 @@ export default function FantasticStatistics() {
           <p className="ProgressBarStatus w-[35vw] pb-2">
             current donation amount: {currentDonationAmount} /{" "}
             {calculatePercentage({
-              currentDonationAmount,
-              targetDonationAmount,
+              currentAmount: currentDonationAmount,
+              targetAmount: targetDonationAmount,
             })}
             %
           </p>
