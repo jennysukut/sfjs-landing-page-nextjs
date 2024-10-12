@@ -10,14 +10,28 @@ import SiteButton from "@/components/siteButton";
 import { calculatePercentage } from "@/utils/numberUtils";
 
 export default function FantasticStatistics() {
-  const fellows = 250;
-  const businesses = 40;
-  const donations = 50;
+  const fellows = 175;
+  const businesses = 1;
+  const donations = 5;
+  const fellowDonations = 5;
+  const businessDonations = 0;
   const [currentDonationAmount, setCurrentDonationAmount] = useState(0);
 
   const targetFellows = 10000;
-  const targetBusinesses = 200;
+  const targetBusinesses = 500;
   const targetDonationAmount = 15000;
+
+  //we'll need to get all the info to fill the data:
+  //fellow sign-ups
+  //collaborators
+  //fellow beta-testers
+  //referral partners
+  //business sign-ups
+  //business beta-testers
+  //fellow donation numbers
+  //business donation numbers
+  //total donations
+  //total pre-purchased jobs - this is optional. To get this number, I'll have to tie the business donation information to the relevant amount of jobs offered per amount and set the number based off that.
 
   //get the current amount of donations
   const getCurrentAmount = () => {
@@ -174,19 +188,27 @@ export default function FantasticStatistics() {
           <p className="ProgressBarStatus w-[35vw] pb-2">
             total donations: {donations}
           </p>
-          <ProgressBar current={donations} total={100} fillColor="bg-sky" />
+          <ProgressBar current={donations} total={600} fillColor="bg-sky" />
         </div>
         <div className="ProgressBarContainer mb-4 mt-10 sm:mt-0">
           <p className="ProgressBarStatus w-[35vw] pb-2">
-            fellow donations: {30}
+            fellow donations: {fellowDonations}
           </p>
-          <ProgressBar current={30} total={100} fillColor="bg-orange" />
+          <ProgressBar
+            current={fellowDonations}
+            total={500}
+            fillColor="bg-orange"
+          />
         </div>
         <div className="ProgressBarContainer mb-4 mt-10 sm:mt-0">
           <p className="ProgressBarStatus w-[35vw] pb-2">
-            business donations: {20}
+            business donations: {businessDonations}
           </p>
-          <ProgressBar current={20} total={100} fillColor="bg-lilac" />
+          <ProgressBar
+            current={businessDonations}
+            total={100}
+            fillColor="bg-lilac"
+          />
         </div>
         <div className="ProgressBarContainer mb-4 mt-10 sm:mt-0">
           <p className="ProgressBarStatus w-[35vw] pb-2">
