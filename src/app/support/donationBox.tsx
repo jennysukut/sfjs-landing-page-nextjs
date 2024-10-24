@@ -128,13 +128,19 @@ function DonationBox() {
       const { name, email, amount } = data;
       initiateFellowDonation({ name, email, amount }, ACCEPT_FELLOW_DONATION);
     } else {
-      const { businessName, contactName, email, amount, referral} = data;
-      initiateBusinessDonation({ businessName, contactName, email, amount, referral }, ACCEPT_BUSINESS_DONATION);
+      const { businessName, contactName, email, amount, referral } = data;
+      initiateBusinessDonation(
+        { businessName, contactName, email, amount, referral },
+        ACCEPT_BUSINESS_DONATION,
+      );
     }
   };
 
   // initiate donation function
-  const initiateFellowDonation = ({ name, email, amount }: any, mutation: any) => {
+  const initiateFellowDonation = (
+    { name, email, amount }: any,
+    mutation: any,
+  ) => {
     const donation = {
       name: name,
       amount: String(parseFloat(amount.replace(/^\$/, "")).toFixed(2)),
@@ -162,7 +168,10 @@ function DonationBox() {
   };
 
   // initiate donation function
-  const initiateBusinessDonation = ({ businessName, contactName, email, amount, referral }: any, mutation: any) => {
+  const initiateBusinessDonation = (
+    { businessName, contactName, email, amount, referral }: any,
+    mutation: any,
+  ) => {
     const donation = {
       businessName: businessName,
       contactName: contactName,
@@ -420,7 +429,7 @@ function DonationBox() {
         mutation: GET_CURRENT_AMOUNT,
       })
       .then(({ data }) => {
-        setCurrentAmount(data.currentDonations);
+        setCurrentAmount(data.metrics.donationMetrics.totalDonations);
       })
       .catch((err) => {
         console.log(err);

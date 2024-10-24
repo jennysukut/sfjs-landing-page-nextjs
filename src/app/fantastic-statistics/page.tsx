@@ -46,7 +46,11 @@ export default function FantasticStatistics() {
       .then(({ data }) => {
         console.log(data);
         setFellows(data.metrics.fellowMetrics.signups);
+        setCollaborators(data.metrics.fellowMetrics.collaborators);
+        setFellowBetaTesters(data.metrics.fellowMetrics.betaTesters);
+        setReferralPartners(data.metrics.fellowMetrics.referralPartners);
         setBusinesses(data.metrics.businessMetrics.signups);
+        setBusinessBetaTesters(data.metrics.businessMetrics.betaTesters);
         setDonations(data.metrics.donationMetrics.totalDonations);
         setFellowDonations(data.metrics.donationMetrics.fellowDonations);
         setBusinessDonations(data.metrics.donationMetrics.businessDonations);
