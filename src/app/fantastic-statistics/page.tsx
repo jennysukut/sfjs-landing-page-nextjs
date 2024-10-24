@@ -10,11 +10,11 @@ import SiteButton from "@/components/siteButton";
 import { calculatePercentage } from "@/utils/numberUtils";
 
 export default function FantasticStatistics() {
-  const fellows = 175;
-  const businesses = 1;
-  const donations = 5;
-  const fellowDonations = 5;
-  const businessDonations = 0;
+  const [fellows, setFellows] = useState(0);
+  const [businesses, setBusinesses] = useState(0);
+  const [donations, setDonations] = useState(0);
+  const [fellowDonations, setFellowDonations] = useState(0);
+  const [businessDonations, setBusinessDonations] = useState(0);
   const [currentDonationAmount, setCurrentDonationAmount] = useState(0);
 
   const targetFellows = 10000;
@@ -40,7 +40,13 @@ export default function FantasticStatistics() {
         mutation: GET_CURRENT_AMOUNT,
       })
       .then(({ data }) => {
-        setCurrentDonationAmount(data.currentDonations);
+        console.log(data);
+        setFellows(data.metrics.fellows);
+        setBusinesses(data.metrics.businesses);
+        setDonations(data.metrics.donations);
+        setFellowDonations(data.metrics.fellowDonations);
+        setBusinessDonations(data.metrics.businessDonations);
+        setCurrentDonationAmount(data.metrics.currentDonations);
       })
       .catch((err) => {
         console.log(err);
@@ -71,7 +77,7 @@ export default function FantasticStatistics() {
                   aria="fellows"
                   addClasses="px-8"
                 >
-                  150 people signed up
+                  {fellows} people signed up
                 </SiteButton>
               </div>
               <div className="Collaborators flex items-center gap-8">
@@ -125,7 +131,7 @@ export default function FantasticStatistics() {
                   aria="fellows"
                   addClasses="px-8"
                 >
-                  200 businesses signed up
+                  {businesses} businesses signed up
                 </SiteButton>
               </div>
               <div className="Collaborators flex items-center gap-8">

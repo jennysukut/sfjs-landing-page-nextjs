@@ -54,7 +54,14 @@ export const COMPLETE_PAYMENT = gql`
 `;
 
 export const GET_CURRENT_AMOUNT = gql`
-  query GetCurrentDonations {
+query Metrics {
+  metrics {
     currentDonations
+    fellows
+    businesses
+    donations
+    fellowDonations
+    businessDonations
   }
+}
 `;
