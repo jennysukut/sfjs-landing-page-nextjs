@@ -41,12 +41,12 @@ export default function FantasticStatistics() {
       })
       .then(({ data }) => {
         console.log(data);
-        setFellows(data.metrics.fellows);
-        setBusinesses(data.metrics.businesses);
-        setDonations(data.metrics.donations);
-        setFellowDonations(data.metrics.fellowDonations);
-        setBusinessDonations(data.metrics.businessDonations);
-        setCurrentDonationAmount(data.metrics.currentDonations);
+        setFellows(data.metrics.fellowMetrics.signups);
+        setBusinesses(data.metrics.businessMetrics.signups);
+        setDonations(data.metrics.donationMetrics.totalDonations);
+        setFellowDonations(data.metrics.donationMetrics.fellowDonations);
+        setBusinessDonations(data.metrics.donationMetrics.businessDonations);
+        setCurrentDonationAmount(data.metrics.donationMetrics.totalDonations);
       })
       .catch((err) => {
         console.log(err);
