@@ -10,11 +10,15 @@ import SiteButton from "@/components/siteButton";
 import { calculatePercentage } from "@/utils/numberUtils";
 
 export default function FantasticStatistics() {
-  const fellows = 175;
-  const businesses = 1;
-  const donations = 5;
-  const fellowDonations = 5;
-  const businessDonations = 0;
+  const [fellows, setFellows] = useState(0);
+  const [collaborators, setCollaborators] = useState(0);
+  const [referralPartners, setReferralPartners] = useState(0);
+  const [fellowBetaTesters, setFellowBetaTesters] = useState(0);
+  const [businesses, setBusinesses] = useState(0);
+  const [businessBetaTesters, setBusinessBetaTesters] = useState(0);
+  const [donations, setDonations] = useState(0);
+  const [fellowDonations, setFellowDonations] = useState(0);
+  const [businessDonations, setBusinessDonations] = useState(0);
   const [currentDonationAmount, setCurrentDonationAmount] = useState(0);
 
   const targetFellows = 10000;
@@ -40,7 +44,13 @@ export default function FantasticStatistics() {
         mutation: GET_CURRENT_AMOUNT,
       })
       .then(({ data }) => {
-        setCurrentDonationAmount(data.currentDonations);
+        console.log(data);
+        setFellows(data.metrics.fellowMetrics.signups);
+        setBusinesses(data.metrics.businessMetrics.signups);
+        setDonations(data.metrics.donationMetrics.totalDonations);
+        setFellowDonations(data.metrics.donationMetrics.fellowDonations);
+        setBusinessDonations(data.metrics.donationMetrics.businessDonations);
+        setCurrentDonationAmount(data.metrics.donationMetrics.totalDonations);
       })
       .catch((err) => {
         console.log(err);
@@ -71,7 +81,7 @@ export default function FantasticStatistics() {
                   aria="fellows"
                   addClasses="px-8"
                 >
-                  150 people signed up
+                  {fellows} people signed up
                 </SiteButton>
               </div>
               <div className="Collaborators flex items-center gap-8">
@@ -81,7 +91,7 @@ export default function FantasticStatistics() {
                   aria="collaborators"
                   addClasses="px-8"
                 >
-                  15 collaboration requests
+                  {collaborators} collaboration requests
                 </SiteButton>
               </div>
               <div className="BetaTesters flex items-center gap-8">
@@ -91,7 +101,7 @@ export default function FantasticStatistics() {
                   aria="beta testers"
                   addClasses="px-8"
                 >
-                  150 beta testers
+                  {fellowBetaTesters} beta testers
                 </SiteButton>
               </div>
               <div className="ReferralPartners flex items-center gap-8">
@@ -101,7 +111,7 @@ export default function FantasticStatistics() {
                   aria="refferal partners"
                   addClasses="px-8"
                 >
-                  15 referral partner inquiries
+                  {referralPartners} referral partner inquiries
                 </SiteButton>
               </div>
             </div>
@@ -125,7 +135,7 @@ export default function FantasticStatistics() {
                   aria="fellows"
                   addClasses="px-8"
                 >
-                  200 businesses signed up
+                  {businesses} businesses signed up
                 </SiteButton>
               </div>
               <div className="Collaborators flex items-center gap-8">
@@ -135,10 +145,10 @@ export default function FantasticStatistics() {
                   aria="collaborators"
                   addClasses="px-8"
                 >
-                  20 beta test requests
+                  {businessBetaTesters} beta test requests
                 </SiteButton>
               </div>
-              <div className="BetaTesters flex items-center gap-8">
+              {/* <div className="BetaTesters flex items-center gap-8">
                 <SiteButton
                   variant="filled"
                   colorScheme="e6"
@@ -147,7 +157,7 @@ export default function FantasticStatistics() {
                 >
                   10 pre-purchased job posts
                 </SiteButton>
-              </div>
+              </div> */}
             </div>
           </div>
         </InfoBox>
