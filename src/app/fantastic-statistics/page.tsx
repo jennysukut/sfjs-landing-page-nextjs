@@ -11,7 +11,11 @@ import { calculatePercentage } from "@/utils/numberUtils";
 
 export default function FantasticStatistics() {
   const [fellows, setFellows] = useState(0);
+  const [collaborators, setCollaborators] = useState(0);
+  const [referralPartners, setReferralPartners] = useState(0);
+  const [fellowBetaTesters, setFellowBetaTesters] = useState(0);
   const [businesses, setBusinesses] = useState(0);
+  const [businessBetaTesters, setBusinessBetaTesters] = useState(0);
   const [donations, setDonations] = useState(0);
   const [fellowDonations, setFellowDonations] = useState(0);
   const [businessDonations, setBusinessDonations] = useState(0);
@@ -87,7 +91,7 @@ export default function FantasticStatistics() {
                   aria="collaborators"
                   addClasses="px-8"
                 >
-                  15 collaboration requests
+                  {collaborators} collaboration requests
                 </SiteButton>
               </div>
               <div className="BetaTesters flex items-center gap-8">
@@ -97,7 +101,7 @@ export default function FantasticStatistics() {
                   aria="beta testers"
                   addClasses="px-8"
                 >
-                  150 beta testers
+                  {fellowBetaTesters} beta testers
                 </SiteButton>
               </div>
               <div className="ReferralPartners flex items-center gap-8">
@@ -107,7 +111,7 @@ export default function FantasticStatistics() {
                   aria="refferal partners"
                   addClasses="px-8"
                 >
-                  15 referral partner inquiries
+                  {referralPartners} referral partner inquiries
                 </SiteButton>
               </div>
             </div>
@@ -141,10 +145,10 @@ export default function FantasticStatistics() {
                   aria="collaborators"
                   addClasses="px-8"
                 >
-                  20 beta test requests
+                  {businessBetaTesters} beta test requests
                 </SiteButton>
               </div>
-              <div className="BetaTesters flex items-center gap-8">
+              {/* <div className="BetaTesters flex items-center gap-8">
                 <SiteButton
                   variant="filled"
                   colorScheme="e6"
@@ -153,7 +157,7 @@ export default function FantasticStatistics() {
                 >
                   10 pre-purchased job posts
                 </SiteButton>
-              </div>
+              </div> */}
             </div>
           </div>
         </InfoBox>
