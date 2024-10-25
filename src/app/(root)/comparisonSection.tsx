@@ -25,7 +25,7 @@ function ComparisonSection() {
                 variant="hollow"
                 aria="comparison point"
                 size="small"
-                addClasses="text-lg text-center border-olive drop-shadow-olive text-olive"
+                addClasses="text-md text-center border-olive drop-shadow-olive text-olive"
               >
                 {point}
               </InfoBox>
@@ -48,7 +48,7 @@ function ComparisonSection() {
           colorScheme="b1"
           addClasses="text-center leading-8 text-xl"
         >
-          {`we think it’s time to change this sad status quo and demand better.`}
+          {`we think it’s time to change this sad status quo and demand better!`}
         </InfoBox>
         <h1 className="ComparisonSectionText mt-14 pb-4 pl-4 text-center text-[1.25rem] font-bold leading-8 text-midnight sm:text-2xl">
           {`that's why we’re building a job platform & cultural movement, focused on people + promoting:`}
@@ -63,7 +63,7 @@ function ComparisonSection() {
                   colorScheme={colorScheme as ButtonColorOption}
                   aria="comparison point"
                   size="small"
-                  addClasses="text-lg"
+                  addClasses="text-md"
                 >
                   {details}
                 </InfoBox>

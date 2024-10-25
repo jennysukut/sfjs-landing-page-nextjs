@@ -217,6 +217,19 @@ export const makersInfo = {
       "Move buff  and metalhead",
     ],
   },
+  "christina mayr": {
+    firstName: "christina",
+    lastName: "mayr",
+    img: "bg-[url('/makers/christina.svg')]",
+    shadow: "bg-magenta",
+    details: [
+      "Passionate about making work better",
+      "Teaches and coaches technical writers",
+      "Made 2 small humans",
+      "Enjoys a good renaissance fair",
+      "Decent cook, terrible baker",
+    ],
+  },
 };
 
 export type MakersObjectType = typeof makersInfo;

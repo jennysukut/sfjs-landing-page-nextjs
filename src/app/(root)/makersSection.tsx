@@ -53,11 +53,11 @@ export default function MakersSection() {
         <div className="MakersTitles ml-4 sm:ml-16">
           <h1 className="MakersTitle sm:text-2xl">our volunteers:</h1>
           <p className="MakersSubtitle mb-5 max-w-xl pt-4 text-lg font-semibold italic">
-            this is our group of amazing makers giving their time, energy, and
+            this is our group of amazing humans giving their time, energy, and
             expertise to make this idea a reality
           </p>
         </div>
-        <MotionContainer addClasses="AllMakers mb-20 mt-14 flex max-w-4xl flex-wrap items-center justify-center gap-10  gap-x-10 sm:gap-x-16">
+        <MotionContainer addClasses="AllMakers mb-20 mt-10 flex max-w-4xl flex-wrap items-center justify-center gap-10  gap-x-10 sm:gap-x-16">
           {/* MakersButtonContainer */}
           {makersArray.map(([key, maker]) => (
             <motion.div
