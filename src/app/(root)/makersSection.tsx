@@ -54,10 +54,10 @@ export default function MakersSection() {
     <section className="MakersSection flex w-full flex-col self-center border-b-2 border-t-2 border-olive/20 pt-16 sm:pt-20">
       <div className="MakersContainer">
         <div className="MakersTitles ml-4 sm:ml-16">
-          <h1 className="MakersTitle">our makers:</h1>
+          <h1 className="MakersTitle">our volunteers:</h1>
           <p className="MakersSubtitle mb-5 max-w-xl font-semibold italic">
-            this is our group of amazing humans volunteering their time, energy,
-            and expertise to make this idea a reality
+            this is our group of amazing makers giving their time, energy, and
+            expertise to make this idea a reality
           </p>
         </div>
         <MotionContainer addClasses="AllMakers mb-20 mt-14 flex max-w-4xl flex-wrap items-center justify-center gap-10  gap-x-10 sm:gap-x-16">
