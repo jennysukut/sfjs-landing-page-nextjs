@@ -38,7 +38,7 @@ export const landingPageText = {
       { details: "common sense", colorScheme: "f2" },
       { details: "human value", colorScheme: "a5" },
       { details: "ease-of-mind", colorScheme: "b1" },
-      { details: "responsibilty", colorScheme: "a4" },
+      { details: "responsibilty", colorScheme: "e2" },
       { details: "respect", colorScheme: "d5" },
       { details: "simplicity", colorScheme: "a1" },
     ],

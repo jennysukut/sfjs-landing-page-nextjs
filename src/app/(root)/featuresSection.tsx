@@ -179,7 +179,7 @@ export default function FeaturesSection() {
           variants={fadeInItem}
           className={`FeaturesPrompt mt-12 flex self-center pb-8 sm:-translate-x-[50%] sm:items-start ${mobileDetail !== "none" ? "hidden" : "last:"}`}
         >
-          <p className="FeaturesPrompt max-w-44 text-center text-xs text-jade">
+          <p className="FeaturesPrompt max-w-44 text-center text-sm text-jade">
             {landingPageText.arrowprompts.feature}
           </p>
           <Image

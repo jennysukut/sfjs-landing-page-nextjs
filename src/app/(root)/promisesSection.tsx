@@ -143,7 +143,7 @@ function PromisesSection() {
             height={174}
             className="w-[75px]"
           ></Image>
-          <p className="PromisesPrompt max-w-44 pt-12 text-center text-xs text-lilac">
+          <p className="PromisesPrompt max-w-44 pt-12 text-center text-sm text-lilac">
             {landingPageText.arrowprompts.guarantee}
           </p>
         </motion.div>

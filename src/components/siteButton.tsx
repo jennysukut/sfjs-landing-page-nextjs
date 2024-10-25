@@ -37,7 +37,7 @@ const SiteButton: React.FC<ButtonProps> = ({
     "SiteButton relative z-[1] cursor-pointer rounded-full font-semibold transition-all duration-200 tracking-superwide hover:saturate-[120%]",
     {
       // size
-      "px-8 py-4 text-[0.85rem] sm:px-10 md:text-sm": size === "large",
+      "px-8 py-4 text-[0.85rem] sm:px-10 md:text-[0.9rem]": size === "large",
       "h-16 w-16": size === "largeCircle",
       "h-6 w-6": size === "smallCircle",
       "px-4 py-2 text-xs min-w-[65px]": size === "default",
@@ -78,7 +78,7 @@ const SiteButton: React.FC<ButtonProps> = ({
     "ButtonShadow absolute rounded-full text-transparent font-semibold tracking-superwide",
     {
       // size
-      "px-8 py-4 text-[0.85rem] sm:px-10 md:text-sm left-2 -right-2 top-2":
+      "px-8 py-4 text-[0.5rem] sm:px-10 md:text-[0.9rem] left-2 -right-2 top-2":
         size === "large",
       "h-16 w-16 -right-1.5 top-1.5 left-1.5": size === "largeCircle",
       "h-6 w-6 -right-1 top-1 left-1": size === "smallCircle",
