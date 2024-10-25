@@ -107,7 +107,7 @@ export default function MakersSection() {
           addClasses="px-10"
           onClick={() => showModal(<HelpUsModal />)}
         >
-          help this bunch of hooligans{" "}
+          support these volunteers{" "}
         </SiteButton>
         <div className="OtherButtons flex flex-col items-end justify-end gap-6 sm:flex-row">
           <SiteButton
@@ -118,7 +118,7 @@ export default function MakersSection() {
             addClasses="px-14"
             onClick={() => showModal(<SignupModalCollaborator1 />)}
           >
-            collaborate with us
+            want to collaborate?
           </SiteButton>
           <SiteButton
             aria="sign up"

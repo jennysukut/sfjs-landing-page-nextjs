@@ -47,6 +47,19 @@ export const makersInfo = {
       "Fan of the Green Bay Packers",
     ],
   },
+
+  "dillon arnold": {
+    firstName: "dillon",
+    lastName: "arnold",
+    img: "bg-[url('/makers/dillon.svg')]",
+    shadow: "bg-orange",
+    details: [
+      "His passion is flying planes",
+      "Has a degree in finance",
+      "Husband and dog dad",
+      "If he wasn't a software developer with a degree in finance, he's love to get into the field of homicide investigation",
+    ],
+  },
   "stephen walker": {
     firstName: "stephen",
     lastName: "walker",
@@ -62,19 +75,6 @@ export const makersInfo = {
       "Is a huge fan of video games, especially retro arcade games",
     ],
   },
-  "dillon arnold": {
-    firstName: "dillon",
-    lastName: "arnold",
-    img: "bg-[url('/makers/dillon.svg')]",
-    shadow: "bg-orange",
-    details: [
-      "His passion is flying planes",
-      "Has a degree in finance",
-      "Husband and dog dad",
-      "If he wasn't a software developer with a degree in finance, he's love to get into the field of homicide investigation",
-    ],
-  },
-
   "jacob sukut": {
     firstName: "jacob",
     lastName: "sukut",

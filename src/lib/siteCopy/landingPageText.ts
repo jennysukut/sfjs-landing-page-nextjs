@@ -14,6 +14,36 @@ export const landingPageText = {
       "click the buttons to learn how we implement these fantastic features!",
   },
 
+  comparisonDetails: {
+    painPoints: [
+      "pain",
+      "disconnection",
+      "overwhelm",
+      "depression",
+      "hopelessness",
+      "suicide",
+      "dehumanization",
+      "financial stress",
+      "anxiety",
+      "desperation",
+      "fear",
+    ],
+    promoting: [
+      { details: "mental health", colorScheme: "c4" },
+      { details: "connection", colorScheme: "e5" },
+      { details: "transparency", colorScheme: "d4" },
+      { details: "empathy", colorScheme: "f1" },
+      { details: "realistic expectations", colorScheme: "d2" },
+      { details: "honesty", colorScheme: "b6" },
+      { details: "common sense", colorScheme: "f2" },
+      { details: "human value", colorScheme: "a5" },
+      { details: "ease-of-mind", colorScheme: "b1" },
+      { details: "responsibilty", colorScheme: "a4" },
+      { details: "respect", colorScheme: "d5" },
+      { details: "simplicity", colorScheme: "a1" },
+    ],
+  },
+
   features: {
     business: [
       {
