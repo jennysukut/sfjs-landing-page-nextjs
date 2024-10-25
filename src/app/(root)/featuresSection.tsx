@@ -85,14 +85,14 @@ export default function FeaturesSection() {
             choose category:
           </p>
         </div>
-        <div className="ButtonContainer flex flex-col items-center gap-4 sm:gap-10 md:flex-row">
+        <div className="ButtonContainer -ml-4 flex flex-col items-center gap-4 sm:gap-10 md:flex-row">
           <SiteButton
             aria="features for businesses"
             size="extraLarge"
             variant="filled"
             colorScheme="b3"
             onClick={() => handleClick("business")}
-            addClasses="sm:w-[20rem] text-base"
+            addClasses="sm:w-[15rem] text-base"
           >
             for businesses
           </SiteButton>
@@ -102,7 +102,7 @@ export default function FeaturesSection() {
             variant="filled"
             colorScheme="c4"
             onClick={() => handleClick("individual")}
-            addClasses="sm:w-[20rem] text-base"
+            addClasses="sm:w-[15rem] text-base"
           >
             for job-seekers
           </SiteButton>
