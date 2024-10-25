@@ -80,7 +80,7 @@ export default function FeaturesSection() {
       {/* Features Heading */}
       <div className="FeaturesHeading flex max-w-[90vw] flex-col items-start justify-center gap-8 pb-8 xl:flex-row">
         <div className="FeaturesTitle items-left mr-14 flex flex-col justify-start text-left">
-          <h1 className="FeaturesTitle">our features:</h1>
+          <h1 className="FeaturesTitle text-2xl">our features:</h1>
           <p className="PromisesSubtitle font-semibold italic">
             choose category:
           </p>

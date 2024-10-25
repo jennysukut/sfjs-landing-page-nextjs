@@ -47,15 +47,12 @@ export default function MakersSection() {
     },
   };
 
-  //make a way to display a random line from the maker's details when their picture is clicked.
-  //the random line should be displayed in a siteLabel
-
   return (
     <section className="MakersSection flex w-full flex-col self-center border-b-2 border-t-2 border-olive/20 pt-16 sm:pt-20">
       <div className="MakersContainer">
         <div className="MakersTitles ml-4 sm:ml-16">
-          <h1 className="MakersTitle">our volunteers:</h1>
-          <p className="MakersSubtitle mb-5 max-w-xl font-semibold italic">
+          <h1 className="MakersTitle sm:text-2xl">our volunteers:</h1>
+          <p className="MakersSubtitle mb-5 max-w-xl pt-4 text-lg font-semibold italic">
             this is our group of amazing makers giving their time, energy, and
             expertise to make this idea a reality
           </p>

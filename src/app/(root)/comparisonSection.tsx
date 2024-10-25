@@ -1,6 +1,7 @@
 import SiteButton from "@/components/siteButton";
 import SiteLabel from "@/components/siteLabel";
 import InfoBox from "@/components/infoBox";
+import MotionContainer from "@/components/motionContainer";
 
 import { landingPageText } from "@/lib/siteCopy/landingPageText";
 import { ButtonColorOption } from "@/lib/stylingData/buttonColors";
@@ -16,7 +17,7 @@ function ComparisonSection() {
         <h1 className="ComparisonSectionText -mt-8 max-w-[700px] pl-4 text-[1.25rem] font-bold leading-8 text-midnight sm:text-2xl">
           {`it's causing unnecessary:`}
         </h1>
-        <div className="PainPoints flex flex-wrap justify-center gap-4">
+        <MotionContainer addClasses="PainPoints flex flex-wrap justify-center">
           {landingPageText.comparisonDetails.painPoints.map((point) => {
             return (
               <InfoBox
@@ -30,7 +31,7 @@ function ComparisonSection() {
               </InfoBox>
             );
           })}
-        </div>
+        </MotionContainer>
         <p className="PainPointDetail self-end pt-8 text-end">{`...the list goes on`}</p>
       </div>
       <div className="comparisonSectionComparisonContainer flex flex-col items-center gap-12 pb-14">
@@ -52,7 +53,7 @@ function ComparisonSection() {
         <h1 className="ComparisonSectionText mt-14 pb-4 pl-4 text-center text-[1.25rem] font-bold leading-8 text-midnight sm:text-2xl">
           {`that's why we’re building a job platform & cultural movement, focused on people + promoting:`}
         </h1>
-        <div className="ComparisonPoints flex flex-wrap justify-center gap-4">
+        <MotionContainer addClasses="ComparisonPoints flex flex-wrap justify-center">
           {landingPageText.comparisonDetails.promoting.map(
             ({ details, colorScheme }) => {
               return (
@@ -69,7 +70,7 @@ function ComparisonSection() {
               );
             },
           )}
-        </div>
+        </MotionContainer>
       </div>
     </div>
   );

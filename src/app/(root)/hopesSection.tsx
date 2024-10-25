@@ -17,8 +17,8 @@ export default function HopesSection() {
     <section className="HopesSection flex w-full flex-col items-center p-4 pb-8 sm:p-20">
       <div className="HopesContainer flex flex-col">
         <div className="HopesTitleContainer w-full sm:p-8">
-          <h1 className="HopeTitle text-start">our hopes:</h1>
-          <p className="HopeSubtitle mb-2 max-w-xl font-semibold italic sm:mb-12">
+          <h1 className="HopeTitle text-start text-2xl">our hopes:</h1>
+          <p className="HopeSubtitle mb-2 max-w-xl text-lg font-semibold italic sm:mb-12">
             we have big ideals and even bigger dreams
           </p>
         </div>

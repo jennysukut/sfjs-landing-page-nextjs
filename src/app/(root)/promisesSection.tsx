@@ -79,7 +79,7 @@ function PromisesSection() {
           <h1 className="PromisesTitle text-[1.25rem] sm:text-2xl">
             our promises:
           </h1>
-          <p className="PromisesSubtitle mb-5 font-semibold italic">
+          <p className="PromisesSubtitle mb-5 text-lg font-semibold italic">
             to businesses and job-seekers
           </p>
         </motion.div>
