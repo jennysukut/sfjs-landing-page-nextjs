@@ -34,7 +34,10 @@ export default function FrequentlyAskedQuestions() {
                 key={faq.question}
                 colorScheme={getRandomColorScheme("b2")}
                 size="superLarge"
-                addClasses="text-left w-[80vw] text-midnight"
+                textColor="dark"
+                addClasses="text-left w-[80vw] flex justify-between"
+                isExpandable
+                isSelected={selectedQuestion === faq.question}
                 onClick={() => questionClick(faq.question)}
               >
                 {faq.question}

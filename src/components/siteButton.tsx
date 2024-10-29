@@ -6,6 +6,8 @@ import {
   ButtonColorOption,
 } from "@/lib/stylingData/buttonColors";
 import clsx from "clsx";
+import { text } from "stream/consumers";
+import Image from "next/image";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   addClasses?: string;
@@ -15,6 +17,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   aria: string;
   addImage?: string;
   isSelected?: boolean;
+  textColor?: "standard" | "dark";
+  isExpandable?: boolean;
 }
 
 const SiteButton: React.FC<ButtonProps> = ({
@@ -29,6 +33,8 @@ const SiteButton: React.FC<ButtonProps> = ({
   children,
   addImage,
   isSelected,
+  textColor = "standard",
+  isExpandable,
   ...props
 }) => {
   const [isPressed, setIsPressed] = useState(false);
@@ -49,7 +55,10 @@ const SiteButton: React.FC<ButtonProps> = ({
 
       // variant
       "bg-cream border-jade border-[2px]": variant === "hollow",
-      "text-jade": variant === "hollow" && !isSelected,
+      "text-jade":
+        variant === "hollow" && textColor === "standard" && !isSelected,
+      "text-midnight":
+        variant === "hollow" && textColor === "dark" && !isSelected,
       [`text-eggshell ${buttonColors[colorScheme].color1}`]:
         variant === "filled",
       [`${addImage} bg-cover`]: variant === "avatar",
@@ -124,6 +133,30 @@ const SiteButton: React.FC<ButtonProps> = ({
         onMouseLeave={handleMouseLeave}
       >
         {children}
+        {isExpandable && !isSelected ? (
+          <button className="ExpandButton -mr-3 self-center opacity-100 hover:opacity-50">
+            <Image
+              src="/eggshell-expand-button.svg"
+              alt="expandButton"
+              width={14}
+              height={14}
+            ></Image>
+          </button>
+        ) : (
+          ""
+        )}
+        {isExpandable && isSelected ? (
+          <button className="CollapseButton -mr-3 self-center opacity-100 hover:opacity-50">
+            <Image
+              src="/eggshell-collapse-button.svg"
+              alt="collapseButton"
+              width={14}
+              height={14}
+            ></Image>
+          </button>
+        ) : (
+          ""
+        )}
       </button>
       <div className={shadowClasses}>{children}</div>
     </div>

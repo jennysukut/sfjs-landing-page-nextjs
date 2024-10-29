@@ -26,6 +26,11 @@ export default function MobileMenuModal() {
         >
           signup
         </SiteButton>
+        <Link href={"/faq"}>
+          <SiteButton variant="filled" colorScheme="c4" aria="faq" value="faq">
+            our faq
+          </SiteButton>
+        </Link>
         <Link href="/support">
           <SiteButton
             variant="filled"

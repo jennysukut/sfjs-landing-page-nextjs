@@ -48,7 +48,7 @@ export default function NavBar() {
         />
       </Link>
 
-      <div className="NavButtonContainer hidden items-end gap-4 md:flex md:flex-row md:items-center md:max-lg:-mr-8 lg:gap-6">
+      <div className="NavButtonContainer hidden items-end gap-4 md:flex md:flex-row md:items-center md:max-lg:-mr-8">
         <SiteButton
           variant="filled"
           colorScheme="b4"
