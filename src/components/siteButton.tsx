@@ -11,7 +11,13 @@ import Image from "next/image";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   addClasses?: string;
-  size?: "large" | "largeCircle" | "smallCircle" | "extraLarge" | "superLarge";
+  size?:
+    | "default"
+    | "large"
+    | "largeCircle"
+    | "smallCircle"
+    | "extraLarge"
+    | "superLarge";
   variant: "hollow" | "filled" | "avatar";
   colorScheme: ButtonColorOption;
   aria: string;

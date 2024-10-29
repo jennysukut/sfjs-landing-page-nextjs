@@ -24,7 +24,7 @@ export const FAQ = [
   },
   {
     question:
-      "Why do you call your employees/volunteers ‘makers’ and the job seekers ‘fellows’? Why not ‘Employees’ and ‘Users’?",
+      "Why do you call your employees/volunteers ‘makers’ and the job seekers ‘fellows’? Why not ‘employees’ and ‘users’?",
     answer: [
       "	The language we use shapes reality.*",
       "We understand that terms like ‘employee’ and ‘user’ are not inherently negative. They are utilitarian. They describe the relationship that a person has with a thing. It makes sense to say that a person who ‘uses’ a site should be called a ‘user’. It is descriptive. However, there is so much more to a person than that.",
