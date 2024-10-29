@@ -72,16 +72,16 @@ export default function NavBar() {
             our faq
           </SiteButton>
         </Link>
-        <Link href={"/support"}>
+        <Link href={"/crowdfunding"}>
           <SiteButton
             variant="filled"
             colorScheme="e5"
             aria="donate"
-            value="support"
+            value="crowdfunding"
             onClick={handleNavButtonClick}
-            isSelected={clickedButton === "support"}
+            isSelected={clickedButton === "crowdfunding"}
           >
-            support us
+            crowdfunding
           </SiteButton>
         </Link>
         <Link href={"/pricing"}>
@@ -106,6 +106,18 @@ export default function NavBar() {
         >
           share
         </SiteButton>
+        <Link href={"/our-supporters"}>
+          <SiteButton
+            variant="filled"
+            colorScheme="b3"
+            aria="supporters"
+            value="supporters"
+            onClick={handleNavButtonClick}
+            isSelected={clickedButton === "supporters"}
+          >
+            supporters
+          </SiteButton>
+        </Link>
       </div>
       {clickedButton === "share" ? (
         <ShareOptions setClickedButton={setClickedButton} />

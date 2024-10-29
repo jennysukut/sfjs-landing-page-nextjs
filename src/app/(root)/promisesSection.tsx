@@ -106,15 +106,15 @@ function PromisesSection() {
           })}
         </ul>
         <ButtonContainer addClasses="flex flex-col-reverse items-start sm:items-end sm:flex-row justify-center sm:justify-end">
-          <Link href={"/support"}>
+          <Link href={"/crowdfunding"}>
             <SiteButton
-              aria="support us"
+              aria="crowdfunding"
               size="large"
               variant="filled"
               colorScheme="c4"
               addClasses="px-14"
             >
-              support us
+              explore our crowdfunding
             </SiteButton>
           </Link>
           <SiteButton
@@ -143,7 +143,7 @@ function PromisesSection() {
             height={174}
             className="w-[75px]"
           ></Image>
-          <p className="PromisesPrompt max-w-44 pt-12 text-center text-sm text-lilac">
+          <p className="PromisesPrompt max-w-60 pt-12 text-center text-sm text-lilac">
             {landingPageText.arrowprompts.guarantee}
           </p>
         </motion.div>

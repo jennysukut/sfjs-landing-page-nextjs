@@ -25,9 +25,9 @@ export default function Footer() {
             faq
           </SiteButton>
         </Link>
-        <Link href={"/support"}>
+        <Link href={"/crowdfunding"}>
           <SiteButton variant="filled" colorScheme="d4" aria="our makers">
-            support us
+            crowdfunding
           </SiteButton>
         </Link>
         <Link href={"/pricing"}>

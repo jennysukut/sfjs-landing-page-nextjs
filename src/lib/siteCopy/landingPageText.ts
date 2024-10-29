@@ -9,7 +9,7 @@ export const landingPageText = {
 
   arrowprompts: {
     guarantee:
-      "psssttt, we’ve got fun rewards for individuals and businesses who help support us! check them out by pressing this button",
+      "psssttt, we’ve got fun rewards for individuals and businesses who participate in our crowdfunding campaign! check them out by pressing this button",
     feature:
       "click the buttons to learn how we implement these fantastic features!",
   },
