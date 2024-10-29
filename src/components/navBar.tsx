@@ -60,7 +60,18 @@ export default function NavBar() {
         >
           sign up
         </SiteButton>
-
+        <Link href={"/faq"}>
+          <SiteButton
+            variant="filled"
+            colorScheme="c4"
+            aria="faq"
+            value="faq"
+            onClick={handleNavButtonClick}
+            isSelected={clickedButton === "faq"}
+          >
+            our faq
+          </SiteButton>
+        </Link>
         <Link href={"/support"}>
           <SiteButton
             variant="filled"

@@ -20,8 +20,8 @@ export default function FrequentlyAskedQuestions() {
 
   return (
     <div className="faqPage self-center">
-      <h1 className="faqTitle mt-8 pb-4">{`frequently asked questions:`}</h1>
-      <div className="faqs flex flex-col items-center gap-4">
+      <h1 className="faqTitle mt-8 pb-8">{`frequently asked questions:`}</h1>
+      <div className="faqs mb-14 flex flex-col items-center gap-4">
         {FAQ.map((faq) => {
           return (
             <div
@@ -43,7 +43,8 @@ export default function FrequentlyAskedQuestions() {
                 <InfoBox
                   variant="hollow"
                   aria={faq.question}
-                  addClasses="text-left text-midnight indent-8 leading-7 mt-8"
+                  width="extraWide"
+                  addClasses="text-left text-midnight indent-8 leading-7 my-8 ml-14"
                 >
                   {Array.isArray(faq.answer) ? (
                     faq.answer.map((section, index) => (
