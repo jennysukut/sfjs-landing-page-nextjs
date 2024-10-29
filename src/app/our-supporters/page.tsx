@@ -9,7 +9,7 @@ import { makersInfo } from "@/lib/makersInfo";
 
 export default function OurSupporters() {
   const [fellows, setFellows] = useState(381);
-  const [currentName, setCurrentName] = useState("");
+  const [currentName, setCurrentName] = useState(0);
 
   const getCurrentAmount = () => {
     client
@@ -24,11 +24,11 @@ export default function OurSupporters() {
       });
   };
 
-  const fellowClick = () => {
-    if (currentName === "jacob") {
-      setCurrentName("");
+  const fellowClick = (index: any) => {
+    if (currentName === index) {
+      setCurrentName(0);
     } else {
-      setCurrentName("jacob");
+      setCurrentName(index);
     }
   };
 
@@ -43,17 +43,17 @@ export default function OurSupporters() {
       <p className="OurSupportersSubtitle mb-8 w-[70%] self-end text-right text-sm italic sm:max-w-[40rem] sm:text-left sm:text-lg md:mt-4">
         {`each of these circles represents a fellow who has signed up & supports our straightforward job site`}
       </p>
-      <div className="OurSupportersGroup flex flex-wrap gap-4">
+      <div className="OurSupportersGroup mb-14 flex flex-wrap gap-4">
         {Array.from({ length: fellows }).map((_, index) => (
           <SiteButton
             aria="supporter"
             variant="filled"
-            size={currentName === "jacob" ? "default" : "smallCircle"}
-            onClick={fellowClick}
+            size={currentName === index ? "default" : "smallCircle"}
+            onClick={() => fellowClick(index)}
             colorScheme={getRandomColorScheme("a1")}
             key={index}
           >
-            {currentName}
+            {currentName === index ? currentName : ""}
           </SiteButton>
         ))}
       </div>
