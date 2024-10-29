@@ -38,8 +38,11 @@ export default function OurSupporters() {
   // }, []);
 
   return (
-    <div className="OurSupportersPage max-w-[85vw] justify-center self-center">
-      <h1 className="OurSupportersTitle py-8">Our Supporters:</h1>
+    <div className="OurSupportersPage max-w-[80vw] justify-center self-center">
+      <h1 className="OurSupportersTitle pt-8">our supporters:</h1>
+      <p className="OurSupportersSubtitle mb-8 w-[70%] self-end text-right text-sm italic sm:max-w-[40rem] sm:text-left sm:text-lg md:mt-4">
+        {`each of these circles represents a fellow who has signed up & supports our straightforward job site`}
+      </p>
       <div className="OurSupportersGroup flex flex-wrap gap-4">
         {Array.from({ length: fellows }).map((_, index) => (
           <SiteButton

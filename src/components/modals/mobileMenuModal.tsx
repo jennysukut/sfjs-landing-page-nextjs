@@ -31,16 +31,16 @@ export default function MobileMenuModal() {
             our faq
           </SiteButton>
         </Link>
-        <Link href="/support">
+        <Link href="/crowdfunding">
           <SiteButton
             variant="filled"
             colorScheme="e5"
-            aria="business"
+            aria="crowdfunding"
             addClasses="w-[200px]"
             size="large"
             onClick={hideModal}
           >
-            support us
+            crowdfunding
           </SiteButton>
         </Link>
         <Link href="/pricing">
