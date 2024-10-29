@@ -6,6 +6,7 @@ import {
   largeShadowColors,
 } from "@/lib/stylingData/largeShadowColors";
 import { smallShadowColors } from "@/lib/stylingData/smallShadowColors";
+import Image from "next/image";
 
 interface InfoBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   variant: "hollow" | "filled";
@@ -18,6 +19,8 @@ interface InfoBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   size?: "small" | "standard" | "large";
   width?: "extraWide" | null;
   shadowSize?: "small";
+  canCollapse?: boolean;
+  collapseClick?: Function;
 }
 
 const InfoBox: React.FC<InfoBoxProps> = ({
@@ -32,6 +35,8 @@ const InfoBox: React.FC<InfoBoxProps> = ({
   textSize = "large",
   width = "standard",
   shadowSize = "standard",
+  canCollapse,
+  collapseClick,
   ...props
 }) => {
   const boxClasses = clsx(
@@ -68,6 +73,22 @@ const InfoBox: React.FC<InfoBoxProps> = ({
     <div className={boxClasses}>
       <h3 className="Title my-1 text-lg">{title}</h3>
       {children}
+
+      {canCollapse ? (
+        <button
+          className="CollapseButton self-end opacity-100 hover:opacity-50"
+          onClick={collapseClick as React.MouseEventHandler<HTMLButtonElement>}
+        >
+          <Image
+            src="/jade-collapse-button.svg"
+            alt="collapseButton"
+            width={16}
+            height={16}
+          ></Image>
+        </button>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

@@ -47,7 +47,11 @@ export default function FrequentlyAskedQuestions() {
                   variant="hollow"
                   aria={faq.question}
                   width="extraWide"
-                  addClasses="text-left text-midnight indent-8 leading-7 my-8 ml-14"
+                  canCollapse
+                  collapseClick={() => {
+                    setSelectedQuestion("");
+                  }}
+                  addClasses="text-left text-midnight indent-8 leading-7 my-8 ml-14 flex flex-col"
                 >
                   {Array.isArray(faq.answer) ? (
                     faq.answer.map((section, index) => (
