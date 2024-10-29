@@ -100,5 +100,4 @@ export const FAQ = [
       "Straightforward Job Site will be available worldwide. When we launch our MVP, we will be available in English, but accessible from any country. We plan to bring in some fantastic translators to make our site available in every language as soon as we are able. ",
     ],
   },
-  { question: "", answer: "" },
 ];
