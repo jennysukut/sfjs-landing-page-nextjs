@@ -5,6 +5,7 @@ import client from "@/lib/apollo-client";
 import { GET_CURRENT_AMOUNT } from "@/graphql/mutations";
 import { useEffect, useState } from "react";
 import getRandomColorScheme from "@/utils/getRandomColorScheme";
+import { makersInfo } from "@/lib/makersInfo";
 
 export default function OurSupporters() {
   const [fellows, setFellows] = useState(381);
@@ -37,7 +38,7 @@ export default function OurSupporters() {
   // }, []);
 
   return (
-    <div className="OurSupportersPage max-w-[90vw] justify-center self-center">
+    <div className="OurSupportersPage max-w-[85vw] justify-center self-center">
       <h1 className="OurSupportersTitle py-8">Our Supporters:</h1>
       <div className="OurSupportersGroup flex flex-wrap gap-4">
         {Array.from({ length: fellows }).map((_, index) => (

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import SiteButton from "./siteButton";
 import {
   LinkedinShareButton,
@@ -18,26 +19,26 @@ export default function ShareOptions({ setClickedButton }: any) {
           linkedin
         </SiteButton>
       </LinkedinShareButton>
-      <FacebookShareButton url="straightforwardjobsite.com">
+      <Link href="/referral-program">
         <SiteButton
           variant="filled"
           colorScheme="f1"
           aria="facebook"
           onClick={() => setClickedButton("")}
         >
-          facebook
+          referral program
         </SiteButton>
-      </FacebookShareButton>
-      <TwitterShareButton url="straightforwardjobsite.com">
+      </Link>
+      <FacebookShareButton url="straightforwardjobsite.com">
         <SiteButton
           variant="filled"
           colorScheme="c1"
-          aria="twitter"
+          aria="facebook"
           onClick={() => setClickedButton("")}
         >
-          twitter
+          facebook
         </SiteButton>
-      </TwitterShareButton>
+      </FacebookShareButton>
     </div>
   );
 }

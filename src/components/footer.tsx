@@ -43,6 +43,24 @@ export default function Footer() {
         >
           share
         </SiteButton>
+        <Link href="/referral-program">
+          <SiteButton
+            variant="filled"
+            colorScheme="b4"
+            aria="referral"
+            value="referral"
+          >
+            referrals
+          </SiteButton>
+        </Link>
+        <SiteButton
+          variant="filled"
+          colorScheme="e5"
+          aria="betatesting"
+          value="betatesting"
+        >
+          beta testing
+        </SiteButton>
       </div>
       <div className="FooterInfo">
         <p className="Copywrite text-[0.6rem] text-olive sm:text-xs">

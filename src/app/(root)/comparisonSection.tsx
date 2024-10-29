@@ -57,16 +57,18 @@ function ComparisonSection() {
         <h1 className="ComparisonSectionText -mt-8 max-w-[700px] pl-4 text-center text-[1.25rem] font-bold leading-8 text-midnight sm:text-2xl">
           {`we’ve decided to put our collective foot down and fix it ourselves.`}
         </h1>
-        <motion.div variants={motionItem}>
-          <InfoBox
-            variant="filled"
-            aria="change"
-            colorScheme="b1"
-            addClasses="text-center leading-8 text-xl"
-          >
-            {`it’s time to change the status quo and make things better for job-seekers and hiring staff alike!`}
-          </InfoBox>
-        </motion.div>
+        <InfoBox
+          variant="filled"
+          aria="change"
+          colorScheme="b1"
+          width="extraWide"
+          addClasses="text-center leading-8 text-lg "
+        >
+          <p className="details"> {`it’s time to change the status quo.`}</p>
+          <p className="details">
+            {`it's time to make things better for job-seekers and hiring staff alike!`}
+          </p>
+        </InfoBox>
         <h1 className="ComparisonSectionText mt-14 pb-4 pl-4 text-center text-[1.25rem] font-bold leading-8 text-midnight sm:text-2xl">
           {`that's why we’re building a job platform & cultural movement, focused on people + promoting:`}
         </h1>

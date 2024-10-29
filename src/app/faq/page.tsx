@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 
 import InfoBox from "@/components/infoBox";
 import SiteButton from "@/components/siteButton";
@@ -32,7 +33,7 @@ export default function FrequentlyAskedQuestions() {
                 variant="hollow"
                 aria={faq.question}
                 key={faq.question}
-                colorScheme={getRandomColorScheme("b2")}
+                colorScheme={getRandomColorScheme("a1")}
                 size="superLarge"
                 textColor="dark"
                 addClasses="text-left w-[80vw] flex justify-between"
@@ -69,6 +70,41 @@ export default function FrequentlyAskedQuestions() {
             </div>
           );
         })}
+      </div>
+      <div className="faqPageTitleAndButtonsContainer mb-8 flex items-center justify-center">
+        <h1 className="faqTitle mt-8 pb-8">{`other details:`}</h1>
+        <div className="ButtonContainer ml-8 flex gap-6">
+          <Link href="/pricing">
+            <SiteButton
+              aria="pricing"
+              variant="filled"
+              colorScheme="b1"
+              size="large"
+            >
+              about pricing
+            </SiteButton>
+          </Link>
+          <Link href="/referral-program">
+            <SiteButton
+              aria="referral"
+              variant="filled"
+              colorScheme="b3"
+              size="large"
+            >
+              our referral program
+            </SiteButton>
+          </Link>
+          <Link href="/beta-testing">
+            <SiteButton
+              aria="betaTesting"
+              variant="filled"
+              colorScheme="f1"
+              size="large"
+            >
+              beta testing info
+            </SiteButton>
+          </Link>
+        </div>
       </div>
     </div>
   );
