@@ -60,13 +60,17 @@ function ComparisonSection() {
         <InfoBox
           variant="filled"
           aria="change"
-          colorScheme="b1"
+          colorScheme="b4"
           width="extraWide"
           addClasses="text-center leading-8 text-lg "
         >
           <p className="details"> {`it’s time to change the status quo.`}</p>
           <p className="details">
-            {`it's time to make things better for job-seekers and hiring staff alike!`}
+            {`it's time to make things better for job-seekers and hiring staff alike,`}
+          </p>
+          <p className="details">
+            {`because we're all human and `}
+            <span className="italic">{`we deserve better.`}</span>
           </p>
         </InfoBox>
         <h1 className="ComparisonSectionText mt-14 pb-4 pl-4 text-center text-[1.25rem] font-bold leading-8 text-midnight sm:text-2xl">

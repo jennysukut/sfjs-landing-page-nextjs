@@ -27,7 +27,8 @@ export default function ShareOptionsModal() {
             variant="filled"
             colorScheme="b3"
             aria="linkedin"
-            addClasses="w-[150px] py-3"
+            size="large"
+            addClasses="py-3"
           >
             linkedin
           </SiteButton>
@@ -37,7 +38,8 @@ export default function ShareOptionsModal() {
             variant="filled"
             colorScheme="f1"
             aria="referral"
-            addClasses="w-[150px] py-3"
+            size="large"
+            addClasses="py-3"
             onClick={() => hideModal()}
           >
             referral program
@@ -48,7 +50,8 @@ export default function ShareOptionsModal() {
             variant="filled"
             colorScheme="c1"
             aria="facebook"
-            addClasses="w-[150px] py-3"
+            size="large"
+            addClasses="py-3"
           >
             facebook
           </SiteButton>

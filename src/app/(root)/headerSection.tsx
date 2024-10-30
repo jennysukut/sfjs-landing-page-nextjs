@@ -31,7 +31,7 @@ function HeaderSection() {
           colorScheme="e5"
           onClick={() => showModal(<HelpUsModal />)}
         >
-          join the movement
+          support our mission
         </SiteButton>
       </ButtonContainer>
     </section>

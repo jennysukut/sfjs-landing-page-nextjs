@@ -53,14 +53,16 @@ export default function Footer() {
             referrals
           </SiteButton>
         </Link>
-        <SiteButton
-          variant="filled"
-          colorScheme="e5"
-          aria="betatesting"
-          value="betatesting"
-        >
-          beta testing
-        </SiteButton>
+        <Link href="/beta-testing">
+          <SiteButton
+            variant="filled"
+            colorScheme="e5"
+            aria="betatesting"
+            value="betatesting"
+          >
+            beta testing
+          </SiteButton>
+        </Link>
       </div>
       <div className="FooterInfo">
         <p className="Copywrite text-[0.6rem] text-olive sm:text-xs">

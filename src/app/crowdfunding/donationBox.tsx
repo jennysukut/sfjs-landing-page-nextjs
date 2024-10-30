@@ -15,7 +15,6 @@ import InfoBox from "@/components/infoBox";
 import SiteButton from "@/components/siteButton";
 
 import { supportPageInfo } from "@/lib/siteCopy/supportPageInfo";
-import { dropDown } from "@/components/navBar";
 
 import getRandomColorScheme from "@/utils/getRandomColorScheme";
 import { parseAmount, calculatePercentage } from "@/utils/numberUtils";
@@ -57,7 +56,6 @@ type FellowFormData = z.infer<typeof fellowDonationSchema>;
 type BusinessFormData = z.infer<typeof businessDonationSchema>;
 
 function DonationBox() {
-  useSignals();
   const { showModal } = useModal();
 
   const rewards = supportPageInfo.rewards;
@@ -448,7 +446,7 @@ function DonationBox() {
         src="https://secure.helcim.app/helcim-pay/services/start.js"
       />
       <div
-        className={`DonationStation flex max-w-[95vw] flex-col items-center gap-6 self-center px-8 pb-8 lg:w-5/12 lg:self-auto ${dropDown.value === true ? "mt-20" : "mt-8"}`}
+        className={`DonationStation flex max-w-[95vw] flex-col items-center gap-6 self-center px-8 pb-8 lg:w-5/12 lg:self-auto`}
       >
         <div className="ProgressBarContainer mb-4 mt-10 sm:mt-0">
           <p className="ProgressBarStatus">

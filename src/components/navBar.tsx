@@ -1,14 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { signal } from "@preact/signals-react";
 import { useModal } from "@/contexts/ModalContext";
 
 import Image from "next/image";
 import SiteButton from "./siteButton";
 import Link from "next/link";
-import ShareOptions from "./shareOptions";
-import SignupOptions from "./signupOptions";
 import MobileMenuModal from "./modals/mobileMenuModal";
 import SignupOptionsModal from "./modals/signupModals/signupOptionsModal";
 import ShareOptionsModal from "./modals/shareModals/shareOptionsModal";
@@ -22,18 +20,6 @@ export default function NavBar() {
   function handleNavButtonClick(e: any) {
     setClickedButton(clickedButton === e.target.value ? "" : e.target.value);
   }
-
-  function navClickOption({ e, modal }: any): void {
-    window.innerWidth < 1024 ? showModal(modal) : handleNavButtonClick(e);
-  }
-
-  useEffect(() => {
-    if (clickedButton === "share" || clickedButton === "signup") {
-      dropDown.value = true;
-    } else {
-      dropDown.value = false;
-    }
-  }, [clickedButton]);
 
   return (
     <div className="NavBar mx-auto flex h-fit w-[95vw] justify-between px-8 py-6 sm:w-[98vw] sm:px-16">
@@ -54,7 +40,7 @@ export default function NavBar() {
           colorScheme="b4"
           aria="sign up"
           value="signup"
-          onClick={(e) => navClickOption({ e, modal: <SignupOptionsModal /> })}
+          onClick={() => showModal(<SignupOptionsModal />)}
           isSelected={clickedButton === "signup"}
           className="hidden lg:block"
         >
@@ -101,7 +87,7 @@ export default function NavBar() {
           colorScheme="f3"
           aria="share on socials"
           value="share"
-          onClick={(e) => navClickOption({ e, modal: <ShareOptionsModal /> })}
+          onClick={() => showModal(<ShareOptionsModal />)}
           isSelected={clickedButton === "share"}
         >
           share
@@ -119,17 +105,6 @@ export default function NavBar() {
           </SiteButton>
         </Link>
       </div>
-      {clickedButton === "share" ? (
-        <ShareOptions setClickedButton={setClickedButton} />
-      ) : (
-        ""
-      )}
-
-      {clickedButton === "signup" ? (
-        <SignupOptions setClickedButton={setClickedButton} />
-      ) : (
-        ""
-      )}
       <div className="MobileMenuButton py-4 md:hidden">
         <img
           src="/BurgerMenu.svg"
