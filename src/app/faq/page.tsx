@@ -1,12 +1,12 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link";
 
+import Link from "next/link";
 import InfoBox from "@/components/infoBox";
 import SiteButton from "@/components/siteButton";
-import DropDownButton from "@/components/dropDownButton";
-import { FAQ } from "@/lib/siteCopy/frequentlyAskedQuestions";
 import getRandomColorScheme from "@/utils/getRandomColorScheme";
+
+import { FAQ } from "@/lib/siteCopy/frequentlyAskedQuestions";
 
 export default function FrequentlyAskedQuestions() {
   const [selectedQuestion, setSelectedQuestion] = useState("");

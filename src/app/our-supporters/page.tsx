@@ -1,11 +1,11 @@
 "use client";
+import client from "@/lib/apollo-client";
+
+import { useEffect, useState } from "react";
+import { GET_CURRENT_AMOUNT } from "@/graphql/mutations";
 
 import SiteButton from "@/components/siteButton";
-import client from "@/lib/apollo-client";
-import { GET_CURRENT_AMOUNT } from "@/graphql/mutations";
-import { useEffect, useState } from "react";
 import getRandomColorScheme from "@/utils/getRandomColorScheme";
-import { makersInfo } from "@/lib/makersInfo";
 
 export default function OurSupporters() {
   const [fellows, setFellows] = useState(381);

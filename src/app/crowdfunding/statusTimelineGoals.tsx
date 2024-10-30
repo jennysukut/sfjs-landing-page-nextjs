@@ -6,7 +6,7 @@ import { supportPageInfo } from "@/lib/siteCopy/supportPageInfo";
 export default function StatusTimelineGoalsSection() {
   return (
     <div className="CurrentStatusAndTimeline flex flex-col items-center gap-6 px-8 sm:gap-12">
-      <h1 className="CurrentStatusTitle pl-4 md:self-start">
+      <h1 className="CurrentStatusTitle -mb-4 pl-4 md:self-start">
         our current status:
       </h1>
       <InfoBox

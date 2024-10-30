@@ -16,12 +16,12 @@ export const supportPageInfo = {
 
   estTimeline: [
     "If you are wondering when you will get access to this amazing job site, rest assured it will be soon!",
-    "Our team is working hard to deliver an MVP before the end of November.*",
-    "We will set up a soft launch for our Beta Testers after a quick run through QA and are aiming for a full launch in December 2024!*",
+    "Our team is working hard to deliver an MVP before the end of December.*",
+    "We will set up a soft launch for our Beta Testers after a quick run through QA and are aiming for a full launch in in early 2025!*",
   ],
 
   timelineAst:
-    "*if there are delays in the development process, this timeline will be extended. We are confident we will at the very least be able to launch before the start of 2025!",
+    "*if there are delays in the development process, this timeline will be extended. We are confident we will at the very least be able to launch before the middle of 2025!",
 
   incentivesAndRewards: [
     "The best reward is that this site will be available to use by the end of the year!",

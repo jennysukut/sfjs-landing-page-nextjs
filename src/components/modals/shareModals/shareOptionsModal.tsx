@@ -1,14 +1,12 @@
 "use client";
+import * as Dialog from "@radix-ui/react-dialog";
+
+import Link from "next/link";
+
+import { useModal } from "@/contexts/ModalContext";
+import { LinkedinShareButton, FacebookShareButton } from "next-share";
 
 import SiteButton from "../../siteButton";
-import { useModal } from "@/contexts/ModalContext";
-import * as Dialog from "@radix-ui/react-dialog";
-import {
-  LinkedinShareButton,
-  FacebookShareButton,
-  TwitterShareButton,
-} from "next-share";
-import Link from "next/link";
 
 export default function ShareOptionsModal() {
   const { hideModal } = useModal();

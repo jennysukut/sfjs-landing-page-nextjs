@@ -1,11 +1,11 @@
 "use client";
 
+import { useModal } from "@/contexts/ModalContext";
+
 import InfoBox from "@/components/infoBox";
 import SiteButton from "@/components/siteButton";
 import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsModal";
 import MotionContainer from "@/components/motionContainer";
-
-import { useModal } from "@/contexts/ModalContext";
 
 export default function BetaTesting() {
   const { showModal } = useModal();

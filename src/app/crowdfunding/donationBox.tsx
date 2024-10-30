@@ -2,7 +2,6 @@
 
 import * as z from "zod";
 import { useState, useEffect } from "react";
-import { useSignals } from "@preact/signals-react/runtime";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useModal } from "@/contexts/ModalContext";
@@ -446,7 +445,7 @@ function DonationBox() {
         src="https://secure.helcim.app/helcim-pay/services/start.js"
       />
       <div
-        className={`DonationStation flex max-w-[95vw] flex-col items-center gap-6 self-center px-8 pb-8 lg:w-5/12 lg:self-auto`}
+        className={`DonationStation -mt-4 flex max-w-[95vw] flex-col items-center gap-6 self-center px-8 pb-8 lg:w-5/12 lg:self-auto`}
       >
         <div className="ProgressBarContainer mb-4 mt-10 sm:mt-0">
           <p className="ProgressBarStatus">
@@ -478,8 +477,8 @@ function DonationBox() {
             className="flex w-full flex-col items-center"
           >
             <h1 className="SupportUsTitle mt-2">show your support</h1>
-            <h3 className="SupportUsSubtitle mt-2 text-lg font-medium italic text-jade">
-              for Straightforward Job Site
+            <h3 className="SupportUsSubtitle mt-2 text-lg font-semibold italic text-jade">
+              for this amazingly Straightforward Job Site & Mission
             </h3>
             <p className="DonationComment max-w-60 pt-8 text-sm font-medium text-olive">
               scroll down the page or click the amount buttons to see our
@@ -547,7 +546,7 @@ function DonationBox() {
             {donationCategory === "business" &&
               printRewardsArray(businessRewardsArray)}
 
-            <p className="SupportUsComment mt-10 max-w-60 text-sm font-normal italic text-olive">
+            <p className="SupportUsComment mt-10 max-w-60 text-sm font-semibold italic text-olive">
               every donation is helpful & sincerely appreciated!{" "}
             </p>
 
