@@ -679,6 +679,19 @@ function DonationBox() {
             </div>
           </form>
         </InfoBox>
+        <div className="ButtonContainer mt-8 flex flex-col items-end gap-4 self-end">
+          <p className="ReferralQuestion text-right italic">
+            {`...want to help us with our campaign?`}
+          </p>
+          <SiteButton
+            aria="referral"
+            variant="filled"
+            colorScheme="b4"
+            addClasses="px-8 py-3"
+          >
+            explore our referral program
+          </SiteButton>
+        </div>
       </div>
     </>
   );
