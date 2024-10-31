@@ -14,8 +14,8 @@ function ComparisonSection() {
       transition: {
         x: {
           type: "spring",
-          duration: 3,
-          delay: 0.5,
+          duration: 2,
+          delay: 0.2,
         },
         opacity: {
           duration: 0.5,

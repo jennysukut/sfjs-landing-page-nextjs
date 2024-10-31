@@ -160,6 +160,66 @@ export default function ReferralProgram() {
       ) : (
         ""
       )}
+      {/* post-launch details for individuals*/}
+      {currentCategory === "postlaunch" && currentType === "individual" ? (
+        <div className="PostLaunchDetails flex flex-col gap-8">
+          <InfoBox
+            variant="hollow"
+            aria="details"
+            width="extraWide"
+            addClasses="leading-8 text-center"
+          >
+            <p className="detail">
+              {`After our launch, we will continue our referral program, transitioning from our Crowdfunding Campaign to a focus on referrals for Job Listings. `}
+            </p>
+          </InfoBox>
+          <InfoBox
+            variant="hollow"
+            aria="details"
+            addClasses="leading-8"
+            width="extraWide"
+          >
+            <p className="detail pt-4 text-center italic">{`We’ll be paying our referral partners $100 for each Job Post they bring to our Straightforward Job Site!`}</p>
+            <p className="detail pt-4">{`This 25% commission is a hefty one that reflects our care for people and our desire to find ways to help support more humans with our intentional + human-centric platform.`}</p>
+          </InfoBox>
+          <div className="ButtonContainer self-end">
+            <SiteButton
+              variant="hollow"
+              colorScheme="f1"
+              aria="referral button"
+              size="large"
+              onClick={() => showModal(<SignupModalCollaborator1 />)}
+            >
+              become a referral partner
+            </SiteButton>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+      {/* post-launch details for businesses*/}
+      {currentCategory === "postlaunch" && currentType === "business" ? (
+        <div className="PostLaunchDetails flex flex-col gap-8">
+          <InfoBox
+            variant="hollow"
+            aria="details"
+            width="extraWide"
+            addClasses="leading-8 text-center flex flex-col items-center"
+          >
+            <p className="detail">
+              {`Once we’re finished with our Beta Test, we’ll launch this Straightforward Job Site and open it for all businesses and job-seekers to use!`}
+            </p>
+            <p className="detail pt-4 text-left">
+              {`During this time, businesses can sign up to be a Business Referral Partner and can gain credits to their account for bringing other businesses on board. `}
+            </p>
+            <p className="detail pt-4 italic">
+              {`When the business posts their first job listing, you’ll get $100 credit to use on future job posts of your own!`}
+            </p>
+          </InfoBox>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
