@@ -43,7 +43,7 @@ export default function OurSupporters() {
       <p className="OurSupportersSubtitle mb-8 w-[70%] self-end text-left text-sm italic sm:mt-2 sm:max-w-[40rem] sm:text-lg">
         {`each of these circles represents a fellow who has signed up & supports our straightforward job site`}
       </p>
-      <div className="OurSupportersGroup mb-14 flex flex-wrap items-center gap-4">
+      <div className="OurSupportersGroup mb-14 flex flex-wrap items-center justify-center gap-4">
         {Array.from({ length: fellows }).map((_, index) => (
           <SiteButton
             aria="supporter"

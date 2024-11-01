@@ -77,6 +77,7 @@ export default function ReferralProgram() {
             variant="hollow"
             aria="details"
             width="extraWide"
+            size="large"
             addClasses="leading-8 text-center"
           >
             <p className="detail">
@@ -87,6 +88,7 @@ export default function ReferralProgram() {
             variant="hollow"
             aria="details"
             addClasses="leading-8"
+            size="large"
             width="extraWide"
           >
             <p className="detail pt-4">{`In the Straightforward Sharing Program, you spread the word about this new platform with businesses. If they decide to take advantage of our crowdfunding rewards, you get 10% of the amount they’ve invested! `}</p>
@@ -115,6 +117,7 @@ export default function ReferralProgram() {
             variant="hollow"
             aria="details"
             width="extraWide"
+            size="large"
             addClasses="leading-8 text-center flex flex-col items-center"
           >
             <p className="detail">
@@ -127,6 +130,7 @@ export default function ReferralProgram() {
           <InfoBox
             variant="hollow"
             aria="details"
+            size="large"
             addClasses="leading-8 flex gap-x-8 items-center"
             width="extraWide"
           >
@@ -136,6 +140,7 @@ export default function ReferralProgram() {
           <InfoBox
             variant="hollow"
             aria="details"
+            size="large"
             addClasses="leading-8 flex items-center gap-x-8"
             width="extraWide"
           >
@@ -169,6 +174,7 @@ export default function ReferralProgram() {
             variant="hollow"
             aria="details"
             width="extraWide"
+            size="large"
             addClasses="leading-8 text-center"
           >
             <p className="detail">
@@ -180,6 +186,7 @@ export default function ReferralProgram() {
             aria="details"
             addClasses="leading-8"
             width="extraWide"
+            size="large"
           >
             <p className="detail pt-4 text-center italic">{`We’ll be paying our referral partners $100 for each Job Post they bring to our Straightforward Job Site!`}</p>
             <p className="detail pt-4">{`This 25% commission is a hefty one that reflects our care for people and our desire to find ways to help support more humans with our intentional + human-centric platform.`}</p>
@@ -206,6 +213,7 @@ export default function ReferralProgram() {
             variant="hollow"
             aria="details"
             width="extraWide"
+            size="large"
             addClasses="leading-8 text-center flex flex-col items-center"
           >
             <p className="detail">

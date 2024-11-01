@@ -53,7 +53,7 @@ const InfoBox: React.FC<InfoBoxProps> = ({
       //textSize
       "text-[0.6rem] sm:text-xs": textSize === "small",
       "text-xs sm:text-sm": textSize === "medium",
-      "text-sm sm:text-md": textSize === "large",
+      "text-md sm:text-md": textSize === "large",
 
       // size
       "py-4 px-8 sm:py-6 sm:px-10 md:py-14 md:px-16 rounded-2xl sm:rounded-3xl":
