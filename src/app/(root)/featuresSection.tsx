@@ -78,10 +78,10 @@ export default function FeaturesSection() {
   return (
     <section className="FeaturesSection flex max-w-[95vw] flex-col items-center justify-center p-4 md:p-14">
       {/* Features Heading */}
-      <div className="FeaturesHeading flex max-w-[90vw] flex-col items-start justify-center gap-8 pb-8 xl:flex-row">
+      <div className="FeaturesHeading flex max-w-[90vw] flex-col items-center justify-center gap-8 pb-8 xl:flex-row">
         <div className="FeaturesTitle items-left mr-14 flex flex-col justify-start text-left">
-          <h1 className="FeaturesTitle text-2xl">our features:</h1>
-          <p className="PromisesSubtitle font-semibold italic">
+          <h1 className="FeaturesTitle pl-4 text-2xl sm:pl-0">our features:</h1>
+          <p className="PromisesSubtitle pl-4 font-semibold italic sm:pl-0">
             choose category:
           </p>
         </div>

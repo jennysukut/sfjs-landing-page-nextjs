@@ -96,7 +96,7 @@ const SiteButton: React.FC<ButtonProps> = ({
     "ButtonShadow absolute text-transparent font-semibold tracking-superwide",
     {
       // size
-      "px-8 py-4 text-[0.5rem] sm:px-10 md:text-[0.9rem] left-2 -right-2 top-2 rounded-full":
+      "px-8 py-4 text-[0.85rem] sm:px-10 md:text-[0.9rem] left-2 -right-2 top-2 rounded-full":
         size === "large",
       "h-16 w-16 -right-1.5 top-1.5 left-1.5 rounded-full":
         size === "largeCircle",

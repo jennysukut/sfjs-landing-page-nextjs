@@ -57,33 +57,34 @@ export default function MakersSection() {
             expertise to make this idea a reality
           </p>
         </div>
-        <MotionContainer addClasses="AllMakers mb-20 mt-10 flex max-w-4xl flex-wrap items-center justify-center gap-10  gap-x-10 sm:gap-x-16">
-          {/* MakersButtonContainer */}
-          {makersArray.map(([key, maker]) => (
-            <motion.div
-              key={key}
-              variants={motionItem}
-              className="MakerPicturesContainer flex flex-col items-center"
-            >
-              <div className="ButtonContainer flex">
-                <SiteButton
-                  variant="avatar"
-                  size="largeCircle"
-                  colorScheme="b1"
-                  aria="test"
-                  addClasses={`${maker.shadow} mb-4`}
-                  addImage={`${maker.img}`}
-                  onClick={() => handleClick(maker)}
-                ></SiteButton>
-              </div>
-              <div className="MakerName flex flex-col items-center pl-2">
-                <p>{maker.firstName}</p>
-                <p>{maker.lastName}</p>
-              </div>
-            </motion.div>
-          ))}
-        </MotionContainer>
-
+        <div className="MotionContainerContainer -mt-4 flex flex-col items-center self-center">
+          <MotionContainer addClasses="AllMakers mb-20 mt-10 flex max-w-4xl flex-wrap self-center items-center justify-center gap-10  gap-x-10 sm:gap-x-16">
+            {/* MakersButtonContainer */}
+            {makersArray.map(([key, maker]) => (
+              <motion.div
+                key={key}
+                variants={motionItem}
+                className="MakerPicturesContainer flex flex-col items-center"
+              >
+                <div className="ButtonContainer flex">
+                  <SiteButton
+                    variant="avatar"
+                    size="largeCircle"
+                    colorScheme="b1"
+                    aria="test"
+                    addClasses={`${maker.shadow} mb-4`}
+                    addImage={`${maker.img}`}
+                    onClick={() => handleClick(maker)}
+                  ></SiteButton>
+                </div>
+                <div className="MakerName flex flex-col items-center pl-2">
+                  <p>{maker.firstName}</p>
+                  <p>{maker.lastName}</p>
+                </div>
+              </motion.div>
+            ))}
+          </MotionContainer>
+        </div>
         {randomMakerDetail && (
           <SiteLabel
             variant="display"

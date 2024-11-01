@@ -9,7 +9,7 @@ import getRandomColorScheme from "@/utils/getRandomColorScheme";
 
 export default function OurSupporters() {
   const [fellows, setFellows] = useState(381);
-  const [currentName, setCurrentName] = useState(900);
+  // const [currentName, setCurrentName] = useState(900);
 
   const getCurrentAmount = () => {
     client
@@ -24,18 +24,18 @@ export default function OurSupporters() {
       });
   };
 
-  const fellowClick = (index: any) => {
-    if (currentName === index) {
-      setCurrentName(900);
-    } else {
-      setCurrentName(index);
-    }
-  };
+  // const fellowClick = (index: any) => {
+  //   if (currentName === index) {
+  //     setCurrentName(900);
+  //   } else {
+  //     setCurrentName(index);
+  //   }
+  // };
 
-  //get the current amount of donations on re-render
-  // useEffect(() => {
-  //   getCurrentAmount();
-  // }, []);
+  // get the current amount of donations on re-render
+  useEffect(() => {
+    getCurrentAmount();
+  }, []);
 
   return (
     <div className="OurSupportersPage max-w-[80vw] justify-center self-center">
@@ -48,13 +48,14 @@ export default function OurSupporters() {
           <SiteButton
             aria="supporter"
             variant="filled"
-            size={currentName === index ? "default" : "smallCircle"}
-            onClick={() => fellowClick(index)}
+            size="smallCircle"
+            // size={currentName === index ? "default" : "smallCircle"}
+            // onClick={() => fellowClick(index)}
             colorScheme={getRandomColorScheme("a1")}
             addClasses="align-middle"
             key={index}
           >
-            {currentName === index ? currentName : ""}
+            {/* {currentName === index ? currentName : ""} */}
           </SiteButton>
         ))}
       </div>

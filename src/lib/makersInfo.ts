@@ -197,13 +197,6 @@ export const makersInfo = {
     shadow: "bg-jade",
     details: [],
   },
-  "ruben perez": {
-    firstName: "ruben",
-    lastName: "perez",
-    img: "bg-[url('/makers/ruben.svg')]",
-    shadow: "bg-olive",
-    details: [],
-  },
   "jessica d'apice": {
     firstName: "jessica",
     lastName: "d'apice",

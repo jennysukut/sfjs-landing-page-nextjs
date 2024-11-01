@@ -10,7 +10,7 @@ function HeaderSection() {
   const { showModal } = useModal();
   return (
     <section className="HeaderSection items-left flex w-full flex-grow flex-col gap-4 border-b-2 border-olive/20 pb-24">
-      <h1 className="LandingPageText max-w-[800px] pl-4 text-[1.25rem] font-bold leading-10 text-midnight sm:text-[1.7rem]">
+      <h1 className="LandingPageText max-w-[800px] pl-4 text-[1.5rem] font-bold leading-10 text-midnight sm:text-[1.7rem]">
         our mission: to make hiring human with simplicity, honesty, and
         transparency.
       </h1>

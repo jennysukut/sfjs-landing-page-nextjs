@@ -14,10 +14,12 @@ export default function ReferralProgram() {
   const [currentType, setCurrentType] = useState("");
 
   return (
-    <div className="ReferralProgramPage flex w-[95vw] max-w-[1600px] flex-col items-center self-center p-10 pb-4 sm:w-[75vw] sm:p-14">
-      <div className="ReferralProgramTitle&Options flex justify-center gap-6">
-        <h1 className="ReferralProgramTitle">our referral programs:</h1>
-        <div className="buttonContainer mb-12 flex gap-8">
+    <div className="ReferralProgramPage am:pb-4 flex w-[95vw] max-w-[1600px] flex-col items-center self-center p-10 sm:w-[75vw] sm:p-14">
+      <div className="ReferralProgramTitle&Options flex flex-col items-center justify-center justify-items-center gap-6 lg:flex-row">
+        <h1 className="ReferralProgramTitle text-right lg:text-left">
+          our referral programs:
+        </h1>
+        <div className="buttonContainer mb-12 flex flex-col items-center gap-8 xl:flex-row">
           <SiteButton
             aria="prelaunch"
             variant="filled"
@@ -91,7 +93,7 @@ export default function ReferralProgram() {
             <p className="detail pt-4 text-center italic">{`This means anywhere from $25 to $5,000, depending on how many future jobs the business wants to secure. `}</p>
             <p className="detail pt-4">{`If you sign up to be a part of this program, you’ll get to meet with our fantastic Co-Founder Jacob to make sure you’re a good fit and we’ll provide you with a referral code and contract to get started!`}</p>
           </InfoBox>
-          <div className="ButtonContainer self-end">
+          <div className="ButtonContainer mb-40 self-end">
             <SiteButton
               variant="hollow"
               colorScheme="f1"
@@ -118,26 +120,26 @@ export default function ReferralProgram() {
             <p className="detail">
               {`During our Development & Beta Phase, we have two special offers for all businesses:`}
             </p>
-            <p className="detail w-[75%] pt-4 text-center">
+            <p className="detail pt-4 text-center">
               {`1/2 Off Pre-Purchased Job Posts bought in our Crowdfunding Campaign and our Business Referral Program.`}
             </p>
           </InfoBox>
           <InfoBox
             variant="hollow"
             aria="details"
-            addClasses="leading-8 flex items-center"
+            addClasses="leading-8 flex gap-x-8 items-center"
             width="extraWide"
           >
-            <h2 className="detail w-full pt-4">{`Half-Off Option:`}</h2>
+            <h2 className="detail pt-4">{`Half-Off Option:`}</h2>
             <p className="detail pt-4">{`The ½ Off Option is part of our Crowdfunding Campaign and you can get anywhere from 1 to a Lifetime of Job Listings at this price! `}</p>
           </InfoBox>
           <InfoBox
             variant="hollow"
             aria="details"
-            addClasses="leading-8 flex items-center"
+            addClasses="leading-8 flex items-center gap-x-8"
             width="extraWide"
           >
-            <h2 className="detail w-[80rem] pt-4">{`Business Referral Program:`}</h2>
+            <h2 className="detail pt-4">{`Business Referral Program:`}</h2>
             <div className="TextGroup">
               <p className="detail pt-4">{`Our Business Referral Program is something you can sign up for if you’re a part of our Beta Test!`}</p>
               <p className="detail pt-4">{`Once you’ve had a chance to try our platform, you can refer other businesses to purchase Job-Listings within our Crowdfunding Campaign and you’ll get $100 credit towards a future job post with us.`}</p>

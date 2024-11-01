@@ -27,7 +27,7 @@ export default function HopesSection() {
             aria="change perspectives"
             variant="filled"
             colorScheme="f3"
-            addClasses="rounded-full text-md text-center self-center"
+            addClasses="md:rounded-full text-md text-center self-center"
             size="small"
           >
             to change perspectives in the current work landscape

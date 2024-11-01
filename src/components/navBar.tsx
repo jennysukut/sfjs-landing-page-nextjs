@@ -22,10 +22,10 @@ export default function NavBar() {
   }
 
   return (
-    <div className="NavBar mx-auto flex h-fit w-[95vw] justify-between px-8 py-6 sm:w-[98vw] sm:px-16">
+    <div className="NavBar mx-auto flex h-fit w-[95vw] justify-between px-8 py-12 sm:w-[98vw] sm:px-16">
       <Link href={"/"}>
         <Image
-          className="Logo mt-4 max-w-44 cursor-pointer transition-transform duration-300 hover:scale-105"
+          className="Logo max-w-44 cursor-pointer transition-transform duration-300 hover:scale-105"
           src="/sfjs-logo.svg"
           width={229}
           height={75}
@@ -34,7 +34,7 @@ export default function NavBar() {
         />
       </Link>
 
-      <div className="NavButtonContainer hidden items-end gap-4 md:flex md:flex-row md:items-center md:max-lg:-mr-8">
+      <div className="NavButtonContainer hidden items-end gap-4 lg:flex lg:flex-row lg:items-center lg:max-lg:-mr-8">
         <SiteButton
           variant="filled"
           colorScheme="b4"
@@ -105,7 +105,7 @@ export default function NavBar() {
           </SiteButton>
         </Link>
       </div>
-      <div className="MobileMenuButton py-4 md:hidden">
+      <div className="MobileMenuButton self-end py-4 align-middle lg:hidden">
         <img
           src="/BurgerMenu.svg"
           alt="mobile menu"

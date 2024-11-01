@@ -20,7 +20,7 @@ export default function FrequentlyAskedQuestions() {
   }
 
   return (
-    <div className="faqPage self-center">
+    <div className="FaqPage flex w-[95vw] max-w-[1600px] flex-col self-center p-10 pb-4 sm:w-[75vw] sm:p-14">
       <h1 className="faqTitle mt-8 pb-8">{`frequently asked questions:`}</h1>
       <div className="faqs mb-14 flex flex-col items-center gap-4">
         {FAQ.map((faq) => {
@@ -71,9 +71,9 @@ export default function FrequentlyAskedQuestions() {
           );
         })}
       </div>
-      <div className="faqPageTitleAndButtonsContainer mb-8 flex items-center justify-center">
+      <div className="faqPageTitleAndButtonsContainer mb-8 flex flex-col items-center justify-center gap-x-8 sm:flex-row">
         <h1 className="faqTitle mt-8 pb-8">{`other details:`}</h1>
-        <div className="ButtonContainer ml-8 flex gap-6">
+        <div className="ButtonContainer sm:items-left ml-8 flex flex-col items-center gap-6 xl:flex-row">
           <Link href="/pricing">
             <SiteButton
               aria="pricing"
