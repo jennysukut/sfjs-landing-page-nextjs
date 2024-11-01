@@ -1,14 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { signal } from "@preact/signals-react";
 import { useModal } from "@/contexts/ModalContext";
 
 import Image from "next/image";
 import SiteButton from "./siteButton";
 import Link from "next/link";
-import ShareOptions from "./shareOptions";
-import SignupOptions from "./signupOptions";
 import MobileMenuModal from "./modals/mobileMenuModal";
 import SignupOptionsModal from "./modals/signupModals/signupOptionsModal";
 import ShareOptionsModal from "./modals/shareModals/shareOptionsModal";
@@ -23,23 +21,11 @@ export default function NavBar() {
     setClickedButton(clickedButton === e.target.value ? "" : e.target.value);
   }
 
-  function navClickOption({ e, modal }: any): void {
-    window.innerWidth < 1024 ? showModal(modal) : handleNavButtonClick(e);
-  }
-
-  useEffect(() => {
-    if (clickedButton === "share" || clickedButton === "signup") {
-      dropDown.value = true;
-    } else {
-      dropDown.value = false;
-    }
-  }, [clickedButton]);
-
   return (
-    <div className="NavBar mx-auto flex h-fit w-[95vw] justify-between px-8 py-6 sm:w-[98vw] sm:px-16">
+    <div className="NavBar mx-auto flex h-fit w-[95vw] justify-between px-8 py-12 sm:w-[98vw] sm:px-16">
       <Link href={"/"}>
         <Image
-          className="Logo mt-4 max-w-44 cursor-pointer transition-transform duration-300 hover:scale-105"
+          className="Logo max-w-44 cursor-pointer transition-transform duration-300 hover:scale-105"
           src="/sfjs-logo.svg"
           width={229}
           height={75}
@@ -48,29 +34,40 @@ export default function NavBar() {
         />
       </Link>
 
-      <div className="NavButtonContainer hidden items-end gap-4 md:flex md:flex-row md:items-center md:max-lg:-mr-8 lg:gap-6">
+      <div className="NavButtonContainer hidden items-end gap-4 lg:flex lg:flex-row lg:items-center lg:max-lg:-mr-8">
         <SiteButton
           variant="filled"
           colorScheme="b4"
           aria="sign up"
           value="signup"
-          onClick={(e) => navClickOption({ e, modal: <SignupOptionsModal /> })}
+          onClick={() => showModal(<SignupOptionsModal />)}
           isSelected={clickedButton === "signup"}
           className="hidden lg:block"
         >
           sign up
         </SiteButton>
-
-        <Link href={"/support"}>
+        <Link href={"/faq"}>
+          <SiteButton
+            variant="filled"
+            colorScheme="c4"
+            aria="faq"
+            value="faq"
+            onClick={handleNavButtonClick}
+            isSelected={clickedButton === "faq"}
+          >
+            our faq
+          </SiteButton>
+        </Link>
+        <Link href={"/crowdfunding"}>
           <SiteButton
             variant="filled"
             colorScheme="e5"
             aria="donate"
-            value="support"
+            value="crowdfunding"
             onClick={handleNavButtonClick}
-            isSelected={clickedButton === "support"}
+            isSelected={clickedButton === "crowdfunding"}
           >
-            support us
+            crowdfunding
           </SiteButton>
         </Link>
         <Link href={"/pricing"}>
@@ -90,24 +87,25 @@ export default function NavBar() {
           colorScheme="f3"
           aria="share on socials"
           value="share"
-          onClick={(e) => navClickOption({ e, modal: <ShareOptionsModal /> })}
+          onClick={() => showModal(<ShareOptionsModal />)}
           isSelected={clickedButton === "share"}
         >
           share
         </SiteButton>
+        <Link href={"/our-supporters"}>
+          <SiteButton
+            variant="filled"
+            colorScheme="b3"
+            aria="supporters"
+            value="supporters"
+            onClick={handleNavButtonClick}
+            isSelected={clickedButton === "supporters"}
+          >
+            supporters
+          </SiteButton>
+        </Link>
       </div>
-      {clickedButton === "share" ? (
-        <ShareOptions setClickedButton={setClickedButton} />
-      ) : (
-        ""
-      )}
-
-      {clickedButton === "signup" ? (
-        <SignupOptions setClickedButton={setClickedButton} />
-      ) : (
-        ""
-      )}
-      <div className="MobileMenuButton py-4 md:hidden">
+      <div className="MobileMenuButton self-end py-4 align-middle lg:hidden">
         <img
           src="/BurgerMenu.svg"
           alt="mobile menu"

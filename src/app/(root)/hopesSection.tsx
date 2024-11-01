@@ -17,8 +17,8 @@ export default function HopesSection() {
     <section className="HopesSection flex w-full flex-col items-center p-4 pb-8 sm:p-20">
       <div className="HopesContainer flex flex-col">
         <div className="HopesTitleContainer w-full sm:p-8">
-          <h1 className="HopeTitle text-start">our hopes:</h1>
-          <p className="HopeSubtitle mb-2 max-w-xl font-semibold italic sm:mb-12">
+          <h1 className="HopeTitle text-start text-2xl">our hopes:</h1>
+          <p className="HopeSubtitle mb-2 max-w-xl text-lg font-semibold italic sm:mb-12">
             we have big ideals and even bigger dreams
           </p>
         </div>
@@ -27,7 +27,7 @@ export default function HopesSection() {
             aria="change perspectives"
             variant="filled"
             colorScheme="f3"
-            addClasses="rounded-full text-sm text-center self-center"
+            addClasses="md:rounded-full text-md text-center self-center"
             size="small"
           >
             to change perspectives in the current work landscape
@@ -39,7 +39,7 @@ export default function HopesSection() {
                   aria="change perspectives"
                   variant="filled"
                   colorScheme="d4"
-                  addClasses="text-sm text-center py-8"
+                  addClasses="text-md text-center py-8"
                 >
                   to show how exciting & successful people-focused, conscious,
                   transparent businesses can be{" "}
@@ -51,7 +51,7 @@ export default function HopesSection() {
                   variant="filled"
                   colorScheme="f4"
                   size="small"
-                  addClasses="rounded-full text-sm text-center"
+                  addClasses="rounded-full text-md text-center"
                 >
                   to write our own stories
                 </InfoBox>
@@ -64,7 +64,7 @@ export default function HopesSection() {
                   variant="filled"
                   colorScheme="c5"
                   size="small"
-                  addClasses="text-sm rounded-full text-center"
+                  addClasses="text-md rounded-full text-center"
                 >
                   to empower individuals
                 </InfoBox>
@@ -74,7 +74,7 @@ export default function HopesSection() {
                   aria="change perspectives"
                   variant="filled"
                   colorScheme="e6"
-                  addClasses=" text-sm text-center py-8"
+                  addClasses=" text-md text-center py-8"
                 >
                   to make human decency & honest communication a standard
                   business practice

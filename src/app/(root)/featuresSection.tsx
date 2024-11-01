@@ -78,21 +78,21 @@ export default function FeaturesSection() {
   return (
     <section className="FeaturesSection flex max-w-[95vw] flex-col items-center justify-center p-4 md:p-14">
       {/* Features Heading */}
-      <div className="FeaturesHeading flex max-w-[90vw] flex-col items-start justify-center gap-8 pb-8 xl:flex-row">
+      <div className="FeaturesHeading flex max-w-[90vw] flex-col items-center justify-center gap-8 pb-8 xl:flex-row">
         <div className="FeaturesTitle items-left mr-14 flex flex-col justify-start text-left">
-          <h1 className="FeaturesTitle">our features:</h1>
-          <p className="PromisesSubtitle font-semibold italic">
+          <h1 className="FeaturesTitle pl-4 text-2xl sm:pl-0">our features:</h1>
+          <p className="PromisesSubtitle pl-4 font-semibold italic sm:pl-0">
             choose category:
           </p>
         </div>
-        <div className="ButtonContainer flex flex-col items-center gap-4 sm:gap-10 md:flex-row">
+        <div className="ButtonContainer -ml-4 flex flex-col items-center gap-4 sm:gap-10 md:flex-row">
           <SiteButton
             aria="features for businesses"
             size="extraLarge"
             variant="filled"
             colorScheme="b3"
             onClick={() => handleClick("business")}
-            addClasses="sm:w-[20rem] text-base"
+            addClasses="sm:w-[15rem] text-base"
           >
             for businesses
           </SiteButton>
@@ -102,7 +102,7 @@ export default function FeaturesSection() {
             variant="filled"
             colorScheme="c4"
             onClick={() => handleClick("individual")}
-            addClasses="sm:w-[20rem] text-base"
+            addClasses="sm:w-[15rem] text-base"
           >
             for job-seekers
           </SiteButton>
@@ -179,7 +179,7 @@ export default function FeaturesSection() {
           variants={fadeInItem}
           className={`FeaturesPrompt mt-12 flex self-center pb-8 sm:-translate-x-[50%] sm:items-start ${mobileDetail !== "none" ? "hidden" : "last:"}`}
         >
-          <p className="FeaturesPrompt max-w-44 text-center text-xs text-jade">
+          <p className="FeaturesPrompt max-w-44 text-center text-sm text-jade">
             {landingPageText.arrowprompts.feature}
           </p>
           <Image

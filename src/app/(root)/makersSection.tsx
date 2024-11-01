@@ -47,46 +47,44 @@ export default function MakersSection() {
     },
   };
 
-  //make a way to display a random line from the maker's details when their picture is clicked.
-  //the random line should be displayed in a siteLabel
-
   return (
     <section className="MakersSection flex w-full flex-col self-center border-b-2 border-t-2 border-olive/20 pt-16 sm:pt-20">
       <div className="MakersContainer">
         <div className="MakersTitles ml-4 sm:ml-16">
-          <h1 className="MakersTitle">our makers:</h1>
-          <p className="MakersSubtitle mb-5 max-w-xl font-semibold italic">
-            this is our group of amazing humans volunteering their time, energy,
-            and expertise to make this idea a reality
+          <h1 className="MakersTitle sm:text-2xl">our volunteers:</h1>
+          <p className="MakersSubtitle mb-5 max-w-xl pt-4 text-lg font-semibold italic">
+            this is our group of amazing humans giving their time, energy, and
+            expertise to make this idea a reality
           </p>
         </div>
-        <MotionContainer addClasses="AllMakers mb-20 mt-14 flex max-w-4xl flex-wrap items-center justify-center gap-10  gap-x-10 sm:gap-x-16">
-          {/* MakersButtonContainer */}
-          {makersArray.map(([key, maker]) => (
-            <motion.div
-              key={key}
-              variants={motionItem}
-              className="MakerPicturesContainer flex flex-col items-center"
-            >
-              <div className="ButtonContainer flex">
-                <SiteButton
-                  variant="avatar"
-                  size="largeCircle"
-                  colorScheme="b1"
-                  aria="test"
-                  addClasses={`${maker.shadow} mb-4`}
-                  addImage={`${maker.img}`}
-                  onClick={() => handleClick(maker)}
-                ></SiteButton>
-              </div>
-              <div className="MakerName flex flex-col items-center pl-2">
-                <p>{maker.firstName}</p>
-                <p>{maker.lastName}</p>
-              </div>
-            </motion.div>
-          ))}
-        </MotionContainer>
-
+        <div className="MotionContainerContainer -mt-4 flex flex-col items-center self-center">
+          <MotionContainer addClasses="AllMakers mb-20 mt-10 flex max-w-4xl flex-wrap self-center items-center justify-center gap-10  gap-x-10 sm:gap-x-16">
+            {/* MakersButtonContainer */}
+            {makersArray.map(([key, maker]) => (
+              <motion.div
+                key={key}
+                variants={motionItem}
+                className="MakerPicturesContainer flex flex-col items-center"
+              >
+                <div className="ButtonContainer flex">
+                  <SiteButton
+                    variant="avatar"
+                    size="largeCircle"
+                    colorScheme="b1"
+                    aria="test"
+                    addClasses={`${maker.shadow} mb-4`}
+                    addImage={`${maker.img}`}
+                    onClick={() => handleClick(maker)}
+                  ></SiteButton>
+                </div>
+                <div className="MakerName flex flex-col items-center pl-2">
+                  <p>{maker.firstName}</p>
+                  <p>{maker.lastName}</p>
+                </div>
+              </motion.div>
+            ))}
+          </MotionContainer>
+        </div>
         {randomMakerDetail && (
           <SiteLabel
             variant="display"
@@ -107,7 +105,7 @@ export default function MakersSection() {
           addClasses="px-10"
           onClick={() => showModal(<HelpUsModal />)}
         >
-          help this bunch of hooligans{" "}
+          support these volunteers{" "}
         </SiteButton>
         <div className="OtherButtons flex flex-col items-end justify-end gap-6 sm:flex-row">
           <SiteButton
@@ -118,7 +116,7 @@ export default function MakersSection() {
             addClasses="px-14"
             onClick={() => showModal(<SignupModalCollaborator1 />)}
           >
-            collaborate with us
+            want to collaborate?
           </SiteButton>
           <SiteButton
             aria="sign up"

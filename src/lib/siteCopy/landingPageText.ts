@@ -9,9 +9,39 @@ export const landingPageText = {
 
   arrowprompts: {
     guarantee:
-      "psssttt, we’ve got fun rewards for individuals and businesses who help support us! check them out by pressing this button",
+      "psssttt, we’ve got fun rewards for individuals and businesses who participate in our crowdfunding campaign! check them out by pressing this button",
     feature:
       "click the buttons to learn how we implement these fantastic features!",
+  },
+
+  comparisonDetails: {
+    painPoints: [
+      "pain",
+      "disconnection",
+      "overwhelm",
+      "depression",
+      "hopelessness",
+      "suicide",
+      "dehumanization",
+      "financial stress",
+      "anxiety",
+      "desperation",
+      "fear",
+    ],
+    promoting: [
+      { details: "mental health", colorScheme: "c4" },
+      { details: "connection", colorScheme: "e5" },
+      { details: "transparency", colorScheme: "d4" },
+      { details: "empathy", colorScheme: "b4" },
+      { details: "realistic expectations", colorScheme: "d2" },
+      { details: "honesty", colorScheme: "b6" },
+      { details: "common sense", colorScheme: "f2" },
+      { details: "human value", colorScheme: "a5" },
+      { details: "ease-of-mind", colorScheme: "b1" },
+      { details: "responsibilty", colorScheme: "b3" },
+      { details: "respect", colorScheme: "c5" },
+      { details: "simplicity", colorScheme: "f4" },
+    ],
   },
 
   features: {

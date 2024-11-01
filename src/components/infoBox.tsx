@@ -6,6 +6,7 @@ import {
   largeShadowColors,
 } from "@/lib/stylingData/largeShadowColors";
 import { smallShadowColors } from "@/lib/stylingData/smallShadowColors";
+import Image from "next/image";
 
 interface InfoBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   variant: "hollow" | "filled";
@@ -18,6 +19,8 @@ interface InfoBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   size?: "small" | "standard" | "large";
   width?: "extraWide" | null;
   shadowSize?: "small";
+  canCollapse?: boolean;
+  collapseClick?: Function;
 }
 
 const InfoBox: React.FC<InfoBoxProps> = ({
@@ -32,10 +35,12 @@ const InfoBox: React.FC<InfoBoxProps> = ({
   textSize = "large",
   width = "standard",
   shadowSize = "standard",
+  canCollapse,
+  collapseClick,
   ...props
 }) => {
   const boxClasses = clsx(
-    "InfoBox relative z-[1] font-semibold leading-5 transition-all duration-200 tracking-superwide",
+    "InfoBox max-w-[95vw] relative z-[1] font-semibold leading-5 transition-all duration-200 tracking-superwide",
     {
       // variant + shadowSize
       "bg-cream border-jade drop-shadow-jade text-jade font-semibold border-[3px]":
@@ -51,9 +56,10 @@ const InfoBox: React.FC<InfoBoxProps> = ({
       "text-md sm:text-md": textSize === "large",
 
       // size
-      "py-4 px-8 sm:py-6 sm:px-10 md:py-14 md:px-16 rounded-3xl":
+      "py-4 px-8 sm:py-6 sm:px-10 md:py-14 md:px-16 rounded-2xl sm:rounded-3xl":
         size === "standard",
-      "py-4 px-10 sm:py-6 sm:px-14 rounded-ml sm:rounded-3xl": size === "small",
+      "py-4 px-10 sm:py-6 sm:px-14 rounded-2xl sm:rounded-3xl":
+        size === "small",
       "py-8 px-8 xs:px-10 sm:py-8 sm:px-12 md:py-14 md:px-16 rounded-3xl":
         size === "large",
 
@@ -68,6 +74,22 @@ const InfoBox: React.FC<InfoBoxProps> = ({
     <div className={boxClasses}>
       <h3 className="Title my-1 text-lg">{title}</h3>
       {children}
+
+      {canCollapse ? (
+        <button
+          className="CollapseButton self-end opacity-100 hover:opacity-50"
+          onClick={collapseClick as React.MouseEventHandler<HTMLButtonElement>}
+        >
+          <Image
+            src="/jade-collapse-button.svg"
+            alt="collapseButton"
+            width={16}
+            height={16}
+          ></Image>
+        </button>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

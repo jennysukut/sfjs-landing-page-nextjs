@@ -19,11 +19,11 @@ export default function SignupModalBusiness2() {
         {`if you’re interested in supporting us + getting some great deals for job posts with us, check out our crowdfunding rewards`}
       </Dialog.Description>
       <div className="ButtonContainer flex flex-col items-center">
-        <Link href={"/support"}>
+        <Link href={"/crowdfunding"}>
           <SiteButton
             variant="filled"
             colorScheme="b4"
-            aria="help us"
+            aria="crowdfunding"
             size="large"
             addClasses="mt-6"
             onClick={() => hideModal()}

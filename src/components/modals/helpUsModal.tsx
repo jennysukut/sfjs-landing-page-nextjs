@@ -43,10 +43,10 @@ export default function HelpUsModal() {
           onClick={() => showModal(<ShareOptionsModal />)}
           addClasses="px-6"
         >
-          tell your friends
+          spread the word
         </SiteButton>
       </div>
-      <Link href={"/support"}>
+      <Link href={"/crowdfunding"}>
         <SiteButton
           variant="filled"
           colorScheme="c4"
@@ -55,7 +55,7 @@ export default function HelpUsModal() {
           onClick={hideModal}
           addClasses="px-6 lg:mt-2"
         >
-          support us
+          support our campaign
         </SiteButton>
       </Link>
     </div>

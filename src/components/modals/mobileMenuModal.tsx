@@ -26,16 +26,29 @@ export default function MobileMenuModal() {
         >
           signup
         </SiteButton>
-        <Link href="/support">
+        <Link href={"/faq"}>
+          <SiteButton
+            variant="filled"
+            colorScheme="c4"
+            aria="faq"
+            value="faq"
+            size="large"
+            addClasses="w-[200px]"
+            onClick={hideModal}
+          >
+            our faq
+          </SiteButton>
+        </Link>
+        <Link href="/crowdfunding">
           <SiteButton
             variant="filled"
             colorScheme="e5"
-            aria="business"
+            aria="crowdfunding"
             addClasses="w-[200px]"
             size="large"
             onClick={hideModal}
           >
-            support us
+            crowdfunding
           </SiteButton>
         </Link>
         <Link href="/pricing">
@@ -60,6 +73,19 @@ export default function MobileMenuModal() {
         >
           share
         </SiteButton>
+        <Link href={"/our-supporters"}>
+          <SiteButton
+            variant="filled"
+            colorScheme="c4"
+            aria="faq"
+            value="faq"
+            size="large"
+            addClasses="w-[200px]"
+            onClick={hideModal}
+          >
+            supporters
+          </SiteButton>
+        </Link>
       </div>
     </div>
   );

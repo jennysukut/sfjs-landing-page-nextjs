@@ -21,7 +21,7 @@ function getRandomColorScheme(
   // Get the total number of color schemes
   const totalSchemes = colorOptions.length;
 
-  // Generate a random index, excluding the current scheme
+  // Generate a random index, excluding the current scheme and previous scheme
   let randomIndex: number;
   do {
     randomIndex = Math.floor(Math.random() * totalSchemes);

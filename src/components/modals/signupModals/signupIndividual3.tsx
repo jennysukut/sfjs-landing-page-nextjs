@@ -25,11 +25,11 @@ export default function SignupModalIndividual3() {
         {`The biggest help to our startup is getting fellow humans involved! The more people we have using this job site, the more businesses will be inclined to post here. It would be fantastic if you told your friends + family + fellow job-seekers to sign up!`}
       </Dialog.Description>
       <div className="ButtonContainer mt-4 flex flex-col items-center justify-end gap-4 sm:flex-row">
-        <Link href={"/support"}>
+        <Link href="/crowdfunding">
           <SiteButton
             variant="filled"
             colorScheme="e5"
-            aria="submit"
+            aria="crowdfunding"
             onClick={hideModal}
             addClasses="px-6"
           >
