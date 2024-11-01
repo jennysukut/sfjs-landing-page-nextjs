@@ -34,12 +34,14 @@ export default function BetaTesting() {
       <p className="BetaTestingSubtitle -mt-4 w-[70%] text-left text-sm italic sm:w-[50vw] sm:text-left sm:text-lg">
         {`once we've finished initial development for our platform, we will launch an exclusive beta testing phase!`}
       </p>
-      <MotionContainer addClasses="BetaTestingDetails w-[60vw] mb-14 justify-center flex flex-col self-center -mt-12">
+      <MotionContainer addClasses="BetaTestingDetails mb-14 justify-center flex flex-col self-center -mt-12">
         <InfoBox
           variant="filled"
           aria="free jobs"
           colorScheme="f1"
-          addClasses="justify-self-end my-4"
+          size="large"
+          textSize="large"
+          addClasses="justify-self-end text-center my-4"
         >
           {`Every Job Listing in our Beta Testing Phase is Free!`}
         </InfoBox>
@@ -47,6 +49,8 @@ export default function BetaTesting() {
           variant="filled"
           aria="job seekers beta"
           colorScheme="c4"
+          size="large"
+          textSize="large"
           addClasses="justify-self-start text-center leading-8 my-4"
         >
           <p className="detail">
@@ -63,7 +67,9 @@ export default function BetaTesting() {
           variant="filled"
           aria="business beta testing"
           colorScheme="b4"
-          addClasses="justify-self-end mr-8 text-center leading-8 my-4"
+          size="large"
+          textSize="large"
+          addClasses="justify-self-end lg:ml-14 text-center leading-8 my-4"
         >
           <p className="detail pt-4">
             {`We will be selecting a handful of businesses to participate in our Beta Test, where they’ll be able to set up real job postings for free in exchange for their insights and testimonials!`}

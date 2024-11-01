@@ -73,6 +73,19 @@ export default function MobileMenuModal() {
         >
           share
         </SiteButton>
+        <Link href={"/our-supporters"}>
+          <SiteButton
+            variant="filled"
+            colorScheme="c4"
+            aria="faq"
+            value="faq"
+            size="large"
+            addClasses="w-[200px]"
+            onClick={hideModal}
+          >
+            supporters
+          </SiteButton>
+        </Link>
       </div>
     </div>
   );

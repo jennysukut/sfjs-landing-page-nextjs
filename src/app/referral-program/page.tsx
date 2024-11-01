@@ -15,11 +15,11 @@ export default function ReferralProgram() {
 
   return (
     <div className="ReferralProgramPage am:pb-4 flex w-[95vw] max-w-[1600px] flex-col items-center self-center p-10 sm:w-[75vw] sm:p-14">
-      <div className="ReferralProgramTitle&Options flex flex-col items-center justify-center justify-items-center gap-6 lg:flex-row">
+      <div className="ReferralProgramTitle&Options flex flex-col items-center justify-center justify-items-center gap-6 xl:flex-row">
         <h1 className="ReferralProgramTitle text-right lg:text-left">
           our referral programs:
         </h1>
-        <div className="buttonContainer mb-12 flex flex-col items-center gap-8 xl:flex-row">
+        <div className="buttonContainer mb-12 flex flex-col items-center gap-4 md:flex-row lg:gap-8">
           <SiteButton
             aria="prelaunch"
             variant="filled"
@@ -46,7 +46,7 @@ export default function ReferralProgram() {
           </SiteButton>
         </div>
       </div>
-      <div className="PreLaunchOptions mb-12 flex gap-8">
+      <div className="PreLaunchOptions mb-12 flex flex-col gap-4 lg:flex-row lg:gap-8">
         <SiteButton
           aria="individual"
           variant="filled"

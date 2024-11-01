@@ -40,7 +40,7 @@ export default function OurSupporters() {
   return (
     <div className="OurSupportersPage max-w-[80vw] justify-center self-center">
       <h1 className="OurSupportersTitle pt-8">our supporters:</h1>
-      <p className="OurSupportersSubtitle mb-8 w-[70%] self-end text-right text-sm italic sm:mt-2 sm:max-w-[40rem] sm:text-left sm:text-lg">
+      <p className="OurSupportersSubtitle mb-8 w-[70%] self-end text-left text-sm italic sm:mt-2 sm:max-w-[40rem] sm:text-lg">
         {`each of these circles represents a fellow who has signed up & supports our straightforward job site`}
       </p>
       <div className="OurSupportersGroup mb-14 flex flex-wrap items-center gap-4">
