@@ -22,7 +22,10 @@ export default function FrequentlyAskedQuestions() {
   return (
     <div className="FaqPage flex w-[95vw] max-w-[1600px] flex-col self-center p-10 pb-4 sm:w-[75vw] sm:p-14">
       <h1 className="faqTitle mt-8 pb-8">{`frequently asked questions:`}</h1>
-      <div className="faqs mb-14 flex flex-col items-center gap-4">
+      <h1 className="faqMobileNotice self-center italic text-olive sm:hidden">
+        {`our faq section is pretty detailed, so it's best explored on a larger screen`}
+      </h1>
+      <div className="faqs mb-14 hidden items-center gap-4 sm:flex sm:flex-col">
         {FAQ.map((faq) => {
           return (
             <div
