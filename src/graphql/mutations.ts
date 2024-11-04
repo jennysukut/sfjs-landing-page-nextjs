@@ -70,6 +70,7 @@ query Metrics {
       totalDonations
       fellowDonations
       businessDonations
+      totalDonationsCount
     }
   }
 }

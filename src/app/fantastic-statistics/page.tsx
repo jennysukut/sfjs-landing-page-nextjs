@@ -51,7 +51,7 @@ export default function FantasticStatistics() {
         setReferralPartners(data.metrics.fellowMetrics.referralPartners);
         setBusinesses(data.metrics.businessMetrics.signups);
         setBusinessBetaTesters(data.metrics.businessMetrics.betaTesters);
-        setDonations(data.metrics.donationMetrics.totalDonations);
+        setDonations(data.metrics.donationMetrics.totalDonationsCount);
         setFellowDonations(data.metrics.donationMetrics.fellowDonations);
         setBusinessDonations(data.metrics.donationMetrics.businessDonations);
         setCurrentDonationAmount(data.metrics.donationMetrics.totalDonations);
