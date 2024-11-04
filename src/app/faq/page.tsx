@@ -71,9 +71,9 @@ export default function FrequentlyAskedQuestions() {
           );
         })}
       </div>
-      <div className="faqPageTitleAndButtonsContainer mb-8 flex flex-col items-center justify-center gap-x-8 sm:flex-row">
+      <div className="faqPageTitleAndButtonsContainer mb-8 flex flex-col items-center justify-center sm:flex-row xl:gap-x-6">
         <h1 className="faqTitle mt-8 pb-8">{`other details:`}</h1>
-        <div className="ButtonContainer sm:items-left ml-8 flex flex-col items-center gap-6 xl:flex-row">
+        <div className="ButtonContainer ml-8 flex flex-col flex-wrap items-center justify-center gap-4 xl:ml-0 xl:flex-row">
           <Link href="/pricing">
             <SiteButton
               aria="pricing"
@@ -91,7 +91,7 @@ export default function FrequentlyAskedQuestions() {
               colorScheme="b3"
               size="large"
             >
-              our referral program
+              referral programs
             </SiteButton>
           </Link>
           <Link href="/beta-testing">

@@ -8,6 +8,7 @@ import { useModal } from "@/contexts/ModalContext";
 
 import Script from "next/script";
 import client from "../../lib/apollo-client";
+import Link from "next/link";
 
 import ProgressBar from "@/components/progressBar";
 import InfoBox from "@/components/infoBox";
@@ -683,14 +684,16 @@ function DonationBox() {
           <p className="ReferralQuestion text-right italic">
             {`...want to help us with our campaign?`}
           </p>
-          <SiteButton
-            aria="referral"
-            variant="filled"
-            colorScheme="b4"
-            addClasses="px-8 py-3"
-          >
-            explore our referral program
-          </SiteButton>
+          <Link href="/referral-program">
+            <SiteButton
+              aria="referral"
+              variant="filled"
+              colorScheme="b4"
+              addClasses="px-8 py-3"
+            >
+              explore our referral program
+            </SiteButton>
+          </Link>
         </div>
       </div>
     </>
