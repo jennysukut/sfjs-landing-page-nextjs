@@ -31,7 +31,7 @@ export default function Footer() {
           </SiteButton>
         </Link>
         <Link href={"/pricing"}>
-          <SiteButton variant="filled" colorScheme="f3" aria="our sponsors">
+          <SiteButton variant="filled" colorScheme="f3" aria="pricing">
             pricing
           </SiteButton>
         </Link>

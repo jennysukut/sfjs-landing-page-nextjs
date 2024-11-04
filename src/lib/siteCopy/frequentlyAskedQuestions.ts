@@ -26,13 +26,12 @@ export const FAQ = [
     question:
       "Why do you call your employees/volunteers ‘makers’ and the job seekers ‘fellows’? Why not ‘employees’ and ‘users’?",
     answer: [
-      "	The language we use shapes reality.*",
+      "	The language we use shapes reality.",
       "We understand that terms like ‘employee’ and ‘user’ are not inherently negative. They are utilitarian. They describe the relationship that a person has with a thing. It makes sense to say that a person who ‘uses’ a site should be called a ‘user’. It is descriptive. However, there is so much more to a person than that.",
       "What’s more, when we describe and categorize people based on their actions, it can be easier to disassociate them from their humanity. ‘User’ does not describe a person, it describes a single action that they take. Often, within software companies, when the term ‘user’ comes up, it is related to statistics, numbers, and money. The ‘user’ then gets held up to be scrutinized in direct relation to profits. The person behind the number gets lost, and sometimes their rights and value as a person can get lost too. ",
       "We like to associate the people on our site with a positive term that helps us keep their humanity in mind. We settled on the term ‘fellow’ because of its whimsy and wholesome connection to personhood.** We hope it catches on!",
       "Likewise, we call our employees ‘makers’ because we believe that describes our relationship with them a little better. They are the reason that this site and service exists. Without them here to ‘make’ this site, it wouldn’t happen. That extends beyond the software developers. Any member of our business is there to make sure we can offer this service, and so, at the very center of this Straightforward Job Site, each and every one of them is making it a reality.",
-      "*Here is a cool study about this: https://www.daytranslations.com/blog/language-changes-color/",
-      "**Also, not gonna lie, “fellow” does harken back to “fellowship” and any good LOTR fan finds a way to slip tolkeinesque terms into anything they create.",
+      "*Also, not gonna lie, “fellow” does harken back to “fellowship” and any good LOTR fan finds a way to slip tolkeinesque terms into anything they create.",
     ],
   },
   {

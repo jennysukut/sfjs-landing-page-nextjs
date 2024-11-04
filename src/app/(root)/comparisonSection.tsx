@@ -26,7 +26,7 @@ function ComparisonSection() {
   };
 
   return (
-    <div className="comparisonSection flex flex-col items-center gap-8">
+    <div className="comparisonSection flex max-w-[100vw] flex-col items-center gap-8 overflow-hidden">
       <div className="comparisonSectionPainPointContainer flex flex-col items-center gap-8 pb-14">
         <h1 className="ComparisonSectionText max-w-[700px] pb-4 pl-4 text-[1.5rem] font-bold leading-8 text-midnight sm:text-[1.7rem]">
           {`the job market is broken.`}
