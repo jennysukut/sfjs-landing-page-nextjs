@@ -26,7 +26,7 @@ function ComparisonSection() {
   };
 
   return (
-    <div className="comparisonSection flex max-w-[100vw] flex-col items-center gap-8 overflow-hidden">
+    <div className="comparisonSection flex max-w-[100vw] flex-col items-center gap-8">
       <div className="comparisonSectionPainPointContainer flex flex-col items-center gap-8 pb-14">
         <h1 className="ComparisonSectionText max-w-[700px] pb-4 pl-4 text-[1.5rem] font-bold leading-8 text-midnight sm:text-[1.7rem]">
           {`the job market is broken.`}
@@ -55,7 +55,7 @@ function ComparisonSection() {
         <h1 className="ComparisonSectionText max-w-[700px] pb-4 pl-4 text-[1.5rem] font-bold leading-8 text-midnight sm:text-[1.7rem]">
           {`enough is enough.`}
         </h1>
-        <h1 className="ComparisonSectionText -mt-8 max-w-[700px] pl-4 text-center text-[1.25rem] font-bold leading-8 text-jade sm:text-2xl">
+        <h1 className="ComparisonSectionText -mt-8 max-w-[700px] overflow-hidden pl-4 text-center text-[1.25rem] font-bold leading-8 text-jade sm:text-2xl">
           {`we’ve decided to put our collective foot down and fix it ourselves.`}
         </h1>
         <motion.div
