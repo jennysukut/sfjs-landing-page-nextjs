@@ -12,13 +12,11 @@ export default function Home() {
     <div className="LandingPage flex flex-grow flex-col items-center gap-8 pt-20 md:pb-12 md:pt-40">
       <div className="LandingPageContainer flex w-[84%] max-w-[1600px] flex-col gap-20 sm:gap-32 md:w-[75%]">
         <HeaderSection />
-        <ComparisonSection />
-        <MakersSection />
       </div>
       <FeaturesSection />
       <div className="LandingPageContainer flex w-[84%] max-w-[1600px] flex-col gap-8 md:w-[75%]">
+        <MakersSection />
         <PromisesSection />
-
         <HopesSection />
       </div>
     </div>

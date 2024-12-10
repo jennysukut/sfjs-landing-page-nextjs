@@ -48,7 +48,7 @@ export default function MakersSection() {
   };
 
   return (
-    <section className="MakersSection flex w-full flex-col self-center border-b-2 border-t-2 border-olive/20 pt-16 sm:pt-20">
+    <section className="MakersSection flex w-full flex-col self-center border-t-2 border-olive/20 pt-16 sm:pt-20">
       <div className="MakersContainer">
         <div className="MakersTitles ml-4 sm:ml-16">
           <h1 className="MakersTitle sm:text-2xl">our volunteers:</h1>
