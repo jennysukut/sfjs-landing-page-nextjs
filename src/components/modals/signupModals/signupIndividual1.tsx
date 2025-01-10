@@ -7,6 +7,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SIGNUP_MUTATION } from "@/graphql/mutations";
 import { useMutation } from "@apollo/client";
+import { FELLOW_SIGNUP_MUTATION } from "@/graphql/mutations";
 
 import SiteButton from "../../siteButton";
 import { sendFellowSignupEmail } from "@/utils/emailUtils";
@@ -44,22 +45,27 @@ export default function SignupModalIndividual1() {
     setBetaTester(newValue);
   };
 
-  const [signUp, { loading, error }] = useMutation(SIGNUP_MUTATION);
+  // const [signUp, { loading, error }] = useMutation(SIGNUP_MUTATION);
+  const [signupFellow, { loading, error }] = useMutation(
+    FELLOW_SIGNUP_MUTATION,
+  );
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     setDisabledButton(true);
-    try {
-      const result = await signUp({ variables: data })
-        .then((result) => {
-          sendFellowSignupEmail(data.email, data.name, betaTester);
-          showModal(<SignupModalIndividual2 />);
-        })
-        .catch((error) => {
-          showModal(<ErrorModal />);
-        });
-    } catch (err) {
-      showModal(<ErrorModal />);
-    }
+    signupFellow({ variables: { requestBody: data } });
+
+    // try {
+    //   const result = await signUp({ variables: data })
+    //     .then((result) => {
+    //       sendFellowSignupEmail(data.email, data.name, betaTester);
+    //       showModal(<SignupModalIndividual2 />);
+    //     })
+    //     .catch((error) => {
+    //       showModal(<ErrorModal />);
+    //     });
+    // } catch (err) {
+    //   showModal(<ErrorModal />);
+    // }
   };
 
   return (
