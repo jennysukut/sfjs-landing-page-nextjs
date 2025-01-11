@@ -13,6 +13,14 @@
   font-style: normal;
 }
 
+.rotate-x-90 {
+  transform: rotateX(90deg);
+}
+
+.rotate-x-0 {
+  transform: rotateX(0deg);
+}
+
 .radix-themes {
   --default-font-family: "satoshi", sans-serif;
   --heading-font-family: "satoshi", sans-serif;

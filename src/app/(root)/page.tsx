@@ -7,11 +7,13 @@ import PromisesSection from "./promisesSection";
 import HeaderSection from "./headerSection";
 import ComparisonSection from "./comparisonSection";
 import SubHeaderSection from "./subHeaderSection";
+import OtherHeaderSection from "./otherHeaderSections";
 
 export default function Home() {
   return (
     <div className="LandingPage flex flex-grow flex-col items-center gap-8 pt-20 md:pb-12 md:pt-20">
       <div className="LandingPageContainer flex w-[84%] max-w-[1600px] flex-col gap-20 sm:gap-32 md:w-[90%]">
+        <OtherHeaderSection />
         <HeaderSection />
         <SubHeaderSection />
       </div>
