@@ -7,6 +7,7 @@ import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsMo
 import HelpUsModal from "@/components/modals/helpUsModal";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import MotionContainer from "@/components/motionContainer";
 
 function OtherHeaderSection() {
   const descriptorList = [
@@ -48,23 +49,52 @@ function OtherHeaderSection() {
   }, [isFlipping]);
 
   return (
-    <section className="HeaderSection flex w-full flex-col gap-0 border-b-2 border-olive/20 pb-24">
-      <div className="TitleJobBoardImage flex items-start justify-center gap-8">
-        <div className="HeaderTitle -mt-8 flex flex-col gap-6"></div>
-
-        <h1 className="Title text-[2.5rem]">
-          where hiring is{" "}
-          <span
-            className={`inline-block transition-all duration-500 ${
-              isFlipping
-                ? "-rotate-x-90 -translate-y-2 opacity-0"
-                : "rotate-x-0 translate-y-0 opacity-100"
-            }`}
-            style={{ transformStyle: "preserve-3d" }}
+    <section className="HeaderSection mt-10 flex w-full flex-col gap-2 self-center align-middle">
+      <h1 className="Title self-center text-[3.25rem] tracking-widest text-midnight">
+        {/* where hiring is{" "} */}
+        {/* hiring never felt so{" "} */}
+        hiring, but more{" "}
+        <span
+          className={`inline-block transition-all duration-500 ${
+            isFlipping
+              ? "-rotate-x-90 -translate-y-2 opacity-0"
+              : "rotate-x-0 translate-y-0 opacity-100"
+          }`}
+          style={{ transformStyle: "preserve-3d" }}
+        >
+          {currentDescriptor}
+        </span>
+      </h1>
+      <div className="Buttons mb-20 flex gap-6 self-center">
+        <MotionContainer>
+          <SiteButton
+            variant="filled"
+            aria="what makes us different?"
+            colorScheme="b4"
+            // addClasses="px-8 py-3"
+            size="large"
           >
-            {currentDescriptor}
-          </span>
-        </h1>
+            what makes us different?
+          </SiteButton>
+          <SiteButton
+            variant="filled"
+            aria="features"
+            // addClasses="px-8 py-3"
+            size="large"
+            colorScheme="c4"
+          >
+            check out our features
+          </SiteButton>
+          <SiteButton
+            variant="filled"
+            aria="signup"
+            // addClasses="px-8 py-3"
+            size="large"
+            colorScheme="b6"
+          >
+            sign up!
+          </SiteButton>
+        </MotionContainer>
       </div>
     </section>
   );

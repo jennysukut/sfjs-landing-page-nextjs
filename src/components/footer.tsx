@@ -10,7 +10,7 @@ export default function Footer() {
   const { showModal } = useModal();
 
   return (
-    <div className="Footer flex flex-col items-end justify-between gap-6 px-8 py-8 sm:h-24 sm:w-full sm:flex-row">
+    <div className="Footer z-30 flex flex-col items-end justify-between gap-6 px-8 py-8 sm:h-24 sm:w-full sm:flex-row">
       <div className="FooterButtonContainer flex flex-row flex-wrap gap-4">
         <SiteButton
           variant="filled"

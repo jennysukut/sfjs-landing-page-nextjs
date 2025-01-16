@@ -8,21 +8,19 @@ import HeaderSection from "./headerSection";
 import ComparisonSection from "./comparisonSection";
 import SubHeaderSection from "./subHeaderSection";
 import OtherHeaderSection from "./otherHeaderSections";
+import GraphicHeaderSection from "./graphicHeaderSection";
 
 export default function Home() {
   return (
-    <div className="LandingPage flex flex-grow flex-col items-center gap-8 pt-20 md:pb-12 md:pt-20">
-      <div className="LandingPageContainer flex w-[84%] max-w-[1600px] flex-col gap-20 sm:gap-32 md:w-[90%]">
-        <OtherHeaderSection />
-        <HeaderSection />
-        <SubHeaderSection />
-      </div>
-      <FeaturesSection />
-      <div className="LandingPageContainer flex w-[84%] max-w-[1600px] flex-col gap-8 md:w-[75%]">
-        <MakersSection />
-        {/* <PromisesSection /> */}
-        {/* <HopesSection /> */}
-      </div>
+    <div
+      className="LandingPageContainer z-20 -mb-10 -mt-48 flex h-[140vh] w-[100vw] max-w-[1600px] flex-col items-center justify-center"
+      style={{
+        backgroundImage: 'url("/BackgroundShapes3.svg")',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <OtherHeaderSection />
     </div>
   );
 }

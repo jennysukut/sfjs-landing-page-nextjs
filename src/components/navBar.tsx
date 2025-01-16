@@ -22,7 +22,7 @@ export default function NavBar() {
   }
 
   return (
-    <div className="NavBar mx-auto flex h-fit w-[95vw] justify-between px-8 py-12 sm:w-[98vw] sm:px-16">
+    <div className="NavBar z-0 mx-auto flex h-fit w-[95vw] justify-between px-8 py-12 sm:w-[98vw] sm:px-16">
       <Link href={"/"}>
         <Image
           className="Logo max-w-44 cursor-pointer transition-transform duration-300 hover:scale-105"
