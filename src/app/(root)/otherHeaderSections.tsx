@@ -1,4 +1,5 @@
 import { useModal } from "@/contexts/ModalContext";
+import { motion } from "framer-motion";
 
 import Link from "next/link";
 import SiteButton from "@/components/siteButton";
@@ -16,7 +17,6 @@ function OtherHeaderSection() {
     "honest",
     "personal",
     "colorful",
-    "quick",
     "human.",
   ];
 
@@ -24,6 +24,26 @@ function OtherHeaderSection() {
 
   const [currentDescriptor, setCurrentDescriptor] = useState(descriptorList[0]);
   const [isFlipping, setIsFlipping] = useState(false);
+
+  const motionItem = {
+    start: { opacity: 0, x: -100 },
+    move: {
+      x: 0,
+      opacity: 100,
+      transition: {
+        opacity: {
+          duration: 0.5,
+          ease: "easeInOut",
+          delay: 1,
+        },
+        x: {
+          type: "spring",
+          duration: 2,
+          delay: 1,
+        },
+      },
+    },
+  };
 
   useEffect(() => {
     if (currentDescriptor !== descriptorList[descriptorList.length - 1]) {
@@ -49,38 +69,55 @@ function OtherHeaderSection() {
   }, [isFlipping]);
 
   return (
-    <section className="HeaderSection mt-10 flex w-full flex-col gap-2 self-center align-middle">
-      <h1 className="Title self-center text-[3.25rem] tracking-widest text-midnight">
-        {/* where hiring is{" "} */}
-        {/* hiring never felt so{" "} */}
-        hiring, but more{" "}
-        <span
-          className={`inline-block transition-all duration-500 ${
-            isFlipping
-              ? "-rotate-x-90 -translate-y-2 opacity-0"
-              : "rotate-x-0 translate-y-0 opacity-100"
-          }`}
-          style={{ transformStyle: "preserve-3d" }}
+    <section className="HeaderSection z-30 mt-4 flex w-full flex-col gap-2 self-center align-middle">
+      <div className="TitleSection flex justify-between gap-4 self-center">
+        <h1 className="Title self-start text-[3.5rem] tracking-widest text-midnight">
+          {/* where hiring is{" "} */}
+          hiring, but more{" "}
+        </h1>
+
+        <div className="RotatingWordContainer -mb-4 mt-0 w-[17vw]">
+          <h1
+            className={`font-serif inline-block text-[4.5rem] font-semibold tracking-normal transition-all duration-500 ${
+              isFlipping
+                ? "-rotate-x-90 -translate-y-2 opacity-0"
+                : "rotate-x-0 translate-y-0 opacity-100"
+            }`}
+            style={{ transformStyle: "preserve-3d" }}
+          >
+            {currentDescriptor}
+          </h1>
+        </div>
+      </div>
+      <div className="Buttons mb-20 ml-4 mt-4 flex gap-6 self-center">
+        <motion.div
+          initial="start"
+          variants={motionItem}
+          viewport={{ once: true }}
+          whileInView="move"
+          className="mt-8 align-middle"
         >
-          {currentDescriptor}
-        </span>
-      </h1>
-      <div className="Buttons mb-20 flex gap-6 self-center">
+          <Image
+            width={50}
+            height={30}
+            alt="arrow"
+            src="/PointArrow.svg"
+            className="mt-4 align-middle"
+          ></Image>
+        </motion.div>
         <MotionContainer>
           <SiteButton
             variant="filled"
             aria="what makes us different?"
             colorScheme="b4"
-            // addClasses="px-8 py-3"
-            size="large"
+            size="medium"
           >
             what makes us different?
           </SiteButton>
           <SiteButton
             variant="filled"
             aria="features"
-            // addClasses="px-8 py-3"
-            size="large"
+            size="medium"
             colorScheme="c4"
           >
             check out our features
@@ -88,8 +125,7 @@ function OtherHeaderSection() {
           <SiteButton
             variant="filled"
             aria="signup"
-            // addClasses="px-8 py-3"
-            size="large"
+            size="medium"
             colorScheme="b6"
           >
             sign up!

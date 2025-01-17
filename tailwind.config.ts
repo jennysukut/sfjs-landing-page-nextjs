@@ -6,6 +6,7 @@ const config: Config = {
   theme: {
     fontFamily: {
       sans: ["satoshi", "sans-serif"],
+      serif: ["petrona", "serif"],
     },
     extend: {
       screens: {

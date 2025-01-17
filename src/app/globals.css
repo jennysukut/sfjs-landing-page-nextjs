@@ -13,6 +13,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "petrona";
+  src: url("/fonts/Petrona-Italic-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 400 600 900;
+  font-style: normal;
+}
+
 .rotate-x-90 {
   transform: rotateX(90deg);
 }

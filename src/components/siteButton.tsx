@@ -17,7 +17,9 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     | "largeCircle"
     | "smallCircle"
     | "extraLarge"
-    | "superLarge";
+    | "superLarge"
+    | "medium";
+
   variant: "hollow" | "filled" | "avatar";
   colorScheme: ButtonColorOption;
   aria: string;
@@ -54,6 +56,7 @@ const SiteButton: React.FC<ButtonProps> = ({
       "h-16 w-16 rounded-full": size === "largeCircle",
       "h-6 w-6 rounded-full": size === "smallCircle",
       "px-4 py-2 text-xs min-w-[65px] rounded-full": size === "default",
+      "px-8 py-3 text-[0.85rem] min-w-[65px] rounded-full": size === "medium",
       "px-12 py-6 text-[0.85rem] sm:py-6 md:px-10 md:py-4 md:text-sm rounded-full":
         size === "extraLarge",
       "px-12 py-6 text-[0.85rem] sm:py-6 md:px-10 md:py-6 md:text-base rounded-3xl":
@@ -103,6 +106,9 @@ const SiteButton: React.FC<ButtonProps> = ({
       "h-6 w-6 -right-1 top-1 left-1 rounded-full": size === "smallCircle",
       "px-4 py-2 text-xs min-w-[65px] -right-1.5 top-1.5  left-1.5 rounded-full":
         size === "default",
+      "px-8 py-3 text-[0.85rem] min-w-[65px] -right-1.5 top-1.5  left-1.5 rounded-full":
+        size === "medium",
+
       "px-12 py-6 text-[0.85rem] sm:py-6 md:px-10 md:text-sm md:py-4 left-2 -right-2 top-2 rounded-full":
         size === "extraLarge",
       "px-12 py-6 text-[0.85rem] sm:py-6 md:px-10 md:py-6 md:text-base left-2 -right-2 top-2 rounded-3xl":
