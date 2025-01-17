@@ -22,7 +22,7 @@ const businessSchema = z.object({
 
 type FormData = z.infer<typeof businessSchema>;
 
-export default function SignupModalBusiness1() {
+export default function SignupModalBusiness1({ freeJob }: any) {
   const { showModal } = useModal();
   const [earlySignup, setEarlySignup] = useState(false);
   const [betaTester, setBetaTester] = useState(false);
@@ -79,7 +79,9 @@ export default function SignupModalBusiness1() {
         sign up
       </Dialog.Title>
       <Dialog.Description className="Subtitle w-full text-center">
-        to be notified when we launch Straightforward Job Site
+        {freeJob === true
+          ? "to get early access & free job posts with Straightforward Job Site"
+          : "to be notified when we launch Straightforward Job Site"}
       </Dialog.Description>
       <form
         className="BusinessSignupForm flex flex-col gap-2"
@@ -128,11 +130,13 @@ export default function SignupModalBusiness1() {
             }}
           />
           <label htmlFor="betaTester" className="cursor-pointer pl-2 text-sm">
-            get in early
+            {freeJob === true
+              ? "get free job listings during beta"
+              : "get in early"}
           </label>
         </div>
 
-        <div className="BetaTesterButton -mb-4 mt-6 flex items-center gap-2">
+        <div className="BetaTesterButton -mb-8 mt-6 flex items-center gap-2">
           <SiteButton
             variant="hollow"
             colorScheme="c1"
@@ -146,12 +150,12 @@ export default function SignupModalBusiness1() {
             }}
           />
           <label htmlFor="betaTester" className="cursor-pointer pl-2 text-sm">
-            sign up to be a beta tester
+            be a beta tester
           </label>
         </div>
 
         {/* form submission button */}
-        <div className="ButtonContainer mt-8 flex justify-end">
+        <div className="ButtonContainer -mb-4 mt-8 flex justify-end">
           <SiteButton
             variant="hollow"
             colorScheme="c1"

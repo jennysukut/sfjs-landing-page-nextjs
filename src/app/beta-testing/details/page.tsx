@@ -10,7 +10,7 @@ import MotionContainer from "@/components/motionContainer";
 import Image from "next/image";
 import SignupModalBusiness1 from "@/components/modals/signupModals/signupBusiness1";
 
-export default function BetaTesting() {
+export default function BetaTestingDetailsPage() {
   const router = useRouter();
   const { showModal } = useModal();
   const motionItem = {
@@ -41,17 +41,17 @@ export default function BetaTesting() {
   return (
     <div
       className="BetaTestingPage -mb-10 -mt-48 flex h-[140vh] w-[100vw] max-w-[1600px] flex-col items-center justify-center"
-      style={{
-        backgroundImage: 'url("/BackgroundShapes7.svg")',
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      // style={{
+      //   backgroundImage: 'url("/BackgroundShapes7.svg")',
+      //   backgroundSize: "cover",
+      //   backgroundPosition: "center",
+      // }}
     >
       <div className="TitleSection -mt-8 flex flex-col gap-6 self-center">
         <h1 className="Title self-center text-[3.5rem] tracking-widest text-midnight">
-          get in early
+          beta testing details
         </h1>
-        <div className="SecondLine mr-6 self-center">
+        {/* <div className="SecondLine mr-6 self-center">
           <h1
             className={`Title inline-block font-serif text-[4rem] font-semibold tracking-normal text-midnight`}
           >
@@ -104,7 +104,7 @@ export default function BetaTesting() {
           >
             learn more
           </SiteButton>
-        </MotionContainer>
+        </MotionContainer> */}
       </div>
     </div>
   );
