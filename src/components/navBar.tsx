@@ -26,7 +26,7 @@ export default function NavBar() {
       <Link href={"/"}>
         <Image
           className="Logo max-w-44 cursor-pointer transition-transform duration-300 hover:scale-105"
-          src="/sfjs-logo.svg"
+          src="/sfjs-updated-logo.svg"
           width={229}
           height={75}
           alt="Straightforward Job Site logo"
@@ -46,7 +46,7 @@ export default function NavBar() {
         >
           sign up
         </SiteButton>
-        <Link href={"/faq"}>
+        {/* <Link href={"/faq"}>
           <SiteButton
             variant="filled"
             colorScheme="c4"
@@ -57,17 +57,17 @@ export default function NavBar() {
           >
             our faq
           </SiteButton>
-        </Link>
+        </Link> */}
         <Link href={"/crowdfunding"}>
           <SiteButton
             variant="filled"
             colorScheme="e5"
             aria="donate"
-            value="crowdfunding"
+            value="beta testing"
             onClick={handleNavButtonClick}
-            isSelected={clickedButton === "crowdfunding"}
+            isSelected={clickedButton === "beta testing"}
           >
-            crowdfunding
+            beta testing
           </SiteButton>
         </Link>
         <Link href={"/pricing"}>
@@ -82,9 +82,21 @@ export default function NavBar() {
             pricing
           </SiteButton>
         </Link>
+        <Link href={"/our-supporters"}>
+          <SiteButton
+            variant="filled"
+            colorScheme="f3"
+            aria="supporters"
+            value="supporters"
+            onClick={handleNavButtonClick}
+            isSelected={clickedButton === "supporters"}
+          >
+            our supporters
+          </SiteButton>
+        </Link>
         <SiteButton
           variant="filled"
-          colorScheme="f3"
+          colorScheme="b3"
           aria="share on socials"
           value="share"
           onClick={() => showModal(<ShareOptionsModal />)}
@@ -92,18 +104,6 @@ export default function NavBar() {
         >
           share
         </SiteButton>
-        <Link href={"/our-supporters"}>
-          <SiteButton
-            variant="filled"
-            colorScheme="b3"
-            aria="supporters"
-            value="supporters"
-            onClick={handleNavButtonClick}
-            isSelected={clickedButton === "supporters"}
-          >
-            supporters
-          </SiteButton>
-        </Link>
       </div>
       <div className="MobileMenuButton self-end py-4 align-middle lg:hidden">
         <img

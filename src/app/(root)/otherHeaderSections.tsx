@@ -74,7 +74,7 @@ function OtherHeaderSection() {
   }, [isFlipping]);
 
   return (
-    <section className="HeaderSection z-30 mt-4 flex w-full flex-col gap-2 self-center align-middle">
+    <section className="HeaderSection z-10 mt-4 flex w-full flex-col gap-2 self-center align-middle">
       <div className="TitleSection flex justify-between gap-4 self-center">
         <h1 className="Title self-start text-[3.5rem] tracking-widest text-midnight">
           {/* where hiring is{" "} */}
