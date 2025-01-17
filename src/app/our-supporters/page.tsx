@@ -39,13 +39,7 @@ export default function OurSupporters() {
 
   return (
     <div className="OurSupportersPage max-w-[80vw] justify-center self-center">
-      <h1 className="OurSupportersTitle pt-2 text-[2rem]">
-        our{" "}
-        {/* <span className="supporters font-serif text-[2.5rem] tracking-widest">
-          fantastic{" "}
-        </span> */}
-        supporters:
-      </h1>
+      <h1 className="OurSupportersTitle pt-2 text-[2rem]">our supporters:</h1>
       <p className="OurSupportersSubtitle mb-8 w-[70%] self-end text-left text-sm sm:mt-4 sm:max-w-[40rem] sm:text-xl">
         {`each of these circles represents a `}
         <span className="other font-serif text-[1.5rem] font-semibold tracking-wider">

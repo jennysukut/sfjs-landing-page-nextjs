@@ -58,7 +58,7 @@ export default function NavBar() {
             our faq
           </SiteButton>
         </Link> */}
-        <Link href={"/crowdfunding"}>
+        <Link href={"/beta-testing"}>
           <SiteButton
             variant="filled"
             colorScheme="e5"
