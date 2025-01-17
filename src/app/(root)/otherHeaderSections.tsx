@@ -78,7 +78,7 @@ function OtherHeaderSection() {
 
         <div className="RotatingWordContainer -mb-4 mt-0 w-[17vw]">
           <h1
-            className={`font-serif inline-block text-[4.5rem] font-semibold tracking-normal transition-all duration-500 ${
+            className={`font-serif inline-block text-[4.5rem] font-semibold tracking-normal text-midnight transition-all duration-500 ${
               isFlipping
                 ? "-rotate-x-90 -translate-y-2 opacity-0"
                 : "rotate-x-0 translate-y-0 opacity-100"
@@ -93,7 +93,7 @@ function OtherHeaderSection() {
         <motion.div
           initial="start"
           variants={motionItem}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           whileInView="move"
           className="mt-8 align-middle"
         >

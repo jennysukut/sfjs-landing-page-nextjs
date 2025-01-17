@@ -13,9 +13,9 @@ import GraphicHeaderSection from "./graphicHeaderSection";
 export default function Home() {
   return (
     <div
-      className="LandingPageContainer z-20 -mb-10 -mt-48 flex h-[140vh] w-[100vw] max-w-[1600px] flex-col items-center justify-center"
+      className="LandingPageContainer -mb-10 -mt-48 flex h-[140vh] w-[100vw] max-w-[1600px] flex-col items-center justify-center"
       style={{
-        backgroundImage: 'url("/BackgroundShapes4.svg")',
+        backgroundImage: 'url("/BackgroundShapes5.svg")',
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
