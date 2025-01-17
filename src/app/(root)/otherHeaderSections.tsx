@@ -28,17 +28,22 @@ function OtherHeaderSection() {
   const motionItem = {
     start: { opacity: 0, x: -100 },
     move: {
-      x: 0,
-      opacity: 100,
+      x: [
+        -100, 0, -20, 0, -20, 5, -20, 0, -30, 0, -20, 5, -20, 0, -30, 0, -20, 0,
+        -20, 0,
+      ],
+      opacity: 1,
       transition: {
         opacity: {
-          duration: 0.5,
+          duration: 0.74,
           ease: "easeInOut",
           delay: 1,
         },
         x: {
-          type: "spring",
-          duration: 2,
+          type: "tween",
+          duration: 30,
+          repeat: Infinity,
+          ease: "easeInOut",
           delay: 1,
         },
       },
