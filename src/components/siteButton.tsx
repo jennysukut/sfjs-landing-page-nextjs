@@ -59,7 +59,7 @@ const SiteButton: React.FC<ButtonProps> = ({
       "px-8 py-3 text-[0.85rem] min-w-[65px] rounded-full": size === "medium",
       "px-12 py-6 text-[0.85rem] sm:py-6 md:px-10 md:py-4 md:text-sm rounded-full":
         size === "extraLarge",
-      "px-12 py-6 text-[0.85rem] sm:py-6 md:px-10 md:py-6 md:text-base rounded-3xl":
+      "px-12 py-6 text-[0.85rem] sm:py-6 md:px-20 md:py-10 md:text-base rounded-3xl":
         size === "superLarge",
 
       // variant
@@ -111,7 +111,7 @@ const SiteButton: React.FC<ButtonProps> = ({
 
       "px-12 py-6 text-[0.85rem] sm:py-6 md:px-10 md:text-sm md:py-4 left-2 -right-2 top-2 rounded-full":
         size === "extraLarge",
-      "px-12 py-6 text-[0.85rem] sm:py-6 md:px-10 md:py-6 md:text-base left-2 -right-2 top-2 rounded-3xl":
+      "px-12 py-6 text-[0.85rem] sm:py-6 md:px-20 md:py-10 md:text-base left-2 -right-2 top-2 rounded-3xl":
         size === "superLarge",
 
       // variant

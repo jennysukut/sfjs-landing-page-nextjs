@@ -11,14 +11,7 @@ import { useState, useEffect } from "react";
 import MotionContainer from "@/components/motionContainer";
 
 function OtherHeaderSection() {
-  const descriptorList = [
-    "simple",
-    "unique",
-    "honest",
-    "personal",
-    "colorful",
-    "human.",
-  ];
+  const descriptorList = ["simple", "honest", "personal", "colorful", "human."];
 
   const { showModal } = useModal();
 
@@ -65,7 +58,7 @@ function OtherHeaderSection() {
         }, 500); // Half a second for flip animation
 
         return () => clearTimeout(changeWordTimeout);
-      }, 2000);
+      }, 1500);
 
       return () => clearInterval(transitionInterval);
     } else {
@@ -83,7 +76,7 @@ function OtherHeaderSection() {
 
         <div className="RotatingWordContainer -mb-4 mt-0 w-[17vw]">
           <h1
-            className={`font-serif inline-block text-[4.5rem] font-semibold tracking-normal text-midnight transition-all duration-500 ${
+            className={`inline-block font-serif text-[4.5rem] font-semibold tracking-normal text-midnight transition-all duration-500 ${
               isFlipping
                 ? "-rotate-x-90 -translate-y-2 opacity-0"
                 : "rotate-x-0 translate-y-0 opacity-100"
