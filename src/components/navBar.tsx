@@ -97,12 +97,12 @@ export default function NavBar() {
         <SiteButton
           variant="filled"
           colorScheme="b3"
-          aria="share on socials"
-          value="share"
+          aria="connect on socials"
+          value="connect"
           onClick={() => showModal(<ShareOptionsModal />)}
-          isSelected={clickedButton === "share"}
+          isSelected={clickedButton === "connect"}
         >
-          share
+          connect
         </SiteButton>
       </div>
       <div className="MobileMenuButton self-end py-4 align-middle lg:hidden">
