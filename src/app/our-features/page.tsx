@@ -47,7 +47,7 @@ export default function OurFeaturesPage() {
         opacity: {
           duration: 1,
           ease: "easeInOut",
-          delay: 0.5,
+          delay: 1.5,
         },
       },
     },
@@ -65,10 +65,10 @@ export default function OurFeaturesPage() {
             return descriptorList[nextIndex];
           });
           setIsFlipping(false);
-        }, 1000); // Half a second for flip animation
+        }, 1000);
 
         return () => clearTimeout(changeWordTimeout);
-      }, 1500);
+      }, 3000);
 
       return () => clearInterval(transitionInterval);
     } else {
@@ -86,23 +86,43 @@ export default function OurFeaturesPage() {
 
   return (
     <div className="FeaturesPage flex w-[85%] max-w-[1600px] flex-col justify-center self-center">
-      <button
-        className="HumanFocusedTechSection items-middle font-mono flex gap-3 font-semibold"
-        onClick={() => console.log("human focused tech click")}
-      >
-        <Image
-          width={80}
-          height={80}
-          alt="human focused tech"
-          src="/human-flower.svg"
-          className={`align-middle transition-transform duration-1000 ${isRotated ? "rotate-90" : ""} hover:rotate-45`}
-        ></Image>
-        <div className="Title mt-8 flex flex-col text-left">
-          <p>human</p>
-          <p>focused</p>
-          <p>tech</p>
-        </div>
-      </button>
+      <div className="TopButtons flex justify-between">
+        <button
+          className="HumanFocusedTechSection items-middle font-mono ml-[2vw] flex gap-3 font-semibold"
+          onClick={() => console.log("human focused tech click")}
+        >
+          <Image
+            width={90}
+            height={90}
+            alt="human focused tech"
+            src="/human-flower.svg"
+            className={`align-middle transition-transform duration-1000 ${isRotated ? "rotate-90" : ""} hover:rotate-45`}
+          ></Image>
+          <div className="Title mt-8 flex flex-col text-left">
+            <p>human</p>
+            <p>focused</p>
+            <p>tech</p>
+          </div>
+        </button>
+        <button
+          className="ApplicationManagerSection items-middle font-mono mr-[2vw] flex gap-3 self-end font-semibold"
+          onClick={() => console.log("application manager click")}
+        >
+          <div className="Title flex flex-col text-right align-middle text-olive">
+            <p>two-way</p>
+            <p>application</p>
+            <p>manager</p>
+          </div>
+          <Image
+            width={80}
+            height={80}
+            alt="two-way application manager"
+            src="/ams-star.svg"
+            className={`align-middle transition-transform duration-1000 ${isRotated ? "-rotate-90" : ""} hover:-rotate-12`}
+          ></Image>
+        </button>
+      </div>
+
       <div className="TitleSection flex flex-col items-center gap-10 self-center">
         <h1 className="Title text-[3.5rem] tracking-widest text-midnight">
           explore our{" "}
@@ -120,7 +140,7 @@ export default function OurFeaturesPage() {
       </div>
 
       <div className="NoteSection flex items-start gap-4 self-center">
-        {/* <div className="Arrow">
+        <div className="Arrow">
           <motion.div
             initial="start"
             variants={rotate}
@@ -133,23 +153,16 @@ export default function OurFeaturesPage() {
               height={25}
               alt="arrow"
               src="/features-arrow.svg"
-              className="ml-4 mt-2 align-middle"
-            ></Image> */}
-        {/* <Image
-            width={45}
-            height={25}
-            alt="arrow"
-            src="/squiggle-arrow.svg"
-            className="ml-8 mt-2 align-middle"
-          ></Image> */}
-        {/* </motion.div>
-        </div> */}
+              className="ml-4 mt-1 align-middle"
+            ></Image>
+          </motion.div>
+        </div>
         <motion.div
           initial="start"
           variants={opacity}
           viewport={{ once: true }}
           whileInView="show"
-          className="mt-4 flex gap-2"
+          className="mt-6 flex gap-2"
         >
           <p className="Note font-mono text-midnight">& </p>
           <div className="RotatingWordContainer w-[17vw]">
