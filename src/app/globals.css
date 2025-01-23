@@ -20,6 +20,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "mono";
+  src: url("/fonts/DMMono-Regular.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
 .rotate-x-90 {
   transform: rotateX(90deg);
 }

@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-
+import InfoBox from "./infoBox";
 interface ScrollingBackgroundProps {
   speed?: number; // pixels per second
   children?: React.ReactNode;
@@ -86,7 +86,7 @@ const ScrollingBackground: React.FC<ScrollingBackgroundProps> = ({
 
   return (
     <div
-      className="w-full select-none overflow-hidden bg-gray-100"
+      className="w-full select-none overflow-hidden"
       onMouseEnter={() => pauseOnHover && setIsPaused(true)}
       onMouseLeave={() => pauseOnHover && setIsPaused(false)}
       onMouseDown={handleDragStart}
@@ -105,7 +105,7 @@ const ScrollingBackground: React.FC<ScrollingBackgroundProps> = ({
           ref={contentRef}
           className="flex h-64 items-center bg-cover bg-center"
           style={{
-            backgroundImage: "url('/api/placeholder/800/256')",
+            backgroundImage: "url('/BackgroundShapes7.svg')",
             minWidth: "100%",
           }}
         >
@@ -123,13 +123,15 @@ const ExampleScroller = () => {
       <ScrollingBackground speed={20} pauseOnHover={true}>
         <div className="flex gap-8">
           {[1, 2, 3, 4, 5].map((num) => (
-            <div
+            <InfoBox
+              variant="hollow"
+              aria="testing"
               key={num}
-              className="rounded-lg bg-white/80 p-6 shadow-lg backdrop-blur-sm"
+              className="rounded-lg p-6 shadow-lg backdrop-blur-sm"
             >
               <h3 className="text-xl font-bold">Item {num}</h3>
               <p className="text-gray-700">Scrolling content here</p>
-            </div>
+            </InfoBox>
           ))}
         </div>
       </ScrollingBackground>
