@@ -16,6 +16,7 @@ export default function OurFeaturesPage() {
 
   const [currentDescriptor, setCurrentDescriptor] = useState(descriptorList[0]);
   const [isFlipping, setIsFlipping] = useState(false);
+  const [isRotated, setIsRotated] = useState(false);
 
   const rotate = {
     start: { opacity: 0, rotate: -15 },
@@ -46,7 +47,7 @@ export default function OurFeaturesPage() {
         opacity: {
           duration: 1,
           ease: "easeInOut",
-          delay: 1.5,
+          delay: 0.5,
         },
       },
     },
@@ -64,7 +65,7 @@ export default function OurFeaturesPage() {
             return descriptorList[nextIndex];
           });
           setIsFlipping(false);
-        }, 500); // Half a second for flip animation
+        }, 1000); // Half a second for flip animation
 
         return () => clearTimeout(changeWordTimeout);
       }, 1500);
@@ -75,8 +76,33 @@ export default function OurFeaturesPage() {
     }
   }, [isFlipping]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsRotated(true);
+    }, 1000); // Delay before the rotation starts
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="FeaturesPage flex w-[85%] max-w-[1600px] flex-col items-center justify-center self-center">
+    <div className="FeaturesPage flex w-[85%] max-w-[1600px] flex-col justify-center self-center">
+      <button
+        className="HumanFocusedTechSection items-middle font-mono flex gap-3 font-semibold"
+        onClick={() => console.log("human focused tech click")}
+      >
+        <Image
+          width={80}
+          height={80}
+          alt="human focused tech"
+          src="/human-flower.svg"
+          className={`align-middle transition-transform duration-1000 ${isRotated ? "rotate-90" : ""} hover:rotate-45`}
+        ></Image>
+        <div className="Title mt-8 flex flex-col text-left">
+          <p>human</p>
+          <p>focused</p>
+          <p>tech</p>
+        </div>
+      </button>
       <div className="TitleSection flex flex-col items-center gap-10 self-center">
         <h1 className="Title text-[3.5rem] tracking-widest text-midnight">
           explore our{" "}
@@ -93,8 +119,8 @@ export default function OurFeaturesPage() {
         </div>
       </div>
 
-      <div className="NoteSection flex items-baseline gap-4">
-        <div className="Arrow">
+      <div className="NoteSection flex items-start gap-4 self-center">
+        {/* <div className="Arrow">
           <motion.div
             initial="start"
             variants={rotate}
@@ -108,27 +134,27 @@ export default function OurFeaturesPage() {
               alt="arrow"
               src="/features-arrow.svg"
               className="ml-4 mt-2 align-middle"
-            ></Image>
-            {/* <Image
+            ></Image> */}
+        {/* <Image
             width={45}
             height={25}
             alt="arrow"
             src="/squiggle-arrow.svg"
             className="ml-8 mt-2 align-middle"
           ></Image> */}
-          </motion.div>
-        </div>
+        {/* </motion.div>
+        </div> */}
         <motion.div
           initial="start"
           variants={opacity}
           viewport={{ once: true }}
           whileInView="show"
-          className="flex gap-2 align-middle"
+          className="mt-4 flex gap-2"
         >
-          <p className="Note font-mono text-midnight">and </p>
+          <p className="Note font-mono text-midnight">& </p>
           <div className="RotatingWordContainer w-[17vw]">
             <span
-              className={`font-mono inline-block text-midnight transition-all delay-150 duration-1000 ${
+              className={`font-mono inline-block text-midnight transition-all duration-1000 ${
                 isFlipping
                   ? "-rotate-x-90 -translate-y-2 opacity-0"
                   : "rotate-x-0 translate-y-0 opacity-100"
