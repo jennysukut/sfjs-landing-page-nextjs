@@ -130,7 +130,7 @@ export default function OurFeaturesPage() {
     } else {
       setCurrentDescriptor("straightforward");
     }
-  }, [isFlipping]);
+  }, [isFlipping, currentDescriptor, descriptorList]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -142,7 +142,7 @@ export default function OurFeaturesPage() {
 
   return (
     <div
-      className={`LandingPageContainer ${selectedCategory !== "none" ? "" : "-mb-24"} -mt-48 flex h-[140vh] w-[100vw] max-w-[1600px]`}
+      className={`LandingPageContainer ${selectedCategory !== "none" ? "mb-8" : "-mb-24"} -mt-48 flex h-[140vh] w-[100vw] max-w-[1600px]`}
       style={{
         backgroundImage: `url(${bgImage})`,
         backgroundSize: "cover",
@@ -153,7 +153,9 @@ export default function OurFeaturesPage() {
         className={`FeaturesPage mx-auto mt-60 flex w-[85%] max-w-[1600px] flex-col`}
       >
         <div className="TopButtons flex justify-between">
-          <div className="HumanFocusedTechSection flex flex-col">
+          <div
+            className={`HumanFocusedTechSection ${selectedCategory === "ams" ? "invisible" : ""} flex flex-col`}
+          >
             <button
               className="HumanFocusedTechButtons items-middle font-mono -mt-20 ml-[15vw] flex gap-3 font-semibold"
               onClick={() => categoryClick("humanTech")}

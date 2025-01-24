@@ -16,7 +16,7 @@ interface InfoBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   title?: string;
   textSize?: "small" | "medium" | "large";
   addClasses?: string;
-  size?: "small" | "standard" | "large";
+  size?: "small" | "standard" | "large" | "thin";
   width?: "extraWide" | null;
   shadowSize?: "small";
   canCollapse?: boolean;
@@ -62,6 +62,7 @@ const InfoBox: React.FC<InfoBoxProps> = ({
         size === "small",
       "py-8 px-8 xs:px-10 sm:py-8 sm:px-12 md:py-14 md:px-16 rounded-3xl":
         size === "large",
+      "py-6 px-8 sm:py-8 sm:px-10 rounded-2xl sm:rounded-3xl": size === "thin",
 
       //width
       "max-w-screen-sm": width === "standard",
