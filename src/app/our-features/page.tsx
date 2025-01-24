@@ -1,20 +1,25 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { AmsDetails } from "./amsDetails";
-
+import InfoBox from "@/components/infoBox";
+import { HumanTechDetails } from "./humanTechDetails";
+import { JobBoardDetails } from "./jobBoardDetails";
 export default function OurFeaturesPage() {
-  const descriptorList = [
-    "thoughtful",
-    "practical",
-    "almost radical",
-    "conscious",
-    "uniquely sensible",
-    "straightforward",
-  ];
+  const descriptorList = useMemo(
+    () => [
+      "thoughtful",
+      "practical",
+      "almost radical",
+      "conscious",
+      "uniquely sensible",
+      "straightforward",
+    ],
+    [],
+  );
 
   const [currentDescriptor, setCurrentDescriptor] = useState(descriptorList[0]);
   const [isFlipping, setIsFlipping] = useState(false);
@@ -99,12 +104,16 @@ export default function OurFeaturesPage() {
     if (selectedCategory === category) {
       setSelectedCategory("none");
       setShowBottomButtons(true);
+      setShowTopButtons(true);
       setBgImage("/BackgroundShapes8.svg");
     } else {
       setSelectedCategory(category);
       if (category === "ams" || category === "humanTech") {
         setShowBottomButtons(false);
         setBgImage("/BackgroundShapes10.svg");
+      } else if (category === "jobBoard" || category === "noGhosting") {
+        setShowTopButtons(false);
+        setBgImage("/BackgroundShapes9.svg");
       }
     }
   };
@@ -142,7 +151,7 @@ export default function OurFeaturesPage() {
 
   return (
     <div
-      className={`LandingPageContainer ${selectedCategory !== "none" ? "mb-8" : "-mb-24"} -mt-48 flex h-[140vh] w-[100vw] max-w-[1600px]`}
+      className={`LandingPageContainer -mt-48 flex h-[140vh] w-[100vw] max-w-[1600px]`}
       style={{
         backgroundImage: `url(${bgImage})`,
         backgroundSize: "cover",
@@ -152,62 +161,65 @@ export default function OurFeaturesPage() {
       <div
         className={`FeaturesPage mx-auto mt-60 flex w-[85%] max-w-[1600px] flex-col`}
       >
-        <div className="TopButtons flex justify-between">
-          <div
-            className={`HumanFocusedTechSection ${selectedCategory === "ams" ? "invisible" : ""} flex flex-col`}
-          >
-            <button
-              className="HumanFocusedTechButtons items-middle font-mono -mt-20 ml-[15vw] flex gap-3 font-semibold"
-              onClick={() => categoryClick("humanTech")}
+        {/* TOP BUTTON OPTIONS */}
+        {showTopButtons && (
+          <div className="TopButtons flex justify-between">
+            <div
+              className={`HumanFocusedTechSection ${selectedCategory === "ams" ? "invisible" : ""} flex flex-col`}
             >
-              <Image
-                width={90}
-                height={90}
-                alt="human focused tech"
-                src="/human-flower.svg"
-                className={`align-middle transition-transform duration-1000 ${isRotated ? "rotate-90" : ""} hover:rotate-45`}
-              ></Image>
-              <div className="Title mt-8 flex flex-col text-left">
-                <p>human</p>
-                <p>focused</p>
-                <p>tech</p>
-              </div>
-            </button>
-            {/* put human focused tech details here */}
-          </div>
-
-          <div className="ApplicationManagerSection flex flex-col gap-4">
-            <button
-              className="ApplicationManagerButtons items-middle font-mono mr-[2vw] flex gap-3 self-end font-semibold"
-              onClick={() => categoryClick("ams")}
-            >
-              <div className="Title flex flex-col text-right align-middle text-olive">
-                <p>two-way</p>
-                <p>application</p>
-                <p>manager</p>
-              </div>
-              <motion.div
-                initial="start"
-                variants={swirl}
-                viewport={{ once: true }}
-                whileInView="move"
-                className="align-middle"
+              <button
+                className="HumanFocusedTechButtons items-middle font-mono -mt-20 ml-[10vw] flex gap-3 font-semibold"
+                onClick={() => categoryClick("humanTech")}
               >
                 <Image
-                  width={80}
-                  height={80}
-                  alt="two-way application manager"
-                  src="/ams-star.svg"
-                  className={`align-middle transition-transform duration-1000 ${isRotated ? "-rotate-90" : ""} hover:-rotate-12`}
+                  width={90}
+                  height={90}
+                  alt="human focused tech"
+                  src="/human-flower.svg"
+                  className={`align-middle transition-transform duration-1000 ${isRotated ? "rotate-90" : ""} hover:rotate-45`}
                 ></Image>
-              </motion.div>
-            </button>
-            {/* put ams details here */}
-            {/* {selectedCategory === "ams" && <AmsDetails />} */}
-          </div>
-        </div>
-        {selectedCategory === "ams" && <AmsDetails />}
+                <div className="Title mt-8 flex flex-col text-left">
+                  <p>human</p>
+                  <p>focused</p>
+                  <p>facets</p>
+                </div>
+              </button>
+            </div>
 
+            <div className="ApplicationManagerSection flex flex-col gap-4">
+              <button
+                className={`ApplicationManagerButtons ${selectedCategory === "humanTech" ? "invisible" : ""} items-middle font-mono mr-[2vw] flex gap-3 self-end font-semibold`}
+                onClick={() => categoryClick("ams")}
+              >
+                <div className="Title flex flex-col text-right align-middle text-olive">
+                  <p>two-way</p>
+                  <p>application</p>
+                  <p>manager</p>
+                </div>
+                <motion.div
+                  initial="start"
+                  variants={swirl}
+                  viewport={{ once: true }}
+                  whileInView="move"
+                  className="align-middle"
+                >
+                  <Image
+                    width={80}
+                    height={80}
+                    alt="two-way application manager"
+                    src="/ams-star.svg"
+                    className={`align-middle transition-transform duration-1000 ${isRotated ? "-rotate-90" : ""} hover:-rotate-12`}
+                  ></Image>
+                </motion.div>
+              </button>
+            </div>
+          </div>
+        )}
+
+        {selectedCategory === "ams" && <AmsDetails />}
+        {selectedCategory === "humanTech" && <HumanTechDetails />}
+
+        {/* MAIN TITLE */}
         {selectedCategory === "none" && (
           <div className="TitleGroup flex flex-col items-center">
             <div className="TitleSection flex flex-col items-center gap-10 self-center">
@@ -244,6 +256,7 @@ export default function OurFeaturesPage() {
                   ></Image>
                 </motion.div>
               </div>
+
               <motion.div
                 initial="start"
                 variants={opacity}
@@ -270,11 +283,16 @@ export default function OurFeaturesPage() {
           </div>
         )}
 
+        {/* {selectedCategory === "jobBoard" && <JobBoardDetails />} */}
+        {selectedCategory === "noGhosting" && <HumanTechDetails />}
+
+        {/* MAYBE we need to make the buttons absolute in their positioning so they're not affected when things move around on the page? */}
+        {/* BOTTOM BUTTON OPTIONS */}
         {showBottomButtons && (
           <div className="BottomButtons flex justify-between">
             <button
-              className="HonestJobBoardSection items-middle font-mono -ml-8 flex gap-4 font-semibold"
-              onClick={() => console.log("active honest job board click")}
+              className={`HonestJobBoardSection ${selectedCategory === "noGhosting" ? "invisible" : ""} items-middle font-mono absolute bottom-96 left-8 flex gap-4 font-semibold`}
+              onClick={() => categoryClick("jobBoard")}
             >
               <motion.div
                 initial="start"
@@ -297,11 +315,10 @@ export default function OurFeaturesPage() {
                 <p>job board</p>
               </div>
             </button>
-            {/* put job board details here */}
 
             <button
-              className="NoGhostingSection items-middle font-mono -mt-24 mr-32 flex gap-3 self-end font-semibold"
-              onClick={() => console.log("ghosting deterrent click")}
+              className={`NoGhostingSection ${selectedCategory === "jobBoard" ? "invisible" : ""} items-middle font-mono absolute bottom-80 right-40 mb-8 flex gap-3 self-end font-semibold`}
+              onClick={() => categoryClick("noGhosting")}
             >
               <div className="Title flex flex-col text-right align-middle text-magenta">
                 <p>our ghosting</p>
@@ -315,7 +332,6 @@ export default function OurFeaturesPage() {
                 className={`align-middle transition-transform duration-1000 ${isRotated ? "-rotate-90" : ""} hover:-rotate-12`}
               ></Image>
             </button>
-            {/* put ghosting details here */}
           </div>
         )}
       </div>

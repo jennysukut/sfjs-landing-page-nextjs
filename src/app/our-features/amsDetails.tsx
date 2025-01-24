@@ -10,7 +10,7 @@ export function AmsDetails() {
     "tracks every application you've submitted",
     "gives real-time updates on the status of your application",
     "you can communicate with businesses via messaging system",
-    "schedule and track interviews",
+    "schedule and track your interviews",
   ];
 
   const businessDetails = [
