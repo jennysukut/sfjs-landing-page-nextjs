@@ -13,6 +13,14 @@ export function AmsDetails() {
     "schedule and track interviews",
   ];
 
+  const businessDetails = [
+    "keeps track of all your open positions",
+    "allows for easy management of applications",
+    "communicate and schedule interviews all in one place",
+    "keep your applicants up-to-date",
+    "move through the hiring process easily and efficiently",
+  ];
+
   return (
     <div
       className={`AmsDetails -mr-8 -mt-8 mb-14 flex flex-row-reverse gap-6 self-center`}
@@ -54,24 +62,39 @@ export function AmsDetails() {
             className={`rounded-3xl border-2 border-jade align-middle drop-shadow-jade`}
           />
         )}
+        {clickedButton === "businesses" && (
+          <video
+            src="/ams-video.mp4"
+            width={600}
+            height={445}
+            autoPlay
+            className={`rounded-3xl border-2 border-jade align-middle drop-shadow-jade`}
+          />
+        )}
       </div>
-      <div className="Details mt-8 max-w-[27vw]">
+      <div className="Details mt-8 max-w-[26vw]">
         <InfoBox variant="hollow" aria="ams details" size="thin">
-          <h2 className="Title pb-1 text-lg text-midnight">
+          <h2 className="Title pb-1 text-xl text-midnight">
             Application Manager
           </h2>
-          <p className="SubTitle italic text-olive">for {clickedButton}</p>
+          <p className="SubTitle text-lg italic text-olive">
+            for {clickedButton}
+          </p>
+
           {clickedButton === "job seekers" && (
-            <ul className="Details ml-2 mt-3 flex list-disc flex-col gap-2">
+            <ul className="Details mb-4 ml-2 mt-8 flex list-disc flex-col gap-4">
               {jobSeekersDetails.map((detail: string, index: number) => {
                 return <li key={index}>{detail}</li>;
               })}
             </ul>
           )}
-          {/* <ul className="Details ml-2 mt-3 list-disc">
-            <li className="item">details about the ams here</li>
-            <li className="item">some more info about it</li>
-          </ul> */}
+          {clickedButton === "businesses" && (
+            <ul className="Details mb-4 ml-2 mt-8 flex list-disc flex-col gap-4">
+              {businessDetails.map((detail: string, index: number) => {
+                return <li key={index}>{detail}</li>;
+              })}
+            </ul>
+          )}
         </InfoBox>
       </div>
     </div>

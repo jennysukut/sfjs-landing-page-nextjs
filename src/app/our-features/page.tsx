@@ -104,7 +104,7 @@ export default function OurFeaturesPage() {
       setSelectedCategory(category);
       if (category === "ams" || category === "humanTech") {
         setShowBottomButtons(false);
-        setBgImage("/BackgroundShapes9.svg");
+        setBgImage("/BackgroundShapes10.svg");
       }
     }
   };
