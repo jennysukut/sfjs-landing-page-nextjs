@@ -290,7 +290,7 @@ export default function OurFeaturesPage() {
         {/* MAYBE we need to make the buttons absolute in their positioning so they're not affected when things move around on the page? */}
         {/* BOTTOM BUTTON OPTIONS */}
         {showBottomButtons && (
-          <div className="BottomButtons flex justify-between">
+          <div className="BottomButtons flex self-end">
             <button
               className={`HonestJobBoardSection ${selectedCategory === "noGhosting" ? "invisible" : ""} items-middle font-mono absolute bottom-96 left-8 flex gap-4 font-semibold`}
               onClick={() => categoryClick("jobBoard")}
@@ -318,7 +318,7 @@ export default function OurFeaturesPage() {
             </button>
 
             <button
-              className={`NoGhostingSection ${selectedCategory === "jobBoard" ? "invisible" : ""} items-middle font-mono absolute bottom-80 right-40 mb-8 flex gap-3 self-end font-semibold`}
+              className={`NoGhostingSection ${selectedCategory === "jobBoard" ? "invisible" : ""} items-middle font-mono ${selectedCategory === "noGhosting" ? "mb-10 mr-10 mt-8 items-end justify-self-end" : "absolute bottom-80 right-40"} mb-8 flex gap-3 font-semibold`}
               onClick={() => categoryClick("noGhosting")}
             >
               <div className="Title flex flex-col text-right align-middle text-magenta">
