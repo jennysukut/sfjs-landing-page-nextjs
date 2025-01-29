@@ -77,7 +77,7 @@ export function HumanTechDetails() {
           aria="no resumes"
           size="small"
         >
-          {`descrimination-curbing layout`}
+          {`descrimination-curbing details`}
         </InfoBox>
         <InfoBox
           variant="filled"
@@ -94,6 +94,14 @@ export function HumanTechDetails() {
           size="small"
         >
           {`all-human interactions`}
+        </InfoBox>
+        <InfoBox
+          variant="filled"
+          colorScheme="c2"
+          aria="no resumes"
+          size="small"
+        >
+          {`human-focused profiles`}
         </InfoBox>
         <InfoBox
           variant="filled"

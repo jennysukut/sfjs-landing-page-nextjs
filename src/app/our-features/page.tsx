@@ -8,6 +8,7 @@ import { AmsDetails } from "./amsDetails";
 import InfoBox from "@/components/infoBox";
 import { HumanTechDetails } from "./humanTechDetails";
 import { JobBoardDetails } from "./jobBoardDetails";
+import { NoGhostingDetails } from "./noGhostingDetails";
 export default function OurFeaturesPage() {
   const descriptorList = useMemo(
     () => [
@@ -284,7 +285,7 @@ export default function OurFeaturesPage() {
         )}
 
         {/* {selectedCategory === "jobBoard" && <JobBoardDetails />} */}
-        {selectedCategory === "noGhosting" && <HumanTechDetails />}
+        {selectedCategory === "noGhosting" && <NoGhostingDetails />}
 
         {/* MAYBE we need to make the buttons absolute in their positioning so they're not affected when things move around on the page? */}
         {/* BOTTOM BUTTON OPTIONS */}
