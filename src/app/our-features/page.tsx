@@ -31,8 +31,6 @@ export default function OurFeaturesPage() {
   const [showTopButtons, setShowTopButtons] = useState(true);
   const [bgImage, setBgImage] = useState("/BackgroundShapes8.svg");
 
-  // backgroundImage: {`${selectedCategory === "ams" ? 'url("/BackgroundShapes9.svg")' : 'url("/BackgroundShapes8.svg")'}`},
-
   const rotate = {
     start: { opacity: 0, rotate: -15 },
     move: {
@@ -152,7 +150,7 @@ export default function OurFeaturesPage() {
 
   return (
     <div
-      className={`LandingPageContainer -mt-48 flex h-[140vh] w-[100vw] max-w-[1600px]`}
+      className={`LandingPageContainer -mt-48 flex ${selectedCategory === "noGhosting" ? "mb-14" : ""} h-[140vh] w-[100vw] max-w-[1600px]`}
       style={{
         backgroundImage: `url(${bgImage})`,
         backgroundSize: "cover",
@@ -284,7 +282,7 @@ export default function OurFeaturesPage() {
           </div>
         )}
 
-        {/* {selectedCategory === "jobBoard" && <JobBoardDetails />} */}
+        {selectedCategory === "jobBoard" && <JobBoardDetails />}
         {selectedCategory === "noGhosting" && <NoGhostingDetails />}
 
         {/* MAYBE we need to make the buttons absolute in their positioning so they're not affected when things move around on the page? */}
@@ -292,7 +290,7 @@ export default function OurFeaturesPage() {
         {showBottomButtons && (
           <div className="BottomButtons flex self-end">
             <button
-              className={`HonestJobBoardSection ${selectedCategory === "noGhosting" ? "invisible" : ""} items-middle font-mono absolute bottom-96 left-8 flex gap-4 font-semibold`}
+              className={`HonestJobBoardSection ${selectedCategory === "noGhosting" ? "invisible" : ""} items-middle font-mono absolute bottom-[21rem] left-20 flex gap-4 font-semibold`}
               onClick={() => categoryClick("jobBoard")}
             >
               <motion.div
@@ -310,7 +308,7 @@ export default function OurFeaturesPage() {
                   className={`align-middle transition-transform duration-1000 hover:shrink`}
                 ></Image>
               </motion.div>
-              <div className="Title mt-8 flex flex-col text-left text-peach">
+              <div className={`Title mt-8 flex flex-col text-left text-peach`}>
                 <p>an active</p>
                 <p>& honest</p>
                 <p>job board</p>

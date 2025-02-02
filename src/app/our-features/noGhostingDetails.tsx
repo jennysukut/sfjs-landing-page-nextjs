@@ -38,7 +38,7 @@ export function NoGhostingDetails() {
       </InfoBox>
       <div className="Buttons my-0 -mb-2 flex gap-4 self-start">
         <SiteButton
-          colorScheme="b3"
+          colorScheme="f3"
           variant="hollow"
           aria="why"
           onClick={() => setDetails("why")}
