@@ -6,122 +6,18 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import SiteButton from "@/components/siteButton";
 
-export default function FeaturesHeaderSection() {
-  const descriptorList = useMemo(
-    () => [
-      "thoughtful",
-      "practical",
-      "almost radical",
-      "conscious",
-      "uniquely sensible",
-      "straightforward",
-    ],
-    [],
-  );
-
-  const [currentDescriptor, setCurrentDescriptor] = useState(descriptorList[0]);
-  const [isFlipping, setIsFlipping] = useState(false);
-  const [isRotated, setIsRotated] = useState(false);
-
-  const rotate = {
-    start: { opacity: 0, rotate: -15 },
-    move: {
-      rotate: 0,
-      opacity: 1,
-      transition: {
-        opacity: {
-          duration: 1,
-          ease: "easeInOut",
-          delay: 1,
-        },
-        rotate: {
-          duration: 1,
-          repeat: 0,
-          ease: "easeInOut",
-          delay: 1,
-        },
-      },
-    },
+export default function FeaturesHeaderSection({
+  selectedFeature,
+  setSelectedFeature,
+  scrollToFeaturesSection,
+}: any) {
+  const clickButton = (title: string) => {
+    setSelectedFeature(title);
+    scrollToFeaturesSection();
   };
-
-  const opacity = {
-    start: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        opacity: {
-          duration: 1,
-          ease: "easeInOut",
-          delay: 1.5,
-        },
-      },
-    },
-  };
-
-  const motionItem = {
-    start: { opacity: 0, y: -100 },
-    move: {
-      y: [
-        -100, 0, -20, 0, -20, 5, -20, 0, -30, 0, -20, 5, -20, 0, -30, 0, -20, 0,
-        -20, 0,
-      ],
-      opacity: 1,
-      transition: {
-        opacity: {
-          duration: 0.74,
-          ease: "easeInOut",
-          delay: 1,
-        },
-        y: {
-          type: "tween",
-          duration: 30,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1,
-        },
-      },
-    },
-  };
-
-  useEffect(() => {
-    if (currentDescriptor !== descriptorList[descriptorList.length - 1]) {
-      const transitionInterval = setInterval(() => {
-        setIsFlipping(true);
-
-        const changeWordTimeout = setTimeout(() => {
-          setCurrentDescriptor((prev) => {
-            const currentIndex = descriptorList.indexOf(prev);
-            const nextIndex = currentIndex + 1;
-            return descriptorList[nextIndex];
-          });
-          setIsFlipping(false);
-        }, 1000);
-
-        return () => clearTimeout(changeWordTimeout);
-      }, 3000);
-
-      return () => clearInterval(transitionInterval);
-    } else {
-      setCurrentDescriptor("straightforward");
-    }
-  }, [isFlipping, currentDescriptor, descriptorList]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsRotated(true);
-    }, 1000); // Delay before the rotation starts
-
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <div
       className={`FeaturesPageTopSection flex h-[100vh] w-[100vw] max-w-[1600px] justify-center overflow-clip`}
-      // style={{
-      //   backgroundImage: `url("/BackgroundShapes10.svg")`,
-      //   backgroundSize: "contain",
-      //   backgroundPosition: "center",
-      // }}
     >
       <div className="BackgroundElements absolute -z-20 flex w-[100vw] flex-col">
         <Image
@@ -147,7 +43,7 @@ export default function FeaturesHeaderSection() {
         ></Image>
       </div>
 
-      <div className="FeaturesLabelButtons absolute flex h-[100%] w-[100%] flex-col">
+      <div className="FeaturesLabelButtons absolute flex h-[100vh] w-[100%] flex-col">
         <div className="GhostingButton ml-[50vw] self-center">
           <SiteButton
             variant="filled"
@@ -155,6 +51,8 @@ export default function FeaturesHeaderSection() {
             aria="no ghosting"
             size="medium"
             addClasses="rotate-12"
+            isSelected={selectedFeature === "no ghosting"}
+            onClick={() => clickButton("no ghosting")}
           >
             no more ghosting
           </SiteButton>
@@ -166,6 +64,8 @@ export default function FeaturesHeaderSection() {
             aria="application manager"
             size="medium"
             addClasses="-rotate-6"
+            isSelected={selectedFeature === "two-way application managment"}
+            onClick={() => clickButton("two-way application managment")}
           >
             two-way application manager
           </SiteButton>
@@ -178,6 +78,8 @@ export default function FeaturesHeaderSection() {
             aria="job board"
             size="medium"
             addClasses="-rotate-1"
+            isSelected={selectedFeature === "honest + active job board"}
+            onClick={() => clickButton("honest + active job board")}
           >
             honest + active job board
           </SiteButton>
@@ -189,6 +91,8 @@ export default function FeaturesHeaderSection() {
             aria="human focused tech"
             size="medium"
             addClasses="rotate-6"
+            isSelected={selectedFeature === "human-focused tech"}
+            onClick={() => clickButton("human-focused tech")}
           >
             human focused tech
           </SiteButton>

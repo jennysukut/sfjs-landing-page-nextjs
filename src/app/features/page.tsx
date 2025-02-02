@@ -45,18 +45,17 @@ export default function OurFeaturesPage() {
 
   return (
     <div className="FeaturesPage flex flex-col items-center justify-center">
-      <button className="test" onClick={scrollToFeaturesSection}>
-        test
-      </button>
-      <FeaturesHeaderSection />
+      <FeaturesHeaderSection
+        setSelectedFeature={setSelectedFeature}
+        selectedFeature={selectedFeature}
+        scrollToFeaturesSection={scrollToFeaturesSection}
+      />
 
       <div
         ref={featuresRef}
         className={`FeaturesPageTopSection my-8 flex max-w-[1600px] flex-col items-center justify-center gap-8`}
       >
-        {" "}
-        <StackedCards />
-        {/* <ButtonOptionsComponent
+        <ButtonOptionsComponent
           type="feature"
           buttons={[
             "no ghosting",
@@ -68,30 +67,9 @@ export default function OurFeaturesPage() {
           handleAdd={handleAdd}
           handleDelete={handleDelete}
           buttonSize="medium"
-        /> */}
+        />
+        <StackedCards selectedFeature={selectedFeature} />
       </div>
-      {/* <div className="Info">
-        <InfoBox
-          variant="filled"
-          colorScheme="b3"
-          aria="info"
-          size="extraLarge"
-          width="extraWide"
-          addClasses="absolute z-10 top-0"
-        >
-          testing one info box
-        </InfoBox>
-        <InfoBox
-          variant="filled"
-          colorScheme="f1"
-          aria="info"
-          size="extraLarge"
-          width="extraWide"
-          addClasses="fixed z-20 -top-96"
-        >
-          testing another info box
-        </InfoBox>
-      </div> */}
     </div>
   );
 }
