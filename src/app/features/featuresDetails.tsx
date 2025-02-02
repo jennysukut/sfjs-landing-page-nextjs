@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import InfoBox from "@/components/infoBox";
-
+import SiteButton from "@/components/siteButton";
 const StackedCards = ({ selectedFeature, setSelectedFeature }: any) => {
+  const [clickedButton, setClickedButton] = useState("");
   const [cards, setCards] = useState([
     {
       id: "honest + active job board",
@@ -73,11 +74,66 @@ const StackedCards = ({ selectedFeature, setSelectedFeature }: any) => {
     }, 300);
   };
 
-  // const currentCardDetails = () => {
-  //   if (selectedFeature === "no ghosting") {
+  const jobSeekersDetails = [
+    "tracks every application you've submitted",
+    "gives real-time updates on the status of your application",
+    "you can communicate with businesses via messaging system",
+    "schedule and track your interviews",
+  ];
 
-  //   } else if ()
-  // }
+  const businessDetails = [
+    "keeps track of all your open positions",
+    "allows for easy management of applications",
+    "communicate and schedule interviews all in one place",
+    "keep your applicants up-to-date",
+    "move through the hiring process easily and efficiently",
+  ];
+
+  const currentCardDetails = () => {
+    if (selectedFeature === "no ghosting") {
+      return <p className="test">testing</p>;
+    } else if (
+      selectedFeature === "two-way application managment" &&
+      clickedButton === "job seekers"
+    ) {
+      return (
+        <div className="AmsDetails my-10 flex align-middle font-medium">
+          <ul className="Details mr-8 flex list-disc flex-col gap-2">
+            {jobSeekersDetails.map((detail: string, index: number) => {
+              return <li key={index}>{detail}</li>;
+            })}
+          </ul>
+          <video
+            src="/ams-video.mp4"
+            width={500}
+            height={300}
+            autoPlay
+            className={`rounded-2xl border-2 border-jade align-middle drop-shadow-jade`}
+          />
+        </div>
+      );
+    } else if (
+      selectedFeature === "two-way application managment" &&
+      clickedButton === "businesses"
+    ) {
+      return (
+        <div className="AmsDetails my-10 flex align-middle font-medium">
+          <ul className="Details mr-8 flex list-disc flex-col gap-2">
+            {businessDetails.map((detail: string, index: number) => {
+              return <li key={index}>{detail}</li>;
+            })}
+          </ul>
+          <video
+            src="/ams-video.mp4"
+            width={500}
+            height={300}
+            autoPlay
+            className={`rounded-2xl border-2 border-jade align-middle drop-shadow-jade`}
+          />
+        </div>
+      );
+    }
+  };
 
   return (
     <div className="CardsContainer flex items-center self-center">
@@ -91,21 +147,43 @@ const StackedCards = ({ selectedFeature, setSelectedFeature }: any) => {
               left: `${card.move}px`,
               zIndex: card.zIndex,
               width: "75vw",
-              height: "400px",
+              height: "450px",
               transform: card.isActive ? "translateY(-20px) scale(1.05)" : "",
             }}
             onClick={() => bringToFront(card.id)}
           >
-            <div className="CardChildren p-8">
-              {/* <h1 className="font-serif text-[1.75rem] font-medium tracking-wider text-eggshell">
-                {card.title}:
-              </h1> */}
-              {(card.isActive || card.id === selectedFeature) && (
-                <h1 className="text-[1.75rem] font-medium tracking-wider text-eggshell">
-                  {card.title}:
-                </h1>
-              )}
-            </div>
+            {(card.isActive || card.id === selectedFeature) && (
+              <div className="CardChildren p-8">
+                <div className="TitleOptButtons flex gap-4">
+                  <h1 className="text-[1.75rem] font-medium tracking-superwide text-eggshell">
+                    {card.title}:
+                  </h1>
+                  {card.id === "two-way application managment" && (
+                    <div className="ButtonOptions flex gap-4">
+                      <SiteButton
+                        variant="filled"
+                        colorScheme="e5"
+                        aria="test"
+                        onClick={() => setClickedButton("job seekers")}
+                        isSelected={clickedButton === "job seekers"}
+                      >
+                        for job seekers
+                      </SiteButton>
+                      <SiteButton
+                        variant="filled"
+                        colorScheme="d1"
+                        aria="test"
+                        onClick={() => setClickedButton("businesses")}
+                        isSelected={clickedButton === "businesses"}
+                      >
+                        for businesses
+                      </SiteButton>
+                    </div>
+                  )}
+                </div>
+                {currentCardDetails()}
+              </div>
+            )}
           </div>
         ))}
       </div>
