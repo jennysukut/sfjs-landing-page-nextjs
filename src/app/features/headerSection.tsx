@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import SiteButton from "@/components/siteButton";
 
 export default function FeaturesHeaderSection() {
   const descriptorList = useMemo(
@@ -146,6 +147,54 @@ export default function FeaturesHeaderSection() {
         ></Image>
       </div>
 
+      <div className="FeaturesLabelButtons absolute flex h-[100%] w-[100%] flex-col">
+        <div className="GhostingButton ml-[50vw] self-center">
+          <SiteButton
+            variant="filled"
+            colorScheme="b3"
+            aria="no ghosting"
+            size="medium"
+            addClasses="rotate-12"
+          >
+            no more ghosting
+          </SiteButton>
+        </div>
+        <div className="AMSButton ml-14 self-start">
+          <SiteButton
+            variant="filled"
+            colorScheme="f3"
+            aria="application manager"
+            size="medium"
+            addClasses="-rotate-6"
+          >
+            two-way application manager
+          </SiteButton>
+        </div>
+
+        <div className="GhostingButton ml-[50vw] mt-[30vh] self-center align-bottom">
+          <SiteButton
+            variant="filled"
+            colorScheme="c4"
+            aria="job board"
+            size="medium"
+            addClasses="-rotate-1"
+          >
+            honest + active job board
+          </SiteButton>
+        </div>
+        <div className="AMSButton -mt-14 ml-32 self-start align-baseline">
+          <SiteButton
+            variant="filled"
+            colorScheme="b4"
+            aria="human focused tech"
+            size="medium"
+            addClasses="rotate-6"
+          >
+            human focused tech
+          </SiteButton>
+        </div>
+      </div>
+
       {/* MAIN TITLE */}
       <div className="TitleGroup mt-20 flex flex-col items-center">
         <div className="TitleSection flex flex-col items-center gap-10 self-center">
@@ -164,7 +213,7 @@ export default function FeaturesHeaderSection() {
           </div>
         </div>
 
-        <div className="NoteSection flex items-start gap-4 self-center">
+        {/* <div className="NoteSection flex items-start gap-4 self-center">
           <div className="Arrow">
             <motion.div
               initial="start"
@@ -181,8 +230,8 @@ export default function FeaturesHeaderSection() {
                 className="ml-4 mt-1 align-middle"
               ></Image>
             </motion.div>
-          </div>
-
+          </div> */}
+        {/*
           <motion.div
             initial="start"
             variants={opacity}
@@ -204,9 +253,9 @@ export default function FeaturesHeaderSection() {
                 {currentDescriptor}
               </span>
             </div>
-          </motion.div>
-        </div>
-        <motion.div
+          </motion.div> */}
+        {/* </div> */}
+        {/* <motion.div
           initial="start"
           variants={motionItem}
           viewport={{ once: false }}
@@ -220,7 +269,7 @@ export default function FeaturesHeaderSection() {
             src="/PointArrow.svg"
             className="mt-4 rotate-90 align-middle"
           ></Image>
-        </motion.div>
+        </motion.div> */}
       </div>
     </div>
   );
