@@ -68,7 +68,10 @@ export default function OurFeaturesPage() {
           handleDelete={handleDelete}
           buttonSize="medium"
         />
-        <StackedCards selectedFeature={selectedFeature} />
+        <StackedCards
+          selectedFeature={selectedFeature}
+          setSelectedFeature={setSelectedFeature}
+        />
       </div>
     </div>
   );
