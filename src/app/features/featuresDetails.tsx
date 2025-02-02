@@ -16,7 +16,7 @@ const StackedCards = ({ selectedFeature, setSelectedFeature }: any) => {
     {
       id: "human-focused tech",
       color: "bg-orange",
-      title: "Human Focused Tech",
+      title: "Human-Focused Tech",
       zIndex: 20,
       move: -80,
       width: "85vw",
@@ -46,7 +46,11 @@ const StackedCards = ({ selectedFeature, setSelectedFeature }: any) => {
   ]);
 
   useEffect(() => {
-    bringToFront(selectedFeature);
+    if (selectedFeature === "") {
+      setSelectedFeature("no ghosting");
+    } else {
+      bringToFront(selectedFeature);
+    }
   }, [selectedFeature]);
 
   const bringToFront = (selectedId: any) => {
@@ -69,15 +73,21 @@ const StackedCards = ({ selectedFeature, setSelectedFeature }: any) => {
     }, 300);
   };
 
+  // const currentCardDetails = () => {
+  //   if (selectedFeature === "no ghosting") {
+
+  //   } else if ()
+  // }
+
   return (
     <div className="CardsContainer flex items-center self-center">
-      <div className="Cards relative ml-[10vw] h-[600px] w-[85vw]">
+      <div className="Cards relative ml-[10vw] min-h-[600px] w-[85vw]">
         {cards.map((card, index) => (
           <div
             key={card.id}
             className={`absolute cursor-pointer rounded-3xl p-6 text-eggshell ${card.shadow} ${card.color} ${card.isActive ? "translate-x-2 translate-y-2" : ""}flex flex-col transition-all duration-300 ease-in-out hover:-translate-x-1.5 hover:-translate-y-1.5`}
             style={{
-              top: `${index * 70}px`,
+              top: `${index * 50}px`,
               left: `${card.move}px`,
               zIndex: card.zIndex,
               width: "75vw",
@@ -87,8 +97,14 @@ const StackedCards = ({ selectedFeature, setSelectedFeature }: any) => {
             onClick={() => bringToFront(card.id)}
           >
             <div className="CardChildren p-8">
-              <h1 className="text-eggshell">{card.title}:</h1>
-              <p className="mt-2">details</p>
+              {/* <h1 className="font-serif text-[1.75rem] font-medium tracking-wider text-eggshell">
+                {card.title}:
+              </h1> */}
+              {(card.isActive || card.id === selectedFeature) && (
+                <h1 className="text-[1.75rem] font-medium tracking-wider text-eggshell">
+                  {card.title}:
+                </h1>
+              )}
             </div>
           </div>
         ))}
