@@ -16,11 +16,13 @@ interface LabelProps extends React.HTMLAttributes<HTMLDivElement> {
   type?: string;
   addClasses?: string;
   textSize?: "medium" | "large";
+  width?: "large" | "default";
 }
 
 const SiteLabel: React.FC<LabelProps> = ({
   type = "label",
   size = "default",
+  width = "default",
   aria,
   variant,
   colorScheme = getRandomColorScheme("a1"),
@@ -42,7 +44,8 @@ const SiteLabel: React.FC<LabelProps> = ({
 
       // size
       "py-2": size === "default",
-      "px-8 py-3": size === "medium",
+      "px-8 py-3": size === "medium" && width === "default",
+      "px-[3rem] py-3": size === "medium" && width === "large",
 
       //textSize
       "text-xs  tracking-widest": !textSize,

@@ -72,7 +72,7 @@ const HonestActiveJobBoard = () => {
           type: "tween",
           duration: 3,
           repeat: 0,
-          ease: "smooth",
+          ease: "easeInOut",
           delay: 1,
         },
       },
@@ -111,6 +111,7 @@ const HonestActiveJobBoard = () => {
           textSize="medium"
           colorScheme="b3"
           addClasses="rotate-12"
+          width="large"
         >
           no ghost jobs or evergreen listings
         </SiteLabel>
@@ -200,8 +201,8 @@ const HonestActiveJobBoard = () => {
                   whileInView="move"
                 >
                   <Image
-                    width={80}
-                    height={80}
+                    width={100}
+                    height={100}
                     alt="star"
                     src="/ams-star.svg"
                     className="z-50"
@@ -213,7 +214,7 @@ const HonestActiveJobBoard = () => {
                 variant="hollow"
                 aria="active listing details"
                 colorScheme="b4"
-                addClasses="px-6"
+                addClasses="px-8 mr-4"
               >
                 how do we make sure listings are active?
               </SiteButton>
