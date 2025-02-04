@@ -15,6 +15,32 @@ export default function FeaturesHeaderSection({
     setSelectedFeature(title);
     scrollToFeaturesSection();
   };
+
+  const motionItem = {
+    start: { opacity: 0, y: -100 },
+    move: {
+      y: [
+        -100, 0, -20, 0, -20, 5, -20, 0, -30, 0, -20, 5, -20, 0, -30, 0, -20, 0,
+        -20, 0,
+      ],
+      opacity: 1,
+      transition: {
+        opacity: {
+          duration: 0.74,
+          ease: "easeInOut",
+          delay: 1,
+        },
+        y: {
+          type: "tween",
+          duration: 30,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1,
+        },
+      },
+    },
+  };
+
   return (
     <div
       className={`FeaturesPageTopSection flex h-[100vh] w-[100vw] max-w-[1600px] justify-center overflow-clip`}
@@ -43,13 +69,13 @@ export default function FeaturesHeaderSection({
         ></Image>
       </div>
 
-      <div className="FeaturesLabelButtons absolute flex h-[100vh] w-[100%] flex-col">
+      {/* <div className="FeaturesLabelButtons absolute flex h-[100vh] w-[100%] flex-col">
         <div className="GhostingButton ml-[50vw] self-center">
           <SiteButton
             variant="filled"
             colorScheme="b3"
             aria="no ghosting"
-            size="medium"
+            size="large"
             addClasses="rotate-12"
             isSelected={selectedFeature === "no ghosting"}
             onClick={() => clickButton("no ghosting")}
@@ -62,7 +88,7 @@ export default function FeaturesHeaderSection({
             variant="filled"
             colorScheme="f3"
             aria="application manager"
-            size="medium"
+            size="large"
             addClasses="-rotate-6"
             isSelected={selectedFeature === "two-way application managment"}
             onClick={() => clickButton("two-way application managment")}
@@ -76,8 +102,8 @@ export default function FeaturesHeaderSection({
             variant="filled"
             colorScheme="c4"
             aria="job board"
-            size="medium"
-            addClasses="-rotate-1"
+            size="large"
+            addClasses="rotate-3"
             isSelected={selectedFeature === "honest + active job board"}
             onClick={() => clickButton("honest + active job board")}
           >
@@ -89,15 +115,15 @@ export default function FeaturesHeaderSection({
             variant="filled"
             colorScheme="b4"
             aria="human focused tech"
-            size="medium"
-            addClasses="rotate-6"
+            size="large"
+            addClasses=""
             isSelected={selectedFeature === "human-focused tech"}
             onClick={() => clickButton("human-focused tech")}
           >
             human focused tech
           </SiteButton>
         </div>
-      </div>
+      </div> */}
 
       {/* MAIN TITLE */}
       <div className="TitleGroup mt-20 flex flex-col items-center">
@@ -110,70 +136,29 @@ export default function FeaturesHeaderSection({
               className={`Title inline-block font-serif text-[4rem] font-semibold tracking-normal text-midnight`}
             >
               <span className="Title font-sans text-[3.5rem] tracking-widest text-midnight">
-                sweet{" "}
+                unique{" "}
               </span>
               features
             </h1>
           </div>
         </div>
-
-        {/* <div className="NoteSection flex items-start gap-4 self-center">
-          <div className="Arrow">
-            <motion.div
-              initial="start"
-              variants={rotate}
-              viewport={{ once: true }}
-              whileInView="move"
-              className="align-middle"
-            >
-              <Image
-                width={60}
-                height={25}
-                alt="arrow"
-                src="/features-arrow.svg"
-                className="ml-4 mt-1 align-middle"
-              ></Image>
-            </motion.div>
-          </div> */}
-        {/*
-          <motion.div
-            initial="start"
-            variants={opacity}
-            viewport={{ once: true }}
-            whileInView="show"
-            className="mt-6 flex gap-2"
-          >
-            <p className="Note font-mono text-midnight">& </p>
-            <div className="RotatingWordContainer w-[20vw]">
-              <span
-                className={`font-mono inline-block text-midnight transition-all duration-1000 ${
-                  isFlipping
-                    ? "-rotate-x-90 -translate-y-2 opacity-0"
-                    : "rotate-x-0 translate-y-0 opacity-100"
-                }`}
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                {" "}
-                {currentDescriptor}
-              </span>
-            </div>
-          </motion.div> */}
-        {/* </div> */}
-        {/* <motion.div
+        <motion.div
           initial="start"
           variants={motionItem}
           viewport={{ once: false }}
           whileInView="move"
-          className="-mr-32 mt-14 self-end"
+          className="-mr-14 mt-8 self-end"
         >
-          <Image
-            width={50}
-            height={30}
-            alt="arrow"
-            src="/PointArrow.svg"
-            className="mt-4 rotate-90 align-middle"
-          ></Image>
-        </motion.div> */}
+          <button onClick={() => scrollToFeaturesSection()}>
+            <Image
+              width={50}
+              height={30}
+              alt="arrow"
+              src="/PointArrow.svg"
+              className="mt-4 rotate-90 align-middle"
+            ></Image>
+          </button>
+        </motion.div>
       </div>
     </div>
   );

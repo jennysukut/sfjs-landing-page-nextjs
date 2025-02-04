@@ -11,9 +11,12 @@ import ButtonOptionsComponent from "@/components/ButtonOptionsContainer";
 import AddHandler from "@/components/addHandler";
 import DeleteHandler from "@/components/deleteHandler";
 import StackedCards from "./featuresDetails";
+import Features from "./features";
 
 export default function OurFeaturesPage() {
-  const [selectedFeature, setSelectedFeature] = useState("");
+  const [selectedFeature, setSelectedFeature] = useState(
+    "honest + active job board",
+  );
   const featuresRef = useRef<HTMLDivElement | null>(null);
 
   const scrollToFeaturesSection = () => {
@@ -58,9 +61,9 @@ export default function OurFeaturesPage() {
         <ButtonOptionsComponent
           type="feature"
           buttons={[
+            "honest + active job board",
             "no ghosting",
             "two-way application managment",
-            "honest + active job board",
             "human-focused tech",
           ]}
           selectedArray={selectedFeature}
@@ -68,10 +71,11 @@ export default function OurFeaturesPage() {
           handleDelete={handleDelete}
           buttonSize="medium"
         />
-        <StackedCards
+        <Features />
+        {/* <StackedCards
           selectedFeature={selectedFeature}
           setSelectedFeature={setSelectedFeature}
-        />
+        /> */}
       </div>
     </div>
   );

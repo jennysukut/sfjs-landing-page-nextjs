@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import InfoBox from "@/components/infoBox";
 import SiteButton from "@/components/siteButton";
 const StackedCards = ({ selectedFeature, setSelectedFeature }: any) => {
-  const [clickedButton, setClickedButton] = useState("");
+  const [clickedButton, setClickedButton] = useState("job seekers");
   const [cards, setCards] = useState([
     {
       id: "honest + active job board",
@@ -135,6 +135,31 @@ const StackedCards = ({ selectedFeature, setSelectedFeature }: any) => {
     }
   };
 
+  const amsButtonOptions = () => {
+    return (
+      <div className="ButtonOptions flex gap-4">
+        <SiteButton
+          variant="filled"
+          colorScheme="e5"
+          aria="test"
+          onClick={() => setClickedButton("job seekers")}
+          isSelected={clickedButton === "job seekers"}
+        >
+          for job seekers
+        </SiteButton>
+        <SiteButton
+          variant="filled"
+          colorScheme="d1"
+          aria="test"
+          onClick={() => setClickedButton("businesses")}
+          isSelected={clickedButton === "businesses"}
+        >
+          for businesses
+        </SiteButton>
+      </div>
+    );
+  };
+
   return (
     <div className="CardsContainer flex items-center self-center">
       <div className="Cards relative ml-[10vw] min-h-[600px] w-[85vw]">
@@ -158,28 +183,8 @@ const StackedCards = ({ selectedFeature, setSelectedFeature }: any) => {
                   <h1 className="text-[1.75rem] font-medium tracking-superwide text-eggshell">
                     {card.title}:
                   </h1>
-                  {card.id === "two-way application managment" && (
-                    <div className="ButtonOptions flex gap-4">
-                      <SiteButton
-                        variant="filled"
-                        colorScheme="e5"
-                        aria="test"
-                        onClick={() => setClickedButton("job seekers")}
-                        isSelected={clickedButton === "job seekers"}
-                      >
-                        for job seekers
-                      </SiteButton>
-                      <SiteButton
-                        variant="filled"
-                        colorScheme="d1"
-                        aria="test"
-                        onClick={() => setClickedButton("businesses")}
-                        isSelected={clickedButton === "businesses"}
-                      >
-                        for businesses
-                      </SiteButton>
-                    </div>
-                  )}
+                  {card.id === "two-way application managment" &&
+                    amsButtonOptions()}
                 </div>
                 {currentCardDetails()}
               </div>

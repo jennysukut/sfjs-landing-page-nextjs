@@ -10,6 +10,7 @@ import Image from "next/image";
 
 interface LabelProps extends React.HTMLAttributes<HTMLDivElement> {
   variant: "display" | "functional";
+  size?: "medium" | "default";
   colorScheme?: SmallShadowColorOption;
   aria: string;
   type?: string;
@@ -19,6 +20,7 @@ interface LabelProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const SiteLabel: React.FC<LabelProps> = ({
   type = "label",
+  size = "default",
   aria,
   variant,
   colorScheme = getRandomColorScheme("a1"),
@@ -32,16 +34,20 @@ const SiteLabel: React.FC<LabelProps> = ({
   }
 
   const labelClasses = clsx(
-    `Label w-fit py-2 flex relative z-[1] rounded-full font-medium transition-all duration-200 ${smallShadowColors[colorScheme]} text-eggshell py-1 tracking-widest m-1`,
+    `Label w-fit flex relative z-[1] rounded-full font-medium transition-all duration-200 ${smallShadowColors[colorScheme]} text-eggshell m-1`,
     {
       // variant
       "px-4": variant === "display",
       "pr-3 pl-4": variant === "functional",
 
+      // size
+      "py-2": size === "default",
+      "px-8 py-3": size === "medium",
+
       //textSize
-      "text-xs": !textSize,
-      "text-sm": textSize === "medium",
-      "text-md": textSize === "large",
+      "text-xs  tracking-widest": !textSize,
+      "text-sm  tracking-widest": textSize === "medium",
+      "text-md  tracking-superwide justify-center": textSize === "large",
     },
     addClasses,
   );
