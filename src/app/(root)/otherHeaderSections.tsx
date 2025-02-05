@@ -103,7 +103,7 @@ function OtherHeaderSection() {
             className="mt-4 align-middle"
           ></Image>
         </motion.div>
-        <MotionContainer>
+        <MotionContainer addClasses="mt-8 flex gap-6">
           <SiteButton
             variant="filled"
             aria="what makes us different?"
