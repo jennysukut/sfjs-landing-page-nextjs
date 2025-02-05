@@ -29,21 +29,6 @@ const TwoWayAms = ({ amsRef }: any) => {
     "move through the hiring process easily",
   ];
 
-  const swirl = {
-    start: { rotate: 360 },
-    move: {
-      rotate: 0,
-      transition: {
-        rotate: {
-          duration: 15,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 0,
-        },
-      },
-    },
-  };
-
   const motionItem = {
     start: { opacity: 0, rotate: 12 },
     move: {
@@ -61,22 +46,6 @@ const TwoWayAms = ({ amsRef }: any) => {
           repeat: 0,
           ease: "easeInOut",
           delay: 1,
-        },
-      },
-    },
-  };
-
-  // this isn't swirling how I'd like - make sure rotate -360 is an option
-  const revSwirl = {
-    start: { rotate: -360 },
-    move: {
-      rotate: 0,
-      transition: {
-        rotate: {
-          duration: 15,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 0,
         },
       },
     },
