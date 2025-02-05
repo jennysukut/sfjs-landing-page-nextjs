@@ -40,24 +40,54 @@ const NoGhosting = () => {
     },
   };
 
+  const motionItem = {
+    start: { opacity: 0, rotate: 12 },
+    move: {
+      rotate: [6, -2, 0],
+      opacity: 1,
+      transition: {
+        opacity: {
+          duration: 0.74,
+          ease: "easeInOut",
+          delay: 1,
+        },
+        rotate: {
+          type: "tween",
+          duration: 3,
+          repeat: 0,
+          ease: "easeInOut",
+          delay: 1,
+        },
+      },
+    },
+  };
+
   return (
-    <div className="HonestActiveJobBoardContainer mt-24 flex flex-col">
-      <SiteLabel
-        variant="display"
-        aria="no ghost jobs"
-        size="medium"
-        textSize="medium"
-        colorScheme="d4"
-        addClasses="-rotate-12 -mb-10 -mt-20 -ml-10 self-start z-50"
+    <div className="NoGhostingContainer mt-24 flex flex-col">
+      <motion.div
+        initial="start"
+        variants={motionItem}
+        viewport={{ once: true }}
+        whileInView="move"
+        className="z-10 -mb-10 -mr-10 -mt-20 self-end"
       >
-        more treating people like people
-      </SiteLabel>
+        <SiteLabel
+          variant="display"
+          aria="no ghost jobs"
+          size="medium"
+          textSize="medium"
+          colorScheme="d4"
+          addClasses="-rotate-12"
+        >
+          more treating people like people
+        </SiteLabel>
+      </motion.div>
       <InfoBox
         aria="job board info"
         variant="hollow"
         size="extraLarge"
         width="extraWide"
-        addClasses="self-center flex flex-col"
+        addClasses="self-center flex flex-col z-0"
       >
         <h2 className="title mt-4 text-center text-[1.9rem] font-semibold">
           No More Ghosting{" "}

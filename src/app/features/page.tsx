@@ -62,8 +62,8 @@ export default function OurFeaturesPage() {
           type="feature"
           buttons={[
             "honest + active job board",
-            "no ghosting",
             "two-way application managment",
+            "no ghosting",
             "human-focused tech",
           ]}
           selectedArray={selectedFeature}
@@ -71,11 +71,8 @@ export default function OurFeaturesPage() {
           handleDelete={handleDelete}
           buttonSize="medium"
         />
+
         <Features />
-        {/* <StackedCards
-          selectedFeature={selectedFeature}
-          setSelectedFeature={setSelectedFeature}
-        /> */}
       </div>
     </div>
   );

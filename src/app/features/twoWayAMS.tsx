@@ -9,25 +9,9 @@ import { ButtonColorOption } from "@/lib/stylingData/buttonColors";
 import { useModal } from "@/contexts/ModalContext";
 import ActivePostCheckModal from "@/components/modals/activePostCheckModal";
 
-const HonestActiveJobBoard = () => {
+const TwoWayAms = () => {
   const { showModal } = useModal();
-  const jobPostFeatures = [
-    { detail: "Pay Details", colorScheme: "b4" },
-    { detail: "Location Type", colorScheme: "f5" },
-    { detail: "Number of Applications", colorScheme: "f1" },
-    { detail: "Hybrid Details", colorScheme: "d2" },
-
-    { detail: "Position Type", colorScheme: "c4" },
-    { detail: "Non-Negotiable Skills", colorScheme: "d1" },
-    { detail: "Minimum Experience Levels", colorScheme: "b6" },
-    { detail: "Perks", colorScheme: "f3" },
-
-    { detail: "Full Interview Process", colorScheme: "c3" },
-    { detail: "Responsibilities", colorScheme: "b3" },
-    { detail: "Ideal Candidate Details", colorScheme: "d1" },
-    { detail: "& More...", colorScheme: "e6" },
-  ];
-
+  const [clickedButton, setClickedButton] = useState("job seekers");
   const swirl = {
     start: { rotate: 360 },
     move: {
@@ -88,18 +72,18 @@ const HonestActiveJobBoard = () => {
         variants={motionItem}
         viewport={{ once: true }}
         whileInView="move"
-        className="z-10 -mb-10 -mr-10 -mt-20 self-end"
+        className="z-10 -mb-10 -ml-10 -mt-20 self-start"
       >
         <SiteLabel
           variant="display"
           aria="no ghost jobs"
           size="medium"
           textSize="medium"
-          colorScheme="b3"
-          addClasses="rotate-12"
+          colorScheme="c3"
+          addClasses="-rotate-12"
           width="large"
         >
-          no ghost jobs or evergreen listings
+          keep track of everything all in one place
         </SiteLabel>
       </motion.div>
       <InfoBox
@@ -109,72 +93,71 @@ const HonestActiveJobBoard = () => {
         width="extraWide"
         addClasses="self-center flex flex-col"
       >
-        <h2 className="title mt-4 text-center text-[1.9rem] font-semibold">
-          Our Honest + Active Job Board
+        <h2 className="title mb-6 mt-4 text-center text-[1.9rem] font-semibold">
+          Two-Way Application Management
         </h2>
-        <div className="Details flex w-[100%] justify-between align-top">
+        <div className="ButtonOptions mb-6 flex justify-center gap-6">
+          <SiteButton
+            variant="hollow"
+            colorScheme="b2"
+            size="medium"
+            aria="test"
+            onClick={() => setClickedButton("job seekers")}
+            isSelected={clickedButton === "job seekers"}
+          >
+            for job seekers
+          </SiteButton>
+          <SiteButton
+            variant="hollow"
+            colorScheme="c1"
+            size="medium"
+            aria="test"
+            onClick={() => setClickedButton("businesses")}
+            isSelected={clickedButton === "businesses"}
+          >
+            for businesses
+          </SiteButton>
+        </div>
+        <div className="Details flex w-[100%] justify-center gap-6 align-top">
           {/* left column */}
-          <div className="LeftColumn flex flex-col align-top">
-            <div className="Title flex gap-4">
-              <motion.div
-                initial="start"
-                variants={swirl}
-                viewport={{ once: true }}
-                whileInView="move"
-                className="align-middle"
-              >
-                <Image
-                  width={100}
-                  height={100}
-                  alt="two-way application manager"
-                  src="/peach-starburst.svg"
-                  className={`drop-shadow-smLime transition-transform duration-1000`}
-                ></Image>
-              </motion.div>
-              <h2 className="PostIncludesTitle mt-8 max-w-[50%] align-middle text-2xl font-bold italic text-peach">
-                EACH POST INCLUDES:
-              </h2>
-            </div>
-
-            <MotionContainer
-              direction="x"
-              addClasses="Details mt-4 max-w-[35vw] justify-start gap-2 mb-6 ml-6 flex flex-wrap "
-            >
-              {jobPostFeatures.map((feature, index) => {
-                return (
-                  <SiteLabel
-                    variant="display"
-                    aria={feature.detail}
-                    key={index}
-                    addClasses="px-6"
-                    size="medium"
-                    colorScheme={feature.colorScheme as ButtonColorOption}
-                  >
-                    {feature.detail}
-                  </SiteLabel>
-                );
-              })}
-            </MotionContainer>
-          </div>
+          <div className="LeftColumn flex flex-col align-top"></div>
 
           {/* middle column */}
-          <Image
+          {/* <Image
             width={100}
             height={100}
             alt="arrow"
             src="/swirl-arrow.svg"
             className="z-50 mr-4 self-start pt-4"
-          ></Image>
+          ></Image> */}
 
           {/* right column */}
           <div className="RightColumn relative flex flex-col">
-            <Image
+            {/* <Image
               width={500}
               height={300}
               alt="JobBoard"
               src="/jobBoardSS.png"
               className={`my-10 self-end rounded-3xl border-2 border-jade align-middle drop-shadow-jade`}
-            ></Image>
+            ></Image> */}
+            {clickedButton === "job seekers" && (
+              <video
+                src="/ams-video.mp4"
+                width={500}
+                height={300}
+                autoPlay
+                className={`rounded-3xl border-2 border-jade align-middle drop-shadow-jade`}
+              />
+            )}
+            {clickedButton === "businesses" && (
+              <video
+                src="/ams-video.mp4"
+                width={500}
+                height={300}
+                autoPlay
+                className={`rounded-3xl border-2 border-jade align-middle drop-shadow-jade`}
+              />
+            )}
             <div className="OtherDetails -ml-14 mb-4 mr-20 mt-4 flex max-w-[40vw] flex-col flex-wrap items-end gap-4">
               <div className="StarAndTitle flex gap-4 align-text-bottom">
                 <h2 className="ActiveJobs text-right text-[1.6rem] leading-9 text-olive">
@@ -213,4 +196,4 @@ const HonestActiveJobBoard = () => {
   );
 };
 
-export default HonestActiveJobBoard;
+export default TwoWayAms;
