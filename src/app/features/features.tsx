@@ -7,6 +7,8 @@ import { motion } from "framer-motion";
 import HonestActiveJobBoard from "./honestActiveJobBoard";
 import NoGhosting from "./noGhosting";
 import TwoWayAms from "./twoWayAMS";
+import HumanFocusedTech from "./humanFocusedTech";
+
 const Features = () => {
   const opacity = {
     start: { opacity: 0 },
@@ -23,16 +25,10 @@ const Features = () => {
   };
   return (
     <div className="FeaturesSection flex flex-col gap-14">
-      {/* <motion.div
-        initial="start"
-        variants={opacity}
-        viewport={{ once: false }}
-        whileInView="show"
-      > */}
       <HonestActiveJobBoard />
       <TwoWayAms />
       <NoGhosting />
-      {/* </motion.div> */}
+      <HumanFocusedTech />
     </div>
   );
 };

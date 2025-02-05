@@ -76,10 +76,11 @@ const NoGhosting = () => {
           aria="no ghost jobs"
           size="medium"
           textSize="medium"
-          colorScheme="d4"
-          addClasses="-rotate-12"
+          colorScheme="e5"
+          width="large"
+          addClasses="rotate-12"
         >
-          more treating people like people
+          more treating people like humans
         </SiteLabel>
       </motion.div>
       <InfoBox
