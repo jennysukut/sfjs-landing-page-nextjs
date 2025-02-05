@@ -18,9 +18,14 @@ export default function OurFeaturesPage() {
     "honest + active job board",
   );
   const featuresRef = useRef<HTMLDivElement | null>(null);
+  const amsRef = useRef<HTMLDivElement | null>(null);
 
   const scrollToFeaturesSection = () => {
     featuresRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const scrollToAms = () => {
+    amsRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleAdd = (type: "feature", item: any) => {
@@ -45,6 +50,12 @@ export default function OurFeaturesPage() {
       },
     });
   };
+
+  useEffect(() => {
+    if (selectedFeature === "two-way application managment") {
+      scrollToAms();
+    }
+  }, [selectedFeature]);
 
   return (
     <div className="FeaturesPage flex flex-col items-center justify-center">
@@ -72,7 +83,7 @@ export default function OurFeaturesPage() {
           buttonSize="medium"
         />
 
-        <Features />
+        <Features amsRef={amsRef} />
       </div>
     </div>
   );

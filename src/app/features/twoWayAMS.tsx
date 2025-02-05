@@ -10,7 +10,7 @@ import { useModal } from "@/contexts/ModalContext";
 import ActivePostCheckModal from "@/components/modals/activePostCheckModal";
 import { idealButtonPattern } from "@/lib/stylingData/idealButtonPattern";
 
-const TwoWayAms = () => {
+const TwoWayAms = ({ amsRef }: any) => {
   const { showModal } = useModal();
   const [clickedButton, setClickedButton] = useState("job seekers");
   const jobSeekersDetails = [
@@ -83,7 +83,10 @@ const TwoWayAms = () => {
   };
 
   return (
-    <div className="HonestActiveJobBoardContainer mt-24 flex flex-col">
+    <div
+      ref={amsRef}
+      className="HonestActiveJobBoardContainer mt-24 flex flex-col"
+    >
       <motion.div
         initial="start"
         variants={motionItem}

@@ -11,11 +11,6 @@ export default function FeaturesHeaderSection({
   setSelectedFeature,
   scrollToFeaturesSection,
 }: any) {
-  const clickButton = (title: string) => {
-    setSelectedFeature(title);
-    scrollToFeaturesSection();
-  };
-
   const motionItem = {
     start: { opacity: 0, y: -100 },
     move: {
@@ -47,83 +42,27 @@ export default function FeaturesHeaderSection({
     >
       <div className="BackgroundElements absolute -z-20 flex w-[100vw] flex-col">
         <Image
-          width={400}
+          width={440}
           height={600}
           alt="top group"
           src="/TopSideBG10.svg"
           className="-my-40 -mt-20 max-w-[50vw] self-start"
         ></Image>
         <Image
-          width={170}
+          width={220}
           height={400}
           alt="right group"
           src="/RightSideBG10.svg"
-          className="-my-40 max-w-[30vw] self-end"
+          className="-mb-52 -mt-44 max-w-[30vw] self-end"
         ></Image>
         <Image
           width={600}
           height={600}
           alt="bottom group"
           src="/BottomSideBG10.svg"
-          className="-mb-40 mr-60 mt-4 max-w-[60vw] self-center"
+          className="-mb-44 mr-60 mt-4 max-w-[60vw] self-center"
         ></Image>
       </div>
-
-      {/* <div className="FeaturesLabelButtons absolute flex h-[100vh] w-[100%] flex-col">
-        <div className="GhostingButton ml-[50vw] self-center">
-          <SiteButton
-            variant="filled"
-            colorScheme="b3"
-            aria="no ghosting"
-            size="large"
-            addClasses="rotate-12"
-            isSelected={selectedFeature === "no ghosting"}
-            onClick={() => clickButton("no ghosting")}
-          >
-            no more ghosting
-          </SiteButton>
-        </div>
-        <div className="AMSButton ml-14 self-start">
-          <SiteButton
-            variant="filled"
-            colorScheme="f3"
-            aria="application manager"
-            size="large"
-            addClasses="-rotate-6"
-            isSelected={selectedFeature === "two-way application managment"}
-            onClick={() => clickButton("two-way application managment")}
-          >
-            two-way application manager
-          </SiteButton>
-        </div>
-
-        <div className="GhostingButton ml-[50vw] mt-[30vh] self-center align-bottom">
-          <SiteButton
-            variant="filled"
-            colorScheme="c4"
-            aria="job board"
-            size="large"
-            addClasses="rotate-3"
-            isSelected={selectedFeature === "honest + active job board"}
-            onClick={() => clickButton("honest + active job board")}
-          >
-            honest + active job board
-          </SiteButton>
-        </div>
-        <div className="AMSButton -mt-14 ml-32 self-start align-baseline">
-          <SiteButton
-            variant="filled"
-            colorScheme="b4"
-            aria="human focused tech"
-            size="large"
-            addClasses=""
-            isSelected={selectedFeature === "human-focused tech"}
-            onClick={() => clickButton("human-focused tech")}
-          >
-            human focused tech
-          </SiteButton>
-        </div>
-      </div> */}
 
       {/* MAIN TITLE */}
       <div className="TitleGroup mt-20 flex flex-col items-center">
