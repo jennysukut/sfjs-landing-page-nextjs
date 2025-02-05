@@ -9,7 +9,7 @@ import NoGhosting from "./noGhosting";
 import TwoWayAms from "./twoWayAMS";
 import HumanFocusedTech from "./humanFocusedTech";
 
-const Features = ({ amsRef }: any) => {
+const Features = ({ amsRef, ghostingRef, humanTechRef }: any) => {
   const opacity = {
     start: { opacity: 0 },
     show: {
@@ -27,8 +27,8 @@ const Features = ({ amsRef }: any) => {
     <div className="FeaturesSection flex flex-col gap-14">
       <HonestActiveJobBoard />
       <TwoWayAms amsRef={amsRef} />
-      <NoGhosting />
-      <HumanFocusedTech />
+      <NoGhosting ghostingRef={ghostingRef} />
+      <HumanFocusedTech humanTechRef={humanTechRef} />
     </div>
   );
 };

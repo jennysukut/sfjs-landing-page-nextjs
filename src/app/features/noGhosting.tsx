@@ -6,7 +6,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import MotionContainer from "@/components/motionContainer";
 
-const NoGhosting = () => {
+const NoGhosting = ({ ghostingRef }: any) => {
   const jobPostIncludes = [
     "pay details: hourly or annual amount",
     "location: remote, onsite, or hybrid",
@@ -63,7 +63,7 @@ const NoGhosting = () => {
   };
 
   return (
-    <div className="NoGhostingContainer mt-24 flex flex-col">
+    <div ref={ghostingRef} className="NoGhostingContainer mt-24 flex flex-col">
       <motion.div
         initial="start"
         variants={motionItem}

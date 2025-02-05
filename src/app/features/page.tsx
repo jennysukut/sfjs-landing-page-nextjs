@@ -14,18 +14,55 @@ import StackedCards from "./featuresDetails";
 import Features from "./features";
 
 export default function OurFeaturesPage() {
-  const [selectedFeature, setSelectedFeature] = useState(
-    "honest + active job board",
-  );
+  const [selectedFeature, setSelectedFeature] = useState("");
   const featuresRef = useRef<HTMLDivElement | null>(null);
   const amsRef = useRef<HTMLDivElement | null>(null);
+  const ghostingRef = useRef<HTMLDivElement | null>(null);
+  const humanTechRef = useRef<HTMLDivElement | null>(null);
 
   const scrollToFeaturesSection = () => {
     featuresRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const scrollToAms = () => {
-    amsRef.current?.scrollIntoView({ behavior: "smooth" });
+    const offset = 120; // Adjust this value as needed
+    const element = amsRef.current;
+    if (element) {
+      const elementPosition =
+        element.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: elementPosition - offset,
+        behavior: "smooth",
+      });
+    }
+    // amsRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const scrollToNoGhosting = () => {
+    const offset = 120; // Adjust this value as needed
+    const element = ghostingRef.current;
+    if (element) {
+      const elementPosition =
+        element.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: elementPosition - offset,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const scrollToHumanTech = () => {
+    const offset = 110; // Adjust this value as needed
+    const element = humanTechRef.current;
+    if (element) {
+      const elementPosition =
+        element.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: elementPosition - offset,
+        behavior: "smooth",
+      });
+    }
+    // humanTechRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleAdd = (type: "feature", item: any) => {
@@ -54,6 +91,12 @@ export default function OurFeaturesPage() {
   useEffect(() => {
     if (selectedFeature === "two-way application managment") {
       scrollToAms();
+    } else if (selectedFeature === "honest + active job board") {
+      scrollToFeaturesSection();
+    } else if (selectedFeature === "no ghosting") {
+      scrollToNoGhosting();
+    } else if (selectedFeature === "human-focused tech") {
+      scrollToHumanTech();
     }
   }, [selectedFeature]);
 
@@ -83,7 +126,11 @@ export default function OurFeaturesPage() {
           buttonSize="medium"
         />
 
-        <Features amsRef={amsRef} />
+        <Features
+          amsRef={amsRef}
+          ghostingRef={ghostingRef}
+          humanTechRef={humanTechRef}
+        />
       </div>
     </div>
   );

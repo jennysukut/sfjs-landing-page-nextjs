@@ -10,7 +10,7 @@ import { useModal } from "@/contexts/ModalContext";
 import ActivePostCheckModal from "@/components/modals/activePostCheckModal";
 import { idealButtonPattern } from "@/lib/stylingData/idealButtonPattern";
 
-const HumanFocusedTech = () => {
+const HumanFocusedTech = ({ humanTechRef }: any) => {
   const { showModal } = useModal();
   const [clickedButton, setClickedButton] = useState("job seekers");
 
@@ -68,7 +68,10 @@ const HumanFocusedTech = () => {
   };
 
   return (
-    <div className="HonestActiveJobBoardContainer mt-24 flex flex-col">
+    <div
+      ref={humanTechRef}
+      className="HonestActiveJobBoardContainer mt-24 flex flex-col"
+    >
       <motion.div
         initial="start"
         variants={motionItem}
