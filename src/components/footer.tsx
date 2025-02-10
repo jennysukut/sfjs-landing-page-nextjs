@@ -20,16 +20,12 @@ export default function Footer() {
         >
           signup
         </SiteButton>
-        <Link href={"/faq"}>
-          <SiteButton variant="filled" colorScheme="c4" aria="faq" value="faq">
-            faq
-          </SiteButton>
-        </Link>
-        <Link href={"/crowdfunding"}>
+
+        {/* <Link href={"/crowdfunding"}>
           <SiteButton variant="filled" colorScheme="d4" aria="our makers">
             crowdfunding
           </SiteButton>
-        </Link>
+        </Link> */}
         <Link href={"/pricing"}>
           <SiteButton variant="filled" colorScheme="f3" aria="pricing">
             pricing
@@ -43,7 +39,7 @@ export default function Footer() {
         >
           share
         </SiteButton>
-        <Link href="/referral-program">
+        {/* <Link href="/referral-program">
           <SiteButton
             variant="filled"
             colorScheme="b4"
@@ -52,15 +48,20 @@ export default function Footer() {
           >
             referrals
           </SiteButton>
-        </Link>
+        </Link> */}
         <Link href="/beta-testing">
           <SiteButton
             variant="filled"
-            colorScheme="e5"
+            colorScheme="b4"
             aria="betatesting"
             value="betatesting"
           >
             beta testing
+          </SiteButton>
+        </Link>
+        <Link href={"/faq"}>
+          <SiteButton variant="filled" colorScheme="c4" aria="faq" value="faq">
+            faq
           </SiteButton>
         </Link>
       </div>

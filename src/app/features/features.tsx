@@ -8,8 +8,10 @@ import HonestActiveJobBoard from "./honestActiveJobBoard";
 import NoGhosting from "./noGhosting";
 import TwoWayAms from "./twoWayAMS";
 import HumanFocusedTech from "./humanFocusedTech";
-
+import MoreFeaturesSection from "./moreFeaturesSection";
 const Features = ({ amsRef, ghostingRef, humanTechRef }: any) => {
+  const [viewMore, setViewMore] = useState(false);
+
   const opacity = {
     start: { opacity: 0 },
     show: {
@@ -29,6 +31,26 @@ const Features = ({ amsRef, ghostingRef, humanTechRef }: any) => {
       <TwoWayAms amsRef={amsRef} />
       <NoGhosting ghostingRef={ghostingRef} />
       <HumanFocusedTech humanTechRef={humanTechRef} />
+      <div className="SeeMoreSection flex flex-col">
+        <div className="SeeMoreButton self-end">
+          <SiteButton
+            variant="filled"
+            aria="see more"
+            colorScheme="b4"
+            size="medium"
+            isSelected={viewMore}
+            onClick={() => setViewMore(!viewMore)}
+            addClasses="px-20"
+          >
+            View More Details
+          </SiteButton>
+        </div>
+        {viewMore === true && (
+          <div className="FeaturesSection">
+            <MoreFeaturesSection />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -6,6 +6,8 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import MotionContainer from "@/components/motionContainer";
 
+const MotionImage = motion(Image);
+
 const NoGhosting = ({ ghostingRef }: any) => {
   const noGhostingDetails = [
     "Simply put, there are too many applications and not enough time to respond to them all.",
@@ -22,7 +24,7 @@ const NoGhosting = ({ ghostingRef }: any) => {
   ];
 
   const noGhostingInfo = [
-    "Whether that be a custom message from the business, or our own notification letting you know pertinent updates, you’ll never be left in the dark. You deserve it.",
+    "Whether that be a custom message from the business, or our own notification letting you know pertinent updates, you'll never be left in the dark. You deserve it.",
   ];
 
   const motionItem = {
@@ -42,21 +44,6 @@ const NoGhosting = ({ ghostingRef }: any) => {
           repeat: 0,
           ease: "easeInOut",
           delay: 1,
-        },
-      },
-    },
-  };
-
-  const swirl = {
-    start: { rotate: 360 },
-    move: {
-      rotate: 0,
-      transition: {
-        rotate: {
-          duration: 15,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 0,
         },
       },
     },
@@ -110,20 +97,15 @@ const NoGhosting = ({ ghostingRef }: any) => {
             </SiteLabel>
           </div>
 
-          {/* <motion.div
-            initial="start"
-            variants={swirl}
-            viewport={{ once: true }}
-            whileInView="move"
-            // className="align-middle"
-          > */}
-          <Image
+          <MotionImage
             width={120}
             height={120}
             alt="no ghosting"
             src="/lime-flower.svg"
-          ></Image>
-          {/* </motion.div> */}
+            animate={{ rotate: 360 }}
+            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+            className="hover:rotate-12"
+          />
 
           {/* right column */}
           {/* <div className="RightColumn relative flex flex-col">

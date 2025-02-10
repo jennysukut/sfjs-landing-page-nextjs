@@ -91,7 +91,7 @@ export default function NavBar() {
             onClick={handleNavButtonClick}
             isSelected={clickedButton === "supporters"}
           >
-            our supporters
+            supporters
           </SiteButton>
         </Link>
         <SiteButton
