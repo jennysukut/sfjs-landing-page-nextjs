@@ -70,7 +70,7 @@ export default function NavBar() {
             beta testing
           </SiteButton>
         </Link>
-        <Link href={"/pricing"}>
+        <Link href={"/our-pricing"}>
           <SiteButton
             variant="filled"
             colorScheme="d4"
@@ -82,7 +82,7 @@ export default function NavBar() {
             pricing
           </SiteButton>
         </Link>
-        <Link href={"/our-supporters"}>
+        {/* <Link href={"/our-supporters"}>
           <SiteButton
             variant="filled"
             colorScheme="f3"
@@ -92,6 +92,18 @@ export default function NavBar() {
             isSelected={clickedButton === "supporters"}
           >
             supporters
+          </SiteButton>
+        </Link> */}
+        <Link href={"/our-supporters"}>
+          <SiteButton
+            variant="filled"
+            colorScheme="f3"
+            aria="features"
+            value="features"
+            onClick={handleNavButtonClick}
+            isSelected={clickedButton === "features"}
+          >
+            our features
           </SiteButton>
         </Link>
         <SiteButton
