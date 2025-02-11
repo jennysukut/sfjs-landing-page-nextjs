@@ -68,7 +68,7 @@ const OurPricing = () => {
         </SiteButton>
       </div>
       <div className="OtherColumns flex min-h-[60vh] gap-8 align-top">
-        <div className="MiddleColumn flex flex-col gap-4 border-l-2 border-l-olive border-opacity-15 pb-8 pl-6 text-center">
+        <div className="MiddleColumn flex flex-col gap-6 border-l-2 border-l-olive border-opacity-15 pb-8 pl-6 text-center">
           <InfoBox
             variant="hollow"
             size="large"

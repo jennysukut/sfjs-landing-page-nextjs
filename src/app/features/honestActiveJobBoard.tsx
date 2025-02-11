@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import InfoBox from "@/components/infoBox";
 import SiteButton from "@/components/siteButton";
 import SiteLabel from "@/components/siteLabel";
@@ -80,6 +80,18 @@ const HonestActiveJobBoard = () => {
       },
     },
   };
+
+  const videoRef = useRef<HTMLVideoElement | null>(null); // Create a ref for the video
+
+  useEffect(() => {
+    if (videoRef.current) {
+      const timer = setTimeout(() => {
+        videoRef.current?.play(); // Play the video after the delay
+      }, 4500);
+
+      return () => clearTimeout(timer); // Cleanup the timer on unmount
+    }
+  }, []);
 
   return (
     <div className="HonestActiveJobBoardContainer mt-24 flex flex-col">
@@ -168,13 +180,15 @@ const HonestActiveJobBoard = () => {
 
           {/* right column */}
           <div className="RightColumn relative flex flex-col">
-            <Image
+            <video
+              src="/job-board-video.mp4"
               width={500}
               height={300}
-              alt="JobBoard"
-              src="/jobBoardSS.png"
-              className={`my-10 self-end rounded-3xl border-2 border-jade align-middle drop-shadow-jade`}
-            ></Image>
+              // autoPlay
+              ref={videoRef}
+              loop
+              className={`my-10 rounded-3xl border-2 border-jade align-middle drop-shadow-jade`}
+            />
             <div className="OtherDetails -ml-14 mb-4 mr-20 mt-4 flex max-w-[40vw] flex-col flex-wrap items-end gap-4">
               <div className="StarAndTitle flex gap-4 align-text-bottom">
                 <h2 className="ActiveJobs text-right text-[1.6rem] leading-9 text-olive">

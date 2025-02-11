@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import InfoBox from "@/components/infoBox";
 import SiteButton from "@/components/siteButton";
 import SiteLabel from "@/components/siteLabel";
@@ -50,6 +50,18 @@ const TwoWayAms = ({ amsRef }: any) => {
       },
     },
   };
+
+  const videoRef = useRef<HTMLVideoElement | null>(null); // Create a ref for the video
+
+  useEffect(() => {
+    if (videoRef.current) {
+      const timer = setTimeout(() => {
+        videoRef.current?.play(); // Play the video after the delay
+      }, 5000);
+
+      return () => clearTimeout(timer); // Cleanup the timer on unmount
+    }
+  }, []);
 
   return (
     <div
@@ -114,19 +126,22 @@ const TwoWayAms = ({ amsRef }: any) => {
           <div className="LeftColumn mt-4 flex flex-col gap-6 align-top">
             {clickedButton === "job seekers" && (
               <video
-                src="/ams-video.mp4"
+                src="/fellow-ams-video.mp4"
                 width={500}
                 height={300}
                 autoPlay
+                // ref={videoRef}
+                loop
                 className={`rounded-3xl border-2 border-jade align-middle drop-shadow-jade`}
               />
             )}
             {clickedButton === "businesses" && (
               <video
-                src="/ams-video.mp4"
+                src="/BusinessAMSSophiaVideo.mp4"
                 width={500}
                 height={300}
                 autoPlay
+                loop
                 className={`rounded-3xl border-2 border-jade align-middle drop-shadow-jade`}
               />
             )}
