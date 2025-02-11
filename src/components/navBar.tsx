@@ -94,7 +94,7 @@ export default function NavBar() {
             supporters
           </SiteButton>
         </Link> */}
-        <Link href={"/our-supporters"}>
+        <Link href={"/features"}>
           <SiteButton
             variant="filled"
             colorScheme="f3"
