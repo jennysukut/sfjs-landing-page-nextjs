@@ -42,7 +42,7 @@ const Features = ({ amsRef, ghostingRef, humanTechRef }: any) => {
             onClick={() => setViewMore(!viewMore)}
             addClasses="px-20"
           >
-            View More Details
+            {viewMore ? "Close" : "View More Details"}
           </SiteButton>
         </div>
         {viewMore === true && (

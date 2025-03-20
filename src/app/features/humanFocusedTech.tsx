@@ -20,7 +20,7 @@ const HumanFocusedTech = ({ humanTechRef }: any) => {
       rotate: 0,
       transition: {
         rotate: {
-          duration: 15,
+          duration: 45,
           repeat: Infinity,
           ease: "easeInOut",
           delay: 0,
@@ -96,64 +96,152 @@ const HumanFocusedTech = ({ humanTechRef }: any) => {
         variant="hollow"
         size="extraLarge"
         width="extraWide"
-        addClasses="self-center flex flex-col"
+        addClasses="self-center flex flex-col justify-center"
       >
         <h2 className="title mb-6 mt-4 text-center text-[1.9rem] font-semibold">
           Human-Focused Tech
         </h2>
-        {/* <div className="ButtonOptions mb-6 flex justify-center gap-6">
-          <SiteButton
-            variant="hollow"
-            colorScheme="b3"
-            size="medium"
-            aria="test"
-            addClasses="w-[25rem]"
-            onClick={() => setClickedButton("job seekers")}
-            isSelected={clickedButton === "job seekers"}
-          >
-            for job seekers
-          </SiteButton>
-          <SiteButton
-            variant="hollow"
-            colorScheme="d3"
-            size="medium"
-            aria="test"
-            addClasses="w-[25rem]"
-            onClick={() => setClickedButton("businesses")}
-            isSelected={clickedButton === "businesses"}
-          >
-            for businesses
-          </SiteButton>
-        </div> */}
-        <div className="Details flex w-[100%] justify-center gap-6 align-top">
-          {/* left column */}
-          <div className="LeftColumn mt-4 flex flex-col gap-6 align-top">
-            {/* {clickedButton === "job seekers" && (
-              <video
-                src="/ams-video.mp4"
-                width={500}
-                height={300}
-                autoPlay
-                className={`rounded-3xl border-2 border-jade align-middle drop-shadow-jade`}
-              />
-            )}
-            {clickedButton === "businesses" && (
-              <video
-                src="/ams-video.mp4"
-                width={500}
-                height={300}
-                autoPlay
-                className={`rounded-3xl border-2 border-jade align-middle drop-shadow-jade`}
-              />
-            )}
-            <p className="Comment ml-8 font-medium italic text-olive">
-              {`it's like an ATS, but so much better...`}
-            </p> */}
-          </div>
 
-          {/* right column */}
-          <div className="RightColumn flex flex-col text-center"></div>
+        <p className="Excerpt mb-8 mt-3 max-w-[90%] self-center text-center italic text-midnight">
+          {` We treat everyone like a real human, never like a number, simple data,
+        or way to boost our bottom dollar. We believe this is the least we can
+        do, and the least you deserve.`}
+        </p>
+
+        <div className="humanTechDetails mb-8 flex max-w-[95%] flex-wrap items-center justify-center gap-6 text-center">
+          <InfoBox
+            variant="filled"
+            colorScheme="f1"
+            aria="no resumes"
+            size="extraSmall"
+            textSize="medium"
+          >
+            no resumes
+          </InfoBox>
+          <InfoBox
+            variant="filled"
+            colorScheme="b3"
+            aria="no resumes"
+            size="extraSmall"
+            textSize="medium"
+          >
+            realistic expectations
+          </InfoBox>
+          <InfoBox
+            variant="filled"
+            colorScheme="c1"
+            aria="no resumes"
+            size="extraSmall"
+            textSize="medium"
+          >
+            ease of mind
+          </InfoBox>
+          <InfoBox
+            variant="filled"
+            colorScheme="d1"
+            aria="no resumes"
+            size="extraSmall"
+            textSize="medium"
+          >
+            {`10-50 applications per job listing`}
+          </InfoBox>
+          <InfoBox
+            variant="filled"
+            colorScheme="b4"
+            aria="no resumes"
+            size="extraSmall"
+            textSize="medium"
+          >
+            {`mood-boosting colors`}
+          </InfoBox>
+          <InfoBox
+            variant="filled"
+            colorScheme="b6"
+            aria="no resumes"
+            size="extraSmall"
+            textSize="medium"
+          >
+            intuitive design
+          </InfoBox>
+          <InfoBox
+            variant="filled"
+            colorScheme="c4"
+            aria="no resumes"
+            size="extraSmall"
+            textSize="medium"
+          >
+            daily application limits
+          </InfoBox>
+          <InfoBox
+            variant="filled"
+            colorScheme="d4"
+            aria="no resumes"
+            size="extraSmall"
+            textSize="medium"
+          >
+            {`no ghosting`}
+          </InfoBox>
+          <InfoBox
+            variant="filled"
+            colorScheme="f3"
+            aria="no resumes"
+            size="extraSmall"
+            textSize="medium"
+          >
+            {`descrimination-curbing details`}
+          </InfoBox>
+          <InfoBox
+            variant="filled"
+            colorScheme="e6"
+            aria="no resumes"
+            size="extraSmall"
+            textSize="medium"
+          >
+            {`people-over-profits structure`}
+          </InfoBox>
+          <InfoBox
+            variant="filled"
+            colorScheme="e5"
+            aria="no resumes"
+            size="extraSmall"
+            textSize="medium"
+          >
+            {`all-human interactions`}
+          </InfoBox>
+          <InfoBox
+            variant="filled"
+            colorScheme="c2"
+            aria="no resumes"
+            size="extraSmall"
+            textSize="medium"
+          >
+            {`human-focused profiles`}
+          </InfoBox>
+          <InfoBox
+            variant="filled"
+            colorScheme="c5"
+            aria="no resumes"
+            size="extraSmall"
+            textSize="medium"
+          >
+            {`respect for people's time + attention + data`}
+          </InfoBox>
         </div>
+        <motion.div
+          initial="start"
+          variants={swirl}
+          viewport={{ once: true }}
+          whileInView="move"
+          className="absolute bottom-8 right-40 self-end"
+        >
+          <Image
+            width={150}
+            height={150}
+            alt="two-way application manager"
+            src="/jade-flower.svg"
+            className={`drop-shadow-smLime transition-transform duration-1000`}
+          ></Image>
+        </motion.div>
       </InfoBox>
     </div>
   );

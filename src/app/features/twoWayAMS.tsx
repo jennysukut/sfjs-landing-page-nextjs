@@ -132,6 +132,7 @@ const TwoWayAms = ({ amsRef }: any) => {
                 autoPlay
                 // ref={videoRef}
                 loop
+                muted
                 className={`rounded-3xl border-2 border-jade align-middle drop-shadow-jade`}
               />
             )}
@@ -142,6 +143,7 @@ const TwoWayAms = ({ amsRef }: any) => {
                 height={300}
                 autoPlay
                 loop
+                muted
                 className={`rounded-3xl border-2 border-jade align-middle drop-shadow-jade`}
               />
             )}

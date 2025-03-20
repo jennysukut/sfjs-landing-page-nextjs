@@ -124,11 +124,11 @@ const HonestActiveJobBoard = () => {
         <h2 className="title mt-4 text-center text-[1.9rem] font-semibold">
           Our Honest + Active Job Board
         </h2>
-        <div className="Details flex w-[100%] justify-between align-top">
+        <div className="Details flex w-[100%]">
           {/* left column */}
-          <div className="LeftColumn flex flex-col align-top">
+          <div className="LeftColumn flex flex-col align-middle">
             <div className="Title flex gap-4">
-              <motion.div
+              {/* <motion.div
                 initial="start"
                 variants={swirl}
                 viewport={{ once: true }}
@@ -142,10 +142,21 @@ const HonestActiveJobBoard = () => {
                   src="/peach-starburst.svg"
                   className={`drop-shadow-smLime transition-transform duration-1000`}
                 ></Image>
-              </motion.div>
-              <h2 className="PostIncludesTitle mt-8 max-w-[50%] align-middle text-2xl font-bold italic text-peach">
+              </motion.div> */}
+              {/* <h2 className="PostIncludesTitle ml-8 mt-8 align-middle text-2xl font-bold italic text-peach">
                 EACH POST INCLUDES:
-              </h2>
+              </h2> */}
+              <SiteLabel
+                variant="display"
+                size="medium"
+                aria="no ghosting"
+                colorScheme="b3"
+                textSize="large"
+                width="large"
+                addClasses="self-middle uppercase py-4 mt-14 ml-4"
+              >
+                Each Post Includes:{" "}
+              </SiteLabel>
             </div>
 
             <MotionContainer
@@ -169,27 +180,19 @@ const HonestActiveJobBoard = () => {
             </MotionContainer>
           </div>
 
-          {/* middle column */}
-          <Image
-            width={100}
-            height={100}
-            alt="arrow"
-            src="/swirl-arrow.svg"
-            className="z-50 mr-4 self-start pt-4"
-          ></Image>
-
           {/* right column */}
-          <div className="RightColumn relative flex flex-col">
+          <div className="RightColumn relative mt-4 flex flex-col">
             <video
               src="/job-board-video.mp4"
               width={500}
               height={300}
-              // autoPlay
+              autoPlay
               ref={videoRef}
               loop
+              muted
               className={`my-10 rounded-3xl border-2 border-jade align-middle drop-shadow-jade`}
             />
-            <div className="OtherDetails -ml-14 mb-4 mr-20 mt-4 flex max-w-[40vw] flex-col flex-wrap items-end gap-4">
+            <div className="OtherDetails flex max-w-[40vw] flex-col flex-wrap items-end gap-4">
               <div className="StarAndTitle flex gap-4 align-text-bottom">
                 <h2 className="ActiveJobs text-right text-[1.6rem] leading-9 text-olive">
                   ONLY ACTIVE JOBS ALLOWED HERE

@@ -9,6 +9,12 @@ import MotionContainer from "@/components/motionContainer";
 const MotionImage = motion(Image);
 
 const NoGhosting = ({ ghostingRef }: any) => {
+  const noGhostingInfo = [
+    "Whether that be a custom message from the business, or our own notification letting you know pertinent updates, you'll never be left in the dark. You deserve it.",
+  ];
+
+  const [details, setDetails] = useState("why");
+
   const noGhostingDetails = [
     "Simply put, there are too many applications and not enough time to respond to them all.",
     "The use of ATS systems and their AI makes the resume review process impersonal, and facilitates less human interaction in the hiring process overall.",
@@ -21,10 +27,6 @@ const NoGhosting = ({ ghostingRef }: any) => {
     "Display ratings of businesses and applicants responsiveness.",
     "Focus on *connecting people* in the process, so they can communicate as kind, intentional humans.",
     "Offer response options to hiring staff & make job listings unable to be closed until each applicant gets a response.",
-  ];
-
-  const noGhostingInfo = [
-    "Whether that be a custom message from the business, or our own notification letting you know pertinent updates, you'll never be left in the dark. You deserve it.",
   ];
 
   const motionItem = {
@@ -75,68 +77,85 @@ const NoGhosting = ({ ghostingRef }: any) => {
         variant="hollow"
         size="extraLarge"
         width="extraWide"
-        addClasses="self-center flex flex-col z-0"
+        addClasses="self-center flex flex-col z-0 items-center"
       >
+        <div
+          className="background absolute -mt-8 h-[95%] w-[80vw] self-center"
+          style={{
+            backgroundImage: `url("/BackgroundShapes11.svg")`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
         <h2 className="title mt-4 text-center text-[1.9rem] font-semibold">
           No More Ghosting{" "}
         </h2>
-        <div className="Details mt-6 flex w-[100%] flex-col justify-between gap-4 align-top">
-          {/* left column */}
-          <div className="LeftColumn flex items-center justify-center gap-4">
-            <SiteLabel
-              variant="display"
-              size="medium"
-              aria="no ghosting"
-              colorScheme="b3"
-              textSize="large"
-              width="large"
-              addClasses="self-middle uppercase py-4"
+        <div className="Details mt-6 flex w-[100%] flex-col items-center gap-4 align-top">
+          <SiteLabel
+            variant="display"
+            size="medium"
+            aria="no ghosting"
+            colorScheme="b3"
+            textSize="large"
+            width="large"
+            addClasses="self-middle uppercase py-4"
+          >
+            {`Ghosting is rampant. We're here to mitigate it.`}
+          </SiteLabel>
+          <div className="Buttons my-0 mb-2 flex gap-4">
+            <SiteButton
+              colorScheme="f3"
+              variant="hollow"
+              aria="why"
+              onClick={() => setDetails("why")}
+              isSelected={details === "why"}
             >
-              We guarantee a response for each and every application!
-              {/* {`Our Non-Negotiable Is Thoughtful Communication`} */}
-            </SiteLabel>
+              why it happens
+            </SiteButton>
+            <SiteButton
+              colorScheme="b6"
+              variant="hollow"
+              aria="how"
+              onClick={() => setDetails("how")}
+              isSelected={details === "how"}
+            >
+              {`how we're fixing it`}
+            </SiteButton>
           </div>
 
-          <MotionImage
-            width={120}
-            height={120}
-            alt="no ghosting"
-            src="/lime-flower.svg"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            className="hover:rotate-12"
-          />
-
-          {/* right column */}
-          {/* <div className="RightColumn relative flex flex-col">
-            <Image
-              width={500}
-              height={300}
-              alt="JobBoard"
-              src="/jobBoardSS.png"
-              className={`my-10 self-end rounded-3xl border-2 border-jade align-middle drop-shadow-jade`}
-            ></Image>
-            <div className="OtherDetails -ml-24 mt-4 flex max-w-[40vw] flex-col flex-wrap">
-              <SiteLabel
-                size="medium"
-                textSize="large"
-                variant="display"
-                colorScheme="c4"
-                aria="active listing"
-                addClasses="w-full py-4"
-              >
-                ONLY ACTIVE JOB POSTS HERE
-              </SiteLabel>
-              <MotionContainer
-                direction="x"
-                addClasses="Details mt-0 mb-6 ml-6 flex flex-col gap-3 text-olive leading-6"
-              >
-                {activeChecks.map((detail: string, index: number) => {
-                  return <li key={index}>{detail}</li>;
-                })}
-              </MotionContainer>
-            </div> */}
-          {/* </div> */}
+          <div className="DetailsAndFlower flex">
+            {/* <MotionImage
+              width={120}
+              height={120}
+              alt="no ghosting"
+              src="/lime-flower.svg"
+              // animate={{ rotate: 360 }}
+              // transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+              className="top-30 absolute left-10 hover:rotate-12"
+            /> */}
+            <InfoBox variant="hollow" aria="reasons" size="thin">
+              {details === "why" && (
+                <div className="WhyDetails">
+                  <h2 className="Title font-mono italic">{`WHY GHOSTING HAPPENS:`}</h2>
+                  <ul className="Details mb-4 ml-2 mt-8 flex list-disc flex-col gap-4 text-emerald">
+                    {noGhostingDetails.map((detail: string, index: number) => {
+                      return <li key={index}>{detail}</li>;
+                    })}
+                  </ul>
+                </div>
+              )}
+              {details === "how" && (
+                <div className="HowDetails">
+                  <h2 className="Title font-mono italic">{`WHAT WE'RE DOING ABOUT IT:`}</h2>
+                  <ul className="Details mb-4 ml-2 mt-8 flex list-disc flex-col gap-4 text-emerald">
+                    {whatWeCanDo.map((detail: string, index: number) => {
+                      return <li key={index}>{detail}</li>;
+                    })}
+                  </ul>
+                </div>
+              )}
+            </InfoBox>
+          </div>
         </div>
       </InfoBox>
     </div>

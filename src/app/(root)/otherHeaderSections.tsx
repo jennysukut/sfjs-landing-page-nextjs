@@ -1,14 +1,14 @@
 import { useModal } from "@/contexts/ModalContext";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
-import Link from "next/link";
 import SiteButton from "@/components/siteButton";
 import ButtonContainer from "@/components/buttonContainer";
 import SignupOptionsModal from "@/components/modals/signupModals/signupOptionsModal";
 import HelpUsModal from "@/components/modals/helpUsModal";
 import Image from "next/image";
-import { useState, useEffect } from "react";
 import MotionContainer from "@/components/motionContainer";
+import Link from "next/link";
 
 function OtherHeaderSection() {
   const descriptorList = ["simple", "honest", "personal", "colorful", "human."];
@@ -17,6 +17,7 @@ function OtherHeaderSection() {
 
   const [currentDescriptor, setCurrentDescriptor] = useState(descriptorList[0]);
   const [isFlipping, setIsFlipping] = useState(false);
+  const [clickedButton, setClickedButton] = useState("");
 
   const motionItem = {
     start: { opacity: 0, x: -100 },
@@ -43,6 +44,14 @@ function OtherHeaderSection() {
     },
   };
 
+  const clickButton = (title: string) => {
+    if (clickedButton === title) {
+      setClickedButton("");
+    } else {
+      setClickedButton(title);
+    }
+  };
+
   useEffect(() => {
     if (currentDescriptor !== descriptorList[descriptorList.length - 1]) {
       const transitionInterval = setInterval(() => {
@@ -64,7 +73,7 @@ function OtherHeaderSection() {
     } else {
       setCurrentDescriptor("human.");
     }
-  }, [isFlipping]);
+  }, [isFlipping, currentDescriptor, descriptorList]);
 
   return (
     <section className="HeaderSection z-10 mt-4 flex w-full flex-col gap-2 self-center align-middle">
@@ -109,22 +118,30 @@ function OtherHeaderSection() {
             aria="what makes us different?"
             colorScheme="b4"
             size="medium"
+            onClick={() => clickButton("different")}
+            isSelected={clickedButton === "different"}
           >
             what makes us different?
           </SiteButton>
-          <SiteButton
-            variant="filled"
-            aria="features"
-            size="medium"
-            colorScheme="c4"
-          >
-            check out our features
-          </SiteButton>
+          <Link href="/features">
+            <SiteButton
+              variant="filled"
+              aria="features"
+              size="medium"
+              colorScheme="c4"
+              onClick={() => clickButton("features")}
+              isSelected={clickedButton === "features"}
+            >
+              check out our features
+            </SiteButton>
+          </Link>
           <SiteButton
             variant="filled"
             aria="signup"
             size="medium"
             colorScheme="b6"
+            onClick={() => showModal(<SignupOptionsModal />)}
+            // isSelected={clickedButton === "signup"}
           >
             sign up!
           </SiteButton>
